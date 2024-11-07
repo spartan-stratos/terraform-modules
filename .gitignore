@@ -1,0 +1,7 @@
+# IDE
+.idea
+
+# Terraform dependencies
+terraform.tfstate*
+.terraform.
+.terraform/
