@@ -1,7 +1,6 @@
 variable "domain_name" {
   description = "A domain name for which the certificate should be issued"
   type        = string
-  default     = ""
 }
 
 variable "subject_alternative_names" {
@@ -13,7 +12,6 @@ variable "subject_alternative_names" {
 variable "zone_id" {
   description = "The ID of the hosted zone to contain this record. Required when validating via Route53"
   type        = string
-  default     = ""
 }
 
 variable "tags" {
@@ -31,5 +29,5 @@ variable "wait_for_validation" {
 variable "validation_timeout" {
   description = "Define maximum timeout to wait for the validation to complete"
   type        = string
-  default     = null
+  default     = "10m"
 }
