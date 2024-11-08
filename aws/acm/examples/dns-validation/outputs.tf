@@ -13,7 +13,3 @@ output "acm_certificate_status" {
   value       = module.acm.acm_certificate_status
 }
 
-output "validation_route53_record_fqdns" {
-  description = "List of FQDNs built using the zone domain and name."
-  value       = module.acm.validation_route53_record_fqdns
-}

@@ -3,5 +3,6 @@
 
 # Terraform dependencies
 terraform.tfstate*
-.terraform.
+.terraform.*
 .terraform/
+provider.tf
