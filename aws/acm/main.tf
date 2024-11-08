@@ -1,3 +1,8 @@
+/* 
+aws_acm_certificate allows requesting and management of certificates from the Amazon Certificate Manager.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate
+*/
+
 resource "aws_acm_certificate" "this" {
   domain_name       = var.domain_name
   validation_method = "DNS"
@@ -11,7 +16,10 @@ resource "aws_acm_certificate" "this" {
   }
 }
 
-// create a route53 record for each domain validation option to validate the domain
+/* 
+aws_route53_record provides a Route53 record resource to request a DNS validated certificate.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record
+*/
 resource "aws_route53_record" "validation" {
   for_each = {
     for dvo in aws_acm_certificate.this.domain_validation_options : dvo.domain_name => {
@@ -31,6 +39,10 @@ resource "aws_route53_record" "validation" {
   depends_on = [aws_acm_certificate.this]
 }
 
+/*
+aws_acm_certificate_validation represents a successful validation of an ACM certificate in concert with other resources.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate_validation
+*/
 resource "aws_acm_certificate_validation" "this" {
   count = var.wait_for_validation ? 1 : 0
 
