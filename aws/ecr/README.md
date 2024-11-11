@@ -2,7 +2,6 @@
 Terraform module which creates Amazon ECR resources.
 
 ## Usage
-### Route53 DNS validation
 ```hcl
 module "ecr" {
   source  = "terraform-c0x12c-modules/acm/aws"
