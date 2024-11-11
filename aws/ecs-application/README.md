@@ -9,7 +9,7 @@ This module will create the components below:
 - A security group for ECS service so that only traffic from ALB is accepted
 
 ## Usage
-### Route53 DNS validation
+### Create a ECS application
 ```hcl
 module "application" {
   source  = "c0x12c/ecs-application/aws"
