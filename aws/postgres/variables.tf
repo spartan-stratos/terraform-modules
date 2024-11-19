@@ -16,11 +16,6 @@ variable "instance_class" {
   default     = "db.m5.large"
 }
 
-variable "environment" {
-  description = "The environment of this database"
-  type        = string
-}
-
 variable "disk_size" {
   description = "The disk size of database instance"
   type        = number
@@ -94,4 +89,45 @@ variable "supported_engine_version" {
   description = "The supported engine version to create the Parameter Groups (support Blue-Green Deployment)"
   type        = list(string)
   default     = ["16"]
+}
+
+variable "final_snapshot_identifier_prefix" {
+  description = "The name which is prefixed to the final snapshot on cluster destroy"
+  type        = string
+  default     = "final"
+}
+
+variable "skip_final_snapshot" {
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted"
+  type        = bool
+  default     = false
+}
+
+variable "storage_type" {
+  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), 'gp3' (new generation of general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not. If you specify 'io1' or 'gp3' , you must also include a value for the 'iops' parameter"
+  type        = string
+}
+
+variable "iops" {
+  description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1' or gp3. See notes for limitations regarding this variable for gp3"
+  type        = number
+  default     = null
+}
+
+variable "max_allocated_storage" {
+  description = "Specifies the value for Storage Autoscaling"
+  type        = number
+  default     = 0
+}
+
+variable "monitoring_interval" {
+  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60"
+  type        = number
+  default     = 0
+}
+
+variable "performance_insights_enabled" {
+  description = "Specifies whether Performance Insights are enabled"
+  type        = bool
+  default     = false
 }

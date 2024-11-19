@@ -36,7 +36,7 @@ resource "aws_db_instance" "main" {
   identifier              = var.db_identifier
   instance_class          = var.instance_class
   allocated_storage       = var.disk_size
-  max_allocated_storage   = 1000
+  max_allocated_storage   = var.max_allocated_storage
   backup_window           = var.backup_window
   backup_retention_period = var.backup_retention_day
   db_name                 = var.db_name
@@ -57,7 +57,8 @@ resource "aws_db_instance" "main" {
 
   copy_tags_to_snapshot = true
   multi_az              = var.multi_az
-  storage_type          = "gp2"
+  storage_type          = var.storage_type
+  iops                  = var.iops
 
   storage_encrypted = true
 
@@ -65,19 +66,13 @@ resource "aws_db_instance" "main" {
   parameter_group_name                = aws_db_parameter_group.parameter_group[local.engine_version_major].id
   publicly_accessible                 = false
 
-  final_snapshot_identifier = var.environment == "prod" ? "${local.identifier}-${formatdate("HH-mmaa", timestamp())}" : local.identifier
-  skip_final_snapshot       = var.environment == "prod" ? false : true
+  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
+  skip_final_snapshot       = var.skip_final_snapshot
 
-  monitoring_interval = var.environment == "prod" ? 1 : 0
+  monitoring_interval = var.monitoring_interval
 
-  performance_insights_enabled = var.environment == "prod" ? true : false
-  lifecycle {
-    ignore_changes = [
-      storage_type,
-      iops,
-      max_allocated_storage
-    ]
-  }
+  performance_insights_enabled = var.performance_insights_enabled
+
   timeouts {
     create = "2h"
     update = "2h"
@@ -96,14 +91,15 @@ resource "aws_db_instance" "replica" {
   replicate_source_db   = aws_db_instance.main.identifier
   count                 = var.replica_count
   allocated_storage     = var.disk_size
-  max_allocated_storage = 1000
+  max_allocated_storage = var.max_allocated_storage
 
   identifier = "${var.db_identifier}-replica-${count.index}"
 
   backup_retention_period = "0"
 
   skip_final_snapshot = "true"
-  storage_type        = "gp2"
+  storage_type        = var.storage_type
+  iops                = var.iops
 
   storage_encrypted = true
 
@@ -119,16 +115,7 @@ resource "aws_db_instance" "replica" {
   auto_minor_version_upgrade  = false
   apply_immediately           = var.apply_immediately
 
-  monitoring_interval = var.environment == "prod" ? 1 : 0
+  monitoring_interval = var.monitoring_interval
 
-  performance_insights_enabled = count.index == 0 ? false : true
-
-  lifecycle {
-    ignore_changes = [
-      availability_zone,
-      storage_type,
-      iops,
-      max_allocated_storage
-    ]
-  }
+  performance_insights_enabled = var.performance_insights_enabled
 }
