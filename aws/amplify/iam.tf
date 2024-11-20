@@ -1,5 +1,4 @@
 data "aws_iam_policy_document" "amplify_backend" {
-
   statement {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
