@@ -1,0 +1,67 @@
+name: "Terraform Check on Pull Request"
+
+env:
+  TERRAFORM_VERSION: 1.9.8
+  PLATFORMS: 'aws|gcp'                # delimiter should be "|"
+  EXCLUDED_FOLDERS: 'examples|files'  # delimiter should be "|"
+
+on:
+  pull_request:
+
+jobs:
+  check_for_change:
+    runs-on: ubuntu-latest
+    outputs:
+      modules: ${{ steps.find_modules.outputs.modules }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: Get module directories
+        id: find_modules
+        run: |
+          # Find module directories in PLATFORMS but excluding sub directories starting with EXCLUDED_FOLDERS
+          MODULE_DIRS=($(find . -type d | grep -E '^\./(${{ env.PLATFORMS }})/[^/]*' | grep -Ev '.*/(${{ env.EXCLUDED_FOLDERS }})' | sort -u))
+
+          # Remove './' from the beginning of each directory
+          DIRECTORIES=("${MODULE_DIRS[@]//.\//}")
+          
+          # Convert to a valid JSON array format: compact (single line)
+          DIRECTORIES_JSON=$(printf '%s\n' "${DIRECTORIES[@]}" | jq -R . | jq -sc .)
+          echo "Module directories: $DIRECTORIES_JSON"
+          echo "modules=$DIRECTORIES_JSON" >> "$GITHUB_OUTPUT"
+
+  validate:
+    runs-on: ubuntu-20.04
+    needs: check_for_change
+    if: ${{ needs.check_for_change.outputs.modules != '' }}
+    strategy:
+      matrix:
+        module: ${{ fromJson(needs.check_for_change.outputs.modules) }}
+      fail-fast: false
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+        working-directory: ${{ matrix.module }}
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: false
+        working-directory: ${{ matrix.module }}
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+        working-directory: ${{ matrix.module }}
