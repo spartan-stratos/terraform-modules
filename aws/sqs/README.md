@@ -9,8 +9,7 @@ This module will create the following components:
 ### Create SQS
 ```hcl
 module "sqs" {
-  source  = "c0x12c/sqs/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/sqs?ref=v0.1.0"
 
   name              = "example-queue"
   max_receive_count = 1

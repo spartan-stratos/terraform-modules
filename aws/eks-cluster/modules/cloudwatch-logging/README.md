@@ -6,7 +6,6 @@ Terraform Cloudwatch logging sub-module to create Cloudwatch logging resources o
 ```hcl
 module "cloudwatch_logging" {
   source  = "./modules/cloudwatch-logging"
-  version = "~> 1.0"
 
   name                                    = local.cluster_name
   region                                  = local.region

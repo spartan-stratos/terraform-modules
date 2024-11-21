@@ -11,8 +11,7 @@ This module will create the components below
 ### Create EKS cluster
 ```hcl
 module "eks" {
-  source  = "c0x12c/eks-cluster/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.0"
 
   region          = "us-west-2"
   environment     = "test"

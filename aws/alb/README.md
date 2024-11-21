@@ -7,8 +7,7 @@ Terraform module which creates external Application Load Balancer resources on A
 ### External ALB
 ```hcl
 module "alb" {
-  source  = "terraform-c0x12c-modules/alb/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/alb?ref=v0.1.0"
 
   name              = "example"
   vpc_id            = "vpc-1234567899"

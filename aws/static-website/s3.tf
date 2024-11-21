@@ -1,6 +1,7 @@
 module "s3" {
-  source      = "./modules/s3"
-  environment = var.environment
-  name        = var.name
-  stack_name  = var.stack_name
+  source = "../s3"
+
+  bucket_prefix = var.name
+
+  force_destroy = true
 }
