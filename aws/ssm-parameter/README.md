@@ -5,7 +5,7 @@ Terraform module which creates SSM parameter resources on AWS.
 ### Create a static website
 ```hcl
 module "ssm_parameter" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/ssm-parameter?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/ssm-parameter?ref=v0.1.0"
 
   prefix = "example"
   parameters = {
