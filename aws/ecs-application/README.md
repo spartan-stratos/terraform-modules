@@ -12,7 +12,7 @@ This module will create the components below:
 ### Create a ECS application
 ```hcl
 module "application" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.0"
 
   name                          = "example-service"
   environment                   = "dev"

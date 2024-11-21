@@ -5,7 +5,7 @@ This supports 1024-bit and 2048-bit RSA key sizes only.
 ### Create a Client VPN endpoint
 ```hcl
 module "vpn" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/vpn?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/vpn?ref=v0.1.0"
 
   endpoint_name                  = "example"
   endpoint_client_cidr_block     = "172.16.0.0/20"

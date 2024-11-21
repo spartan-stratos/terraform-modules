@@ -9,7 +9,7 @@ This module will create the following components:
 ### Create RDS PostgreSQL
 ```hcl
 module "instance" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/postgres?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/postgres?ref=v0.1.0"
 
   db_identifier                          = "example-rds"
   db_name                                = "example_rds"

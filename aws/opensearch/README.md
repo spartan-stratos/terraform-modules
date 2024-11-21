@@ -5,7 +5,7 @@ Terraform module which creates OpenSearch resources on AWS.
 ### Create an OpenSearch cluster
 ```hcl
 module "opensearch" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.1.0"
 
   domain             = "opensearch"
   instance_size      = "t3.small.search"

@@ -9,7 +9,7 @@ This module will create the components:
 ### Create Elasticache
 ```hcl
 module "ecs_cluster" {
-  source  = github.com/spartan-stratos/terraform-modules//aws/ecs-cluster?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/ecs-cluster?ref=v0.1.0"
 
   cluster_name = "example"
   tags = {
