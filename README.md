@@ -358,7 +358,7 @@ Terraform module which creates ABC resources on AWS.
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.0](https://github.com/repo/compare/v0.0.1...v1.0.0) (2024-01-01)
+## [0.1.0](https://github.com/repo/compare/v0.0.1...v0.1.0) (2024-01-01)
 
 ### ⚠ BREAKING CHANGES
 

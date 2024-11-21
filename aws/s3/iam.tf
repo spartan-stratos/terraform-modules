@@ -1,4 +1,5 @@
-data "aws_iam_policy_document" "main_policy" {
+data "aws_iam_policy_document" "this_policy" {
+  count = var.enabled_iam_policy ? 1 : 0
   statement {
     effect = "Allow"
     actions = [
@@ -7,13 +8,14 @@ data "aws_iam_policy_document" "main_policy" {
       "s3:PutObjectAcl",
     ]
     resources = [
-      aws_s3_bucket.main.arn,
-      "${aws_s3_bucket.main.arn}/*"
+      local.bucket.arn,
+      "${local.bucket.arn}/*"
     ]
   }
 }
 
 data "aws_iam_policy_document" "readonly_policy" {
+  count = var.enabled_iam_policy ? 1 : 0
   statement {
     effect = "Allow"
     actions = [
@@ -22,8 +24,8 @@ data "aws_iam_policy_document" "readonly_policy" {
       "s3:ListBucket",
     ]
     resources = [
-      aws_s3_bucket.main.arn,
-      "${aws_s3_bucket.main.arn}/*"
+      local.bucket.arn,
+      "${local.bucket.arn}/*"
     ]
   }
 }
@@ -33,11 +35,12 @@ aws_iam_policy main creates an IAM policy for write access to the specified S3 b
 The policy allows overriding object ownership to the bucket owner, uploading objects, and setting object ACLs.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
 */
-resource "aws_iam_policy" "main" {
-  name        = "S3PublicAssetsWrite-${var.bucket_name}"
+resource "aws_iam_policy" "this" {
+  count       = var.enabled_iam_policy ? 1 : 0
+  name        = "S3PublicAssetsWrite-${local.bucket.bucket}"
   description = "Policy that allows writing to the s3 public assets bucket"
 
-  policy = data.aws_iam_policy_document.main_policy.json
+  policy = data.aws_iam_policy_document.this_policy.0.json
 }
 
 /*
@@ -46,8 +49,9 @@ The policy allows listing, getting objects, and viewing object ACLs within the b
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
 */
 resource "aws_iam_policy" "readonly" {
-  name        = "S3AssetsRead-${var.bucket_name}"
+  count       = var.enabled_iam_policy ? 1 : 0
+  name        = "S3AssetsRead-${local.bucket.bucket}"
   description = "Policy that allows reading from the s3 assets bucket"
 
-  policy = data.aws_iam_policy_document.readonly_policy.json
+  policy = data.aws_iam_policy_document.readonly_policy.0.json
 }

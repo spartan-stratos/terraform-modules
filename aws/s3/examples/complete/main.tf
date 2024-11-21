@@ -1,7 +1,15 @@
 module "s3_bucket" {
-  source          = "../../"
+  source = "../../"
 
-  environment     = "dev"
-  bucket_name     = "example-bucket"
-  allowed_origins = ["example.com"]
+  bucket_name   = "example-bucket"
+  bucket_prefix = null
+
+
+  enabled_cors = true
+  cors_configuration = {
+    allowed_origins = ["example.com"]
+    allowed_methods = ["GET"]
+  }
+
+  enabled_iam_policy = true
 }

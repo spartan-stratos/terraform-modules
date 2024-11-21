@@ -6,7 +6,6 @@ Configuration in this directory creates a Fargate EKS Profile
 ```hcl
 module "fargate_profile" {
   source  = "./modules/fargate-profile"
-  version = "~> 1.0"
 
   cluster_name      = aws_eks_cluster.master.name
   cluster_ip_family = "ipv4"

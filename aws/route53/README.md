@@ -8,8 +8,7 @@ This module will create the following components:
 ### Create Route53
 ```hcl
 module "route53" {
-  source  = "c0x12c/route53/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/route53?ref=v0.1.0"
 
   dns_zone = "example.com"
 

@@ -9,8 +9,7 @@ This module will create the components below:
 ### Create a static website
 ```hcl
 module "static_website" {
-  source  = "c0x12c/static-website/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/static-website/aws"
 
   name        = "example"
   stack_name  = "spartan"

@@ -7,8 +7,7 @@ Depends on the app types (SSG or SSR), you will have to manually change the buil
 ### Next.js app
 ```hcl
 module "website" {
-  source  = "terraform-c0x12c-modules/amplify/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/amplify?ref=v0.1.0"
 
   dns_zone         = "example.com"
   environment      = "dev"

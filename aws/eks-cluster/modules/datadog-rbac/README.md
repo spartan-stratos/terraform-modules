@@ -6,7 +6,6 @@ Terraform Datadog RBAC sub-module.
 ```hcl
 module "datadog_rbac" {
   source  = "./modules/datadog-rbac"
-  version = "~> 1.0"
 
   fargate_profiles        = var.fargate_profiles
   default_service_account = var.default_service_account

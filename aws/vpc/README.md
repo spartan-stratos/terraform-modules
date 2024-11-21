@@ -16,11 +16,10 @@ You can specify `enable_single_nat=true` to enable only one NAT gateway for all 
 ### Create a VPC
 ```hcl
 module "vpc" {
-  source  = "c0x12c/vpc/aws"
-  version = "~> 1.0"
+  source  = github.com/spartan-stratos/terraform-modules//aws/vpc?ref=v0.1.0"
 
   name                        = "example"
-  cidr_block                  = "10.1.0.0/16"
+  cidr_block                  = "10.0.1.0/16"
   availability_zone_postfixes = ["a", "b", "c"]
   environment                 = "dev"
   single_nat                  = true
