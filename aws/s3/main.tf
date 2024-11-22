@@ -88,7 +88,7 @@ aws_s3_bucket_policy attaches a policy to the S3 bucket, enabling the public acc
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 */
 resource "aws_s3_bucket_policy" "this" {
-  count = var.enabled_public_policy ? 1 : 0
+  count  = var.enabled_public_policy ? 1 : 0
   bucket = local.bucket.id
   policy = data.aws_iam_policy_document.this.0.json
 }
