@@ -65,6 +65,35 @@ resource "aws_s3_bucket_public_access_block" "this" {
 }
 
 /*
+aws_iam_policy_document generates an IAM policy document granting public access to S3 bucket objects.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
+*/
+data "aws_iam_policy_document" "this" {
+  count = var.enabled_public_policy ? 1 : 0
+  statement {
+    sid       = "PublicReadGetObject"
+    effect    = "Allow"
+    actions   = ["s3:GetObject"]
+    resources = ["${local.bucket.arn}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+  }
+}
+
+/*
+aws_s3_bucket_policy attaches a policy to the S3 bucket, enabling the public access to bucket objects.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
+*/
+resource "aws_s3_bucket_policy" "this" {
+  count  = var.enabled_public_policy ? 1 : 0
+  bucket = local.bucket.id
+  policy = data.aws_iam_policy_document.this.0.json
+}
+
+/*
 aws_s3_bucket_versioning sets versioning status on the S3 bucket.
 Versioning is disabled by default, meaning previous versions of files won't be retained.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
