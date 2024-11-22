@@ -65,6 +65,12 @@ variable "restrict_public_buckets" {
   default     = true
 }
 
+variable "enabled_public_policy" {
+  description = "Enabled create the Public Policy to allow public access to bucket objects."
+  type        = bool
+  default     = false
+}
+
 variable "versioning_status" {
   description = "The status of bucket versioning."
   type        = string
