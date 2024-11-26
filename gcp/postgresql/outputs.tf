@@ -5,7 +5,7 @@ output "db_primary_private_ip_address" {
 
 output "db_replica_private_ip_address" {
   description = "The list of private IP address of replica instance. If there is no replica, use the primary instance's private IP address."
-  value       = length(var.replica_count) > 0 ? google_sql_database_instance.replica[*].private_ip_address : [google_sql_database_instance.primary.private_ip_address]
+  value       = var.replica_count > 0 ? google_sql_database_instance.replica[*].private_ip_address : [google_sql_database_instance.primary.private_ip_address]
 }
 
 output "db_analytic_replica_private_ip_addresses" {
