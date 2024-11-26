@@ -149,7 +149,7 @@ variable "vpcsc_policy" {
   type        = string
   default     = "ALLOW"
   validation {
-    condition = var.vpcsc_policy == "ALLOW" || var.vpcsc_policy == "DENY"
+    condition     = var.vpcsc_policy == "ALLOW" || var.vpcsc_policy == "DENY"
     error_message = "The supported values are ALLOW or DENY."
   }
 }

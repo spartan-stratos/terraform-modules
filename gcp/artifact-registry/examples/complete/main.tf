@@ -1,5 +1,5 @@
 module "docker_repository" {
-  source        = "../../"
+  source = "../../"
 
   format        = "DOCKER"
   location      = "us-west1"
