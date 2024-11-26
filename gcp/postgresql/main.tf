@@ -124,13 +124,13 @@ resource "google_sql_database_instance" "analytic_replica" {
   database_version     = var.database_version
   deletion_protection  = var.enabled_deletion_protection
   master_instance_name = google_sql_database_instance.primary.name
-  user_labels          = var.labels
 
   settings {
     tier              = var.tier
     disk_autoresize   = var.enabled_disk_autoresize
     disk_size         = var.size
     availability_type = var.availability_type
+    user_labels       = var.labels
 
     ip_configuration {
       ipv4_enabled    = false
