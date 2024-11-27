@@ -29,16 +29,16 @@ module "alb" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
+| Name | Version  |
+|------|----------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| Name | Version  |
+|------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
 
 ## Modules
 
