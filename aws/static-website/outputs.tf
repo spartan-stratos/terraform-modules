@@ -5,12 +5,12 @@ output "domain_name" {
 
 output "s3_bucket_id" {
   description = "The S3 bucket ID that holding the web assets"
-  value       = module.s3.s3_bucket_id
+  value       = var.enabled_create_s3 ? module.s3[0].s3_bucket_id : data.aws_s3_bucket.this[0].id
 }
 
 output "s3_bucket_arn" {
   description = "The S3 bucket arn that holding the web assets"
-  value       = module.s3.s3_bucket_arn
+  value       = var.enabled_create_s3 ? module.s3[0].s3_bucket_arn : data.aws_s3_bucket.this[0].arn
 }
 
 output "cloudfront_id" {

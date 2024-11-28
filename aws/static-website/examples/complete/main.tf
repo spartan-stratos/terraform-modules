@@ -1,10 +1,9 @@
 module "static_website" {
   source = "../../"
 
-  name        = "example"
-  stack_name  = "spartan"
-  environment = "dev"
+  name = "example"
 
+  enabled_create_s3 = false
   dns_name          = "example"
   route53_zone_id   = "<r53_zone_id>"
   route53_zone_name = "spartan-dev.io"

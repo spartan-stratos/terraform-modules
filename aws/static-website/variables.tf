@@ -1,11 +1,11 @@
-variable "environment" {
-  description = "The environment name"
-  type        = string
-}
-
 variable "dns_name" {
   description = "The DNS name for the static website"
   type        = string
+}
+
+variable "enabled_create_s3" {
+  description = "The bool value determining whether to create a new S3 bucket"
+  type        = bool
 }
 
 variable "global_tls_certificate_arn" {
@@ -14,7 +14,7 @@ variable "global_tls_certificate_arn" {
 }
 
 variable "name" {
-  description = "For creating the bucket and cloudfront name"
+  description = "For creating or retrieving the bucket and cloudfront name"
   type        = string
 }
 
@@ -25,10 +25,5 @@ variable "route53_zone_id" {
 
 variable "route53_zone_name" {
   description = "R53 zone name"
-  type        = string
-}
-
-variable "stack_name" {
-  description = "The stack name"
   type        = string
 }

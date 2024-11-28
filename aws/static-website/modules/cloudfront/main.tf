@@ -1,4 +1,3 @@
-
 /*
 aws_cloudfront_origin_access_control configures access control settings for CloudFront to securely access the specified S3 bucket.
 Enables signing behavior for security and ensures that the connection protocol is compatible with AWS SigV4 standards.
