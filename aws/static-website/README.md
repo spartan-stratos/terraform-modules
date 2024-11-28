@@ -57,6 +57,7 @@ No resources.
 | <a name="input_name"></a> [name](#input\_name)                                                                         | For creating the bucket and cloudfront name                  | `string` | n/a     |   yes    |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                                    | R53 zone ID                                                  | `string` | n/a     |   yes    |
 | <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name)                              | R53 zone name                                                | `string` | n/a     |   yes    |
+| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | n/a | yes |
 
 ## Outputs
 

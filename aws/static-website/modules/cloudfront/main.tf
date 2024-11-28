@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "this" {
     origin_id                = local.s3_origin_id
   }
 
-  aliases = ["${var.dns_name}.${var.route53_zone_name}"]
+  aliases = [var.dns_name]
 
   enabled         = true
   is_ipv6_enabled = true
@@ -42,7 +42,7 @@ resource "aws_cloudfront_distribution" "this" {
       }
     }
 
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = var.viewer_protocol_policy
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400

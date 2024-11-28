@@ -49,13 +49,14 @@ No modules.
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 zone id | `string` | n/a | yes |
-| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | Route53 zone name | `string` | n/a | yes |
-| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id) | The origin S3 bucket id | `string` | n/a | yes |
-| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn) | SSL certificate arn for attaching to the Cloudfront distribution | `string` | n/a | yes |
+| Name                                                                                                     | Description                                                                           | Type | Default | Required |
+|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|------|---------|:--------:|
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                             | The DNS name for the static website                                                   | `string` | n/a | yes |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                      | Route53 zone id                                                                       | `string` | n/a | yes |
+| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name)                | Route53 zone name                                                                     | `string` | n/a | yes |
+| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id)                               | The origin S3 bucket id                                                               | `string` | n/a | yes |
+| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn)          | SSL certificate arn for attaching to the Cloudfront distribution                      | `string` | n/a | yes |
+| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | n/a | yes |
 
 ## Outputs
 
