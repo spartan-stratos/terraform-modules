@@ -133,12 +133,6 @@ variable "publicly_accessible" {
   default     = false
 }
 
-variable "whitelisted_db_access_cidrs" {
-  description = "List of CIDR blocks representing the IP ranges that are permitted to access the database."
-  type        = list(string)
-  default     = []
-}
-
 variable "storage_encryption_enabled" {
   description = "Specifies whether the DB instance is encrypted. Note that if you are creating a cross-region read replica this field is ignored and you should instead declare kms_key_id with a valid ARN. The default is false if not specified."
   type        = bool
