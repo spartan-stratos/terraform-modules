@@ -1,7 +1,6 @@
 module "postgresql" {
   source = "../../"
 
-  db_identifier                          = "example-rds"
   db_name                                = "example_rds"
   db_username                            = "exampleuser"
   instance_class                         = "db.t3.micro"
@@ -12,4 +11,5 @@ module "postgresql" {
   subnet_ids                             = []
   postgresql_password_secret_id          = "secret-123456789"
   storage_type                           = "gp3"
+  enabled_auto_minor_version_upgrade     = false
 }

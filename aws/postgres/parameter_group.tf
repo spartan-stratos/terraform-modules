@@ -8,7 +8,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_p
 resource "aws_db_parameter_group" "parameter_group" {
   for_each = { for _, version in distinct(concat(var.supported_engine_version, [local.engine_version_major])) : version => version }
 
-  name   = "${local.identifier}-${each.key}"
+  name   = "${local.db_identifier}-${each.key}"
   family = "postgres${each.key}"
 
   parameter {

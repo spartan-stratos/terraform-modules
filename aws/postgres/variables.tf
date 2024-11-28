@@ -5,7 +5,7 @@ variable "apply_immediately" {
 }
 
 variable "backup_window" {
-  description = "The time for this db will create backup"
+  description = "The time window during which backups will be created."
   type        = string
   default     = "01:00-03:00"
 }
@@ -17,13 +17,8 @@ variable "instance_class" {
 }
 
 variable "disk_size" {
-  description = "The disk size of database instance"
+  description = "The disk size of database instance (in GiB)"
   type        = number
-}
-
-variable "db_identifier" {
-  description = "The database identifier"
-  type        = string
 }
 
 variable "db_name" {
@@ -76,7 +71,7 @@ variable "security_group_allow_all_within_vpc_id" {
 }
 
 variable "replica_count" {
-  description = "The number of replica db"
+  description = "The number of replica for the database."
   type        = number
 }
 
@@ -130,4 +125,28 @@ variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
   type        = bool
   default     = false
+}
+
+variable "publicly_accessible" {
+  description = "Specifies whether the RDS instance should be publicly accessible (default is false)."
+  type        = bool
+  default     = false
+}
+
+variable "whitelisted_db_access_cidrs" {
+  description = "List of CIDR blocks representing the IP ranges that are permitted to access the database."
+  type        = list(string)
+  default     = []
+}
+
+variable "storage_encryption_enabled" {
+  description = "Specifies whether the DB instance is encrypted. Note that if you are creating a cross-region read replica this field is ignored and you should instead declare kms_key_id with a valid ARN. The default is false if not specified."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_auto_minor_version_upgrade" {
+  description = "Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window. Defaults to true."
+  type        = bool
+  default     = true
 }
