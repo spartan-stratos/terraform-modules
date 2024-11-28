@@ -4,7 +4,7 @@ output "main_address" {
 }
 
 output "main_endpoint" {
-  description = "The endpoint of primary database instance in address:port format.."
+  description = "The endpoint of primary database instance in address:port format."
   value       = aws_db_instance.main.endpoint
 }
 
