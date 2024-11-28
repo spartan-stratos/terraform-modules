@@ -68,13 +68,3 @@ variable "principal_roles" {
   type        = list(string)
   default     = null
 }
-
-variable "aws_account_id" {
-  description = "AWS account ID which will be used for creating resources."
-  type        = string
-}
-
-variable "aws_region" {
-  description = "AWS region in which the resources will be created."
-  type        = string
-}
