@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "read" {
       "sqs:ReceiveMessage",
     ]
     resources = [
-      "arn:aws:sqs:${var.aws_region}:${var.aws_account_id}:*",
+      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:*",
     ]
   }
 }
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "write" {
       "sqs:SendMessage",
     ]
     resources = [
-      "arn:aws:sqs:${var.aws_region}:${var.aws_account_id}:*",
+      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:*",
     ]
   }
 }

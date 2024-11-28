@@ -5,10 +5,19 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/c
 */
 data "aws_caller_identity" "current" {}
 
+/**
+`aws_caller_identity` provides information about AWS region that is making the Terraform API calls.
+Used here to dynamically configure SQS permissions for the current AWS account.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
+ */
+data "aws_region" "current" {}
+
 locals {
   suffix         = var.fifo_enabled ? ".fifo" : ""
   dlq_queue_name = "${var.name}-dlq${local.suffix}"
   queue_name     = "${var.name}${local.suffix}"
+  aws_account_id = data.aws_caller_identity.current.account_id
+  aws_region     = data.aws_region.current.name
 }
 
 /*
