@@ -9,12 +9,10 @@ This module will create the components below:
 ### Create a static website
 ```hcl
 module "static_website" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/static-website/aws"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/static-website?ref=v0.1.0"
 
-  name        = "example"
-  stack_name  = "spartan"
-  environment = "dev"
-
+  name              = "example"
+  enabled_create_s3 = true
   dns_name          = "example"
   route53_zone_id   = "<r53_zone_id>"
   route53_zone_name = "spartan-dev.io"
@@ -51,15 +49,15 @@ No resources.
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment name | `string` | n/a | yes |
-| <a name="input_global_tls_certificate_arn"></a> [global\_tls\_certificate\_arn](#input\_global\_tls\_certificate\_arn) | The TLS certificate arn for the root domain name | `string` | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | For creating the bucket and cloudfront name | `string` | n/a | yes |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | R53 zone ID | `string` | n/a | yes |
-| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name) | R53 zone name | `string` | n/a | yes |
-| <a name="input_stack_name"></a> [stack\_name](#input\_stack\_name) | The stack name | `string` | n/a | yes |
+| Name                                                                                                                   | Description                                                  | Type     | Default | Required |
+|------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|----------|---------|:--------:|
+| <a name="input_enabled_create_s3"></a> [enabled\_create\_s3](#input\_enabled\_create\_s3)                              | The bool value determining whether to create a new S3 bucket | `bool`   | n/a     |   yes    |
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                           | The DNS name for the static website                          | `string` | n/a     |   yes    |
+| <a name="input_global_tls_certificate_arn"></a> [global\_tls\_certificate\_arn](#input\_global\_tls\_certificate\_arn) | The TLS certificate arn for the root domain name             | `string` | n/a     |   yes    |
+| <a name="input_name"></a> [name](#input\_name)                                                                         | For creating the bucket and cloudfront name                  | `string` | n/a     |   yes    |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                                    | R53 zone ID                                                  | `string` | n/a     |   yes    |
+| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name)                              | R53 zone name                                                | `string` | n/a     |   yes    |
+| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | n/a | yes |
 
 ## Outputs
 

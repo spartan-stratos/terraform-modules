@@ -22,3 +22,8 @@ variable "ssl_certificate_arn" {
   description = "SSL certificate arn for attaching to the Cloudfront distribution"
   type        = string
 }
+
+variable "viewer_protocol_policy" {
+  description = "Determines the protocols that viewers can use to access your CloudFront distribution."
+  type        = string
+}

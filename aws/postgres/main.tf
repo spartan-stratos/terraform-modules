@@ -5,9 +5,9 @@ The `subnet_ids` variable is used to pass the list of subnet IDs to the resource
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
 */
 resource "aws_db_subnet_group" "this" {
-  description = "${var.db_name} db subnet group"
-  name        = "${var.db_name}-subnet"
+  name        = "${local.db_identifier}-subnet-group"
   subnet_ids  = var.subnet_ids
+  description = "${local.db_identifier} db subnet group"
 }
 
 /*
@@ -33,7 +33,7 @@ resource "aws_db_instance" "main" {
     aws_db_parameter_group.parameter_group
   ]
 
-  identifier              = var.db_identifier
+  identifier              = local.db_identifier
   instance_class          = var.instance_class
   allocated_storage       = var.disk_size
   max_allocated_storage   = var.max_allocated_storage
@@ -52,7 +52,7 @@ resource "aws_db_instance" "main" {
 
   # optional
   allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = false
+  auto_minor_version_upgrade  = var.enabled_auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
 
   copy_tags_to_snapshot = true
@@ -60,13 +60,13 @@ resource "aws_db_instance" "main" {
   storage_type          = var.storage_type
   iops                  = var.iops
 
-  storage_encrypted = true
+  storage_encrypted = var.storage_encryption_enabled
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   parameter_group_name                = aws_db_parameter_group.parameter_group[local.engine_version_major].id
   publicly_accessible                 = false
 
-  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
+  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${local.db_identifier}-${formatdate("HH-mmaa", timestamp())}"
   skip_final_snapshot       = var.skip_final_snapshot
 
   monitoring_interval = var.monitoring_interval
@@ -93,15 +93,15 @@ resource "aws_db_instance" "replica" {
   allocated_storage     = var.disk_size
   max_allocated_storage = var.max_allocated_storage
 
-  identifier = "${var.db_identifier}-replica-${count.index}"
+  identifier = "${local.db_identifier}-replica-${count.index}"
 
   backup_retention_period = "0"
 
-  skip_final_snapshot = "true"
+  skip_final_snapshot = true
   storage_type        = var.storage_type
   iops                = var.iops
 
-  storage_encrypted = true
+  storage_encrypted = var.storage_encryption_enabled
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   parameter_group_name                = aws_db_parameter_group.parameter_group[local.engine_version_major].id
@@ -112,7 +112,7 @@ resource "aws_db_instance" "replica" {
   ]
 
   allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = false
+  auto_minor_version_upgrade  = var.enabled_auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
 
   monitoring_interval = var.monitoring_interval
