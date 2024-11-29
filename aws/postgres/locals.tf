@@ -1,8 +1,7 @@
 locals {
   engine_version_major = parseint(split(".", var.engine_version)[0], 10)
-  # RDS identifier accepts only lowercase alphanumeric characters and hyphens
-  db_identifier = replace(var.db_name, "_", "-")
-  postgres_max_workers = {
+  identifier           = replace(var.db_name, "_", "-")
+  max_workers = {
     "db.m5.4xlarge"  = 16
     "db.m5.12xlarge" = 48
     "db.m5.24xlarge" = 96
@@ -10,4 +9,8 @@ locals {
     "db.r5.12xlarge" = 48
     "db.r5.24xlarge" = 96
   }
+  db_subnet_group_description  = "${var.db_name} db subnet group"
+  db_subnet_group_name         = "${var.db_name}-subnet"
+  default_backup_retention     = var.backup_retention_day
+  db_final_snapshot_identifier = "${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
 }
