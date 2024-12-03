@@ -14,10 +14,10 @@ resource "aws_ses_email_identity" "emails" {
 # Datasource to receive SES Full Access to the ses domain
 data "aws_iam_policy_document" "this" {
   statement {
-    effect    = "Allow"
+    effect = "Allow"
 
     principals {
-      type = "AWS"
+      type        = "AWS"
       identifiers = var.principal_roles != null ? var.principal_roles : ["*"]
     }
 
