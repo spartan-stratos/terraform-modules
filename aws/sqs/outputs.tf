@@ -3,9 +3,19 @@ output "queue" {
   value       = aws_sqs_queue.queue
 }
 
+output "queue_arn" {
+  description = "The SQS queue arn"
+  value       = aws_sqs_queue.queue.arn
+}
+
 output "dlq" {
   description = "The SQS dead letter queue info"
   value       = aws_sqs_queue.dlq
+}
+
+output "dlq_arn" {
+  description = "The SQS dead letter queue arn"
+  value       = aws_sqs_queue.dlq.arn
 }
 
 output "iam_policy_sqs_write_arn" {
