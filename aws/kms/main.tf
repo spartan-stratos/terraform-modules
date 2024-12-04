@@ -10,7 +10,6 @@ resource "aws_kms_key" "this" {
   custom_key_store_id      = var.custom_key_store_id
   customer_master_key_spec = var.customer_master_key_spec
   enable_key_rotation      = var.enable_key_rotation
-  policy                   = aws_iam_policy.encrypt_decrypt[0].policy
 }
 
 /*

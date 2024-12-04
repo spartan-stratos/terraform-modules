@@ -1,17 +1,21 @@
-resource "aws_iam_policy" "encrypt_decrypt" {
-  count       = var.enabled_create_policy ? 1 : 0
-  description = "Policy that allows encrypt and decrypt data with the provided encryption KMS key."
+data "aws_iam_policy_document" "encrypt_decrypt" {
+  statement {
+    effect = "Allow"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "kms:Encrypt",
-          "kms:Decrypt"
-        ]
-        Effect = "Allow"
-      },
+    principals {
+      type        = "AWS"
+      identifiers = var.principal_roles != null ? var.principal_roles : ["*"]
+    }
+
+    actions = [
+      "kms:Encrypt",
+      "kms:Decrypt"
     ]
-  })
+    resources = [aws_kms_key.this.arn]
+  }
+}
+
+resource "aws_kms_key_policy" "this" {
+  key_id = aws_kms_key.this.id
+  policy = data.aws_iam_policy_document.encrypt_decrypt.json
 }

@@ -50,3 +50,9 @@ variable "enabled_create_policy" {
   type        = bool
   default     = false
 }
+
+variable "principal_roles" {
+  description = "A list of IAM roles that a specific principal (user, service, or account) can assume."
+  type        = list(string)
+  default     = null
+}
