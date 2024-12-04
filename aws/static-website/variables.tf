@@ -31,4 +31,17 @@ variable "route53_zone_name" {
 variable "viewer_protocol_policy" {
   description = "Determines the protocols that viewers can use to access your CloudFront distribution."
   type        = string
+  default     = "redirect-to-https"
+}
+
+variable "minimum_protocol_version" {
+  description = "The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections."
+  type        = string
+  default     = "TLSv1.2_2021"
+}
+
+variable "price_class" {
+  description = "The price class for this distribution."
+  type        = string
+  default     = "PriceClass_100"
 }
