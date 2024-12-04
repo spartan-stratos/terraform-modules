@@ -1,5 +1,5 @@
 variable "name" {
-  description = "The description of the key as viewed in AWS console."
+  description = "The name of the key as viewed in AWS console."
   type        = string
 }
 
@@ -34,18 +34,19 @@ variable "customer_master_key_spec" {
 }
 
 variable "enable_key_rotation" {
-  description = "Specifies whether key rotation is enabled. Required to be enabled if rotation_period_in_days is specified"
+  description = "Specifies whether key rotation is enabled. Required to be enabled if rotation_period_in_days is specified."
   type        = bool
   default     = false
 }
 
 variable "rotation_period_in_days" {
-  description = "Custom period of time between each rotation date. Must be a number between 90 and 2560"
+  description = "Custom period of time between each rotation date. Must be a number between 90 and 2560."
   type        = number
-  default     = 0
+  default     = 90
 }
 
 variable "enabled_create_policy" {
-  type    = bool
-  default = false
+  description = "Specifies whether policy need to be created."
+  type        = bool
+  default     = false
 }

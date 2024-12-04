@@ -1,19 +1,25 @@
-# AWS SQS Terraform module
-Terraform module which creates SQS resources on AWS.
+# AWS KMS Terraform module
+Terraform module which creates KMS resources on AWS.
 
 This module will create the following components:
-- A main queue for receiving messages
-- A dead letter queue for storing un-processed messages
+- A KMS key with configurable properties such as description, key usage, key rotation, and a custom policy for encryption and decryption actions.
+- An alias for the KMS key, providing a user-friendly name to reference the key in other AWS resources.
 
 ## Usage
-### Create SQS
+### Create KMS
 ```hcl
-module "sqs" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/sqs?ref=v0.1.0"
+module "KMS" {
+  source  = "github.com/spartan-stratos/terraform-modules//aws/KMS?ref=v0.1.0"
 
-  name              = "example-queue"
-  max_receive_count = 1
-  principal_roles   = ["arn:aws:iam::<account-id>:role/sqs-role"]
+  source                   = "../../"
+  name                     = "example"
+  description              = "example"
+  deletion_window_in_days  = 7
+  key_usage                = "ENCRYPT_DECRYPT"
+  custom_key_store_id      = null
+  customer_master_key_spec = "SYMMETRIC_DEFAULT"
+  enable_key_rotation      = false
+  enabled_create_policy    = true
 }
 ```
 
@@ -42,33 +48,31 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_sqs_queue.dlq](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
-| [aws_sqs_queue.queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) | resource |
-| [aws_sqs_queue_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue_policy) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_kms_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
+| [aws_kms_alias](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
+
 
 ## Inputs
 
 | Name                                                                                                                 | Description                                                                                                                        | Type           | Default    | Required |
 |----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|----------------|------------|:--------:|
-| <a name="input_delay_seconds"></a> [delay\_seconds](#input\_delay\_seconds)                                          | The time in seconds that the delivery of all messages in the queue will be delayed. An integer from 0 to 900                       | `string`       | `"0"`      |    no    |
-| <a name="input_dlq_retention_seconds"></a> [dlq\_retention\_seconds](#input\_dlq\_retention\_seconds)                | The number of seconds Amazon SQS retains a message. Integer representing seconds, from 60 (1 minute) to 1209600 (14 days)          | `string`       | `"259200"` |    no    |
-| <a name="input_fifo_deduplication_scope"></a> [fifo\_deduplication\_scope](#input\_fifo\_deduplication\_scope)       | Specifies whether message deduplication occurs at the message group or queue level. (perQueue or perMessageGroupId)                | `string`       | `null`     |    no    |
-| <a name="input_fifo_enabled"></a> [fifo\_enabled](#input\_fifo\_enabled)                                             | Specify whether enable FIFO or not for the SQS queue                                                                               | `bool`         | `false`    |    no    |
-| <a name="input_fifo_throughput_limit"></a> [fifo\_throughput\_limit](#input\_fifo\_throughput\_limit)                | Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group (perQueue or perMessageGroupId) | `string`       | `null`     |    no    |
-| <a name="input_max_receive_count"></a> [max\_receive\_count](#input\_max\_receive\_count)                            | Max receive message count                                                                                                          | `string`       | `"3"`      |    no    |
-| <a name="input_max_size"></a> [max\_size](#input\_max\_size)                                                         | The limit of how many bytes a message can contain before Amazon SQS rejects it                                                     | `string`       | `"2048"`   |    no    |
-| <a name="input_name"></a> [name](#input\_name)                                                                       | The name for creating queue names                                                                                                  | `string`       | n/a        |   yes    |
-| <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles)                                    | A list of IAM roles that a specific principal (user, service, or account) can assume.                                              | `list(string)` | `null`     |    no    |
-| <a name="input_retention_seconds"></a> [retention\_seconds](#input\_retention\_seconds)                              | The number of seconds Amazon SQS retains a message. Integer representing seconds, from 60 (1 minute) to 1209600 (14 days)          | `string`       | `"86400"`  |    no    |
-| <a name="input_visibility_timeout_seconds"></a> [visibility\_timeout\_seconds](#input\_visibility\_timeout\_seconds) | The visibility timeout for the queue. An integer from 0 to 43200                                                                   | `string`       | `"30"`     |    no    |
-| <a name="input_wait_seconds"></a> [wait\_seconds](#input\_wait\_seconds)                                             | The time for which a ReceiveMessage call will wait for a message to arrive (long polling) before returning                         | `string`       | `"10"`     |    no    |
+| <a name="input_name"></a> [name](#input\_name)                                          | The name of the key as viewed in AWS console.                       | `string`       | n/a      |    yes    |
+| <a name="input_description"></a> [description](#input\_description)                | The description of the key as viewed in AWS console.          | `string`       | `null` |    no    |
+| <a name="input_deletion_window_in_days"></a> [deletion\_window\_in\_days](#input\_deletion\_window\_in\_days)       | The waiting period, specified in number of days.                | `number`       | `7`     |    no    |
+| <a name="input_fifo_enabled"></a> [fifo\_enabled](#input\_fifo\_enabled)                                             | Specify whether enable FIFO or not for the KMS queue.                                                                               | `bool`         | `false`    |    no    |
+| <a name="input_key_usage"></a> [key\_usage](#input\_key\_usage)                | Specifies the intended use of the key. Valid values: ENCRYPT_DECRYPT, SIGN_VERIFY, or GENERATE_VERIFY_MAC. | `string`       | `"ENCRYPT_DECRYPT"`     |    no    |
+| <a name="input_custom_key_store_id"></a> [custom\_key\_store\_id](#input\_custom\_key\_store\_id)                                                                       | ID of the KMS Custom Key Store where the key will be stored instead of KMS (eg CloudHSM).                                                                                                  | `string`       | `null`        |   no    |
+| <a name="input_customer_master_key_spec"></a> [customer\_master\_key\_spec](#input\_customer\_master\_key\_spec)                                    | Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_256, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, or ECC_SECG_P256K1.                                              | `string` | `SYMMETRIC_DEFAULT`     |    no    |
+| <a name="input_enable_key_rotation"></a> [enable\_key\_rotation](#input\_enable\_key\_rotation)                              | Specifies whether key rotation is enabled. Required to be enabled if rotation_period_in_days is specified          | `bool`       | `false`  |    no    |
+| <a name="input_rotation_period_in_days"></a> [rotation\_period\_in\_days](#input\_rotation\_period\_in\_days) | Custom period of time between each rotation date. Must be a number between 90 and 2560.                                                                   | `number`       | `90`     |    no    |
+| <a name="input_enabled_create_policy"></a> [enabled\_create\_policy](#input\_enabled\_create\_policy)                                             | Specifies whether policy need to be created.                         | `bool`       | n/a     |    yes    |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dlq"></a> [dlq](#output\_dlq) | The SQS dead letter queue info |
-| <a name="output_queue"></a> [queue](#output\_queue) | The SQS queue info |
+| <a name="output_key_id"></a> [key\_id](#output\_key\_id) | The KMS dead letter queue info |
+| <a name="output_key_arn"></a> [key\_arn](#output\_key\_arn) | The KMS queue info |
+| <a name="output_key_alias"></a> [key\_alias](#output\_key\_alias) | The KMS dead letter queue info |
+| <a name="output_iam_policy_kms_encrypt_decrypt_arn"></a> [iam\_policy\_kms\_encrypt\_decrypt\_arn](#output\_iam\_policy\_kms\_encrypt\_decrypt\_arn) | The KMS queue info |
 <!-- END_TF_DOCS -->
