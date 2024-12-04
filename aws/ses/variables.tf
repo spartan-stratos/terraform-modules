@@ -5,7 +5,7 @@ variable "email_domain" {
 
 variable "emails" {
   description = "List of email addresses allowed for sending in SES sandbox mode. These are verified to send emails during testing."
-  type        = list(string).0
+  type        = list(string)
   default     = []
 }
 
