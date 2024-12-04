@@ -8,11 +8,6 @@ variable "route53_zone_id" {
   type        = string
 }
 
-variable "route53_zone_name" {
-  description = "Route53 zone name"
-  type        = string
-}
-
 variable "s3_bucket_id" {
   description = "The origin S3 bucket id"
   type        = string
