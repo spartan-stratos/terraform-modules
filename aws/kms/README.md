@@ -8,8 +8,8 @@ This module will create the following components:
 ## Usage
 ### Create KMS
 ```hcl
-module "KMS" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/KMS?ref=v0.1.0"
+module "kms" {
+  source  = "github.com/spartan-stratos/terraform-modules//aws/kms?ref=v0.1.0"
 
   source                   = "../../"
   name                     = "example"

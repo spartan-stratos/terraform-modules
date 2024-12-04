@@ -1,4 +1,4 @@
-# SQS
+# KMS
 
 ## Usage
 To run this example you need to execute:
