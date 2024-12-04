@@ -34,6 +34,7 @@ resource "aws_cloudfront_distribution" "this" {
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
 
+
     forwarded_values {
       query_string = false
 
@@ -63,20 +64,20 @@ resource "aws_cloudfront_distribution" "this" {
       }
     }
 
+    viewer_protocol_policy = var.viewer_protocol_policy
     min_ttl                = 0
     default_ttl            = 0
     max_ttl                = 0
     compress               = true
-    viewer_protocol_policy = "allow-all"
   }
 
-  price_class = "PriceClass_100"
+  price_class = var.price_class
 
   viewer_certificate {
     cloudfront_default_certificate = false
     acm_certificate_arn            = var.ssl_certificate_arn
     ssl_support_method             = "sni-only"
-    minimum_protocol_version       = "TLSv1.2_2019"
+    minimum_protocol_version       = var.minimum_protocol_version
   }
 
   retain_on_delete = true
