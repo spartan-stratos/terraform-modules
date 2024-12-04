@@ -11,7 +11,7 @@ resource "aws_kms_key" "this" {
   customer_master_key_spec = var.customer_master_key_spec
   enable_key_rotation      = var.enable_key_rotation
 
-  policy = aws_iam_policy.encrypt_decrypt.policy
+  policy = aws_iam_policy.encrypt_decrypt.policy[0]
 }
 
 /*
