@@ -331,6 +331,8 @@ It is important to keep a single root configuration from growing too large, with
 
 ## [README.md](http://README.md) template
 
+Follow the template as following and use [terraform-docs](https://github.com/terraform-docs/terraform-docs) tool to support generating documentation from Terraform modules.
+
 ```markdown
 # AWS ABC Terraform module
 
