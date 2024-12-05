@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 * Add GCP GKE Gateway API module
 * Add GCP Service Account module
 * Add AWS Eventbridge Scheduler module
+* Add AWS SES module
 
 ## [0.1.2]() (2024-12-04)
 ### Features
