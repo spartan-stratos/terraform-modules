@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.4]() (2024-12-06)
+### Features
+* Add Wildcard SSL Cert module
+
 ## [0.1.3]() (2024-12-05)
 ### Features
 * Add GCP Github OIDC
