@@ -35,7 +35,7 @@ module "instance" {
 
 | Name                                                                     | Version  |
 | ------------------------------------------------------------------------ | -------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | ~> 1.9.8 |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement_aws)                   | >= 5.75  |
 
 ## Providers

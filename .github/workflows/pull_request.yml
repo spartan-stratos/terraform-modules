@@ -1,7 +1,7 @@
 name: "Terraform Check on Pull Request"
 
 env:
-  TERRAFORM_VERSION: 1.9.8
+  TERRAFORM_VERSION: 1.10.1
   PLATFORMS: 'aws|gcp'                # delimiter should be "|"
   EXCLUDED_FOLDERS: 'examples|files'  # delimiter should be "|"
 

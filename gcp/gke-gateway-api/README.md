@@ -22,7 +22,7 @@ module "gke_autopilot" {
 
 | Name | Version  |
 |------|----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | \>= 2.34 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | \>= 0.12 |
 
