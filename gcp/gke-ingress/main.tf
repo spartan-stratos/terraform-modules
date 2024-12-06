@@ -1,3 +1,7 @@
+/**
+`google_compute_global_address` manages global addresses are used for HTTP(S) load balancing.
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
+ */
 resource "google_compute_global_address" "this" {
   for_each     = var.gke_ingress_services
   name         = "${each.key}-public-ip-address"
@@ -6,6 +10,10 @@ resource "google_compute_global_address" "this" {
   address_type = "EXTERNAL"
 }
 
+/**
+`google_compute_security_policy` defines an IP blacklist or whitelist that protects load balanced Google Cloud services by denying or permitting traffic from specified IP ranges.
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_security_policy
+ */
 resource "google_compute_security_policy" "throttle" {
   for_each = var.gke_ingress_services
 
