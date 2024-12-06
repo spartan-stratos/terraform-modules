@@ -42,16 +42,16 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata = {
-    ssh-keys = "management:${tls_private_key.management_ssh_key.public_key_openssh}"
-  }
-
   boot_disk {
     initialize_params {
       image = "${var.image_distro}-${var.image_version}"
       type  = "pd-ssd"
       size  = var.disk_boot_size
     }
+  }
+  
+  metadata = {
+    ssh-keys = "management:${tls_private_key.management_ssh_key.public_key_openssh}"
   }
 
   tags                      = local.network_tags

@@ -1,16 +1,17 @@
 /*
 https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network
 */
-resource "google_compute_network" "this" {
+data "google_compute_network" "this" {
   name = var.vpc_name
 }
+
 /*
 https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall
 */
 
 resource "google_compute_firewall" "egress_vpn" {
   name    = "${var.vpn_name}-egress"
-  network = google_compute_network.this.name
+  network = data.google_compute_network.this.name
 
   allow {
     protocol = "all"
@@ -27,7 +28,7 @@ Allow connections to OpenVPN port
 */
 resource "google_compute_firewall" "udp_vpn" {
   name    = "${var.vpn_name}-udp"
-  network = google_compute_network.this.name
+  network = data.google_compute_network.this.name
 
   allow {
     protocol = "udp"
@@ -44,7 +45,7 @@ Allow Certbot TLS renewal
 */
 resource "google_compute_firewall" "http_vpn" {
   name    = "${var.vpn_name}-http"
-  network = google_compute_network.this.name
+  network = data.google_compute_network.this.name
 
   allow {
     protocol = "tcp"
@@ -61,7 +62,7 @@ Allow Google OAuth 2.0 callback
 */
 resource "google_compute_firewall" "https_vpn" {
   name    = "${var.vpn_name}-https"
-  network = google_compute_network.this.name
+  network = data.google_compute_network.this.name
 
   allow {
     protocol = "tcp"
