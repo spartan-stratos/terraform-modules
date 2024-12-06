@@ -15,7 +15,7 @@ resource "tls_private_key" "management_ssh_key" {
 }
 
 resource "aws_key_pair" "management_ssh_key" {
-  key_name  = var.vpn_name
+  key_name   = var.vpn_name
   public_key = tls_private_key.management_ssh_key.public_key_openssh
 }
 

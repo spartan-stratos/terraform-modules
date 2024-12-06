@@ -12,7 +12,7 @@ output "ssh_public_key" {
 }
 
 output "ovpn_file" {
-  value = <<-EOT
+  value     = <<-EOT
 client
 dev tun
 proto udp
