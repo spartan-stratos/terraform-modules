@@ -1,6 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.5]() (2024-12-06)
+### Features
+* Add GCP Service Connection Policies Module
+* Add GCP IAM Member Module
+* Add GCP Workspace Module
+* Add GCP Ingress Module
+* Add GCP Service Config
+* Add GCP Workload Identity
+* Add GCP Storage Bucket
+* Add GCP Project Service
+* Add GCP OpenVPN Module
+* Add AWS OpenVPN Module
 
 ## [0.1.4]() (2024-12-06)
 ### Features
