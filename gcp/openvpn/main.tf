@@ -49,7 +49,7 @@ resource "google_compute_instance" "default" {
       size  = var.disk_boot_size
     }
   }
-  
+
   metadata = {
     ssh-keys = "management:${tls_private_key.management_ssh_key.public_key_openssh}"
   }
