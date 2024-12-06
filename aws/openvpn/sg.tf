@@ -1,8 +1,14 @@
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+ */
 resource "aws_security_group" "this" {
   name   = var.vpn_name
   vpc_id = var.vpc_id
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+ */
 resource "aws_security_group_rule" "egress_vpn" {
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
@@ -13,7 +19,10 @@ resource "aws_security_group_rule" "egress_vpn" {
   protocol  = "-1"
 }
 
-# Allow connections to OpenVPN port
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+Allow connections to OpenVPN port
+ */
 resource "aws_security_group_rule" "udp_vpn" {
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
@@ -24,7 +33,10 @@ resource "aws_security_group_rule" "udp_vpn" {
   protocol  = "udp"
 }
 
-# Allow Certbot TLS renewal
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+Allow Certbot TLS renewal
+ */
 resource "aws_security_group_rule" "http_vpn" {
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
@@ -35,7 +47,10 @@ resource "aws_security_group_rule" "http_vpn" {
   protocol  = "tcp"
 }
 
-# Allow Google OAuth 2.0 callback
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+Allow Google OAuth 2.0 callback
+ */
 resource "aws_security_group_rule" "https_vpn" {
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]

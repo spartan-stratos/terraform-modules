@@ -1,12 +1,13 @@
-locals {
-  default_fqdn = "${var.vpn_name}.${var.domain_name}"
-  openvpn_fqdn = var.openvpn_fqdn != "" ? var.openvpn_fqdn : local.default_fqdn
-}
-
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone
+*/
 data "aws_route53_zone" "domain" {
   name = var.domain_name
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record
+ */
 resource "aws_route53_record" "vpn" {
   zone_id = data.aws_route53_zone.domain.zone_id
 

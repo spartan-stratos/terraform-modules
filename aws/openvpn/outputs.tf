@@ -2,10 +2,6 @@ output "public_ip" {
   value = aws_eip.this.public_ip
 }
 
-output "ca_cert" {
-  value = tls_self_signed_cert.ca.cert_pem
-}
-
 output "ssh_private_key" {
   value     = tls_private_key.management_ssh_key.private_key_pem
   sensitive = true
@@ -39,4 +35,5 @@ reneg-sec 28800
 ${tls_self_signed_cert.ca.cert_pem}
 </ca>
 EOT
+  sensitive = true
 }

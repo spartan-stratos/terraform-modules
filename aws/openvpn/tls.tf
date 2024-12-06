@@ -1,4 +1,7 @@
-# Generate a Certificate Authority
+/*
+https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key
+Generate a Certificate Authority
+ */
 resource "tls_private_key" "ca" {
   algorithm   = "ECDSA"
   ecdsa_curve = "P384"
@@ -28,7 +31,10 @@ resource "tls_self_signed_cert" "ca" {
   ]
 }
 
-# Generate OpenVPN server certificates
+/*
+https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key
+Generate OpenVPN server certificates
+ */
 resource "tls_private_key" "server" {
   algorithm   = "ECDSA"
   ecdsa_curve = "P384"
@@ -42,7 +48,10 @@ resource "tls_cert_request" "server" {
   }
 }
 
-# Sign OpenVPN server cert request by the CA
+/*
+https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key
+Sign OpenVPN server cert request by the CA
+*/
 resource "tls_locally_signed_cert" "server" {
   cert_request_pem   = tls_cert_request.server.cert_request_pem
   ca_private_key_pem = tls_private_key.ca.private_key_pem

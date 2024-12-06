@@ -1,14 +1,48 @@
+# AWS OpenVPN Terraform module
+
+Terraform module which creates OpenVPN to access internal VPC network.
+
+## Usage
+
+### Create an OpenVPN instance
+
+```hcl
+module "openvpn" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/openvpn?ref=v0.1.5"
+
+  vpn_name    = "openvpn"
+  domain_name = "example.com"
+
+  vpc_id    = "vpc-123456789"
+  subnet_id = "subnet-123456789"
+  extra_sg_ids = ["sg-123456789"]
+
+  oauth2_client_id     = "google_client_id"
+  oauth2_client_secret = "google_client_secret"
+}
+```
+
+## Examples
+
+- [Example](./examples/complete/)
+
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name                                                                      | Version  |
+|---------------------------------------------------------------------------|----------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.75  |
+| <a name="requirement_random"></a> [random](#requirement\_random)          | >= 3.6.3 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls)                   | >= 4.0.6 |
 
 ## Providers
 
-| Name                                                       | Version |
-|------------------------------------------------------------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)          | n/a     |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a     |
-| <a name="provider_tls"></a> [tls](#provider\_tls)          | n/a     |
+| Name                                                       | Version  |
+|------------------------------------------------------------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws)          | >= 5.75  |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6.3 |
+| <a name="provider_tls"></a> [tls](#provider\_tls)          | >= 4.0.6 |
 
 ## Modules
 
@@ -62,7 +96,6 @@ No modules.
 
 | Name                                                                                  | Description |
 |---------------------------------------------------------------------------------------|-------------|
-| <a name="output_ca_cert"></a> [ca\_cert](#output\_ca\_cert)                           | n/a         |
 | <a name="output_ovpn_file"></a> [ovpn\_file](#output\_ovpn\_file)                     | n/a         |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip)                     | n/a         |
 | <a name="output_ssh_private_key"></a> [ssh\_private\_key](#output\_ssh\_private\_key) | n/a         |
