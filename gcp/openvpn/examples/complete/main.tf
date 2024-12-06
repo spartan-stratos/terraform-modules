@@ -1,4 +1,4 @@
-module "openvpn-example" {
+module "openvpn" {
   source = "../../"
 
   vpn_name    = "openvpn-example"
