@@ -14,6 +14,6 @@ output "service_account_key" {
 }
 
 output "dns_record_name" {
-  description = "The list of DNS record name."
-  value       = module.dns[0].dns_record_names
+  description = "The list of DNS record names."
+  value       = try(module.dns[0].dns_record_names, [])
 }

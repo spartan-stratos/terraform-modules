@@ -6,12 +6,12 @@ module "dns" {
 
   count = var.managed_zone != null ? 1 : 0
 
-  dns_name   = "${var.managed_zone}."
   dns_zone   = var.managed_zone
+  dns_name   = "${var.domain_name}."
   create_new = var.create_dns_zone
 
   custom_records = {
-    "${var.name}" = {
+    (var.hostname) = {
       ttl     = var.dns_ttl
       type    = "A"
       rrdatas = var.dns_rrdatas
