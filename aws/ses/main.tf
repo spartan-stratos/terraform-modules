@@ -22,7 +22,7 @@ resource "aws_ses_email_identity" "emails" {
 Used here to provision a hosted zone for the domain specified in `var.email_domain` if `var.use_route53` is set to `true`.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone
 */
-resource "aws_route53_zone" "this" {
+data "aws_route53_zone" "this" {
   count = var.use_route53 ? 1 : 0
   name  = var.email_domain
 }
@@ -37,7 +37,7 @@ resource "aws_route53_record" "verification" {
   count   = var.use_route53 ? 1 : 0
   name    = var.email_domain
   type    = var.record_type
-  zone_id = aws_route53_zone.this[0].zone_id
+  zone_id = data.aws_route53_zone.this[0].zone_id
   ttl     = var.record_ttl
   records = [aws_ses_domain_identity.current.verification_token]
 }
@@ -75,16 +75,6 @@ data "aws_iam_policy_document" "this" {
     ]
     resources = [aws_ses_domain_identity.current.arn]
   }
-}
-
-/*
-`aws_iam_role_policy` attaches an IAM policy to the specified roles in `var.principal_roles`.
-Used here to grant the roles the permissions defined in the generated IAM policy document.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy
-*/
-resource "aws_iam_role_policy" "this" {
-  role   = aws_ses_domain_identity.current.id
-  policy = data.aws_iam_policy_document.this.json
 }
 
 /*
