@@ -6,11 +6,11 @@ module "ses" {
 
   emails = ["abc@example.com", "xyz@example.com"]
 
-  principal_roles = ["arn:aws:iam::<account-id>:role/ses-role"]
+  principal_roles = ["*"]
 }
 
 # SES using route53 to verify email domain
-module "ses" {
+module "ses_route53" {
   source = "../../"
 
   email_domain = "example1.com"
@@ -18,6 +18,8 @@ module "ses" {
   emails = ["abc@example1.com", "xyz@example1.com"]
 
   principal_roles = ["arn:aws:iam::<account-id>:role/ses-role"]
+
+  iam_role_ids = ["arn:aws:iam::<account-id>:role/ses-role"]
 
   use_route53 = true
   record_ttl  = 600
