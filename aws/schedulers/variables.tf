@@ -19,6 +19,6 @@ variable "queue_url" {
 }
 
 variable "schedule_expression" {
-  description = "The scheduling expression"
+  description = "A cron schedule expression defining when the task runs"
   type        = string
 }

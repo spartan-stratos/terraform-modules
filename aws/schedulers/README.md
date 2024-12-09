@@ -16,7 +16,8 @@ This module will create:
 module "scheduler" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/schedulers?ref=v0.1.0"
 
-  sqs_arn = "arn:aws:sqs:<region>:<account_id>:<queue_name>"
+  sqs_arn             = module.sqs-project-service-connection.queue.arn
+  schedule_expression = "cron(0 0/1 * * ? *)"
   message_body = jsonencode({
     type = "cronjob"
     kind = "example-payload"
@@ -58,11 +59,12 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|--|:--------:|
+|------|-------------|------|------|:--------:|
 | <a name="input_message_body"></a> [message\_body](#input\_message\_body) | The content of the message body | `string` | null | yes |
 | <a name="input_name"></a> [name](#input\_name) | The base name for resources, used to create unique resource identifiers. | `string` | null | yes |
 | <a name="input_queue_url"></a> [queue\_url](#input\_queue\_url) | The URL of the SQS queue | `string` | null | yes |
 | <a name="input_sqs_arn"></a> [sqs\_arn](#input\_sqs\_arn) | The ARN of the target SQS queue where messages will be sent. | `string` | null | yes |
+| <a name="input_schedule_expression"></a> [schedule\_expression](#input\_schedule\_expression) | A cron schedule expression defining when the task runs. | `string` | null | no |
 
 ## Outputs
 
