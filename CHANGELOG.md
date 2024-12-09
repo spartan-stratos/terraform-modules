@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8]() (2024-12-09)
+
+### Fixed Bugs
+
+#### aws/scheduler
+
+* Refactored the module to ensure tasks are reliably executed from other services.
+
 ## [0.1.7]() (2024-12-08)
 
 ### Fixed Bugs

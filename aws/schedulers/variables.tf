@@ -17,3 +17,8 @@ variable "queue_url" {
   description = "The URL of the SQS queue"
   type        = string
 }
+
+variable "schedule_expression" {
+  description = "A cron schedule expression defining when the task runs"
+  type        = string
+}
