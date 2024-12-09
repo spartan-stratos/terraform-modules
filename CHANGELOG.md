@@ -1,14 +1,28 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.6]() (2024-12-08)
+
+## [0.1.7]() (2024-12-08)
+
 ### Fixed Bugs
+
+#### aws/ses
+
+* Fixed a bug for the SES policy to send the email.
+
+## [0.1.6]() (2024-12-08)
+
+### Fixed Bugs
+
 #### gcp/service-config
+
 * Fixed a bug where the output `dns_record_name` could be null if the `managed_zone` was not specified.
 * Fixed a bug that prevented the creation of the DNS record set due to an incorrect DNS name value.
 
 ## [0.1.5]() (2024-12-06)
+
 ### Features
+
 * Add GCP Service Connection Policies Module
 * Add GCP IAM Member Module
 * Add GCP Workspace Module
@@ -21,11 +35,15 @@ All notable changes to this project will be documented in this file.
 * Add AWS OpenVPN Module
 
 ## [0.1.4]() (2024-12-06)
+
 ### Features
+
 * Add Wildcard SSL Cert module
 
 ## [0.1.3]() (2024-12-05)
+
 ### Features
+
 * Add GCP Github OIDC
 * Add GCP GKE Gateway API module
 * Add GCP Service Account module
@@ -33,14 +51,21 @@ All notable changes to this project will be documented in this file.
 * Add AWS SES module
 
 ## [0.1.2]() (2024-12-04)
+
 ### Features
+
 * Add KMS module
 * Update Static website module, with default behaviors
-  
+
 ## [0.1.1]() (2024-11-29)
+
 ### Features
+
 * Update postgres module
 
 ## [0.1.0]() (2024-11-28)
+
 ### Features
-* Add AWS acm, alb, amplify, ecr, ecs-application, ecs-cluster, elasticache, iam-sso, identity-provider, opensearch, password-generator, postgres, route53, s3, sqs, ssm-parameter, static-website, vpc-endpoints, vpc, vpn modules.
+
+* Add AWS acm, alb, amplify, ecr, ecs-application, ecs-cluster, elasticache, iam-sso, identity-provider, opensearch,
+  password-generator, postgres, route53, s3, sqs, ssm-parameter, static-website, vpc-endpoints, vpc, vpn modules.

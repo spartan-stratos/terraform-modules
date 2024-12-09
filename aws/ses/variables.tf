@@ -10,10 +10,17 @@ variable "emails" {
 }
 
 variable "principal_roles" {
-  description = "List of IAM roles that should have access to SES. These roles will have permissions to manage and use SES for the configured domain."
+  description = "List of IAM principal roles that should have access to SES."
   type        = list(string)
   default     = null
 }
+
+variable "iam_role_ids" {
+  type        = list(string)
+  default     = []
+  description = "List of IAM role ids that should have access to SES. These roles will have permissions to send SES email."
+}
+
 
 variable "record_type" {
   description = "The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT."

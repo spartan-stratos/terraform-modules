@@ -3,7 +3,7 @@
 Used here to verify the ownership of the domain specified in `var.email_domain` for Amazon SES.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_domain_identity
 */
-resource "aws_ses_domain_identity" "current" {
+resource "aws_ses_domain_identity" "this" {
   domain = var.email_domain
 }
 
@@ -18,9 +18,9 @@ resource "aws_ses_email_identity" "emails" {
 }
 
 /*
-`aws_route53_zone` creates a Route 53 hosted zone for managing DNS records for a specific domain.
-Used here to provision a hosted zone for the domain specified in `var.email_domain` if `var.use_route53` is set to `true`.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_zone
+`aws_route53_zone` data source retrieves information about a specific Route 53 hosted zone which can be useful for managing DNS records.
+This data source is used here to get the hosted zone details of the domain specified in `var.email_domain`.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone
 */
 data "aws_route53_zone" "this" {
   count = var.use_route53 ? 1 : 0
@@ -39,7 +39,7 @@ resource "aws_route53_record" "verification" {
   type    = var.record_type
   zone_id = data.aws_route53_zone.this[0].zone_id
   ttl     = var.record_ttl
-  records = [aws_ses_domain_identity.current.verification_token]
+  records = [aws_ses_domain_identity.this.verification_token]
 }
 
 /*
@@ -50,17 +50,15 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_
 */
 resource "aws_ses_domain_identity_verification" "this" {
   count  = var.use_route53 ? 1 : 0
-  domain = aws_ses_domain_identity.current.domain
+  domain = aws_ses_domain_identity.this.domain
 
   depends_on = [aws_route53_record.verification]
 }
 
 /*
-`aws_iam_policy_document` generates an IAM policy document to allow SES full access for the specified principals.
-Used here to define permissions for roles or entities in `var.principal_roles` to access the SES domain.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
 */
-data "aws_iam_policy_document" "this" {
+data "aws_iam_policy_document" "identity_policy" {
   statement {
     effect = "Allow"
 
@@ -68,12 +66,11 @@ data "aws_iam_policy_document" "this" {
       type        = "AWS"
       identifiers = var.principal_roles != null ? var.principal_roles : ["*"]
     }
-
     actions = [
       "ses:SendEmail",
       "ses:SendRawEmail"
     ]
-    resources = [aws_ses_domain_identity.current.arn]
+    resources = [aws_ses_domain_identity.this.arn]
   }
 }
 
@@ -83,7 +80,31 @@ Used here to define and attach permissions to the domain identity specified in `
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_identity_policy
 */
 resource "aws_ses_identity_policy" "this" {
-  identity = aws_ses_domain_identity.current.arn
+  identity = aws_ses_domain_identity.this.arn
   name     = "SES"
-  policy   = data.aws_iam_policy_document.this.json
+  policy   = data.aws_iam_policy_document.identity_policy.json
 }
+
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
+ */
+data "aws_iam_policy_document" "this" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ses:SendEmail",
+      "ses:SendRawEmail"
+    ]
+    resources = [aws_ses_domain_identity.this.arn]
+  }
+}
+
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy
+ */
+resource "aws_iam_role_policy" "this" {
+  count  = length(var.iam_role_ids)
+  role   = var.iam_role_ids[count.index]
+  policy = data.aws_iam_policy_document.this.json
+}
+
