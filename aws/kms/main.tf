@@ -17,7 +17,10 @@ resource "aws_kms_key" "this" {
 Used here to assign a user-friendly name (`alias/${var.name}`) to the KMS key created by `aws_kms_key.this` for easier management and reference.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias
 */
+
+
 resource "aws_kms_alias" "this" {
-  name          = "alias/${var.name}"
+  for_each      = toset(var.alias_name)
+  name          = "alias/${each.value}"
   target_key_id = aws_kms_key.this.key_id
 }

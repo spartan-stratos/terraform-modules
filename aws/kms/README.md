@@ -55,7 +55,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|----------------|------------|:--------:|
-| <a name="input_name"></a> [name](#input\_name)| The name of the key as viewed in AWS console.| `string`| n/a | yes |
+| <a name="input_alias_name"></a> [alias_name](#input\_alias\_name)| A list of aliases to create. Values must be static strings and not computed values. | `list(string)` | [] | no |
 | <a name="input_description"></a> [description](#input\_description) | The description of the key as viewed in AWS console. | `string` | `null` | no |
 | <a name="input_deletion_window_in_days"></a> [deletion\_window\_in\_days](#input\_deletion\_window\_in\_days) | The waiting period, specified in number of days.| `number` | `7` |    no    |
 | <a name="input_fifo_enabled"></a> [fifo\_enabled](#input\_fifo\_enabled)| Specify whether enable FIFO or not for the KMS queue.| `bool` | `false` | no |
@@ -64,14 +64,14 @@ No modules.
 | <a name="input_customer_master_key_spec"></a> [customer\_master\_key\_spec](#input\_customer\_master\_key\_spec) | Specifies whether the key contains a symmetric key or an asymmetric key pair and the encryption algorithms or signing algorithms that the key supports. Valid values: SYMMETRIC_DEFAULT, RSA_2048, RSA_3072, RSA_4096, HMAC_256, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, or ECC_SECG_P256K1. | `string` | `SYMMETRIC_DEFAULT` | no |
 | <a name="input_enable_key_rotation"></a> [enable\_key\_rotation](#input\_enable\_key\_rotation) | Specifies whether key rotation is enabled. Required to be enabled if rotation_period_in_days is specified | `bool` | `false` | no |
 | <a name="input_rotation_period_in_days"></a> [rotation\_period\_in\_days](#input\_rotation\_period\_in\_days) | Custom period of time between each rotation date. Must be a number between 90 and 2560. | `number` | `90` | no |
-| <a name="input_enabled_create_policy"></a> [enabled\_create\_policy](#input\_enabled\_create\_policy) | Specifies whether policy need to be created. | `bool` | n/a | yes |
+| <a name="input_enabled_create_policy"></a> [enabled\_create\_policy](#input\_enabled\_create\_policy) | Specifies whether policy need to be created. | `bool` | `false` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_key_id"></a> [key\_id](#output\_key\_id) | The KMS dead letter queue info |
-| <a name="output_key_arn"></a> [key\_arn](#output\_key\_arn) | The KMS queue info |
-| <a name="output_key_alias"></a> [key\_alias](#output\_key\_alias) | The KMS dead letter queue info |
-| <a name="output_iam_policy_kms_encrypt_decrypt_arn"></a> [iam\_policy\_kms\_encrypt\_decrypt\_arn](#output\_iam\_policy\_kms\_encrypt\_decrypt\_arn) | The KMS queue info |
+| <a name="output_key_id"></a> [key\_id](#output\_key\_id) | The ID of the KMS key. |
+| <a name="output_key_arn"></a> [key\_arn](#output\_key\_arn) | The ARN of the KMS key. |
+| <a name="output_key_aliases"></a> [key\_aliases](#output\_key\_aliases) | A map of aliases created and their attributes |
+| <a name="output_iam_policy_kms_encrypt_decrypt_arn"></a> [iam\_policy\_kms\_encrypt\_decrypt\_arn](#output\_iam\_policy\_kms\_encrypt\_decrypt\_arn) | The ARN of the IAM policy that grants encrypt and decrypt permissions for the KMS key. |
 <!-- END_TF_DOCS -->
