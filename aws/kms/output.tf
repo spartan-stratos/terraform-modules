@@ -8,9 +8,9 @@ output "key_arn" {
   value       = aws_kms_key.this.arn
 }
 
-output "key_alias" {
-  description = "The alias name assigned to the KMS key."
-  value       = aws_kms_alias.this.id
+output "key_aliases" {
+  description = "A map of aliases created and their attributes."
+  value       = aws_kms_alias.this
 }
 
 output "iam_policy_kms_encrypt_decrypt_arn" {

@@ -1,6 +1,7 @@
-variable "name" {
-  description = "The name of the key as viewed in AWS console."
-  type        = string
+variable "alias_name" {
+  description = "A list of aliases to create. Note - due to the use of `toset()`, values must be static strings and not computed values."
+  type        = list(string)
+  default     = []
 }
 
 variable "description" {

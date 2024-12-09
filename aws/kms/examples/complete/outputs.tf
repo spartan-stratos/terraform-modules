@@ -8,9 +8,9 @@ output "key_arn" {
   value       = module.kms.key_arn
 }
 
-output "key_alias" {
-  description = "The alias name assigned to the KMS key."
-  value       = module.kms.key_alias
+output "key_aliases" {
+  description = "A map of aliases created and their attributes."
+  value       = module.kms.key_aliases
 }
 
 output "iam_policy" {
