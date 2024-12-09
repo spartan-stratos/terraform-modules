@@ -10,7 +10,7 @@ resource "aws_scheduler_schedule" "this" {
     mode = "OFF"
   }
 
-  schedule_expression = "cron(0 2 * * ? *)"
+  schedule_expression = var.schedule_expression
 
   target {
     arn      = "arn:aws:scheduler:::aws-sdk:sqs:sendMessage"
