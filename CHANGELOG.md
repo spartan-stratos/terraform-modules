@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.9]() (2024-12-09)
+
+### Fixed Bugs
+
+#### aws/kms
+
+* Refactored the module to ensure it will not create excessive resources.
 
 ## [0.1.8]() (2024-12-09)
 
