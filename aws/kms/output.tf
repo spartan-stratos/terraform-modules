@@ -10,7 +10,7 @@ output "key_arn" {
 
 output "key_aliases" {
   description = "A map of aliases created and their attributes."
-  value       = aws_kms_alias.this
+  value       = aws_kms_alias.this[*].id
 }
 
 output "iam_policy_kms_encrypt_decrypt_arn" {
