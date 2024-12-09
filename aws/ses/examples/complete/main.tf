@@ -10,7 +10,7 @@ module "ses" {
 }
 
 # SES using route53 to verify email domain
-module "ses" {
+module "ses_route53" {
   source = "../../"
 
   email_domain = "example1.com"
