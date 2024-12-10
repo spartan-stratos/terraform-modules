@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "read_write_policy" {
     ]
     resources = [
       local.bucket.arn,
-      "${alocal.bucket.arn}/*"
+      "${local.bucket.arn}/*"
     ]
   }
 }
