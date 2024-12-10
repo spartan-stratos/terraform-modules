@@ -27,9 +27,9 @@ module "github_actions" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 6.4.0 |
+| Name | Version   |
+|------|-----------|
+| <a name="requirement_github"></a> [github](#requirement\_github) | \>= 6.4.0 |
 
 ## Providers
 
