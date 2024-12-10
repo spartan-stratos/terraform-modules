@@ -85,5 +85,5 @@ resource "aws_iam_policy" "read_write" {
   count       = var.enabled_read_write_policy ? 1 : 0
   name        = "S3ReadWrite-${local.bucket.bucket}"
   description = "Policy that allows writing to the S3 bucket"
-  policy      = data.aws_iam_policy_document.read_write_policy.json
+  policy      = data.aws_iam_policy_document.read_write_policy.0.json
 }
