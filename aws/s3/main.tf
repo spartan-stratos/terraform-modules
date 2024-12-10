@@ -5,11 +5,13 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_b
 resource "aws_s3_bucket" "with_prefix" {
   count         = var.bucket_name == null ? 1 : 0
   bucket_prefix = var.bucket_prefix
+  force_destroy = var.force_destroy
 }
 
 resource "aws_s3_bucket" "without_prefix" {
-  count  = var.bucket_name != null ? 1 : 0
-  bucket = var.bucket_name
+  count         = var.bucket_name != null ? 1 : 0
+  bucket        = var.bucket_name
+  force_destroy = var.force_destroy
 }
 
 locals {
