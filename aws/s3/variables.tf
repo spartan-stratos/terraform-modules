@@ -71,6 +71,18 @@ variable "enabled_public_policy" {
   default     = false
 }
 
+variable "enabled_read_write_policy" {
+  description = "Enabled create the Read Write Policy to allow access to bucket objects."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_read_only_policy" {
+  description = "Enabled create the Read Only Policy to allow access to bucket objects."
+  type        = bool
+  default     = false
+}
+
 variable "versioning_status" {
   description = "The status of bucket versioning."
   type        = string
