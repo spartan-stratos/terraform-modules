@@ -15,7 +15,8 @@ data "aws_iam_policy_document" "encrypt_decrypt" {
   }
 }
 
-resource "aws_kms_key_policy" "this" {
-  key_id = aws_kms_key.this.id
+resource "aws_iam_policy" "this" {
+  name = "KMSEncryptDecrypt-${var.alias_name[0]}"
+
   policy = data.aws_iam_policy_document.encrypt_decrypt.json
 }
