@@ -15,12 +15,12 @@ module "cloudwatch-alarm" {
       name                = "example-alarm"
       description         = "example"
       comparison_operator = "example-comparison"
-      evaluation_periods  = "example-period"
+      evaluation_periods  = "1"
       metric_name         = "exammple-metric"
       namespace           = "example-namespace"
       period              = "example-period"
       statistic           = "Average"
-      threshold           = "example-threshold"
+      threshold           = "20"
     }
   }
 }
