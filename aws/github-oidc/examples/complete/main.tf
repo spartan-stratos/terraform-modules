@@ -5,4 +5,11 @@ module "github_oidc" {
 
   role_policy_arns = []
   aws_account_id   = "example-id"
+  conditions = [
+    {
+      test     = "StringLike"
+      variable = "token.actions.githubusercontent.com:sub"
+      values   = ["repo:spartan/example"]
+    }
+  ]
 }
