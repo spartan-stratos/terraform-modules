@@ -26,9 +26,9 @@ data "aws_iam_policy_document" "assume_role_github" {
       for_each = var.conditions
 
       content {
-        test     = each.value.test
-        variable = each.value.variable
-        values   = each.value.values
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
       }
     }
 
