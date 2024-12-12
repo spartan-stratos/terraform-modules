@@ -1,4 +1,4 @@
-# ECR example
+# CloudWatch example
 
 ## Usage
 To run this example you need to execute:

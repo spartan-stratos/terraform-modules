@@ -1,7 +1,7 @@
 <!-- BEGIN_TF_DOCS -->
 
-# Amazon Cloudwatch Alarm Terraform module
-Terraform module which creates Amazon Cloudwatch Alarm resources.
+# Amazon CloudWatch Alarm Terraform module
+Terraform module which creates Amazon CloudWatch Alarm resources.
 
 ## Usage
 ```hcl
