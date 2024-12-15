@@ -6,7 +6,7 @@ Terraform module which creates Amazon CloudWatch Alarm resources.
 ## Usage
 ```hcl
 module "cloudwatch-alarm" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/cloudwatch?ref=v0.1.11"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/cloudwatch/alarm?ref=v0.1.11"
 
   email = "example-email"
   environment = "dev"
