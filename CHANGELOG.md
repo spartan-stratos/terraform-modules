@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add CloudWatch Alarm Module
+* Add CloudWatch Alarm Module(./aws/cloudwatch/alarm)
 
 ## [0.1.10]() (2024-12-12)
 
