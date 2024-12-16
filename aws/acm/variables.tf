@@ -12,6 +12,7 @@ variable "subject_alternative_names" {
 variable "zone_id" {
   description = "The ID of the hosted zone to contain this record. Required when validating via Route53"
   type        = string
+  default     = null
 }
 
 variable "tags" {
