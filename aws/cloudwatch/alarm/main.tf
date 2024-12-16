@@ -1,4 +1,6 @@
-# Cloudwatch Alarm
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm
+*/
 resource "aws_cloudwatch_metric_alarm" "this" {
   for_each = var.alarms
 
@@ -16,16 +18,22 @@ resource "aws_cloudwatch_metric_alarm" "this" {
 
   dimensions = merge(
     {},
-    each.value.namespace == "AWS/SQS" ? { QueueName = each.value.queue_name } : {}
+    each.value.namespace == "AWS/SQS" ? { QueueName = each.value.queue_name } : {},
+    each.value.namespace == "AWS/ApplicationELB" ? { LoadBalancer = each.value.alb_name } : {}
   )
 }
 
-# SNS Topic
+/*
+https://registry.terraform.io/providers/hashicorp/aws/2.48.0/docs/resources/sns_topic
+*/
 resource "aws_sns_topic" "this" {
   count = var.create_sns_topic ? 1 : 0
   name  = "Cloudwatch-Alarm-notification"
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription
+*/
 resource "aws_sns_topic_subscription" "target" {
   topic_arn = var.create_sns_topic ? aws_sns_topic.this[0].arn : null
   protocol  = "email"
