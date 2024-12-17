@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "assume_role_github" {
 }
 
 resource "aws_iam_role" "github_actions_role" {
-  name               = "role-terraform-ops-${var.role_name}"
+  name               = var.role_name_prefix == "" ? "${var.role_name}" : "${var.role_name_prefix}-${var.role_name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_github.json
 }
 
@@ -45,4 +45,3 @@ resource "aws_iam_role_policy_attachment" "github_actions_role_policy" {
   role       = aws_iam_role.github_actions_role.id
   policy_arn = each.value
 }
-

@@ -9,6 +9,12 @@ variable "role_name" {
   type        = string
 }
 
+variable "role_name_prefix" {
+  description = "The name of the role to be created."
+  type        = string
+  default     = ""
+}
+
 variable "repository_path" {
   description = "The path to the repository (organization/repo_name)."
   type        = string

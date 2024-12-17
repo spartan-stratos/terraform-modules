@@ -44,7 +44,7 @@ Check out the [example](examples/default/README.md) for a full example of using 
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.80.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>=5.75.0 |
 
 ## Modules
 
@@ -68,6 +68,7 @@ Check out the [example](examples/default/README.md) for a full example of using 
 | <a name="input_conditions"></a> [conditions](#input\_conditions) | (Optional) Additonal conditions for checking the OIDC claim. | <pre>list(object({<br/>    test     = string<br/>    variable = string<br/>    values   = list(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_repository_path"></a> [repository\_path](#input\_repository\_path) | The path to the repository (organization/repo\_name). | `string` | n/a | yes |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the role to be created. | `string` | n/a | yes |
+| <a name="input_role_name_prefix"></a> [role\_name\_prefix](#input\_role\_name\_prefix) | The name of the role to be created. | `string` | `""` | no |
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |
 
 ## Outputs
