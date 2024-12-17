@@ -30,16 +30,16 @@ module "route53" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version  |
-|------|----------|
+| Name | Version |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
 
 ## Providers
 
-| Name | Version  |
-|------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.80.0 |
 
 ## Modules
 
@@ -66,7 +66,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_first_record_fqdn"></a> [first\_record\_fqdn](#output\_first\_record\_fqdn) | Fully qualified domain name (FQDN) of the first Route 53 record, if available |
+| <a name="output_r53_main_name_servers"></a> [r53\_main\_name\_servers](#output\_r53\_main\_name\_servers) | A list of name servers in associated (or default) delegation set. |
 | <a name="output_r53_main_zone_id"></a> [r53\_main\_zone\_id](#output\_r53\_main\_zone\_id) | The unique identifier of the main Route 53 DNS zone |
 | <a name="output_r53_main_zone_name"></a> [r53\_main\_zone\_name](#output\_r53\_main\_zone\_name) | The DNS name of the main Route 53 zone |
-| <a name="output_r53_main_name_servers"></a> [r53\_main\_name\_servers](#output\_r53\_main\_name\_servers) | A list of name servers in associated (or default) delegation set. |
 <!-- END_TF_DOCS -->
