@@ -1,3 +1,7 @@
+locals {
+  bucket = var.bucket_name != null ? aws_s3_bucket.without_prefix[0] : aws_s3_bucket.with_prefix[0]
+}
+
 /*
 aws_s3_bucket main creates an S3 bucket with a specified name, adding environment tags for easier management.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
@@ -5,15 +9,13 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_b
 resource "aws_s3_bucket" "with_prefix" {
   count         = var.bucket_name == null ? 1 : 0
   bucket_prefix = var.bucket_prefix
+  force_destroy = var.force_destroy
 }
 
 resource "aws_s3_bucket" "without_prefix" {
-  count  = var.bucket_name != null ? 1 : 0
-  bucket = var.bucket_name
-}
-
-locals {
-  bucket = var.bucket_name != null ? aws_s3_bucket.without_prefix[0] : aws_s3_bucket.with_prefix[0]
+  count         = var.bucket_name != null ? 1 : 0
+  bucket        = var.bucket_name
+  force_destroy = var.force_destroy
 }
 
 /*
