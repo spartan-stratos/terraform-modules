@@ -1,11 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.9]() (2024-12-09)
+## [0.1.13]() (2024-12-17)
 ### Features
 * Update README.md
 * Change name -> alias_name and make it into a `list(string)`
 * Update examples, outputs and description of some variables.
+* Update policy
 
 ## [0.1.4]() (2024-12-05)
 ### Features
