@@ -8,7 +8,7 @@ Terraform module which creates OpenVPN to access internal VPC network.
 
 ```hcl
 module "openvpn" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/openvpn?ref=v0.1.5"
+  source = "github.com/spartan-stratos/terraform-modules//aws/openvpn?ref=v0.1.13"
 
   vpn_name    = "openvpn"
   domain_name = "example.com"
