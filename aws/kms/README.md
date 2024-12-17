@@ -35,9 +35,9 @@ module "kms" {
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.79.0 |
+| Name | Version  |
+|------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
 
 ## Modules
 
