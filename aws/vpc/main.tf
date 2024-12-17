@@ -36,7 +36,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_
 resource "aws_nat_gateway" "main" {
   count         = var.single_nat ? 1 : length(var.availability_zone_postfixes)
   allocation_id = aws_eip.nat[count.index].id
-  subnet_id     = try(aws_subnet.public[count.index].id, aws_subnet.custom_public[count.index].id)
+  subnet_id     = aws_subnet.public[count.index].id
   depends_on    = [aws_internet_gateway.main]
 
   tags = {
@@ -61,27 +61,10 @@ aws_subnet creates private subnets within the VPC for internal resources without
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 */
 resource "aws_subnet" "private" {
-  count = var.create_custom_subnets ? 0 : length(var.availability_zone_postfixes)
+  count = length(var.availability_zone_postfixes)
 
   vpc_id            = aws_vpc.this.id
-  cidr_block        = cidrsubnet(local.private_cidr_blocks, 8, count.index)
-  availability_zone = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
-
-  tags = {
-    Name = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
-  }
-}
-
-/*
-aws_subnet creates private subnets within the VPC for internal resources without direct internet access.
-This blocks create custom subnets upon inputs `var.create_custom_subnets` and `var.custom_private_subnets`.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
-*/
-resource "aws_subnet" "custom_private" {
-  count = var.create_custom_subnets ? length(var.custom_private_subnets) : 0
-
-  vpc_id            = aws_vpc.this.id
-  cidr_block        = element(var.custom_private_subnets, count.index)
+  cidr_block        = var.create_custom_subnets ? element(var.custom_private_subnets, count.index) : cidrsubnet(local.private_cidr_blocks, 8, count.index)
   availability_zone = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
 
   tags = {
@@ -94,28 +77,10 @@ aws_subnet creates public subnets within the VPC with direct internet access.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 */
 resource "aws_subnet" "public" {
-  count                   = var.create_custom_subnets ? 0: length(var.availability_zone_postfixes)
+  count = length(var.availability_zone_postfixes)
 
   vpc_id                  = aws_vpc.this.id
-  cidr_block              = cidrsubnet(local.public_cidr_blocks, 8, count.index)
-  availability_zone       = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
-  map_public_ip_on_launch = true
-
-  tags = {
-    Name = "${var.name}-public-subnet-${format("%03d", count.index + 1)}"
-  }
-}
-
-/*
-aws_subnet creates public subnets within the VPC with direct internet access.
-This blocks create custom subnets upon inputs `var.create_custom_subnets` and `var.custom_private_subnets`.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
-*/
-resource "aws_subnet" "custom_public" {
-  count                   = var.create_custom_subnets ? length(var.custom_public_subnets) : 0
-
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = element(var.custom_public_subnets, count.index)
+  cidr_block              = var.create_custom_subnets ? element(var.custom_public_subnets, count.index) : cidrsubnet(local.public_cidr_blocks, 8, count.index)
   availability_zone       = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
   map_public_ip_on_launch = true
 
@@ -176,7 +141,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rout
 */
 resource "aws_route_table_association" "private" {
   count          = length(var.availability_zone_postfixes)
-  subnet_id      = try(aws_subnet.private[count.index].id, aws_subnet.custom_private[count.index].id)
+  subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id
 }
 
@@ -186,6 +151,6 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rout
 */
 resource "aws_route_table_association" "public" {
   count          = length(var.availability_zone_postfixes)
-  subnet_id      = try(aws_subnet.public[count.index].id, aws_subnet.custom_public[count.index].id)
+  subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
 }
