@@ -15,5 +15,5 @@ output "key_aliases" {
 
 output "iam_policy_kms_encrypt_decrypt_arn" {
   description = "The ARN of the IAM policy that grants encrypt and decrypt permissions for the KMS key."
-  value       = try(aws_iam_policy.this.arn, null)
+  value       = try(aws_iam_policy.this[*].arn, null)
 }
