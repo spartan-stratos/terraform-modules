@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add [AWS GitHub OIDC](./aws/github-oidc)
-* Update output for [AWS Route53](./aws/route53)
-* Add `read_write_policy` and attributes `force_destroy` for [AWS S3](./aws/s3)
-* Update policy for [AWS KMS](./aws/kms)
-* Update [AWS ACM](./aws/acm) `var.zone_id` default value to `null` and resource conditions
+* Add AWS GitHub OIDC [(./aws/github-oidc)](./aws/github-oidc)
+* Update output for AWS Route53 [(./aws/route53)](./aws/route53)
+* Add `read_write_policy` and attributes `force_destroy` for AWS S3  [(./aws/s3)](./aws/s3)
+* Update policy for AWS KMS [(./aws/kms)](./aws/kms)
+* Update AWS ACM `var.zone_id` default value to `null` and resource conditions [(./aws/acm)](./aws/acm)
 
 ## [0.1.11]() (2024-16-09)
 
