@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.11]() (2024-12-17)
+## [0.1.12]() (2024-12-17)
 ### Features
 * Add attribute `force_destroy` for s3 bucket 
 * Add `read_write_policy`
