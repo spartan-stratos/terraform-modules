@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.13]() (2024-12-17)
+## [0.1.12]() (2024-12-17)
 ### Features
 * Update README.md
 * Change name -> alias_name and make it into a `list(string)`
