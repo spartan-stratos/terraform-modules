@@ -37,9 +37,9 @@ module "route53" {
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.80.0 |
+| Name | Version  |
+|------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
 
 ## Modules
 
