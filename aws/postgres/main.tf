@@ -35,7 +35,7 @@ resource "aws_vpc_security_group_egress_rule" "this" {
 
 module "main_db_instance" {
   source                       = "./db_instance"
-  identifier                   = try(var.db_identifier, local.identifier)
+  identifier                   = var.db_identifier != null ? var.db_identifier : local.identifier
   instance_class               = var.instance_class
   allocated_storage            = var.disk_size
   max_allocated_storage        = var.max_allocated_storage
