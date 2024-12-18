@@ -4,6 +4,12 @@ variable "db_name" {
   type        = string
 }
 
+variable "db_identifier" {
+  description = "The identifier name of database instance. If null, the db_name will be used instead."
+  type        = string
+  default     = null
+}
+
 variable "db_username" {
   description = "The master username for the database."
   type        = string
