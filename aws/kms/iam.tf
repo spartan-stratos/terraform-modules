@@ -35,6 +35,6 @@ data "aws_iam_policy_document" "encrypt_decrypt" {
 resource "aws_iam_policy" "this" {
   for_each = toset(var.alias_name)
   name     = "KMSEncryptDecrypt-${each.value}"
-
+  description = "Policy that allows encrypt and decrypt data with the provided encryption KMS key."
   policy = data.aws_iam_policy_document.encrypt_decrypt.json
 }
