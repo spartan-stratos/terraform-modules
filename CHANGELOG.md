@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.14]() (2024-12-18)
+
+### Features
+
+* AWS Postgre: Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/postgres)
+* AWS VPC: Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet creation logics. Correct `aws_security_group.allow_all_within_vpc` ingress rule `cidr_blocks`. Remove `environment` from resource tags.[(./aws/vpc)](./aws/vpc)
+* AWS Route53: Add `r53_main_name_servers` output for route53 [(./aws/route53)](./aws/route53)
+
 ## [0.1.13]() (2024-12-17)
 
 ### Features
