@@ -19,7 +19,8 @@ resource "aws_cloudwatch_metric_alarm" "this" {
   dimensions = merge(
     {},
     each.value.namespace == "AWS/SQS" ? { QueueName = each.value.queue_name } : {},
-    each.value.namespace == "AWS/ApplicationELB" ? { LoadBalancer = each.value.alb_name } : {}
+    each.value.namespace == "AWS/ApplicationELB" ? { LoadBalancer = each.value.alb_name } : {},
+    each.value.namespace == "AWS/DynamoDB" ? { TableName = each.value.table_name } : {}
   )
 }
 

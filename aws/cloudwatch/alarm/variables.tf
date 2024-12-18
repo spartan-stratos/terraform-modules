@@ -44,6 +44,7 @@ variable "alarms" {
     threshold           = number
     queue_name          = optional(string)
     alb_name            = optional(string)
+    table_name          = optional(string)
   }))
 }
 
