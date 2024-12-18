@@ -1,7 +1,7 @@
 resource "aws_db_parameter_group" "parameter_group" {
   for_each = { for _, version in distinct(concat(var.supported_engine_version, [local.engine_version_major])) : version => version }
 
-  name   = "${local.identifier}-${each.key}"
+  name   = var.overwrite_parameter_group_name ? var.custom_parameter_group_name : "${local.identifier}-${each.key}"
   family = "${var.engine}${each.key}"
 
   parameter {
