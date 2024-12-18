@@ -35,7 +35,7 @@ resource "aws_vpc_security_group_egress_rule" "this" {
 
 module "main_db_instance" {
   source                       = "./db_instance"
-  identifier                   = var.db_identifier != null ? var.db_identifier : local.identifier
+  identifier                   = local.identifier
   instance_class               = var.instance_class
   allocated_storage            = var.disk_size
   max_allocated_storage        = var.max_allocated_storage
@@ -64,7 +64,7 @@ module "main_db_instance" {
 module "replica_db_instance" {
   source                       = "./db_instance"
   count                        = var.replica_count
-  identifier                   = "${try(var.db_identifier, local.identifier)}-replica-${count.index}"
+  identifier                   = "${local.identifier}-replica-${count.index}"
   instance_class               = var.instance_class
   allocated_storage            = var.disk_size
   max_allocated_storage        = var.max_allocated_storage

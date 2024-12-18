@@ -1,6 +1,6 @@
 locals {
   engine_version_major = parseint(split(".", var.engine_version)[0], 10)
-  identifier           = replace(var.db_name, "_", "-")
+  identifier           = var.db_identifier != null ? var.db_identifier : replace(var.db_name, "_", "-")
   max_workers = {
     "db.m5.4xlarge"  = 16
     "db.m5.12xlarge" = 48
