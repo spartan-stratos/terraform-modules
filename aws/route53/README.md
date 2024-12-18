@@ -58,7 +58,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_create_new"></a> [create\_new](#input\_create\_new) | Flag to determine if new resources should be created | `bool` | `false` | no |
-| <a name="input_custom_records"></a> [custom\_records](#input\_custom\_records) | Custom DNS records for Route 53 configuration, with options for type, TTL, and record values | <pre>map(object({<br/>    type    = optional(string) // default: CNAME<br/>    ttl     = optional(number) // default: 3600<br/>    records = list(string)<br/>  }))</pre> | `{}` | no |
+| <a name="input_custom_records"></a> [custom\_records](#input\_custom\_records) | Custom DNS records for Route 53 configuration, with options for type, TTL, and record values | <pre>map(object({<br/>    zone_id = optional(string)<br/>    type    = optional(string) // default: CNAME<br/>    ttl     = optional(number) // default: 3600<br/>    records = list(string)<br/>  }))</pre> | `{}` | no |
 | <a name="input_dns_zone"></a> [dns\_zone](#input\_dns\_zone) | The DNS zone name for Route 53 configuration | `string` | n/a | yes |
 
 ## Outputs
