@@ -163,8 +163,8 @@ variable "supported_engine_version" {
 }
 
 # Security groups
-variable "security_group_ids" {
-  description = "The list of existing security group ids to associate with database instance."
+variable "vpc_security_group_ids" {
+  description = "The list of existing vpc security group ids to associate with database instance."
   type        = list(string)
   default     = null
 }

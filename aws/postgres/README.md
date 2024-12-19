@@ -68,36 +68,36 @@ module "instance" {
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_allow_major_version_upgrade"></a> [allow\_major\_version\_upgrade](#input\_allow\_major\_version\_upgrade) | Indicates whether major version upgrades are allowed. | `bool` | `true` | no |
-| <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | Apply any changes to this database immediately. | `bool` | `true` | no |
-| <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Indicates whether minor engine upgrades will be applied automatically to the DB instance during the maintenance window. | `bool` | `false` | no |
-| <a name="input_backup_retention_day"></a> [backup\_retention\_day](#input\_backup\_retention\_day) | The number of days to retain database backups (default is 7 days). | `number` | `7` | no |
-| <a name="input_copy_tags_to_snapshot"></a> [copy\_tags\_to\_snapshot](#input\_copy\_tags\_to\_snapshot) | Indicates whether all instance tags should be copied to snapshots. | `bool` | `true` | no |
+| Name | Description                                                                                                                         | Type | Default | Required |
+|------|-------------------------------------------------------------------------------------------------------------------------------------|------|---------|:--------:|
+| <a name="input_allow_major_version_upgrade"></a> [allow\_major\_version\_upgrade](#input\_allow\_major\_version\_upgrade) | Indicates whether major version upgrades are allowed.                                                                               | `bool` | `true` | no |
+| <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately) | Apply any changes to this database immediately.                                                                                     | `bool` | `true` | no |
+| <a name="input_auto_minor_version_upgrade"></a> [auto\_minor\_version\_upgrade](#input\_auto\_minor\_version\_upgrade) | Indicates whether minor engine upgrades will be applied automatically to the DB instance during the maintenance window.             | `bool` | `false` | no |
+| <a name="input_backup_retention_day"></a> [backup\_retention\_day](#input\_backup\_retention\_day) | The number of days to retain database backups (default is 7 days).                                                                  | `number` | `7` | no |
+| <a name="input_copy_tags_to_snapshot"></a> [copy\_tags\_to\_snapshot](#input\_copy\_tags\_to\_snapshot) | Indicates whether all instance tags should be copied to snapshots.                                                                  | `bool` | `true` | no |
 | <a name="input_custom_parameter_group_name"></a> [custom\_parameter\_group\_name](#input\_custom\_parameter\_group\_name) | Custom parameter group name, used when `var.overwrite_parameter_group_name` is `true` and `var.supported_engine_version` size is 1. | `string` | `null` | no |
-| <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier name of database instance. If null, the db\_name will be used instead. | `string` | `null` | no |
-| <a name="input_db_name"></a> [db\_name](#input\_db\_name) | The name of the database. | `string` | n/a | yes |
-| <a name="input_db_port"></a> [db\_port](#input\_db\_port) | The port number on which the database accepts connections. | `number` | `5432` | no |
-| <a name="input_db_username"></a> [db\_username](#input\_db\_username) | The master username for the database. | `string` | n/a | yes |
-| <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | The disk size of the database instance, in gigabytes. | `number` | `20` | no |
-| <a name="input_engine"></a> [engine](#input\_engine) | The database engine to be used (e.g., postgres). | `string` | `"postgres"` | no |
-| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of the database engine to use (default is 16.4). | `string` | `"16.4"` | no |
-| <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | Enable database authentication using AWS IAM. | `bool` | `false` | no |
-| <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | The instance class for the database. | `string` | `"db.m5.large"` | no |
-| <a name="input_max_allocated_storage"></a> [max\_allocated\_storage](#input\_max\_allocated\_storage) | The upper limit (in GB) to which Amazon RDS can automatically scale the storage of the DB instance. | `number` | `1000` | no |
-| <a name="input_monitoring_interval"></a> [monitoring\_interval](#input\_monitoring\_interval) | The interval in seconds between points when Enhanced Monitoring metrics are collected for the DB instance. | `number` | `0` | no |
-| <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Indicates whether the database instance should be deployed across multiple availability zones. | `bool` | `false` | no |
-| <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Specifies whether Performance Insights are enabled for the DB instance. | `bool` | `false` | no |
-| <a name="input_port"></a> [port](#input\_port) | The port of the database. | `number` | `5432` | no |
-| <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | The number of read replicas for the database. | `number` | n/a | yes |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | The list of existing security group ids to associate with database instance. | `list(string)` | `null` | no |
-| <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Defines whether a final DB snapshot is created before the DB instance is deleted. | `bool` | `true` | no |
-| <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Whether the DB instance is encrypted. | `bool` | `true` | no |
-| <a name="input_storage_type"></a> [storage\_type](#input\_storage\_type) | The storage type of the RDS instance (standard, gp2, or gp3). | `string` | `"gp3"` | no |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet IDs for the DB subnet group. | `list(string)` | n/a | yes |
-| <a name="input_supported_engine_version"></a> [supported\_engine\_version](#input\_supported\_engine\_version) | A list of supported engine versions for the Parameter Groups, supporting Blue-Green deployment. | `list(number)` | <pre>[<br/>  14,<br/>  15,<br/>  16<br/>]</pre> | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC in which the RDS instance will be launched. | `string` | n/a | yes |
+| <a name="input_db_identifier"></a> [db\_identifier](#input\_db\_identifier) | The identifier name of database instance. If null, the db\_name will be used instead.                                               | `string` | `null` | no |
+| <a name="input_db_name"></a> [db\_name](#input\_db\_name) | The name of the database.                                                                                                           | `string` | n/a | yes |
+| <a name="input_db_port"></a> [db\_port](#input\_db\_port) | The port number on which the database accepts connections.                                                                          | `number` | `5432` | no |
+| <a name="input_db_username"></a> [db\_username](#input\_db\_username) | The master username for the database.                                                                                               | `string` | n/a | yes |
+| <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size) | The disk size of the database instance, in gigabytes.                                                                               | `number` | `20` | no |
+| <a name="input_engine"></a> [engine](#input\_engine) | The database engine to be used (e.g., postgres).                                                                                    | `string` | `"postgres"` | no |
+| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The version of the database engine to use (default is 16.4).                                                                        | `string` | `"16.4"` | no |
+| <a name="input_iam_database_authentication_enabled"></a> [iam\_database\_authentication\_enabled](#input\_iam\_database\_authentication\_enabled) | Enable database authentication using AWS IAM.                                                                                       | `bool` | `false` | no |
+| <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | The instance class for the database.                                                                                                | `string` | `"db.m5.large"` | no |
+| <a name="input_max_allocated_storage"></a> [max\_allocated\_storage](#input\_max\_allocated\_storage) | The upper limit (in GB) to which Amazon RDS can automatically scale the storage of the DB instance.                                 | `number` | `1000` | no |
+| <a name="input_monitoring_interval"></a> [monitoring\_interval](#input\_monitoring\_interval) | The interval in seconds between points when Enhanced Monitoring metrics are collected for the DB instance.                          | `number` | `0` | no |
+| <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Indicates whether the database instance should be deployed across multiple availability zones.                                      | `bool` | `false` | no |
+| <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Specifies whether Performance Insights are enabled for the DB instance.                                                             | `bool` | `false` | no |
+| <a name="input_port"></a> [port](#input\_port) | The port of the database.                                                                                                           | `number` | `5432` | no |
+| <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | The number of read replicas for the database.                                                                                       | `number` | n/a | yes |
+| <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Defines whether a final DB snapshot is created before the DB instance is deleted.                                                   | `bool` | `true` | no |
+| <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Whether the DB instance is encrypted.                                                                                               | `bool` | `true` | no |
+| <a name="input_storage_type"></a> [storage\_type](#input\_storage\_type) | The storage type of the RDS instance (standard, gp2, or gp3).                                                                       | `string` | `"gp3"` | no |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet IDs for the DB subnet group.                                                                                       | `list(string)` | n/a | yes |
+| <a name="input_supported_engine_version"></a> [supported\_engine\_version](#input\_supported\_engine\_version) | A list of supported engine versions for the Parameter Groups, supporting Blue-Green deployment.                                     | `list(number)` | <pre>[<br/>  14,<br/>  15,<br/>  16<br/>]</pre> | no |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC in which the RDS instance will be launched.                                                                       | `string` | n/a | yes |
+| <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | The list of existing vpc security group ids to associate with database instance.                                                    | `list(string)` | `null` | no |
 
 ## Outputs
 
