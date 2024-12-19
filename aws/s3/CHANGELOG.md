@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.15]() (2024-12-19)
+### Features
+* Add variable `acl` and resource `aws_s3_bucket_acl`.
+
 ## [0.1.12]() (2024-12-17)
 ### Features
 * Add attribute `force_destroy` for s3 bucket 
