@@ -22,6 +22,8 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "this" {
+  count = var.use_existing_security_groups ? 0 : 1
+
   security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = data.aws_vpc.this.cidr_block
   from_port         = var.port
@@ -30,6 +32,8 @@ resource "aws_vpc_security_group_ingress_rule" "this" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "this" {
+  count = var.use_existing_security_groups ? 0 : 1
+
   security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
