@@ -74,20 +74,10 @@ variable "multi_az" {
 }
 
 # Custom parameter group
-variable "overwrite_parameter_group_name" {
-  description = "Whether to overwrite parameter group name."
-  type        = bool
-  default     = false
-}
-
 variable "custom_parameter_group_name" {
   description = "Custom parameter group name, used when `var.overwrite_parameter_group_name` is `true` and `var.supported_engine_version` size is 1."
   type        = string
   default     = null
-  validation {
-    condition     = (var.overwrite_parameter_group_name == true && var.custom_parameter_group_name != null) || (var.overwrite_parameter_group_name == false)
-    error_message = "You have enabled `var.overwrite_parameter_group_name` so `var.custom_parameter_group_name` must not be null or empty!"
-  }
 }
 
 # Security
