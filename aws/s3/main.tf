@@ -106,3 +106,21 @@ resource "aws_s3_bucket_versioning" "this" {
     status = var.versioning_status
   }
 }
+
+/**
+aws_s3_bucket_acl provides an S3 bucket ACL resource.
+NOTE:
+- terraform destroy does not delete the S3 Bucket ACL but does remove the resource from Terraform state.
+- This resource cannot be used with S3 directory buckets.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+ */
+resource "aws_s3_bucket_acl" "this" {
+  count = var.acl == "public-read" ? 1 : 0
+  depends_on = [
+    aws_s3_bucket_ownership_controls.this,
+    aws_s3_bucket_public_access_block.this,
+  ]
+
+  bucket = local.bucket.id
+  acl    = var.acl
+}

@@ -100,3 +100,9 @@ variable "force_destroy" {
   type        = bool
   default     = false
 }
+
+variable "acl" {
+  description = "Canned ACL to apply to the bucket. Support private and public-read."
+  type        = string
+  default     = "private"
+}
