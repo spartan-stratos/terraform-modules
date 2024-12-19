@@ -80,7 +80,7 @@ module "replica_db_instance" {
   storage_encrypted            = var.storage_encrypted
   engine                       = var.engine
   engine_version               = var.engine_version
-  vpc_security_group_ids       = local.vpc_security_group_ids
+  vpc_security_group_ids       = local.security_group_ids
   allow_major_version_upgrade  = var.allow_major_version_upgrade
   auto_minor_version_upgrade   = var.auto_minor_version_upgrade
   apply_immediately            = var.apply_immediately

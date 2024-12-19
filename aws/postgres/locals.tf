@@ -13,5 +13,5 @@ locals {
   db_subnet_group_name         = "${var.db_name}-subnet"
   default_backup_retention     = var.backup_retention_day
   db_final_snapshot_identifier = "${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
-  vpc_security_group_ids       = var.security_group_ids != null ? var.security_group_ids : [aws_security_group.this[0].id]
+  security_group_ids           = var.security_group_ids != null ? var.security_group_ids : [aws_security_group.this[0].id]
 }
