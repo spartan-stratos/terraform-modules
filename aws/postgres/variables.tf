@@ -173,14 +173,8 @@ variable "supported_engine_version" {
 }
 
 # Security groups
-variable "use_existing_security_groups" {
-  description = "Whether to associate existing vpc security groups with database instance."
-  type        = bool
-  default     = false
-}
-
 variable "vpc_security_group_ids" {
   description = "The list of existing vpc security group ids to associate with database instance."
   type        = list(string)
-  default     = []
+  default     = null
 }
