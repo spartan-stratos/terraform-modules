@@ -73,6 +73,13 @@ variable "multi_az" {
   default     = false
 }
 
+# Custom parameter group
+variable "custom_parameter_group_name" {
+  description = "Custom parameter group name, used when `var.overwrite_parameter_group_name` is `true` and `var.supported_engine_version` size is 1."
+  type        = string
+  default     = null
+}
+
 # Security
 variable "storage_encrypted" {
   description = "Whether the DB instance is encrypted."
@@ -153,4 +160,11 @@ variable "supported_engine_version" {
   description = "A list of supported engine versions for the Parameter Groups, supporting Blue-Green deployment."
   type        = list(number)
   default     = [14, 15, 16]
+}
+
+# Security groups
+variable "vpc_security_group_ids" {
+  description = "The list of existing vpc security group ids to associate with database instance."
+  type        = list(string)
+  default     = null
 }

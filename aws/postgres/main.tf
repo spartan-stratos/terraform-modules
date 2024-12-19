@@ -14,13 +14,17 @@ resource "aws_db_subnet_group" "this" {
 }
 
 resource "aws_security_group" "this" {
+  count = var.vpc_security_group_ids == null ? 0 : 1
+
   name        = "Allow ${local.identifier} RDS"
   description = "Allow RDS inbound traffic and outbound traffic inside the VPC"
   vpc_id      = var.vpc_id
 }
 
 resource "aws_vpc_security_group_ingress_rule" "this" {
-  security_group_id = aws_security_group.this.id
+  count = var.vpc_security_group_ids == null ? 0 : 1
+
+  security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = data.aws_vpc.this.cidr_block
   from_port         = var.port
   ip_protocol       = "tcp"
@@ -28,7 +32,9 @@ resource "aws_vpc_security_group_ingress_rule" "this" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "this" {
-  security_group_id = aws_security_group.this.id
+  count = var.vpc_security_group_ids == null ? 0 : 1
+
+  security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
@@ -49,7 +55,7 @@ module "main_db_instance" {
   password                     = random_password.this.result
   db_name                      = var.db_name
   db_subnet_group_name         = aws_db_subnet_group.this.name
-  vpc_security_group_ids       = [aws_security_group.this.id]
+  vpc_security_group_ids       = local.vpc_security_group_ids
   allow_major_version_upgrade  = var.allow_major_version_upgrade
   auto_minor_version_upgrade   = var.auto_minor_version_upgrade
   apply_immediately            = var.apply_immediately
@@ -74,7 +80,7 @@ module "replica_db_instance" {
   storage_encrypted            = var.storage_encrypted
   engine                       = var.engine
   engine_version               = var.engine_version
-  vpc_security_group_ids       = [aws_security_group.this.id]
+  vpc_security_group_ids       = local.vpc_security_group_ids
   allow_major_version_upgrade  = var.allow_major_version_upgrade
   auto_minor_version_upgrade   = var.auto_minor_version_upgrade
   apply_immediately            = var.apply_immediately
