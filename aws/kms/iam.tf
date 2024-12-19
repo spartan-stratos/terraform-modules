@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "this" {
 
 resource "aws_kms_key_policy" "this" {
   key_id = aws_kms_key.this.id
-  policy = data.aws_iam_policy_document.encrypt_decrypt.json
+  policy = data.aws_iam_policy_document.this.json
 }
 
 data "aws_iam_policy_document" "encrypt_decrypt" {
@@ -33,8 +33,8 @@ data "aws_iam_policy_document" "encrypt_decrypt" {
 
 
 resource "aws_iam_policy" "this" {
-  for_each = toset(var.alias_name)
-  name     = "KMSEncryptDecrypt-${each.value}"
-
-  policy = data.aws_iam_policy_document.encrypt_decrypt.json
+  for_each    = toset(var.alias_name)
+  name        = "KmsEncryptDecrypt-${each.value}"
+  description = "Policy that allows encrypt and decrypt data with the provided encryption KMS key."
+  policy      = data.aws_iam_policy_document.encrypt_decrypt.json
 }
