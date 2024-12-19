@@ -1,6 +1,6 @@
 locals {
   engine_version_major = parseint(split(".", var.engine_version)[0], 10)
-  identifier           = replace(var.db_name, "_", "-")
+  identifier           = var.db_identifier != null ? var.db_identifier : replace(var.db_name, "_", "-")
   max_workers = {
     "db.m5.4xlarge"  = 16
     "db.m5.12xlarge" = 48
@@ -13,4 +13,5 @@ locals {
   db_subnet_group_name         = "${var.db_name}-subnet"
   default_backup_retention     = var.backup_retention_day
   db_final_snapshot_identifier = "${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
+  vpc_security_group_ids       = var.vpc_security_group_ids != null ? var.vpc_security_group_ids : [aws_security_group.this[0].id]
 }

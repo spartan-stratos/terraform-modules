@@ -43,6 +43,13 @@ resource "aws_instance" "this" {
   tags = {
     "Name" = var.vpn_name
   }
+
+  lifecycle {
+    ignore_changes = [
+      ami,
+      user_data
+    ]
+  }
 }
 
 /*

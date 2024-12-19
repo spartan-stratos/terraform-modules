@@ -27,4 +27,3 @@ output "iam_policy_s3_bucket_assets_read_only_arn" {
   description = "The ARN of the IAM policy granting read-only access to the S3 bucket assets"
   value       = try(aws_iam_policy.readonly.0.arn, null)
 }
-

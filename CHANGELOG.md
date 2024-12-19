@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.14]() (2024-12-18)
+
+### Features
+
+* AWS Postgre: Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/postgres)
+* AWS VPC: Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet creation logics. Correct `aws_security_group.allow_all_within_vpc` ingress rule `cidr_blocks`. Remove `environment` from resource tags.[(./aws/vpc)](./aws/vpc)
+* AWS Route53: Add `r53_main_name_servers` output for route53 [(./aws/route53)](./aws/route53)
+
+## [0.1.13]() (2024-12-17)
+
+### Features
+
+* OpenVPN: Add Ignore Change for `ami` and `user_data` [(./aws/openvpn)](./aws/openvpn)
+
+## [0.1.12]() (2024-12-17)
+
+### Features
+
+* Add AWS GitHub OIDC [(./aws/github-oidc)](./aws/github-oidc)
+* Update output for AWS Route53 [(./aws/route53)](./aws/route53)
+* Add `read_write_policy` and attributes `force_destroy` for AWS S3  [(./aws/s3)](./aws/s3)
+* Update policy for AWS KMS [(./aws/kms)](./aws/kms)
+* Update AWS ACM `var.zone_id` default value to `null` and resource conditions [(./aws/acm)](./aws/acm)
+
 ## [0.1.11]() (2024-16-09)
 
 ### Features

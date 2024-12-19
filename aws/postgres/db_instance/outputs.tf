@@ -1,16 +1,19 @@
 output "db_identifier" {
-  value = aws_db_instance.this.identifier
+  description = "The instance identifier name."
+  value       = aws_db_instance.this.identifier
 }
 
-
 output "db_address" {
-  value = aws_db_instance.this.address
+  description = "The hostname of the instance."
+  value       = aws_db_instance.this.address
 }
 
 output "db_name" {
-  value = aws_db_instance.this.db_name
+  description = "The database name."
+  value       = aws_db_instance.this.db_name
 }
 
 output "db_username" {
-  value = aws_db_instance.this.username
+  description = "The database username."
+  value       = aws_db_instance.this.username
 }
