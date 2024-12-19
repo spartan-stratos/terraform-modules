@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.15]() (2024-12-19)
+### Fix bugs
+* Change from `aws_iam_policy.this[*].arn` to `values(aws_iam_policy.this)[*].arn` in order to fix the null list output 
+
 ## [0.1.12]() (2024-12-17)
 ### Features
 * Update README.md
