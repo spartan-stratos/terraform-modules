@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.15]() (2024-12-19)
+
+### Features
+
+* Add AWS Cloud Trail module [(./aws/cloudtrail)](./aws/cloudtrail).
+* AWS Postgres: Update security group to use vpc existing security groups and allow user to overwrite rds parameter group name.
+* AWS KMS: Change from `aws_iam_policy.this[*].arn` to `values(aws_iam_policy.this)[*].arn` in order to fix the null list output.
+* AWS S3: Add variable `acl` and resource `aws_s3_bucket_acl`.
+
 ## [0.1.14]() (2024-12-18)
 
 ### Features
