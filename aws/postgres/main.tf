@@ -14,7 +14,7 @@ resource "aws_db_subnet_group" "this" {
 }
 
 resource "aws_security_group" "this" {
-  count = var.vpc_security_group_ids == null ? 0 : 1
+  count = var.security_group_ids == null ? 0 : 1
 
   name        = "Allow ${local.identifier} RDS"
   description = "Allow RDS inbound traffic and outbound traffic inside the VPC"
@@ -22,7 +22,7 @@ resource "aws_security_group" "this" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "this" {
-  count = var.vpc_security_group_ids == null ? 0 : 1
+  count = var.security_group_ids == null ? 0 : 1
 
   security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = data.aws_vpc.this.cidr_block
@@ -32,7 +32,7 @@ resource "aws_vpc_security_group_ingress_rule" "this" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "this" {
-  count = var.vpc_security_group_ids == null ? 0 : 1
+  count = var.security_group_ids == null ? 0 : 1
 
   security_group_id = aws_security_group.this[0].id
   cidr_ipv4         = "0.0.0.0/0"

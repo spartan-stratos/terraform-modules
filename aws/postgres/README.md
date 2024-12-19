@@ -91,13 +91,13 @@ module "instance" {
 | <a name="input_performance_insights_enabled"></a> [performance\_insights\_enabled](#input\_performance\_insights\_enabled) | Specifies whether Performance Insights are enabled for the DB instance. | `bool` | `false` | no |
 | <a name="input_port"></a> [port](#input\_port) | The port of the database. | `number` | `5432` | no |
 | <a name="input_replica_count"></a> [replica\_count](#input\_replica\_count) | The number of read replicas for the database. | `number` | n/a | yes |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | The list of existing security group ids to associate with database instance. | `list(string)` | `null` | no |
 | <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Defines whether a final DB snapshot is created before the DB instance is deleted. | `bool` | `true` | no |
 | <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Whether the DB instance is encrypted. | `bool` | `true` | no |
 | <a name="input_storage_type"></a> [storage\_type](#input\_storage\_type) | The storage type of the RDS instance (standard, gp2, or gp3). | `string` | `"gp3"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet IDs for the DB subnet group. | `list(string)` | n/a | yes |
 | <a name="input_supported_engine_version"></a> [supported\_engine\_version](#input\_supported\_engine\_version) | A list of supported engine versions for the Parameter Groups, supporting Blue-Green deployment. | `list(number)` | <pre>[<br/>  14,<br/>  15,<br/>  16<br/>]</pre> | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC in which the RDS instance will be launched. | `string` | n/a | yes |
-| <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | The list of existing vpc security group ids to associate with database instance. | `list(string)` | `null` | no |
 
 ## Outputs
 

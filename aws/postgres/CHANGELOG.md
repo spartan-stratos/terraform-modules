@@ -4,8 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.15]() (2024-12-19)
 ### Features
-* Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and `replica_db_instance`.
-* Add `var.copy_tags_to_snapshot`.
+* Add `var.custom_parameter_group_name` and `var.security_group_ids` to overwrite parameter group name and use exising security group ids.
 
 ## [0.1.14]() (2024-12-18)
 ### Features

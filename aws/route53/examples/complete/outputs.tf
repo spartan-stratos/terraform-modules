@@ -11,5 +11,5 @@ output "first_record_fqdn" {
 }
 
 output "r53_main_name_servers" {
-  value       = module.route53.r53_main_name_servers
+  value = module.route53.r53_main_name_servers
 }
