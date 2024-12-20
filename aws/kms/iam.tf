@@ -9,7 +9,8 @@ data "aws_iam_policy_document" "this" {
 
     actions = [
       "kms:Encrypt",
-      "kms:Decrypt"
+      "kms:Decrypt",
+      "kms:PutKeyPolicy",
     ]
     resources = [aws_kms_key.this.arn]
   }
