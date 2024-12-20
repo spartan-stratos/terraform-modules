@@ -1,3 +1,7 @@
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key_policy
+https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html
+*/
 data "aws_iam_policy_document" "this" {
   statement {
     effect = "Allow"
@@ -11,8 +15,15 @@ data "aws_iam_policy_document" "this" {
       "kms:Encrypt",
       "kms:Decrypt",
       "kms:PutKeyPolicy",
+      "kms:DescribeKey",
+      "kms:GenerateDataKey*",
+      "kms:ReEncrypt*",
+
     ]
     resources = [aws_kms_key.this.arn]
+  }
+  statement {
+    
   }
 }
 

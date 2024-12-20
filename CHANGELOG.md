@@ -1,8 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.16]() (2024-12-20)
+## [0.1.17]() (2024-12-20)
+### Features
+*  AWS KMS: Add policy `kms:ReEncrypt*`, `kms:GenerateDataKey*` and `kms:DescribeKey` for matching default key policy [(./aws/kms)](./aws/kms)
 
+## [0.1.16]() (2024-12-20)
 ### Features
 
 * AWS Cloudwatch Alarm: Add support for specifying target group in alarms [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm).
