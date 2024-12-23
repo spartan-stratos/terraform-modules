@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "read" {
       "sqs:GetQueueAttributes",
     ]
     resources = [
-      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${local.queue_name}"
+      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${aws_sqs_queue.queue.arn}"
     ]
   }
 }
@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "write" {
       "sqs:SendMessage",
     ]
     resources = [
-      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${local.queue_name}"
+      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${aws_sqs_queue.queue.arn}"
     ]
   }
 }
