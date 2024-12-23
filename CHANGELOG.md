@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.19]() (2024-12-23)
+
+### Features
+
+* AWS EKS: add output `datadog_agent_cluster_role_name`
+* AWS EKS: Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
+
 ## [0.1.18]() (2024-12-23)
 
 ### Features
