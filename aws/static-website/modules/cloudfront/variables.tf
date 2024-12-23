@@ -3,6 +3,11 @@ variable "dns_name" {
   type        = string
 }
 
+variable "domain_name" {
+  description = "The domain name for the static website."
+  type        = string
+}
+
 variable "route53_zone_id" {
   description = "Route53 zone id"
   type        = string

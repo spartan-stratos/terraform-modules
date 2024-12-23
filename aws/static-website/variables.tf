@@ -3,6 +3,11 @@ variable "dns_name" {
   type        = string
 }
 
+variable "domain_name" {
+  description = "The domain name for the static website."
+  type        = string
+}
+
 variable "enabled_create_s3" {
   description = "The bool value determining whether to create a new S3 bucket"
   type        = bool
