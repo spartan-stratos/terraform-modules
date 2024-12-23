@@ -1,6 +1,5 @@
 variable "datadog_agent_cluster_role_name" {
   type    = string
-  default = "datadog-agent"
 }
 
 variable "fargate_profiles" {

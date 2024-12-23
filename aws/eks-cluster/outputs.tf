@@ -43,3 +43,8 @@ output "aws_eks_cluster_auth_data" {
   value       = local.aws_auth_configmap_data
   description = "The ConfigMap data for managing EKS cluster authentication"
 }
+
+output "datadog_agent_cluster_role_name" {
+  value       = local.datadog_agent_cluster_role_name
+  description = "The ClusterRole created in order to configure Datadog Agent"
+}
