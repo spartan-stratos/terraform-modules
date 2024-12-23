@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.18]() (2024-12-23)
+
+### Features
+
+* AWS S3: add output: `iam_policy_s3_bucket_assets_read_write_arn`.
+
 ## [0.1.17]() (2024-12-23)
 
 ### Features
