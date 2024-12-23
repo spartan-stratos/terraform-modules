@@ -6,14 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS EKS: add output `datadog_agent_cluster_role_name`
-* AWS EKS: Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
+* AWS eks-cluster [(./aws/eks-cluster)](./aws/eks-cluster/)
+  * Add output `datadog_agent_cluster_role_name`
+  * Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
 
 ## [0.1.18]() (2024-12-23)
 
 ### Features
 
-* AWS S3: add output: `iam_policy_s3_bucket_assets_read_write_arn`.
+* AWS S3: add output: `iam_policy_s3_bucket_assets_read_write_arn`. [(./aws/s3)](./aws/s3/)
 
 ## [0.1.17]() (2024-12-23)
 
