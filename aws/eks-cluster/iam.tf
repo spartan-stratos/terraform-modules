@@ -177,7 +177,7 @@ data "aws_iam_policy_document" "node_assume_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["eks.amazonaws.com"]
+      identifiers = ["ec2.amazonaws.com"]
     }
   }
 }
