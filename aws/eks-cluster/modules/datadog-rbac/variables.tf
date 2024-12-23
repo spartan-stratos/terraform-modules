@@ -1,5 +1,6 @@
 variable "datadog_agent_cluster_role_name" {
-  type    = string
+  type        = string
+  description = "Name of the ClusterRole to create in order to configure Datadog Agents"
 }
 
 variable "fargate_profiles" {

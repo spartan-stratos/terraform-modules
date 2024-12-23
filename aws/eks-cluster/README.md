@@ -141,6 +141,7 @@ module "eks" {
 | <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version) | The Kubernetes version for creating the cluster. | `string` | `"1.31"` | no |
 | <a name="input_create_fargate_profile"></a> [create\_fargate\_profile](#input\_create\_fargate\_profile) | Specify whether creaing the Fargate profile for running pods. | `bool` | `false` | no |
 | <a name="input_custom_namespaces"></a> [custom\_namespaces](#input\_custom\_namespaces) | Custom namespaces to be created during initialization | `list(string)` | `[]` | no |
+| <a name="input_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#input\_datadog\_agent\_cluster\_role\_name) | Name of the ClusterRole to create in order to configure Datadog Agents | `string` | `"datadog-agent"` | no |
 | <a name="input_default_service_account"></a> [default\_service\_account](#input\_default\_service\_account) | Default service account name for binding with Datadog | `string` | `"default"` | no |
 | <a name="input_efs_backup_policy_status"></a> [efs\_backup\_policy\_status](#input\_efs\_backup\_policy\_status) | Enable/disable backup for EFS Filesystem.  Value should be ENABLE/DISABLED.  Defaults to DISABLED | `string` | `"DISABLED"` | no |
 | <a name="input_efs_lifecycle_policy"></a> [efs\_lifecycle\_policy](#input\_efs\_lifecycle\_policy) | Lifecycle Policy for the EFS Filesystem | <pre>list(object({<br/>    transition_to_ia                    = string<br/>    transition_to_primary_storage_class = string<br/>  }))</pre> | `[]` | no |
@@ -174,7 +175,7 @@ module "eks" {
 | <a name="output_aws_iam_instance_profile_node"></a> [aws\_iam\_instance\_profile\_node](#output\_aws\_iam\_instance\_profile\_node) | The instance profile associated with the EKS worker nodes |
 | <a name="output_aws_iam_role_node"></a> [aws\_iam\_role\_node](#output\_aws\_iam\_role\_node) | The IAM role assigned to the EKS worker nodes for managing permissions |
 | <a name="output_aws_security_group_cluster"></a> [aws\_security\_group\_cluster](#output\_aws\_security\_group\_cluster) | The security group applied to the EKS cluster for network control |
-| <a name="output_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#output\_datadog\_agent\_cluster\_role\_name) | The ClusterRole created in order to configure Datadog Agent |
+| <a name="output_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#output\_datadog\_agent\_cluster\_role\_name) | Name of the ClusterRole to create in order to configure Datadog Agents |
 | <a name="output_efs"></a> [efs](#output\_efs) | The Amazon EFS (Elastic File System) configuration for the cluster, if available |
 | <a name="output_eks_default_auth_role_arn"></a> [eks\_default\_auth\_role\_arn](#output\_eks\_default\_auth\_role\_arn) | The ARN of the IAM role used for default EKS authentication |
 | <a name="output_fargate_profile"></a> [fargate\_profile](#output\_fargate\_profile) | Details of the Fargate profile configured for the EKS cluster |
