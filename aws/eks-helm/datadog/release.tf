@@ -35,8 +35,8 @@ resource "helm_release" "this" {
 
   values = [
     templatefile("${path.module}/values.yaml.tftpl", {
-      http_check_url : var.http_check_urls,
-      environment : var.environment
+      http_check_urls = var.http_check_urls,
+      environment     = var.environment
     })
   ]
   lifecycle {
