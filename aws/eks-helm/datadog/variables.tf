@@ -49,3 +49,12 @@ variable "chart_version" {
   type    = string
   default = "3.65.1"
 }
+
+variable "datadog_envs" {
+  description = "Environment variables for datadog agents"
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  default = []
+}

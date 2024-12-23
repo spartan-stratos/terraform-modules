@@ -1,3 +1,34 @@
+locals {
+  manifest = <<YAML
+datadog:
+  logs:
+    enabled: true
+    containerCollectAll: true
+agents:
+  enabled: false
+clusterAgent:
+  enabled: true
+  metricsProvider:
+    enabled: true
+  env:
+%{~for env in var.datadog_envs}
+    - name: ${env.name}
+      value: ${yamlencode(env.value)}
+%{~endfor~}
+  confd:
+    http_check.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+%{for url in var.http_check_urls}
+        - name: ${url}
+          url: ${url}
+          tags:
+            - env: ${var.environment}
+%{endfor}
+YAML
+}
+
 resource "random_password" "cluster_agent_token" {
   length  = 32
   special = false
@@ -33,12 +64,7 @@ resource "helm_release" "this" {
     value = random_password.cluster_agent_token.result
   }
 
-  values = [
-    templatefile("${path.module}/values.yaml.tftpl", {
-      http_check_urls = var.http_check_urls,
-      environment     = var.environment
-    })
-  ]
+  values = [local.manifest]
   lifecycle {
     ignore_changes = [
       timeout

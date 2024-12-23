@@ -29,6 +29,7 @@ No modules.
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The EKS cluster name | `any` | n/a | yes |
 | <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key) | The datadog api key | `string` | n/a | yes |
 | <a name="input_datadog_app_key"></a> [datadog\_app\_key](#input\_datadog\_app\_key) | The datadog app key | `string` | n/a | yes |
+| <a name="input_datadog_envs"></a> [datadog\_envs](#input\_datadog\_envs) | Environment variables for datadog agents | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site) | The datadog site | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment where the resources will be created. | `string` | n/a | yes |
 | <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name) | The Helm release of the services. | `string` | `"datadog"` | no |
