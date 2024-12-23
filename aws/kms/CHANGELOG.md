@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.17]() (2024-12-23)
+### Fix bugs
+*  Update policy statement
+
 ## [0.1.16]() (2024-12-20)
 ### Fix bugs
 *  Add policy `kms:PutKeyPolicy` to fix bugs

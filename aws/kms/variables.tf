@@ -57,3 +57,8 @@ variable "principal_roles" {
   type        = list(string)
   default     = null
 }
+
+variable "aws_account_id" {
+  description = "The ID of AWS account."
+  type        = string
+}
