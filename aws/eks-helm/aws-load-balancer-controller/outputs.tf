@@ -14,6 +14,6 @@ output "internal_alb_cname" {
 }
 
 output "internal_group_name" {
-  value = try(kubernetes_ingress_v1.internal_alb[0].metadata.0.annotations["alb.ingress.kubernetes.io/group.name"], null)
+  value       = try(kubernetes_ingress_v1.internal_alb[0].metadata.0.annotations["alb.ingress.kubernetes.io/group.name"], null)
   description = "Group name of internal aws load balancer"
 }
