@@ -3,6 +3,11 @@ variable "dns_name" {
   type        = string
 }
 
+variable "domain_name" {
+  description = "The domain name for the static website."
+  type        = string
+}
+
 variable "enabled_create_s3" {
   description = "The bool value determining whether to create a new S3 bucket"
   type        = bool
@@ -39,4 +44,22 @@ variable "price_class" {
   description = "The price class for this distribution."
   type        = string
   default     = "PriceClass_100"
+}
+
+variable "enabled_public_policy" {
+  description = "Enabled create the Public Policy to allow public access to bucket objects."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_read_write_policy" {
+  description = "Enabled create the Read Write Policy to allow access to bucket objects."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_read_only_policy" {
+  description = "Enabled create the Read Only Policy to allow access to bucket objects."
+  type        = bool
+  default     = false
 }
