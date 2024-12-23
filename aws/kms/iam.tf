@@ -1,3 +1,7 @@
+/*
+This will overwrite the default key policy resource
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
+*/
 data "aws_iam_policy_document" "this" {
   statement {
     effect = "Allow"
@@ -26,11 +30,17 @@ data "aws_iam_policy_document" "this" {
   }
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key_policy
+*/
 resource "aws_kms_key_policy" "this" {
   key_id = aws_kms_key.this.id
   policy = data.aws_iam_policy_document.this.json
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
+*/
 data "aws_iam_policy_document" "encrypt_decrypt" {
   statement {
     effect = "Allow"
@@ -42,7 +52,9 @@ data "aws_iam_policy_document" "encrypt_decrypt" {
   }
 }
 
-
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
+*/
 resource "aws_iam_policy" "this" {
   for_each    = toset(var.alias_name)
   name        = "KmsEncryptDecrypt-${each.value}"

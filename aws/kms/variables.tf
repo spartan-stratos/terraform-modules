@@ -59,6 +59,6 @@ variable "principal_roles" {
 }
 
 variable "aws_account_id" {
-  description = "The ID of AWS account"
+  description = "The ID of AWS account."
   type        = string
 }
