@@ -1,6 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.17]() (2024-12-23)
+
+### Features
+
+* AWS KMS: Update key policy statement [(./aws/kms)](./aws/kms).
+* AWS static-website: Update `aws_cloudfront_distribution.aliases`. Add variable `domain_name`, `enabled_read_write_policy`, `enabled_read_only_policy`.
+
 ## [0.1.16]() (2024-12-20)
 
 ### Features
