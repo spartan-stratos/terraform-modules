@@ -1,12 +1,6 @@
 locals {
-  ssl_redirect_action = jsonencode({
-    "Type" : "redirect",
-    "RedirectConfig" : {
-      "Protocol" : "HTTPS",
-      "Port" : "443",
-      "StatusCode" : "HTTP_301"
-    }
-  })
+  ssl_redirect_action    = "{\"Type\": \"redirect\", \"RedirectConfig\": { \"Protocol\": \"HTTPS\", \"Port\": \"443\", \"StatusCode\": \"HTTP_301\"}}"
+  listen_port_http_https = "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
 }
 
 resource "kubernetes_ingress_v1" "external_alb" {
@@ -29,7 +23,7 @@ resource "kubernetes_ingress_v1" "external_alb" {
       "alb.ingress.kubernetes.io/subnets"                  = join(",", var.public_subnet)
       "alb.ingress.kubernetes.io/ssl-policy"               = var.ssl_policy
       "alb.ingress.kubernetes.io/target-type"              = "ip"
-      "alb.ingress.kubernetes.io/listen-ports"             = jsonencode([{ "HTTP" : 80 }, { "HTTPS" : 443 }])
+      "alb.ingress.kubernetes.io/listen-ports"             = local.listen_port_http_https
       "alb.ingress.kubernetes.io/actions.ssl-redirect"     = local.ssl_redirect_action
     }
   }
@@ -74,7 +68,7 @@ resource "kubernetes_ingress_v1" "internal_alb" {
       "alb.ingress.kubernetes.io/subnets"                  = join(",", var.private_subnet)
       "alb.ingress.kubernetes.io/ssl-policy"               = var.ssl_policy
       "alb.ingress.kubernetes.io/target-type"              = "ip"
-      "alb.ingress.kubernetes.io/listen-ports"             = jsonencode([{ "HTTP" : 80 }, { "HTTPS" : 443 }])
+      "alb.ingress.kubernetes.io/listen-ports"             = local.listen_port_http_https
       "alb.ingress.kubernetes.io/actions.ssl-redirect"     = local.ssl_redirect_action
     }
   }
