@@ -1,14 +1,19 @@
 # AWS EKS Terraform module
+
 Terraform module which creates Amazon EKS (Kubernetes) resources
 
 This module will create the components below
-- Default system applications like: coredns, metrics-server, aws-load-balancer-controller, nginx-ingress-controller
+
+- Default system applications like: coredns, metrics-server,
+  aws-load-balancer-controller, nginx-ingress-controller
 - Associated IAM components for running the cluster
 - Default nodes and Fargate profile for running pods
 - EFS system for mounting volumes
 
 ## Usage
+
 ### Create EKS cluster
+
 ```hcl
 module "eks" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.0"
@@ -56,26 +61,27 @@ module "eks" {
 ```
 
 ## Examples
+
 - [Example Fargate](./examples/fargate/)
 - [Example Managed nodes](./examples/managed-nodes/)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version    |
-|------|------------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8   |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75   |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | \>= 2.33.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | \>= 4.0    |
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.33.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 4.0 |
 
 ## Providers
 
-| Name | Version    |
-|------|------------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75   |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | \>= 2.33.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | \>= 4.0    |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0 |
 
 ## Modules
 
@@ -168,6 +174,7 @@ module "eks" {
 | <a name="output_aws_iam_instance_profile_node"></a> [aws\_iam\_instance\_profile\_node](#output\_aws\_iam\_instance\_profile\_node) | The instance profile associated with the EKS worker nodes |
 | <a name="output_aws_iam_role_node"></a> [aws\_iam\_role\_node](#output\_aws\_iam\_role\_node) | The IAM role assigned to the EKS worker nodes for managing permissions |
 | <a name="output_aws_security_group_cluster"></a> [aws\_security\_group\_cluster](#output\_aws\_security\_group\_cluster) | The security group applied to the EKS cluster for network control |
+| <a name="output_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#output\_datadog\_agent\_cluster\_role\_name) | The ClusterRole created in order to configure Datadog Agent |
 | <a name="output_efs"></a> [efs](#output\_efs) | The Amazon EFS (Elastic File System) configuration for the cluster, if available |
 | <a name="output_eks_default_auth_role_arn"></a> [eks\_default\_auth\_role\_arn](#output\_eks\_default\_auth\_role\_arn) | The ARN of the IAM role used for default EKS authentication |
 | <a name="output_fargate_profile"></a> [fargate\_profile](#output\_fargate\_profile) | Details of the Fargate profile configured for the EKS cluster |
