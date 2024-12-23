@@ -3,10 +3,10 @@ data "aws_iam_policy_document" "this" {
     effect = "Allow"
     principals {
       type        = "AWS"
-      identifiers = "*"
+      identifiers = ["*"]
     }
-    actions   = "kms:*"
-    resources = "*"
+    actions   = ["kms:*"]
+    resources = ["*"]
   }
 
   statement {
