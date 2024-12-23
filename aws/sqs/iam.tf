@@ -6,9 +6,7 @@ data "aws_iam_policy_document" "read" {
       "sqs:DeleteMessage",
       "sqs:GetQueueAttributes",
     ]
-    resources = [
-      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${aws_sqs_queue.queue.arn}"
-    ]
+    resources = [aws_sqs_queue.queue.arn]
   }
 }
 
@@ -18,9 +16,7 @@ data "aws_iam_policy_document" "write" {
     actions = [
       "sqs:SendMessage",
     ]
-    resources = [
-      "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${aws_sqs_queue.queue.arn}"
-    ]
+    resources = [aws_sqs_queue.queue.arn]
   }
 }
 
