@@ -49,6 +49,7 @@ data "aws_iam_policy_document" "read_write_policy" {
     ]
   }
 }
+
 /*
 aws_iam_policy main creates an IAM policy for write access to the specified S3 bucket.
 The policy allows overriding object ownership to the bucket owner, uploading objects, and setting object ACLs.
@@ -74,7 +75,6 @@ resource "aws_iam_policy" "readonly" {
 
   policy = data.aws_iam_policy_document.readonly_policy.0.json
 }
-
 
 /*
 aws_iam_policy read_write_policy creates an IAM policy for read_write_policy access to the specified S3 bucket.

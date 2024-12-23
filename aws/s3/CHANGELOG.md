@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.18]() (2024-12-23)
+### Features
+* Add output `iam_policy_s3_bucket_assets_read_write_arn`.
+
 ## [0.1.15]() (2024-12-19)
 ### Features
 * Add variable `acl` and resource `aws_s3_bucket_acl`.
