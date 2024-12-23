@@ -4,5 +4,5 @@ module "datadog_rbac" {
   fargate_profiles                = var.fargate_profiles
   default_service_account         = var.default_service_account
   custom_namespaces               = var.custom_namespaces
-  datadog_agent_cluster_role_name = local.datadog_agent_cluster_role_name
+  datadog_agent_cluster_role_name = var.datadog_agent_cluster_role_name
 }

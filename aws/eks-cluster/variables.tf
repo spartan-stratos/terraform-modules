@@ -152,6 +152,12 @@ variable "enabled_datadog_agent" {
   default     = false
 }
 
+variable "datadog_agent_cluster_role_name" {
+  type        = string
+  description = "Name of the ClusterRole to create in order to configure Datadog Agents"
+  default     = "datadog-agent"
+}
+
 variable "enabled_cluster_log_types" {
   type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]

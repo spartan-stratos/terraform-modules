@@ -45,6 +45,7 @@ output "aws_eks_cluster_auth_data" {
 }
 
 output "datadog_agent_cluster_role_name" {
-  value       = local.datadog_agent_cluster_role_name
-  description = "The ClusterRole created in order to configure Datadog Agent"
+  # we need to output a var because it has a default value
+  value       = var.datadog_agent_cluster_role_name
+  description = "Name of the ClusterRole to create in order to configure Datadog Agents"
 }
