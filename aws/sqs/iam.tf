@@ -3,6 +3,8 @@ data "aws_iam_policy_document" "read" {
     effect = "Allow"
     actions = [
       "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes",
     ]
     resources = [
       "arn:aws:sqs:${local.aws_region}:${local.aws_account_id}:${local.queue_name}"
@@ -14,9 +16,6 @@ data "aws_iam_policy_document" "write" {
   statement {
     effect = "Allow"
     actions = [
-      "sqs:ReceiveMessage",
-      "sqs:DeleteMessage",
-      "sqs:GetQueueAttributes",
       "sqs:SendMessage",
     ]
     resources = [

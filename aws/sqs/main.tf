@@ -38,22 +38,6 @@ resource "aws_sqs_queue" "queue" {
   deduplication_scope   = var.fifo_deduplication_scope
   fifo_throughput_limit = var.fifo_throughput_limit
 
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "${var.name}-queue-policy-${terraform.workspace}",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "sqs:*",
-      "Resource": "arn:aws:sqs:*:${data.aws_caller_identity.current.account_id}:*"
-    }
-  ]
-}
-POLICY
-
-
   redrive_policy = <<POLICY
 {
   "deadLetterTargetArn":"${aws_sqs_queue.dlq.arn}",
