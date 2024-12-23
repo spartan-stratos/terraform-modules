@@ -60,8 +60,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_external_alb_cname"></a> [external\_alb\_cname](#output\_external\_alb\_cname) | n/a |
-| <a name="output_external_group_name"></a> [external\_group\_name](#output\_external\_group\_name) | n/a |
-| <a name="output_internal_alb_cname"></a> [internal\_alb\_cname](#output\_internal\_alb\_cname) | n/a |
-| <a name="output_internal_group_name"></a> [internal\_group\_name](#output\_internal\_group\_name) | n/a |
+| <a name="output_external_alb_cname"></a> [external\_alb\_cname](#output\_external\_alb\_cname) | CNAME address of external aws load balancer |
+| <a name="output_external_group_name"></a> [external\_group\_name](#output\_external\_group\_name) | Group name of external aws load balancer |
+| <a name="output_internal_alb_cname"></a> [internal\_alb\_cname](#output\_internal\_alb\_cname) | CNAME address of internal aws load balancer |
+| <a name="output_internal_group_name"></a> [internal\_group\_name](#output\_internal\_group\_name) | Group name of internal aws load balancer |
 <!-- END_TF_DOCS -->
