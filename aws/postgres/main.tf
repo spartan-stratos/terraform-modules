@@ -1,121 +1,93 @@
-/*
-aws_db_subnet_group this creates a subnet group for the RDS instance.
-The subnet group is used to specify which subnets the RDS instance will be deployed in.
-The `subnet_ids` variable is used to pass the list of subnet IDs to the resource.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
-*/
+resource "random_password" "this" {
+  length  = 24
+  special = false
+}
+
+data "aws_vpc" "this" {
+  id = var.vpc_id
+}
+
 resource "aws_db_subnet_group" "this" {
-  name        = "${local.db_identifier}-subnet-group"
+  description = local.db_subnet_group_description
+  name        = local.db_subnet_group_name
   subnet_ids  = var.subnet_ids
-  description = "${local.db_identifier} db subnet group"
 }
 
-/*
-aws_secretsmanager_secret_version postgresql_password retrieves the version of a secret from AWS Secrets Manager.
-This secret is used to store the PostgreSQL database password securely.
-The `postgresql_password_secret_id` variable is used to pass the secret's ID to the data source.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret_version
-*/
-data "aws_secretsmanager_secret_version" "postgresql_password" {
-  secret_id = var.postgresql_password_secret_id
+resource "aws_security_group" "this" {
+  count = var.vpc_security_group_ids == null ? 0 : 1
+
+  name        = "Allow ${local.identifier} RDS"
+  description = "Allow RDS inbound traffic and outbound traffic inside the VPC"
+  vpc_id      = var.vpc_id
 }
 
-/*
-aws_db_instance main creates an RDS PostgreSQL instance in the specified VPC and subnet group.
-It is configured with backup, storage, performance, and security options, such as multi-AZ and encryption.
-The database password is retrieved from AWS Secrets Manager.
-The `apply_immediately` variable is used to specify if changes should be applied immediately.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
-*/
-resource "aws_db_instance" "main" {
-  depends_on = [
-    aws_db_subnet_group.this,
-    aws_db_parameter_group.parameter_group
-  ]
+resource "aws_vpc_security_group_ingress_rule" "this" {
+  count = var.vpc_security_group_ids == null ? 0 : 1
 
-  identifier              = local.db_identifier
-  instance_class          = var.instance_class
-  allocated_storage       = var.disk_size
-  max_allocated_storage   = var.max_allocated_storage
-  backup_window           = var.backup_window
-  backup_retention_period = var.backup_retention_day
-  db_name                 = var.db_name
-  engine                  = "postgres"
-  engine_version          = var.engine_version
-  username                = var.db_username
-  password                = data.aws_secretsmanager_secret_version.postgresql_password.secret_string
-  port                    = var.db_port
-  db_subnet_group_name    = aws_db_subnet_group.this.name
-  vpc_security_group_ids = [
-    var.security_group_allow_all_within_vpc_id
-  ]
+  security_group_id = aws_security_group.this[0].id
+  cidr_ipv4         = data.aws_vpc.this.cidr_block
+  from_port         = var.port
+  ip_protocol       = "tcp"
+  to_port           = var.port
+}
 
-  # optional
-  allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = var.enabled_auto_minor_version_upgrade
-  apply_immediately           = var.apply_immediately
+resource "aws_vpc_security_group_egress_rule" "this" {
+  count = var.vpc_security_group_ids == null ? 0 : 1
 
-  copy_tags_to_snapshot = true
-  multi_az              = var.multi_az
-  storage_type          = var.storage_type
-  iops                  = var.iops
+  security_group_id = aws_security_group.this[0].id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
 
-  storage_encrypted = var.storage_encryption_enabled
-
-  iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  parameter_group_name                = aws_db_parameter_group.parameter_group[local.engine_version_major].id
-  publicly_accessible                 = false
-
-  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${local.db_identifier}-${formatdate("HH-mmaa", timestamp())}"
-  skip_final_snapshot       = var.skip_final_snapshot
-
-  monitoring_interval = var.monitoring_interval
-
+module "main_db_instance" {
+  source                       = "./db_instance"
+  identifier                   = local.identifier
+  instance_class               = var.instance_class
+  allocated_storage            = var.disk_size
+  max_allocated_storage        = var.max_allocated_storage
+  backup_retention_period      = local.default_backup_retention
+  skip_final_snapshot          = var.skip_final_snapshot
+  storage_type                 = var.storage_type
+  storage_encrypted            = var.storage_encrypted
+  engine                       = var.engine
+  engine_version               = var.engine_version
+  username                     = var.db_username
+  password                     = random_password.this.result
+  db_name                      = var.db_name
+  db_subnet_group_name         = aws_db_subnet_group.this.name
+  vpc_security_group_ids       = local.vpc_security_group_ids
+  allow_major_version_upgrade  = var.allow_major_version_upgrade
+  auto_minor_version_upgrade   = var.auto_minor_version_upgrade
+  apply_immediately            = var.apply_immediately
+  monitoring_interval          = var.monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
-
-  timeouts {
-    create = "2h"
-    update = "2h"
-    delete = "2h"
-  }
+  parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
+  publicly_accessible          = false
+  final_snapshot_identifier    = local.db_final_snapshot_identifier
+  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
 }
 
-/*
-aws_db_instance replica creates read replicas for the RDS PostgreSQL instance.
-The replicas are configured to replicate from the main instance and are created in the specified VPC.
-It is set up to skip final snapshot creation and does not enable backups for the replicas.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance
-*/
-resource "aws_db_instance" "replica" {
-  instance_class        = var.instance_class
-  replicate_source_db   = aws_db_instance.main.identifier
-  count                 = var.replica_count
-  allocated_storage     = var.disk_size
-  max_allocated_storage = var.max_allocated_storage
-
-  identifier = "${local.db_identifier}-replica-${count.index}"
-
-  backup_retention_period = "0"
-
-  skip_final_snapshot = true
-  storage_type        = var.storage_type
-  iops                = var.iops
-
-  storage_encrypted = var.storage_encryption_enabled
-
-  iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  parameter_group_name                = aws_db_parameter_group.parameter_group[local.engine_version_major].id
-  publicly_accessible                 = false
-
-  vpc_security_group_ids = [
-    var.security_group_allow_all_within_vpc_id,
-  ]
-
-  allow_major_version_upgrade = true
-  auto_minor_version_upgrade  = var.enabled_auto_minor_version_upgrade
-  apply_immediately           = var.apply_immediately
-
-  monitoring_interval = var.monitoring_interval
-
+module "replica_db_instance" {
+  source                       = "./db_instance"
+  count                        = var.replica_count
+  identifier                   = "${local.identifier}-replica-${count.index}"
+  instance_class               = var.instance_class
+  allocated_storage            = var.disk_size
+  max_allocated_storage        = var.max_allocated_storage
+  backup_retention_period      = "0"
+  skip_final_snapshot          = var.skip_final_snapshot
+  storage_type                 = var.storage_type
+  storage_encrypted            = var.storage_encrypted
+  engine                       = var.engine
+  engine_version               = var.engine_version
+  vpc_security_group_ids       = local.vpc_security_group_ids
+  allow_major_version_upgrade  = var.allow_major_version_upgrade
+  auto_minor_version_upgrade   = var.auto_minor_version_upgrade
+  apply_immediately            = var.apply_immediately
+  monitoring_interval          = var.monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
+  parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
+  publicly_accessible          = false
+  replicate_source_db          = module.main_db_instance.db_identifier
+  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
 }

@@ -8,7 +8,7 @@ resource "aws_route53_record" "main" {
   for_each = var.custom_records
 
   name    = each.key
-  zone_id = local.dns_zone.id
+  zone_id = each.value.zone_id != null ? each.value.zone_id : local.dns_zone.id
   type    = each.value.type != null ? each.value.type : local.default_record_type
   ttl     = each.value.ttl != null ? each.value.ttl : local.default_ttl
   records = each.value.records

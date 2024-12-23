@@ -21,7 +21,7 @@ module "saml_vpn" {
 
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="provider_aws"></a> [aws](#provider\_aws)                         | \>= 5.75 |
 
 ## Providers

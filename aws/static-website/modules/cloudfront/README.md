@@ -1,13 +1,16 @@
 # AWS Cloudfront Terraform sub-module
+
 Terraform sub-module which creates Cloudfront resources on AWS.
 
 ## Usage
+
 ### Create Cloudfront
+
 ```hcl
 module "cloudfront" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/static-website/aws//modules/cloudfront"
+  source = "github.com/spartan-stratos/terraform-modules//aws/static-website/aws//modules/cloudfront"
 
-  ndns_name           = var.dns_name
+  dns_name           = var.dns_name
   route53_zone_id     = var.route53_zone_id
   route53_zone_name   = var.route53_zone_name
   s3_bucket_id        = module.s3.s3_bucket_id
@@ -16,20 +19,21 @@ module "cloudfront" {
 ```
 
 ## Examples
+
 - [Example](../../examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version  |
-|------|----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
 
 ## Providers
 
-| Name | Version  |
-|------|----------|
+| Name | Version |
+|------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
 
 ## Modules
@@ -49,14 +53,16 @@ No modules.
 
 ## Inputs
 
-| Name                                                                                                     | Description                                                                           | Type | Default | Required |
-|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|------|---------|:--------:|
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                             | The DNS name for the static website                                                   | `string` | n/a | yes |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                      | Route53 zone id                                                                       | `string` | n/a | yes |
-| <a name="input_route53_zone_name"></a> [route53\_zone\_name](#input\_route53\_zone\_name)                | Route53 zone name                                                                     | `string` | n/a | yes |
-| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id)                               | The origin S3 bucket id                                                               | `string` | n/a | yes |
-| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn)          | SSL certificate arn for attaching to the Cloudfront distribution                      | `string` | n/a | yes |
-| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | n/a | yes |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the static website. | `string` | n/a | yes |
+| <a name="input_minimum_protocol_version"></a> [minimum\_protocol\_version](#input\_minimum\_protocol\_version) | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
+| <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. | `string` | `"PriceClass_100"` | no |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 zone id | `string` | n/a | yes |
+| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id) | The origin S3 bucket id | `string` | n/a | yes |
+| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn) | SSL certificate arn for attaching to the Cloudfront distribution | `string` | n/a | yes |
+| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | `"redirect-to-https"` | no |
 
 ## Outputs
 

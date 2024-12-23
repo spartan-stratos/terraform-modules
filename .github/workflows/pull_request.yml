@@ -1,7 +1,7 @@
 name: "Terraform Check on Pull Request"
 
 env:
-  TERRAFORM_VERSION: 1.9.8
+  TERRAFORM_VERSION: 1.10.1
   PLATFORMS: 'aws|gcp'                # delimiter should be "|"
   EXCLUDED_FOLDERS: 'examples|files'  # delimiter should be "|"
 
@@ -23,19 +23,30 @@ jobs:
       - name: Get module directories
         id: find_modules
         run: |
-          # Find module directories in PLATFORMS but excluding sub directories starting with EXCLUDED_FOLDERS
-          MODULE_DIRS=($(find . -type d | grep -E '^\./(${{ env.PLATFORMS }})/[^/]*' | grep -Ev '.*/(${{ env.EXCLUDED_FOLDERS }})' | sort -u))
-
+          # Find changes between the current commit and its parent
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          
+          # Iterate through changed files and determine affected modules
+          CHANGED_MODULES=()
+          for FILE in $CHANGED_FILES; do
+              MODULE_NAME=$(dirname "$FILE")
+              if echo "$MODULE_NAME" | grep -Eq "^($PLATFORMS)" && echo "$MODULE_NAME" | grep -Eqv "^($EXCLUDED_FOLDERS)"; then
+                  CHANGED_MODULES+=( "$MODULE_NAME" )
+              fi
+          done
+          # Sort and deduplicate module names
+          DIRECTORIES=$(echo "${CHANGED_MODULES[@]}" | tr ' ' '\n' | sort -u)
+          
           # Remove './' from the beginning of each directory
-          DIRECTORIES=("${MODULE_DIRS[@]//.\//}")
+          DIRECTORIES=("${DIRECTORIES[@]//.\//}")
           
           # Convert to a valid JSON array format: compact (single line)
           DIRECTORIES_JSON=$(printf '%s\n' "${DIRECTORIES[@]}" | jq -R . | jq -sc .)
-          echo "Module directories: $DIRECTORIES_JSON"
+          echo "Changed module directories: $DIRECTORIES_JSON"
           echo "modules=$DIRECTORIES_JSON" >> "$GITHUB_OUTPUT"
 
   validate:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: check_for_change
     if: ${{ needs.check_for_change.outputs.modules != '' }}
     strategy:

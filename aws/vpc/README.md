@@ -33,10 +33,10 @@ module "vpc" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version  |
-|------|----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
+| Name | Version   |
+|------|-----------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75  |
 
 ## Providers
 
@@ -73,7 +73,9 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_availability_zone_postfixes"></a> [availability\_zone\_postfixes](#input\_availability\_zone\_postfixes) | List of availability zones | `list(string)` | n/a | yes |
 | <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | The CIDR block for the VPC. | `string` | n/a | yes |
-| <a name="input_environment"></a> [environment](#input\_environment) | The environment of this VPC | `string` | n/a | yes |
+| <a name="input_create_custom_subnets"></a> [create\_custom\_subnets](#input\_create\_custom\_subnets) | Whether to create custom subnets. | `bool` | `false` | no |
+| <a name="input_custom_private_subnets"></a> [custom\_private\_subnets](#input\_custom\_private\_subnets) | List of custom private subnets. | `list(string)` | `[]` | no |
+| <a name="input_custom_public_subnets"></a> [custom\_public\_subnets](#input\_custom\_public\_subnets) | List of custom public subnets. | `list(string)` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of your VPC | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region of the VPC | `string` | n/a | yes |
 | <a name="input_single_nat"></a> [single\_nat](#input\_single\_nat) | Whether to create a single NAT gateway or one per AZ | `bool` | `false` | no |

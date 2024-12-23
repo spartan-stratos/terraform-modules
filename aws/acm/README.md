@@ -2,7 +2,7 @@
 Terraform module which creates ACM certificates and validates them using Route53 DNS.
 
 ## Usage
-### Route53 DNS validation
+### ACM 
 ```hcl
 module "acm" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/acm?ref=v0.1.0"
@@ -29,7 +29,7 @@ module "acm" {
 
 | Name | Version  |
 |------|----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.9.8 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
 
 ## Providers

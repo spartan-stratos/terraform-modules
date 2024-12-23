@@ -12,6 +12,7 @@ variable "dns_zone" {
 variable "custom_records" {
   description = "Custom DNS records for Route 53 configuration, with options for type, TTL, and record values"
   type = map(object({
+    zone_id = optional(string)
     type    = optional(string) // default: CNAME
     ttl     = optional(number) // default: 3600
     records = list(string)

@@ -1,25 +1,18 @@
-/*
-aws_db_parameter_group parameter_group configures a custom parameter group for the RDS PostgreSQL instance.
-The `for_each` block iterates over a set of unique PostgreSQL engine versions specified in `supported_engine_version`,
-allowing creation of a parameter group for each supported version.
-Each parameter is configured with a specific name, value, and `apply_method`, which determines if a reboot is needed.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
-*/
 resource "aws_db_parameter_group" "parameter_group" {
   for_each = { for _, version in distinct(concat(var.supported_engine_version, [local.engine_version_major])) : version => version }
 
-  name   = "${local.db_identifier}-${each.key}"
-  family = "postgres${each.key}"
+  name   = var.custom_parameter_group_name != null ? var.custom_parameter_group_name : "${local.identifier}-${each.key}"
+  family = "${var.engine}${each.key}"
 
   parameter {
     name         = "max_worker_processes"
-    value        = lookup(local.postgres_max_workers, var.instance_class, 8)
+    value        = lookup(local.max_workers, var.instance_class, 8)
     apply_method = "pending-reboot"
   }
 
   parameter {
     name         = "max_parallel_workers"
-    value        = lookup(local.postgres_max_workers, var.instance_class, 8)
+    value        = lookup(local.max_workers, var.instance_class, 8)
     apply_method = "pending-reboot"
   }
 
@@ -39,14 +32,14 @@ resource "aws_db_parameter_group" "parameter_group" {
   # Params for subscriber
   parameter {
     name         = "max_sync_workers_per_subscription"
-    value        = floor(lookup(local.postgres_max_workers, var.instance_class, 8) * 0.5)
+    value        = floor(lookup(local.max_workers, var.instance_class, 8) * 0.5)
     apply_method = "immediate"
   }
 
   # Params for both producer and subscriber
   parameter {
     name         = "max_logical_replication_workers"
-    value        = floor(lookup(local.postgres_max_workers, var.instance_class, 8) * 0.5)
+    value        = floor(lookup(local.max_workers, var.instance_class, 8) * 0.5)
     apply_method = "pending-reboot"
   }
 

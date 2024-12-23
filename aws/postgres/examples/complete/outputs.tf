@@ -10,5 +10,5 @@ output "replica_address" {
 
 # The database name
 output "main_db_name" {
-  value = module.postgresql.main_db_name
+  value = module.postgresql.db_name
 }
