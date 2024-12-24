@@ -1,9 +1,19 @@
+/**
+Use this data source to get the access to the effective Account ID, User ID, and ARN in which Terraform is authorized.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
+ */
+data "aws_caller_identity" "this" {}
+
+/**
+Generates an IAM policy document in JSON format for use with resources that expect policy documents such as aws_iam_policy.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
+ */
 data "aws_iam_policy_document" "assume_role_github" {
   statement {
     actions = ["sts:AssumeRole"]
     effect  = "Allow"
     principals {
-      identifiers = ["arn:aws:iam::${var.aws_account_id}:root"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.this.account_id}:root"]
       type        = "AWS"
     }
   }
@@ -12,14 +22,14 @@ data "aws_iam_policy_document" "assume_role_github" {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
     principals {
-      identifiers = [local.github_oidc_provider_arn]
+      identifiers = [module.provider.arn]
       type        = "Federated"
     }
 
     condition {
       test     = "StringEquals"
       values   = ["sts.amazonaws.com"]
-      variable = "${local.github_oidc_provider_url}:aud"
+      variable = "${module.provider.url}:aud"
     }
 
     dynamic "condition" {
@@ -31,15 +41,22 @@ data "aws_iam_policy_document" "assume_role_github" {
         values   = condition.value.values
       }
     }
-
   }
 }
 
+/**
+Provides an IAM role.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
+ */
 resource "aws_iam_role" "github_actions_role" {
   name               = var.role_name_prefix == "" ? "${var.role_name}" : "${var.role_name_prefix}-${var.role_name}"
   assume_role_policy = data.aws_iam_policy_document.assume_role_github.json
 }
 
+/**
+Attaches a Managed IAM Policy to an IAM role.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment
+ */
 resource "aws_iam_role_policy_attachment" "github_actions_role_policy" {
   for_each   = toset(var.role_policy_arns)
   role       = aws_iam_role.github_actions_role.id
