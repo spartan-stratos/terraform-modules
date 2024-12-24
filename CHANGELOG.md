@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS eks-helm/aws-load-balancer-controller: init module [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller/)
-* AWS SQS [(./aws/sqa)](./aws/sqs)
+* AWS SQS [(./aws/sqs)](./aws/sqs)
   * Refactor components.
   * Update policies Send Receive resources principal to created queue only.
   * Update policy Receive with 2 additional permissions: `sqs:DeleteMessage`, `sqs:GetQueueAttributes`.
