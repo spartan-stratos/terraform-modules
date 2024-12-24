@@ -1,4 +1,4 @@
-# VPC
+# Security Group
 
 ## Usage
 To run this example you need to execute:
