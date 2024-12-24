@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.20]() (2024-12-24)
+### Features
+* Separate the VPC and Security Group
+
 ## [0.1.14]() (2024-12-18)
 ### Features
 * Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet creation logics.
