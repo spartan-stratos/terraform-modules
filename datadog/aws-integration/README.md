@@ -4,8 +4,15 @@ Terraform module which creates Datadog GCP integration and service account resou
 ## Usage
 ### Create Artifact Registry
 ```hcl
+locals {
+  aws_services_enabled = {
+    "elasticache"                    = true
+    "rds"                            = true
+  }
+}
+
 module "datadog_aws_integration" {
-  source  = "github.com/spartan-stratos/terraform-modules//datadog/aws-integration?ref=v0.1.22"
+  source = "github.com/spartan-stratos/terraform-modules//datadog/aws-integration?ref=v0.1.22"
 
   aws_services_enabled = local.aws_services_enabled
 }

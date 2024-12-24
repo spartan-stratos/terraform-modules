@@ -5,13 +5,13 @@ variable "datadog_aws_integration_iam_role" {
 }
 
 variable "datadog_permissions" {
-  description = "List of AWS IAM permissions required for Datadog integration with AWS services."
+  description = "List of AWS IAM permissions required for Datadog integration with AWS services. Reference: https://docs.datadoghq.com/integrations/amazon_web_services/#aws-integration-iam-policy."
   type        = list(string)
-  default     = local.datadog_permissions
+  default     = null
 }
 
 variable "aws_services_enabled" {
-  description = "A map of AWS services with their enabled/disabled metric collection for specific AWS namespaces for this AWS account only."
+  description = "A map of AWS services with their enabled/disabled metric collection for specific AWS namespaces for this AWS account only. Reference: https://docs.datadoghq.com/integrations/#cat-aws."
   type        = map(bool)
-  default     = local.aws_services_enabled
+  default     = null
 }

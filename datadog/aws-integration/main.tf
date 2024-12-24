@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
 
 data "aws_iam_policy_document" "datadog_aws_integration" {
   statement {
-    actions   = var.datadog_permissions
+    actions   = var.datadog_permissions == null ? local.datadog_permissions : var.datadog_permissions
     resources = ["*"]
   }
 }
@@ -51,5 +51,5 @@ resource "datadog_integration_aws" "sandbox" {
   role_name                            = var.datadog_aws_integration_iam_role
   extended_resource_collection_enabled = false
   metrics_collection_enabled           = true
-  account_specific_namespace_rules     = var.aws_services_enabled
+  account_specific_namespace_rules     = var.aws_services_enabled == null ? local.aws_services_enabled : var.aws_services_enabled
 }
