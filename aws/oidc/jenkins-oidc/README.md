@@ -14,7 +14,7 @@ The module can manage the following:
 ## Usages
 ```hcl
 module "jenkins_oidc" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/oidc/jenkins-oidc?ref=v0.2.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/oidc/jenkins-oidc?ref=v0.1.21"
 
   role_name = "jenkins"
   url       = "https://jenkins.example.com/oidc"

@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0]() (2024-12-24)
+## [0.1.21]() (2024-12-24)
 ### Features
 * Add provider `tls` version constraints.
 * Replace `var.aws_account_id` with `data.aws_caller_identity` to use runtime AWS identity.

@@ -7,7 +7,7 @@ Generalized from [(Jenkins OIDC)](../jenkins-oidc) and [(GitHub OIDC)](../github
 ## Usage
 ```hcl
 module "provider" {
-  source    = "github.com/spartan-stratos/terraform-modules//aws/oidc/provider?ref=v0.2.0"
+  source    = "github.com/spartan-stratos/terraform-modules//aws/oidc/provider?ref=v0.1.21"
 
   url                    = "https://token.actions.githubusercontent.com"
   client_id_list         = ["sts.amazonaws.com"]

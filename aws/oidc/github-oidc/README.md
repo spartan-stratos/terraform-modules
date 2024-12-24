@@ -14,7 +14,7 @@ The module can manage the following:
 ## Usages
 ```hcl
 module "github_oidc" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/oidc/github-oidc?ref=v0.2.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/oidc/github-oidc?ref=v0.1.21"
   role_name       = "service-atlas"
   repository_path = "spartan/example"
 
