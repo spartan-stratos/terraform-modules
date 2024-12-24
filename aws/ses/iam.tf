@@ -38,7 +38,10 @@ data "aws_iam_policy_document" "this" {
       "ses:SendEmail",
       "ses:SendRawEmail"
     ]
-    resources = [aws_ses_domain_identity.this.arn]
+    resources = [
+      aws_ses_domain_identity.this.arn,
+      "${aws_ses_domain_identity.this.arn}/*"
+    ]
   }
 }
 
