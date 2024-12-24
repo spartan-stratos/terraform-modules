@@ -79,16 +79,16 @@ variable "oidc_provider" {
 }
 
 variable "external_group_name" {
-  default = "external"
+  default     = "external"
   description = "Group name of external aws load balancer"
 }
 
 variable "enable_internal_alb" {
-  default = false
+  default     = false
   description = "Enable internal aws load balancer"
 }
 
 variable "internal_group_name" {
-  default = "internal"
+  default     = "internal"
   description = "Group name of internal aws load balancer"
 }
