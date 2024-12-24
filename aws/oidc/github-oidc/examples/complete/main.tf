@@ -4,7 +4,6 @@ module "github_oidc" {
   repository_path = "spartan/example"
 
   role_policy_arns = []
-  aws_account_id   = "example-id"
   conditions = [
     {
       test     = "StringLike"

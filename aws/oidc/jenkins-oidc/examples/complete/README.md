@@ -1,4 +1,4 @@
-# IAM SSO module
+# IAM Jenkins OIDC module
 
 ## Usage
 To run this example you need to execute:
