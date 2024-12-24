@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.20]() (2024-12-24)
+## [0.1.21]() (2024-12-24)
 ### Features
 * Separate the VPC and Security Group
 
