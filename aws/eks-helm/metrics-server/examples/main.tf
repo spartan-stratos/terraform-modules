@@ -3,5 +3,5 @@ module "example" {
 
   helm_release_name  = "metrics-server"
   namespace          = "kube-system"
-  helm_chart_version = "3.12"
+  helm_chart_version = "3.12.2"
 }
