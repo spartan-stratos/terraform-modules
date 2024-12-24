@@ -10,7 +10,7 @@ variable "helm_release_name" {
 }
 
 variable "helm_chart_version" {
-  default     = "3.11.0"
+  default     = "3.12.2"
   type        = string
   description = "The chart version of ingress controller"
 }
