@@ -42,11 +42,11 @@ No modules.
 | <a name="input_aws_load_balancer_controller_name"></a> [aws\_load\_balancer\_controller\_name](#input\_aws\_load\_balancer\_controller\_name) | Name of AWS load balancer controller name | `string` | `"aws-load-balancer-controller"` | no |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | Certificate arn for aws load balancer controller | `list(string)` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | EKS Cluster name | `string` | n/a | yes |
-| <a name="input_enable_internal_alb"></a> [enable\_internal\_alb](#input\_enable\_internal\_alb) | n/a | `bool` | `false` | no |
-| <a name="input_external_group_name"></a> [external\_group\_name](#input\_external\_group\_name) | n/a | `string` | `"external"` | no |
+| <a name="input_enable_internal_alb"></a> [enable\_internal\_alb](#input\_enable\_internal\_alb) | Enable internal aws load balancer | `bool` | `false` | no |
+| <a name="input_external_group_name"></a> [external\_group\_name](#input\_external\_group\_name) | Group name of external aws load balancer | `string` | `"external"` | no |
 | <a name="input_idle_timeout"></a> [idle\_timeout](#input\_idle\_timeout) | The idle timeout of load balancer. | `string` | `"60"` | no |
 | <a name="input_ingress_controller_service_name"></a> [ingress\_controller\_service\_name](#input\_ingress\_controller\_service\_name) | Service name of nginx ingress controller | `string` | `"ingress-nginx-controller"` | no |
-| <a name="input_internal_group_name"></a> [internal\_group\_name](#input\_internal\_group\_name) | n/a | `string` | `"internal"` | no |
+| <a name="input_internal_group_name"></a> [internal\_group\_name](#input\_internal\_group\_name) | Group name of internal aws load balancer | `string` | `"internal"` | no |
 | <a name="input_load_balancer_type"></a> [load\_balancer\_type](#input\_load\_balancer\_type) | Namespace of ingress controller | `string` | `"alb"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace of the aws load balancer | `string` | `"kube-system"` | no |
 | <a name="input_oidc_provider"></a> [oidc\_provider](#input\_oidc\_provider) | The OIDC provider which are realted to the cluster. | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre> | n/a | yes |
