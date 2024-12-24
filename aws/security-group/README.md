@@ -13,15 +13,17 @@ module "security_groups" {
 
   security_groups = [
     {
-      name                     = "example"
-      description              = "example description"
-      vpc_id                   = "vpc-1234567899"
-      ingress_rules            = ["example-ingress"]
+      name                     = "example-sg"
+      description              = "Example Security Group"
+      vpc_id                   = "vpc-12345678"
+      ingress_rules            = ["http"]
       ingress_cidr_blocks      = ["0.0.0.0/0"]
-      ingress_ipv6_cidr_blocks = ["::/0"]
-      egress_rules             = ["example-egress"]
+      ingress_ipv6_cidr_blocks = []
+      ingress_self             = [true]
+      egress_rules             = ["https"]
       egress_cidr_blocks       = ["0.0.0.0/0"]
-      egress_ipv6_cidr_blocks  = ["::/0"]
+      egress_ipv6_cidr_blocks  = []
+      egress_self              = []
     }
   ]
 
@@ -57,15 +59,19 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group_rule.egress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.ingress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.egress_cidr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.egress_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.egress_self](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.ingress_cidr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.ingress_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.ingress_self](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_rules"></a> [rules](#input\_rules) | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | `map(list(any))` | <pre>{<br/>  "allow-all": [<br/>    0,<br/>    0,<br/>    "-1",<br/>    "Allow all inbound traffic within vpc"<br/>  ],<br/>  "allow-http": [<br/>    80,<br/>    80,<br/>    "tcp",<br/>    "Allow HTTP traffic"<br/>  ],<br/>  "allow-ssh": [<br/>    22,<br/>    22,<br/>    "tcp",<br/>    "Allow SSH access"<br/>  ]<br/>}</pre> | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | List of security group configurations | <pre>list(object({<br/>    name                     = string<br/>    description              = string<br/>    vpc_id                   = string<br/>    ingress_rules            = list(string)<br/>    ingress_cidr_blocks      = list(string)<br/>    ingress_ipv6_cidr_blocks = list(string)<br/>    egress_rules             = list(string)<br/>    egress_cidr_blocks       = list(string)<br/>    egress_ipv6_cidr_blocks  = list(string)<br/>  }))</pre> | n/a | yes |
+| <a name="input_rules"></a> [rules](#input\_rules) | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | `map(list(any))` | `null` | no |
+| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | n/a | <pre>list(object({<br/>    name                     = string<br/>    description              = string<br/>    vpc_id                   = string<br/>    ingress_rules            = list(string)<br/>    ingress_cidr_blocks      = optional(list(string))<br/>    ingress_ipv6_cidr_blocks = optional(list(string))<br/>    ingress_self             = optional(list(bool))<br/>    egress_rules             = list(string)<br/>    egress_cidr_blocks       = optional(list(string))<br/>    egress_ipv6_cidr_blocks  = optional(list(string))<br/>    egress_self              = optional(list(bool))<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
