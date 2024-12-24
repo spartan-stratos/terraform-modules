@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.21]() (2024-12-24)
+
+### Features
+
+* AWS EKS-Helm Metrics Server: Init module. [(./aws/eks-helm/metrics-server)](./aws/eks-helm/metrics-server)
+* AWS EKS-RBAC: Init module. [(./aws/eks-rbac)](./aws/eks-rbac)
+* AWS SES: Rename `use_route53` to `verify_domain` and add prefix `_amazonses.` to route53 record to validate SES domain. [(./aws/ses)](./aws/ses)
+* AWS OIDC provider: refactor and generalized [(./aws/github-oidc/modules/provider)]() to dedicated module at [(./aws/oidc/provider)](./aws/oidc/provider).
+* AWS Jenkins OIDC: Init jenkins-oidc module. [(aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc)
+* AWS GitHub OIDC: [(aws/oidc/github-oidc)](./aws/oidc/github-oidc)
+  * Add provider `tls` version constraints.
+  * Replace `var.aws_account_id` with `data.aws_caller_identity` to use runtime AWS identity.
+  * Add variables: `additional_thumbprints`, `client_id_list`, `url`, `create_provider`.
+  * Add outputs: `provider_arn`, `provider_url`, `github_tf_ops_role_arn`.
+
 ## [0.1.20]() (2024-12-24)
 
 ### Features
