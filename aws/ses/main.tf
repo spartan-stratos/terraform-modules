@@ -23,7 +23,7 @@ This data source is used here to get the hosted zone details of the domain speci
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone
 */
 data "aws_route53_zone" "this" {
-  count = var.use_route53 ? 1 : 0
+  count = var.verify_domain ? 1 : 0
   name  = var.email_domain
 }
 
@@ -34,8 +34,8 @@ The record is only created if `var.use_record` is `true`.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record
 */
 resource "aws_route53_record" "verification" {
-  count   = var.use_route53 ? 1 : 0
-  name    = var.email_domain
+  count   = var.verify_domain ? 1 : 0
+  name    = "_amazonses.${var.email_domain}"
   type    = var.record_type
   zone_id = data.aws_route53_zone.this[0].zone_id
   ttl     = var.record_ttl
@@ -49,7 +49,7 @@ The verification process depends on the Route 53 record created for domain verif
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_domain_identity_verification
 */
 resource "aws_ses_domain_identity_verification" "this" {
-  count  = var.use_route53 ? 1 : 0
+  count  = var.verify_domain ? 1 : 0
   domain = aws_ses_domain_identity.this.domain
 
   depends_on = [aws_route53_record.verification]
