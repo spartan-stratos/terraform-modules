@@ -9,7 +9,7 @@ This module will create the following components:
 ### Create Security Groups
 ```hcl
 module "security_groups" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.21"
+  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.22"
 
   security_groups = [
     {
