@@ -62,6 +62,7 @@ No modules.
 | [aws_route_table_association.private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
 | [aws_route_table_association.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
 | [aws_security_group.allow_all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group.allow_all_within_cloud](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.allow_all_within_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_subnet.private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_subnet.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
@@ -76,6 +77,7 @@ No modules.
 | <a name="input_create_custom_subnets"></a> [create\_custom\_subnets](#input\_create\_custom\_subnets) | Whether to create custom subnets. | `bool` | `false` | no |
 | <a name="input_custom_private_subnets"></a> [custom\_private\_subnets](#input\_custom\_private\_subnets) | List of custom private subnets. | `list(string)` | `[]` | no |
 | <a name="input_custom_public_subnets"></a> [custom\_public\_subnets](#input\_custom\_public\_subnets) | List of custom public subnets. | `list(string)` | `[]` | no |
+| <a name="input_enabled_allow_all_within_cloud"></a> [enabled\_allow\_all\_within\_cloud](#input\_enabled\_allow\_all\_within\_cloud) | Enable allow all from cloud cidr block | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of your VPC | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region of the VPC | `string` | n/a | yes |
 | <a name="input_single_nat"></a> [single\_nat](#input\_single\_nat) | Whether to create a single NAT gateway or one per AZ | `bool` | `false` | no |

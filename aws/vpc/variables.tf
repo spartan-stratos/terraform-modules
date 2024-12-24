@@ -41,3 +41,9 @@ variable "custom_private_subnets" {
   type        = list(string)
   default     = []
 }
+
+variable "enabled_allow_all_within_cloud" {
+  description = "Enable allow all from cloud cidr block"
+  type = bool
+  default = false
+}
