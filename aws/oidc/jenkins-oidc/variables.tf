@@ -29,3 +29,11 @@ variable "role_name_prefix" {
   type        = string
   default     = ""
 }
+
+# Migration
+
+variable "create_provider" {
+  description = "Whether to create a provider resource for migration purpose on existing provider."
+  type        = bool
+  default     = false
+}

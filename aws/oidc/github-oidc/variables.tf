@@ -54,3 +54,11 @@ variable "conditions" {
   }))
   default = []
 }
+
+# migration
+
+variable "create_provider" {
+  description = "Whether to create a provider resource for migration purpose on existing provider."
+  type        = bool
+  default     = false
+}

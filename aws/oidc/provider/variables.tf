@@ -14,3 +14,9 @@ variable "url" {
   description = "The URL of the identity provider. Corresponds to the iss claim"
   type        = string
 }
+
+variable "create_provider" {
+  description = "Whether to create a provider resource for migration purpose on existing provider."
+  type        = bool
+  default     = false
+}

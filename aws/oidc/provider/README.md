@@ -23,16 +23,16 @@ module "provider" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | \>= 4.0.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 4.0.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | \>= 4.0.6 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0.6 |
 
 ## Modules
 
@@ -52,6 +52,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_thumbprints"></a> [additional\_thumbprints](#input\_additional\_thumbprints) | List of additional thumbprints to add to the thumbprint list. | `list(string)` | `[]` | no |
 | <a name="input_client_id_list"></a> [client\_id\_list](#input\_client\_id\_list) | List of client IDs (also known as audiences) for the IAM OIDC provider. Defaults to STS service if not values are provided | `list(string)` | <pre>[<br/>  "sts.amazonaws.com"<br/>]</pre> | no |
+| <a name="input_create_provider"></a> [create\_provider](#input\_create\_provider) | Whether to create a provider resource for migration purpose on existing provider. | `bool` | `false` | no |
 | <a name="input_url"></a> [url](#input\_url) | The URL of the identity provider. Corresponds to the iss claim | `string` | n/a | yes |
 
 ## Outputs
