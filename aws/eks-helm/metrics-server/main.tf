@@ -7,6 +7,7 @@ resource "helm_release" "metrics_server" {
   namespace  = var.namespace
   keyring    = ""
 
+  # If true, allow unauthenticated access to /metrics.
   set {
     name  = "metrics.enabled"
     value = false
