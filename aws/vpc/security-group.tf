@@ -64,7 +64,7 @@ aws_security_group allow_all_within_cloud creates a security group that allow al
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 */
 resource "aws_security_group" "allow_all_within_cloud" {
-  count = var.enabled_allow_all_within_cloud ? 1 : 0
+  count       = var.enabled_allow_all_within_cloud ? 1 : 0
   name        = "allow_all_within_cloud"
   description = "Allow all inbound traffic from all bird cloud cidrs"
   vpc_id      = aws_vpc.this.id
