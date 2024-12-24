@@ -34,7 +34,7 @@ variable "record_ttl" {
   default     = 600
 }
 
-variable "use_route53" {
+variable "verify_domain" {
   description = "To enable route53 record to verify email domain"
   type        = bool
   default     = false

@@ -23,7 +23,7 @@ module "ses" {
 
   iam_role_ids = ["arn:aws:iam::<account-id>:role/ses-role"]
 
-  use_route53 = true
+  verify_domain = true
   record_ttl  = 600
   record_type = "TXT"
 }
@@ -76,7 +76,7 @@ No modules.
 | <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles) | List of IAM principal roles that should have access to SES.                                                        | `list(string)` | `null`  |    no    |
 | <a name="input_record_ttl"></a> [record\_ttl](#input\_record\_ttl)                | The TTL of the record.                                                                                             | `number`       | `600`   |    no    |
 | <a name="input_record_type"></a> [record\_type](#input\_record\_type)             | The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.              | `string`       | `"TXT"` |    no    |
-| <a name="input_use_route53"></a> [use\_route53](#input\_use\_route53)             | To enable route53 record to verify email domain                                                                    | `bool`         | `false` |    no    |
+| <a name="input_verify_domain"></a> [verify\_domain](#input\_verify\_domain)             | To enable route53 record to verify email domain                                                                    | `bool`         | `false` |    no    |
 
 ## Outputs
 

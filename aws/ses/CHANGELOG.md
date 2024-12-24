@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.21]() (2024-12-24)
+### Features
+* Add prefix to verify domain
+* Rename `use_route53` to `verify_domain` for more information
+
 ## [0.1.7]() (2024-12-09)
 ### Features
 * Fix the SES module
