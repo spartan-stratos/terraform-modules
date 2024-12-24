@@ -1,5 +1,5 @@
 module "aws_security_groups" {
-  source = "../../"
+  source = "../.."
 
   security_groups = [
     {
