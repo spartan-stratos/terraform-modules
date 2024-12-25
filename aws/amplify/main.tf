@@ -3,7 +3,7 @@ aws_amplify_app provides an Amplify App resource, a fullstack serverless app hos
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/amplify_app
 */
 resource "aws_amplify_app" "this" {
-  name       = var.deploy_branch_name
+  name       = var.name
   repository = var.repository
 
   access_token = var.github_token
