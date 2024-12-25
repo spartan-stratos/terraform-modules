@@ -7,7 +7,7 @@ variable "service" {
   description = "Mapping of service name, namespace and their secrets"
   type = object({
     name                       = string
-    additional_iam_policy_arns = list(string)
+    additional_iam_policy_arns = optional(list(string), [])
     config_map                 = optional(map(any), {})
     hostnames                  = list(string)
     namespace                  = string
