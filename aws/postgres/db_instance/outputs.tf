@@ -17,3 +17,8 @@ output "db_username" {
   description = "The database username."
   value       = aws_db_instance.this.username
 }
+
+output "db_port" {
+  description = "The database port."
+  value       = aws_db_instance.this.port
+}
