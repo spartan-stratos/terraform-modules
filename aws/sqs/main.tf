@@ -1,17 +1,3 @@
-/*
-aws_caller_identity provides information about the AWS account that is making the Terraform API calls.
-Used here to dynamically configure SQS permissions for the current AWS account.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity
-*/
-data "aws_caller_identity" "current" {}
-
-/**
-`aws_caller_identity` provides information about AWS region that is making the Terraform API calls.
-Used here to dynamically configure SQS permissions for the current AWS account.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region
- */
-data "aws_region" "current" {}
-
 locals {
   suffix         = var.fifo_enabled ? ".fifo" : ""
   dlq_queue_name = "${var.name}-dlq${local.suffix}"
@@ -51,22 +37,6 @@ resource "aws_sqs_queue" "queue" {
   fifo_queue            = var.fifo_enabled
   deduplication_scope   = var.fifo_deduplication_scope
   fifo_throughput_limit = var.fifo_throughput_limit
-
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Id": "${var.name}-queue-policy-${terraform.workspace}",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "sqs:*",
-      "Resource": "arn:aws:sqs:*:${data.aws_caller_identity.current.account_id}:*"
-    }
-  ]
-}
-POLICY
-
 
   redrive_policy = <<POLICY
 {

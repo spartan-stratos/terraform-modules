@@ -1,8 +1,3 @@
-variable "project_id" {
-  description = "The ID of the project in which the resource belongs."
-  type        = string
-}
-
 variable "service_account_id" {
   description = "The account ID that is used to generate service account email address and a stable unique id."
   type        = string

@@ -21,7 +21,7 @@ module "ses_route53" {
 
   iam_role_ids = ["arn:aws:iam::<account-id>:role/ses-role"]
 
-  use_route53 = true
-  record_ttl  = 600
-  record_type = "TXT"
+  verify_domain = true
+  record_ttl    = 600
+  record_type   = "TXT"
 }

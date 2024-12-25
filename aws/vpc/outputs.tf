@@ -23,16 +23,6 @@ output "vpc_cidr_block" {
   value       = aws_vpc.this.cidr_block
 }
 
-output "security_group_allow_all_within_vpc" {
-  description = "Security group allow all in VPC"
-  value       = aws_security_group.allow_all_within_vpc
-}
-
-output "security_group_allow_all" {
-  description = "Security group allow all"
-  value       = aws_security_group.allow_all
-}
-
 output "private_route_table_ids" {
   description = "List of private route table IDs"
   value       = tolist([for rt in aws_route_table.private : rt.id])
