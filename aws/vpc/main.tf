@@ -158,8 +158,8 @@ resource "aws_route_table_association" "public" {
 resource "aws_flow_log" "this" {
   count = var.create_flow_log ? 1 : 0
 
-  iam_role_arn    = aws_iam_role.vpc-flow-logs-role.arn
-  log_destination = aws_cloudwatch_log_group.this.arn
+  iam_role_arn    = aws_iam_role.vpc-flow-logs-role[count.index].arn
+  log_destination = aws_cloudwatch_log_group.this[count.index].arn
   traffic_type    = "ALL"
   vpc_id          = aws_vpc.this.id
 }
@@ -195,7 +195,7 @@ resource "aws_iam_role_policy" "vpc-flow-logs-policy" {
   count = var.create_flow_log ? 1 : 0
 
   name   = "${var.name}-vpc-flow-logs-policy"
-  role   = aws_iam_role.vpc-flow-logs-role.id
+  role   = aws_iam_role.vpc-flow-logs-role[count.index].id
   policy = <<EOF
 {
   "Version": "2012-10-17",
