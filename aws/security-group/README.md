@@ -6,10 +6,10 @@ This module will create the following components:
 - Security Group Rules (Ingress and Egress)
 
 ## Usage
-### Create Security Groups
+### Create Custom Security Groups
 ```hcl
 module "security_groups" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.22"
+  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.23"
 
   security_groups = [
     {
@@ -33,6 +33,17 @@ module "security_groups" {
 }
 ```
 
+### Create Default Security Groups
+```hcl
+module "security_groups" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.23"
+
+  create_default_security_group = true
+  vpc_id                        = "vpc-12345678"
+  cidr_blocks                   = ["10.0.0.0/16"]
+}
+```
+
 ## Examples
 - [Example](./examples/complete/)
 
@@ -48,7 +59,7 @@ module "security_groups" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
 
 ## Modules
 
@@ -58,6 +69,8 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_security_group.allow_all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group.allow_all_within_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group_rule.egress_cidr](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.egress_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
@@ -70,12 +83,17 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cidr_blocks"></a> [cidr\_blocks](#input\_cidr\_blocks) | List of allowed CIDR blocks used to define ingress/egress rules for the security groups. | `list(string)` | `[]` | no |
+| <a name="input_create_default_security_group"></a> [create\_default\_security\_group](#input\_create\_default\_security\_group) | Flag to determine whether a default security group should be created. | `bool` | `false` | no |
 | <a name="input_rules"></a> [rules](#input\_rules) | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | `map(list(any))` | `null` | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | n/a | <pre>list(object({<br/>    name                     = string<br/>    description              = string<br/>    vpc_id                   = string<br/>    ingress_rules            = list(string)<br/>    ingress_cidr_blocks      = optional(list(string))<br/>    ingress_ipv6_cidr_blocks = optional(list(string))<br/>    ingress_self             = optional(list(bool))<br/>    egress_rules             = list(string)<br/>    egress_cidr_blocks       = optional(list(string))<br/>    egress_ipv6_cidr_blocks  = optional(list(string))<br/>    egress_self              = optional(list(bool))<br/>  }))</pre> | n/a | yes |
+| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A list of objects defining custom security groups. Each security group object should include the following properties:<br/>- `name` (string): The name of the security group.<br/>- `description` (string): A description of the security group's purpose.<br/>- `vpc_id` (string): The VPC ID where the security group will be created.<br/>- `ingress_rules` (list(string)): A list of ingress rule names defined in the `rules` variable.<br/>- `ingress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the ingress rules. Default is an empty list.<br/>- `ingress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the ingress rules. Default is an empty list.<br/>- `ingress_self` (optional, list(bool)): Whether to allow self-referencing ingress rules. Default is an empty list.<br/>- `egress_rules` (list(string)): A list of egress rule names defined in the `rules` variable.<br/>- `egress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the egress rules. Default is an empty list.<br/>- `egress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the egress rules. Default is an empty list.<br/>- `egress_self` (optional, list(bool)): Whether to allow self-referencing egress rules. Default is an empty list. | <pre>list(object({<br/>    name                     = string<br/>    description              = string<br/>    vpc_id                   = string<br/>    ingress_rules            = list(string)<br/>    ingress_cidr_blocks      = optional(list(string))<br/>    ingress_ipv6_cidr_blocks = optional(list(string))<br/>    ingress_self             = optional(list(bool))<br/>    egress_rules             = list(string)<br/>    egress_cidr_blocks       = optional(list(string))<br/>    egress_ipv6_cidr_blocks  = optional(list(string))<br/>    egress_self              = optional(list(bool))<br/>  }))</pre> | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the main VPC associated with the security groups. Can be null if not provided. | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_security_group_allow_all_id"></a> [security\_group\_allow\_all\_id](#output\_security\_group\_allow\_all\_id) | The ID of the 'allow all' security group. |
+| <a name="output_security_group_allow_all_within_vpc_id"></a> [security\_group\_allow\_all\_within\_vpc\_id](#output\_security\_group\_allow\_all\_within\_vpc\_id) | The ID of the 'allow all within VPC' security group. |
 | <a name="output_security_group_ids"></a> [security\_group\_ids](#output\_security\_group\_ids) | Map of security group names to their IDs |
 <!-- END_TF_DOCS -->
