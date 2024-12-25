@@ -16,7 +16,7 @@ resource "aws_amplify_app" "this" {
   })
 
   dynamic "custom_rule" {
-    for_each = var.custom_redirect_rules
+    for_each = local.custom_redirect_rules
 
     content {
       source = custom_rule.value.source

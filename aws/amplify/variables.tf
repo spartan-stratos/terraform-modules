@@ -95,3 +95,9 @@ variable "framework" {
   type        = string
   default     = null
 }
+
+variable "enable_redirect_to_root" {
+  description = "To enable redirect to the root"
+  type        = bool
+  default     = false
+}
