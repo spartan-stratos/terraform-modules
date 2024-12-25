@@ -2,7 +2,7 @@
 module "datadog_agent" {
   source = "../"
 
-  cluster_name    = "my-eks-cluster"
+  cluster_name    = "my-cluster"
   namespace       = "datadog"
   datadog_api_key = "YOUR_SUPER_SECRET_API_KEY"
   datadog_app_key = "YOUR_SUPER_SECRET_APP_KEY"
