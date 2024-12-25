@@ -31,6 +31,7 @@ variable "build_variables" {
 variable "sub_domain" {
   description = "Subdomain for the Amplify app"
   type        = string
+  default     = ""
 }
 
 variable "deploy_branch_name" {
@@ -81,4 +82,16 @@ variable "build_command" {
   description = "The build command to execute JS scripts"
   type        = string
   default     = "yarn build"
+}
+
+variable "enable_backend" {
+  description = "To enable aws_amplify_backend_environment"
+  type        = bool
+  default     = true
+}
+
+variable "framework" {
+  description = "Optional framework for the branch"
+  type        = string
+  default     = null
 }
