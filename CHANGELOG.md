@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file.
 * Datadog/GCP Integration: Init module. [(./datadog/gcp-integration)](./datadog/gcp-integration)
 * AWS Postgres: Add `var.publicly_accessible` to allow external machine connect to rds if `true` [(./aws/postgres)](./aws/postgres)
 
-## Fixes
+### Fixes
 * AWS Postgres: Correct conditions to create security group `aws_security_group.this` when variable `vpc_security_group_ids` is null [(./aws/postgres)](./aws/postgres)
 
 ## [0.1.21]() (2024-12-24)
