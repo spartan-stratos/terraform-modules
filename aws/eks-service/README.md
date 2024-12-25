@@ -1,5 +1,5 @@
 # EKS Service
-This module helps configure a 'EKS Service' via creating a set of corelation [Kubernetes and AWS resources](#resources).
+This module helps configure an 'EKS Service' by creating a correlation set of  [Kubernetes and AWS resources](#resources).
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
