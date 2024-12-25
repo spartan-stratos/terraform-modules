@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS EKS-Service: Init module. [(./aws/eks-service)](./aws/eks-service)
+* AWS EKS-Helm / Datadog: Init module. [(./aws/eks-helm/datadog)](./aws/eks-helm/datadog)
 * AWS Amplify: [(./aws/amplify)](./aws/amplify)
   * Add `var.enable_backend` to enable backend or use frontend format only
   * Add `aws_amplify_webhook` to provides an Amplify Webhook resource
@@ -15,7 +16,6 @@ All notable changes to this project will be documented in this file.
   * Introduced a conditional mechanism to control the creation of VPC flow logs.
 * Datadog / AWS Integration: Init module. [(./datadog/aws-integration)](./datadog/aws-integration)
 * Datadog / GCP Integration: Init module. [(./datadog/gcp-integration)](./datadog/gcp-integration)
-* Datadog / Kubernetes Agent: Init module. [(./datadog/kubernetes-agent)](./datadog/kubernetes-agent)
 
 ## [0.1.21]() (2024-12-24)
 
