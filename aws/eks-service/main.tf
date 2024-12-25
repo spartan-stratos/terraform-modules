@@ -96,6 +96,6 @@ resource "kubernetes_annotations" "default" {
     namespace = var.service.namespace
   }
   annotations = {
-    "eks.amazonaws.com/role-arn" = aws_iam_role.pod_role.arn
+    "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
   }
 }
