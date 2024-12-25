@@ -83,7 +83,7 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "this" {
   count      = length(var.service.additional_iam_policy_arns)
-  role       = aws_iam_role.pod_role.name
+  role       = aws_iam_role.this.name
   policy_arn = var.service.additional_iam_policy_arns[count.index]
 }
 
@@ -93,7 +93,7 @@ resource "kubernetes_annotations" "default" {
   kind        = "ServiceAccount"
   metadata {
     name      = local.service_account_name
-    namespace = var.service.name
+    namespace = var.service.namespace
   }
   annotations = {
     "eks.amazonaws.com/role-arn" = aws_iam_role.pod_role.arn
