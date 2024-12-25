@@ -1,6 +1,7 @@
-# EKS-Helm/Datadog 
-This module help instal and configure Datadog agents for EKS cluster via Helm chart.
+# Datadog Kubernetes Agent
+This module help instal and configure Datadog agents for Kubernetes cluster using datadog Helm chart.
 
+https://artifacthub.io/packages/helm/datadog/datadog
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

@@ -1,5 +1,5 @@
 
-module "eks_helm_datadog" {
+module "datadog_agent" {
   source = "../"
 
   cluster_name    = "my-eks-cluster"
