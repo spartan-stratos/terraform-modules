@@ -126,8 +126,8 @@ module/
     }
     ```
 
-- To simplify references to a resource that is the only one of its type (for example, a single load balancer for an entire module), name the resource `main`.
-    - It takes extra mental work to remember `some_resource.my_special_resource.id` versus `some_resource.main.id`.
+- To simplify references to a resource that is the only one of its type (for example, a single load balancer for an entire module), name the resource `this`.
+    - It takes extra mental work to remember `some_resource.my_special_resource.id` versus `some_resource.this.id`.
 - To differentiate resources of the same type from each other (for example, `primary` and `secondary`), provide meaningful resource names.
 - Make resource names singular.
 - In the resource name, don't repeat the resource type. For example:
@@ -135,7 +135,7 @@ module/
   👍 **Recommended:**
 
     ```
-    resource "google_compute_global_address" "main" { ... }
+    resource "google_compute_global_address" "this" { ... }
     ```
 
   👎 **Not recommended:**
@@ -176,7 +176,7 @@ module/
     ```
     output "name" {
       description = "Name of instance"
-      value       = google_compute_instance.main.name
+      value       = google_compute_instance.this.name
     }
     ```
 
@@ -222,7 +222,7 @@ module/
 For stateful resources, such as databases, ensure that [deletion protection](https://www.terraform.io/language/meta-arguments/lifecycle) is enabled. For example:
 
 ```
-resource "google_sql_database_instance" "main" {
+resource "google_sql_database_instance" "this" {
   name = "primary-instance"
   settings {
     tier = "D0"
