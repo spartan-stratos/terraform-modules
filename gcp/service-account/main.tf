@@ -1,3 +1,5 @@
+data "google_client_config" "current" {}
+
 /**
 `google_service_account` creates Google Cloud IAM service account that applications or services use to interact with Google Cloud resources.
 If you delete and recreate a service account, you must reapply any IAM roles that it had before.
@@ -31,7 +33,7 @@ https://registry.terraform.io/providers/hashicorp/google/6.12.0/docs/resources/g
 resource "google_project_iam_member" "custom_role" {
   count = var.enabled_create_custom_role ? 1 : 0
 
-  project = var.project_id
+  project = data.google_client_config.current.project
   role    = google_project_iam_custom_role.this[0].id
   member  = "serviceAccount:${google_service_account.this.email}"
 }
@@ -44,7 +46,7 @@ https://registry.terraform.io/providers/hashicorp/google/6.12.0/docs/resources/g
 resource "google_project_iam_member" "roles" {
   for_each = var.enabled_create_custom_role == false ? toset(var.roles) : toset([])
 
-  project = var.project_id
+  project = data.google_client_config.current.project
   role    = each.key
   member  = "serviceAccount:${google_service_account.this.email}"
 }
