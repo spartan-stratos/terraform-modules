@@ -16,14 +16,17 @@ variable "service" {
 }
 
 variable "route53_zone_id" {
+  type        = string
   description = "The zone id for adding hostnames for services"
 }
 
 variable "alb_dns" {
+  type        = string
   description = "The DNS of the ALB from K8s cluster"
 }
 
 variable "region" {
+  type = string
   description = "Region for getting ALB hosted zone ID"
 }
 

@@ -37,16 +37,16 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_alb_dns"></a> [alb\_dns](#input\_alb\_dns) | The DNS of the ALB from K8s cluster | `any` | n/a | yes |
+| <a name="input_alb_dns"></a> [alb\_dns](#input\_alb\_dns) | The DNS of the ALB from K8s cluster | `string` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | EKS Cluster name | `string` | n/a | yes |
 | <a name="input_eks_oidc_provider"></a> [eks\_oidc\_provider](#input\_eks\_oidc\_provider) | The OIDC provider of the EKS cluster | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre> | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | Region for getting ALB hosted zone ID | `any` | n/a | yes |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | The zone id for adding hostnames for services | `any` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | Region for getting ALB hosted zone ID | `string` | n/a | yes |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | The zone id for adding hostnames for services | `string` | n/a | yes |
 | <a name="input_service"></a> [service](#input\_service) | Mapping of service name, namespace and their secrets | <pre>object({<br/>    name                       = string<br/>    additional_iam_policy_arns = optional(list(string), [])<br/>    config_map                 = optional(map(any), {})<br/>    hostnames                  = list(string)<br/>    namespace                  = string<br/>    secrets                    = optional(map(any), {})<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_pod_role"></a> [pod\_role](#output\_pod\_role) | n/a |
+| <a name="output_pod_role"></a> [pod\_role](#output\_pod\_role) | The ARN of the IAM role for services' pods |
 <!-- END_TF_DOCS -->
