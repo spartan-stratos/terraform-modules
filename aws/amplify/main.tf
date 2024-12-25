@@ -28,6 +28,12 @@ resource "aws_amplify_app" "this" {
   platform              = var.web_platform
   iam_service_role_arn  = aws_iam_role.amplify_backend.arn
   environment_variables = var.build_variables
+
+  lifecycle {
+    ignore_changes = [
+      access_token
+    ]
+  }
 }
 
 /*
