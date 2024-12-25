@@ -48,5 +48,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cluster_agent_auth_token"></a> [cluster\_agent\_auth\_token](#output\_cluster\_agent\_auth\_token) | n/a |
+| <a name="output_cluster_agent_auth_token"></a> [cluster\_agent\_auth\_token](#output\_cluster\_agent\_auth\_token) | The auth token for the cluster agent |
 <!-- END_TF_DOCS -->
