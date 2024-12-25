@@ -23,6 +23,6 @@ https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/in
 resource "datadog_integration_gcp_sts" "this" {
   client_email    = module.service_account.client_email
   host_filters    = [var.host_filters]
-  automute        = true
-  is_cspm_enabled = false
+  automute        = var.automute
+  is_cspm_enabled = var.is_cspm_enabled
 }

@@ -20,3 +20,15 @@ variable "datadog_roles" {
     "roles/browser"
   ]
 }
+
+variable "automute" {
+  description = "Determines whether to automatically mute monitors related to this integration during a downtime. Set to 'true' to enable automatic muting and 'false' to disable it."
+  type        = bool
+  default     = true
+}
+
+variable "is_cspm_enabled" {
+  description = "Indicates whether CSPM (Cloud Security Posture Management) is enabled in the Terraform configuration. Disable to save cost."
+  type        = bool
+  default     = false
+}
