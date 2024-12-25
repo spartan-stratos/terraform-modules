@@ -10,7 +10,7 @@ locals {
     "db.r5.24xlarge" = 96
   }
   db_subnet_group_description  = "${var.db_name} db subnet group"
-  db_subnet_group_name         = "${var.db_name}-subnet"
+  db_subnet_group_name         = "${var.db_name}-subnets"
   default_backup_retention     = var.backup_retention_day
   db_final_snapshot_identifier = "${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
   vpc_security_group_ids       = var.vpc_security_group_ids != null ? var.vpc_security_group_ids : [aws_security_group.this[0].id]
