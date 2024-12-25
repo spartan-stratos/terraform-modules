@@ -18,6 +18,11 @@ output "db_username" {
   value       = module.main_db_instance.db_username
 }
 
+output "db_port" {
+  description = "The database port."
+  value       = module.main_db_instance.db_port
+}
+
 output "db_password" {
   description = "The database password."
   value       = random_password.this.result
