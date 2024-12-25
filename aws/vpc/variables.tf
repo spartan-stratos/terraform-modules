@@ -41,3 +41,9 @@ variable "custom_private_subnets" {
   type        = list(string)
   default     = []
 }
+
+variable "create_flow_log" {
+  description = "Whether to create VPC flow logs."
+  type        = bool
+  default     = false
+}
