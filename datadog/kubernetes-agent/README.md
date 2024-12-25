@@ -1,5 +1,5 @@
 # Datadog Kubernetes Agent
-This module help instal and configure Datadog agents for Kubernetes cluster using datadog Helm chart.
+This module help install and configure Datadog agents for Kubernetes cluster using datadog Helm chart.
 
 https://artifacthub.io/packages/helm/datadog/datadog
 <!-- BEGIN_TF_DOCS -->
