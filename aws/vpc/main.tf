@@ -155,6 +155,10 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
+/*
+aws_flow_log capture IP traffic for a specific network interface, subnet, or VPC
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log
+ */
 resource "aws_flow_log" "this" {
   count = var.create_flow_log ? 1 : 0
 
@@ -164,12 +168,18 @@ resource "aws_flow_log" "this" {
   vpc_id          = aws_vpc.this.id
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
+ */
 resource "aws_cloudwatch_log_group" "this" {
   count = var.create_flow_log ? 1 : 0
 
   name = "${var.name}-cloudwatch-log-group"
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
+ */
 resource "aws_iam_role" "vpc-flow-logs-role" {
   count = var.create_flow_log ? 1 : 0
 
@@ -191,6 +201,9 @@ resource "aws_iam_role" "vpc-flow-logs-role" {
 EOF
 }
 
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy
+ */
 resource "aws_iam_role_policy" "vpc-flow-logs-policy" {
   count = var.create_flow_log ? 1 : 0
 
