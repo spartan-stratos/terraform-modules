@@ -52,7 +52,11 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_eip.nat](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
+| [aws_flow_log.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/flow_log) | resource |
+| [aws_iam_role.vpc-flow-logs-role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.vpc-flow-logs-policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_internet_gateway.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
 | [aws_nat_gateway.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway) | resource |
 | [aws_route.private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
@@ -72,6 +76,7 @@ No modules.
 | <a name="input_availability_zone_postfixes"></a> [availability\_zone\_postfixes](#input\_availability\_zone\_postfixes) | List of availability zones | `list(string)` | n/a | yes |
 | <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | The CIDR block for the VPC. | `string` | n/a | yes |
 | <a name="input_create_custom_subnets"></a> [create\_custom\_subnets](#input\_create\_custom\_subnets) | Whether to create custom subnets. | `bool` | `false` | no |
+| <a name="input_create_flow_log"></a> [create\_flow\_log](#input\_create\_flow\_log) | Whether to create VPC flow logs. | `bool` | `false` | no |
 | <a name="input_custom_private_subnets"></a> [custom\_private\_subnets](#input\_custom\_private\_subnets) | List of custom private subnets. | `list(string)` | `[]` | no |
 | <a name="input_custom_public_subnets"></a> [custom\_public\_subnets](#input\_custom\_public\_subnets) | List of custom public subnets. | `list(string)` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of your VPC | `string` | n/a | yes |

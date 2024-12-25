@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.22]() (2024-12-25)
 ### Features
 * Separate the VPC and Security Group
+* Introduced a conditional mechanism to control the creation of VPC flow logs.
 
 ## [0.1.14]() (2024-12-18)
 ### Features
