@@ -62,7 +62,7 @@ module "main_db_instance" {
   monitoring_interval          = var.monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
   parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
-  publicly_accessible          = false
+  publicly_accessible          = var.publicly_accessible
   final_snapshot_identifier    = local.db_final_snapshot_identifier
   copy_tags_to_snapshot        = var.copy_tags_to_snapshot
 }

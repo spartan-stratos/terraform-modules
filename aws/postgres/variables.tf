@@ -73,6 +73,12 @@ variable "multi_az" {
   default     = false
 }
 
+variable "publicly_accessible" {
+  description = "Allow external machine connect to rds."
+  type        = bool
+  default     = false
+}
+
 # Custom parameter group
 variable "custom_parameter_group_name" {
   description = "Custom parameter group name, used when `var.overwrite_parameter_group_name` is `true` and `var.supported_engine_version` size is 1."
