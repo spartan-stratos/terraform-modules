@@ -44,6 +44,7 @@ resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
 
 /**
 Create and manage Datadog - Amazon Web Services integration.
+version = "~> 3.46.0"
 https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
  */
 resource "datadog_integration_aws" "sandbox" {
