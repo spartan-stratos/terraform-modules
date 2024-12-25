@@ -4,6 +4,7 @@ module "eks_service" {
   cluster_name = "my-eks-cluster"
   eks_oidc_provider = {
     arn = "arn:aws:iam::123456789012:oidc-provider/my-eks-cluster-oidc-provider"
+    url = "https://oidc.github.com/id/example-id-1234"
   }
   alb_dns = "my-alb-dns"
   service = {
