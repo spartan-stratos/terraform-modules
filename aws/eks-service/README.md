@@ -42,7 +42,7 @@ No modules.
 | <a name="input_eks_oidc_provider"></a> [eks\_oidc\_provider](#input\_eks\_oidc\_provider) | The OIDC provider of the EKS cluster | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre> | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region for getting ALB hosted zone ID | `any` | n/a | yes |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | The zone id for adding hostnames for services | `any` | n/a | yes |
-| <a name="input_service"></a> [service](#input\_service) | Mapping of service name, namespace and their secrets | <pre>object({<br/>    name                       = string<br/>    additional_iam_policy_arns = list(string)<br/>    config_map                 = optional(map(any), {})<br/>    hostnames                  = list(string)<br/>    namespace                  = string<br/>    secrets                    = optional(map(any), {})<br/>  })</pre> | n/a | yes |
+| <a name="input_service"></a> [service](#input\_service) | Mapping of service name, namespace and their secrets | <pre>object({<br/>    name                       = string<br/>    additional_iam_policy_arns = optional(list(string), [])<br/>    config_map                 = optional(map(any), {})<br/>    hostnames                  = list(string)<br/>    namespace                  = string<br/>    secrets                    = optional(map(any), {})<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 
