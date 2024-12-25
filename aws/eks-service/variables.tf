@@ -26,7 +26,7 @@ variable "alb_dns" {
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "Region for getting ALB hosted zone ID"
 }
 
