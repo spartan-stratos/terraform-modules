@@ -26,7 +26,7 @@ resource "helm_release" "metrics_server" {
     
     content {
       name = set_list.value.name
-      value = setlist.value.value
+      value = set_list.value.value
     }
   }
 }
