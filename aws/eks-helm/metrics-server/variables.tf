@@ -40,7 +40,7 @@ variable "set_rbac_create" {
   description = "value"
   type = object({
     name = string
-    value = number
+    value = bool
   })
   default = null
 }
