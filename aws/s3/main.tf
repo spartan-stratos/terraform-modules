@@ -46,6 +46,7 @@ resource "aws_s3_bucket_cors_configuration" "this" {
     content {
       allowed_headers = try(cors_rule.value.allowed_headers, [])
       allowed_methods = try(cors_rule.value.allowed_methods, [])
+      expose_headers  = try(cors_rule.value.expose_headers, [])
       allowed_origins = try(cors_rule.value.allowed_origins, [])
       max_age_seconds = try(cors_rule.value.max_age_seconds, 3600)
     }
