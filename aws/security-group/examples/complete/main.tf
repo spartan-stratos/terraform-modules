@@ -1,4 +1,4 @@
-module "aws_security_groups" {
+module "aws_custom_security_groups" {
   source = "../.."
 
   security_groups = [
@@ -16,4 +16,12 @@ module "aws_security_groups" {
       egress_self              = []
     }
   ]
+}
+
+module "aws_default_security_groups" {
+  source = "../.."
+
+  create_default_security_group = true
+  vpc_id                        = "vpc-12345678"
+  cidr_blocks                   = ["10.0.0.0/16"]
 }
