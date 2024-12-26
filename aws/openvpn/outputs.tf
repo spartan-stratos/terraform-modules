@@ -1,14 +1,17 @@
 output "public_ip" {
-  value = aws_eip.this.public_ip
+  value       = aws_eip.this.public_ip
+  description = "The public IP address of the OpenVPN instance."
 }
 
 output "ssh_private_key" {
-  value     = tls_private_key.management_ssh_key.private_key_pem
-  sensitive = true
+  value       = try(tls_private_key.management_ssh_key[0].private_key_pem, "")
+  sensitive   = true
+  description = "The private key for the management SSH key pair."
 }
 
 output "ssh_public_key" {
-  value = tls_private_key.management_ssh_key.public_key_openssh
+  value       = try(tls_private_key.management_ssh_key[0].public_key_openssh, "")
+  description = "The public key for the management SSH key pair."
 }
 
 output "ovpn_file" {
@@ -36,4 +39,9 @@ ${tls_self_signed_cert.ca.cert_pem}
 </ca>
 EOT
   sensitive = true
+}
+
+output "ca_cert" {
+  value       = tls_self_signed_cert.ca.cert_pem
+  description = "The OpenVPN CA certificate."
 }

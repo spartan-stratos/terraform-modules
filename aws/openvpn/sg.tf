@@ -10,6 +10,7 @@ resource "aws_security_group" "this" {
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
  */
 resource "aws_security_group_rule" "egress_vpn" {
+  count             = var.create_egress_vpn_rule ? 1 : 0
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
 

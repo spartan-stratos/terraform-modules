@@ -89,3 +89,52 @@ variable "oauth2_client_secret" {
   type        = string
   description = "The OAuth2 client secret."
 }
+
+variable "oauth2_provider" {
+  type        = string
+  description = "The OAuth2 provider."
+  default     = "google"
+}
+
+variable "oauth2_issuer" {
+  type        = string
+  description = "The OAuth2 issuer."
+  default     = "https://accounts.google.com"
+}
+
+variable "oauth2_validate_groups" {
+  type        = string
+  description = "The OAuth2 groups to validate, separated by comma"
+  default     = null
+}
+
+variable "oauth2_validate_roles" {
+  type        = string
+  description = "The OAuth2 roles to validate, separated by comma"
+  default     = null
+}
+
+variable "create_management_key_pair" {
+  type        = bool
+  description = "Whether to create a management key pair."
+  default     = true
+}
+
+variable "custom_cert_dns_names" {
+  type        = list(string)
+  description = "A list of custom DNS names to add to the certificate."
+  default     = null
+}
+
+variable "create_egress_vpn_rule" {
+  type        = bool
+  description = "Whether to create an egress rule for the VPN."
+  default     = true
+}
+
+# For no change migrations
+variable "init_script_callback_comment" {
+  description = "The callback name for the OpenVPN server"
+  type        = string
+  default     = "Google Oauth 2.0 callback"
+}
