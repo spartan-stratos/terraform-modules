@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 ## [0.1.27]() (2024-12-26)
 
 ### Features
-* AWS S3: Add variables `read_write_policy_description`, `readonly_policy_description` and `readonly_policy_name_prefix` to avoid forced resource replacements during rollout [(./aws/s3)](./aws/s3)
+* AWS S3: [(./aws/s3)](./aws/s3)
+  * Add variables to avoid forced resource replacements during rollout: `read_write_policy_description`, `read_write_policy_name_prefix`, `readonly_policy_description`, `readonly_policy_name_prefix`, `public_policy_description`, and `public_policy_name_prefix`.
 * AWS Security Groups: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during migration [(./aws/security-group)](./aws/security-group)
 
 ## [0.1.26]() (2024-12-26)
