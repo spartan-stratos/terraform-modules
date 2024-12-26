@@ -124,6 +124,6 @@ variable "readonly_policy_description" {
 
 variable "readonly_policy_name_prefix" {
   description = "The name prefix for the readonly policy"
-  type = string
-  default = "S3AssetsRead"
+  type        = string
+  default     = "S3AssetsRead"
 }
