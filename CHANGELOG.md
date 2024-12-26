@@ -13,7 +13,6 @@ All notable changes to this project will be documented in this file.
 * AWS S3: [(./aws/s3)](./aws/s3)
   * Add attribute `expose_headers` to variable `cors_configuration`.
 
-
 ## [0.1.23]() (2024-12-26)
 
 ### Features
