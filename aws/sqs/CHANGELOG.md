@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.28]() (2024-12-26)
 ### Features
-* Add customizable prefix for read/write policy name via variables `read_policy_name_prefix` and `write_policy_name_prefix`.
+* Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.
 
 ## [0.1.20]() (2024-12-24)
 ### Features

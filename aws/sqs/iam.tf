@@ -21,13 +21,13 @@ data "aws_iam_policy_document" "write" {
 }
 
 resource "aws_iam_policy" "read" {
-  name        = "${var.read_policy_name_prefix}-${var.name}"
+  name        = var.read_policy_name != null ? var.read_policy_name : "SQSRead-${var.name}"
   description = "Policy that allows receive message from a shared queue."
   policy      = data.aws_iam_policy_document.read.json
 }
 
 resource "aws_iam_policy" "write" {
-  name        = "${var.write_policy_name_prefix}-${var.name}"
+  name        = var.write_policy_name != null ? var.write_policy_name : "SQSWrite-${var.name}"
   description = "Policy that allows send message from a shared queue."
   policy      = data.aws_iam_policy_document.write.json
 }

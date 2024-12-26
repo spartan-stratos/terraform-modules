@@ -69,14 +69,14 @@ variable "principal_roles" {
   default     = null
 }
 
-variable "read_policy_name_prefix" {
-  description = "The name of the custom read policy"
+variable "read_policy_name" {
+  description = "Custom read policy name"
   type        = string
-  default     = "SQSRead"
+  default     = null
 }
 
-variable "write_policy_name_prefix" {
-  description = "The name of the custom write policy"
+variable "write_policy_name" {
+  description = "Custom write policy name"
   type        = string
-  default     = "SQSWrite"
+  default     = null
 }
