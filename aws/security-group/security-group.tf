@@ -6,7 +6,7 @@ resource "aws_security_group" "allow_all" {
   count = var.create_default_security_group ? 1 : 0
 
   name        = "allow_all"
-  description = "Allow all inbound and outbound traffic"
+  description = var.custom_sg_allow_all_description != null ? var.custom_sg_allow_all_description : "Allow all inbound and outbound traffic"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -30,7 +30,7 @@ resource "aws_security_group" "allow_all_within_vpc" {
   count = var.create_default_security_group ? 1 : 0
 
   name        = "allow_all_within_vpc"
-  description = "Allow all traffic within the VPC"
+  description = var.custom_sg_allow_all_within_vpc_description != null ? var.custom_sg_allow_all_within_vpc_description : "Allow all traffic within the VPC"
   vpc_id      = var.vpc_id
 
   ingress {

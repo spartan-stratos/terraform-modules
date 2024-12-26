@@ -52,3 +52,16 @@ variable "cidr_blocks" {
   type        = list(string)
   default     = []
 }
+
+# migration purpose
+variable "custom_sg_allow_all_description" {
+  description = "Custom description for security group allow all `aws_security_group.allow_all`."
+  type        = string
+  default     = null
+}
+
+variable "custom_sg_allow_all_within_vpc_description" {
+  description = "Custom description for security group allow all within vpc `aws_security_group.allow_all_within_vpc`."
+  type        = string
+  default     = null
+}
