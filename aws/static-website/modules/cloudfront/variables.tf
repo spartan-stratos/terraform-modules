@@ -46,3 +46,9 @@ variable "use_www_domain" {
   type        = bool
   default     = false
 }
+
+variable "cloudfront_distribution_aliases" {
+  description = "List of domain names that associate with the CloudFront distribution."
+  type        = list(string)
+  default     = null
+}
