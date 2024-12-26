@@ -109,7 +109,7 @@ variable "acl" {
   default     = "private"
 }
 
-# to avoid recreate policies and it dependants resources when migrate
+# avoid recreating policies and their dependent resources during migration
 variable "read_write_policy_description" {
   description = "Decryption for read write policy"
   type        = string
