@@ -38,7 +38,7 @@ variable "rules" {
 variable "create_default_security_group" {
   description = "Flag to determine whether a default security group should be created."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "vpc_id" {

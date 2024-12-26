@@ -1,6 +1,7 @@
 module "aws_custom_security_groups" {
   source = "../.."
 
+  create_default_security_group = false
   security_groups = [
     {
       name                     = "example-sg"
