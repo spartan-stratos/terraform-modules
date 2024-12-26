@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.28]() (2024-12-26)
+### Features
+* Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.
 
 ## [0.1.20]() (2024-12-24)
 ### Features
