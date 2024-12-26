@@ -111,13 +111,13 @@ variable "acl" {
 
 # avoid recreating policies and their dependent resources during migration
 variable "read_write_policy_description" {
-  description = "Decryption for read write policy"
+  description = "Description for read write policy"
   type        = string
   default     = "Policy that allows writing to the S3 bucket"
 }
 
 variable "readonly_policy_description" {
-  description = "Decryption for readonly policy"
+  description = "Description for readonly policy"
   type        = string
   default     = "Policy that allows reading from the s3 assets bucket"
 }

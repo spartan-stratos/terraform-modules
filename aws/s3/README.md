@@ -80,8 +80,8 @@ No modules.
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | Enable to force destroy the bucket. | `bool` | `false` | no |
 | <a name="input_ignore_public_acls"></a> [ignore\_public\_acls](#input\_ignore\_public\_acls) | Whether Amazon S3 should ignore public ACLs for this bucket. | `bool` | `true` | no |
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced | `string` | `null` | no |
-| <a name="input_read_write_policy_description"></a> [read\_write\_policy\_description](#input\_read\_write\_policy\_description) | Decryption for read write policy | `string` | `"Policy that allows writing to the S3 bucket"` | no |
-| <a name="input_readonly_policy_description"></a> [readonly\_policy\_description](#input\_readonly\_policy\_description) | Decryption for readonly policy | `string` | `"Policy that allows reading from the s3 assets bucket"` | no |
+| <a name="input_read_write_policy_description"></a> [read\_write\_policy\_description](#input\_read\_write\_policy\_description) | Description for read write policy | `string` | `"Policy that allows writing to the S3 bucket"` | no |
+| <a name="input_readonly_policy_description"></a> [readonly\_policy\_description](#input\_readonly\_policy\_description) | Description for readonly policy | `string` | `"Policy that allows reading from the s3 assets bucket"` | no |
 | <a name="input_readonly_policy_name_prefix"></a> [readonly\_policy\_name\_prefix](#input\_readonly\_policy\_name\_prefix) | The name prefix for the readonly policy | `string` | `"S3AssetsRead"` | no |
 | <a name="input_restrict_public_buckets"></a> [restrict\_public\_buckets](#input\_restrict\_public\_buckets) | Whether Amazon S3 should restrict public bucket policies for this bucket. | `bool` | `true` | no |
 | <a name="input_versioning_status"></a> [versioning\_status](#input\_versioning\_status) | The status of bucket versioning. | `string` | `"Disabled"` | no |
