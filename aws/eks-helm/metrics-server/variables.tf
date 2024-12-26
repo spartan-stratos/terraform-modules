@@ -17,10 +17,7 @@ variable "helm_chart_version" {
 
 variable "set_configs" {
   description = "To specify the list of set configs"
-  type = list(object({
-    name = string,
-    value = any
-  }))
+  type = list(any)
   default = [{
     name  = "metrics.enabled"
     value = false
@@ -29,9 +26,6 @@ variable "set_configs" {
 
 variable "set_list_config" {
   description = "To specify the list value of a single configs"
-  type = list(object({
-    name = string,
-    value = list(any)
-  }))
+  type = list(any)
   default = []
 }
