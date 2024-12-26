@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "kubernetes_namespace" "this" {
-  count = try(data.kubernetes_namespace_v1.existing.metadata.0.name) != var.service.namespace ? 1 : 0
+  count = try(data.kubernetes_namespace_v1.existing.metadata.0.name) != var.service.namespace || var.create_kubernetes_namespace ? 1 : 0
 
   metadata {
     name = var.service.namespace
@@ -57,7 +57,7 @@ resource "kubernetes_namespace" "this" {
 resource "kubernetes_config_map" "this" {
   depends_on = [kubernetes_namespace.this]
   metadata {
-    name      = "${var.service.name}-config-map"
+    name      = var.config_map_env_var_name != null ? var.config_map_env_var_name : "${var.service.name}-config-map"
     namespace = var.service.namespace
   }
 
@@ -67,7 +67,7 @@ resource "kubernetes_config_map" "this" {
 resource "kubernetes_secret" "this" {
   depends_on = [kubernetes_namespace.this]
   metadata {
-    name      = "${var.service.name}-env-var"
+    name      = var.secret_env_var_name != null ? var.secret_env_var_name : "${var.service.name}-env-var"
     namespace = var.service.namespace
   }
 

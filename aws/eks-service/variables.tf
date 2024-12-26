@@ -37,3 +37,21 @@ variable "eks_oidc_provider" {
     url = string
   })
 }
+
+variable "secret_env_var_name" {
+  description = "To specify secret env var name"
+  type        = string
+  default     = null
+}
+
+variable "config_map_env_var_name" {
+  description = "To specifiy config map env var name"
+  type        = string
+  default     = null
+}
+
+variable "create_kubernetes_namespace" {
+  description = "To specify whether to create a namespace"
+  type        = bool
+  default     = false
+}
