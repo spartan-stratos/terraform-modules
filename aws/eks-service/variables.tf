@@ -45,7 +45,7 @@ variable "suffix_service_name" {
 }
 
 variable "create_kubernetes_namespace" {
-  description = "To create kubernetes namespace"
-  type = bool
-  default = false
+  description = "To specify whether to create a namespace"
+  type        = bool
+  default     = false
 }
