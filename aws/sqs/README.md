@@ -66,11 +66,11 @@ No modules.
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size) | The limit of how many bytes a message can contain before Amazon SQS rejects it | `string` | `"2048"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name for creating queue names | `string` | n/a | yes |
 | <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles) | A list of IAM roles that a specific principal (user, service, or account) can assume. | `list(string)` | `null` | no |
-| <a name="input_read_policy_name"></a> [read\_policy\_name](#input\_read\_policy\_name) | Custom read policy name | `string` | `null` | no |
+| <a name="input_read_policy_name"></a> [read\_policy\_name](#input\_read\_policy\_name) | The name of the custom read policy | `string` | `null` | no |
 | <a name="input_retention_seconds"></a> [retention\_seconds](#input\_retention\_seconds) | The number of seconds Amazon SQS retains a message. Integer representing seconds, from 60 (1 minute) to 1209600 (14 days) | `string` | `"86400"` | no |
 | <a name="input_visibility_timeout_seconds"></a> [visibility\_timeout\_seconds](#input\_visibility\_timeout\_seconds) | The visibility timeout for the queue. An integer from 0 to 43200 | `string` | `"30"` | no |
 | <a name="input_wait_seconds"></a> [wait\_seconds](#input\_wait\_seconds) | The time for which a ReceiveMessage call will wait for a message to arrive (long polling) before returning | `string` | `"10"` | no |
-| <a name="input_write_policy_name"></a> [write\_policy\_name](#input\_write\_policy\_name) | Custom write policy name | `string` | `null` | no |
+| <a name="input_write_policy_name"></a> [write\_policy\_name](#input\_write\_policy\_name) | The name of the custom write policy | `string` | `null` | no |
 
 ## Outputs
 

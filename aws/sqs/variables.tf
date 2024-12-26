@@ -70,13 +70,13 @@ variable "principal_roles" {
 }
 
 variable "read_policy_name" {
-  description = "Custom read policy name"
+  description = "The name of the custom read policy"
   type        = string
   default     = null
 }
 
 variable "write_policy_name" {
-  description = "Custom write policy name"
+  description = "The name of the custom write policy"
   type        = string
   default     = null
 }
