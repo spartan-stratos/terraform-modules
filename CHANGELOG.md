@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.25]() (2024-12-26)
+
+### Features
+* AWS Security Group: Add variables: custom_sg_allow_all_description and custom_sg_allow_all_within_all_description to avoid forces replacement during migration. [(./aws/security-group)](./aws/security-group)
+
 ## [0.1.24]() (2024-12-26)
 
 ### Features
