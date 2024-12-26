@@ -65,3 +65,9 @@ variable "custom_sg_allow_all_within_vpc_description" {
   type        = string
   default     = null
 }
+
+variable "custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks" {
+  description = "Custom IPv6 CIDR blocks to allow in the egress rules for the security group allow_all_within_vpc"
+  type        = list(string)
+  default     = null
+}
