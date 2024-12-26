@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.27]() (2024-12-26)
+### Features
+* Add variables `read_write_policy_description`, `readonly_policy_description` and `readonly_policy_name_prefix` to avoid resources being forced replacement when rollout.
+
 ## [0.1.24]() (2024-12-26)
 ### Features
 * Add attribute `expose_headers` to variable `cors_configuration`.

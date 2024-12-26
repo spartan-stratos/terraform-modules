@@ -108,3 +108,22 @@ variable "acl" {
   type        = string
   default     = "private"
 }
+
+# to avoid recreate policies and it dependants resources when migrate
+variable "read_write_policy_description" {
+  description = "Decryption for read write policy"
+  type        = string
+  default     = "Policy that allows writing to the S3 bucket"
+}
+
+variable "readonly_policy_description" {
+  description = "Decryption for readonly policy"
+  type        = string
+  default     = "Policy that allows reading from the s3 assets bucket"
+}
+
+variable "readonly_policy_name_prefix" {
+  description = "The name prefix for the readonly policy"
+  type = string
+  default = "S3AssetsRead"
+}
