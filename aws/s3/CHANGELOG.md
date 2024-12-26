@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.27]() (2024-12-26)
 ### Features
-* Add variables `read_write_policy_description`, `readonly_policy_description` and `readonly_policy_name_prefix` to avoid forced resource replacements during rollout.
+* Add variables to avoid forced resource replacements during rollout: `read_write_policy_description`, `read_write_policy_name_prefix`, `readonly_policy_description`, `readonly_policy_name_prefix`, `public_policy_description`, and `public_policy_name_prefix`.
 
 ## [0.1.24]() (2024-12-26)
 ### Features

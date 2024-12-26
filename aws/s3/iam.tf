@@ -57,8 +57,8 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
 */
 resource "aws_iam_policy" "this" {
   count       = var.enabled_public_policy ? 1 : 0
-  name        = "S3PublicAssetsWrite-${local.bucket.bucket}"
-  description = "Policy that allows writing to the s3 public assets bucket"
+  name        = "${var.public_policy_name_prefix}-${local.bucket.bucket}"
+  description = var.public_policy_description
 
   policy = data.aws_iam_policy_document.this_policy.0.json
 }
@@ -83,7 +83,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
 */
 resource "aws_iam_policy" "read_write" {
   count       = var.enabled_read_write_policy ? 1 : 0
-  name        = "S3ReadWrite-${local.bucket.bucket}"
+  name        = "${var.read_write_policy_name_prefix}-${local.bucket.bucket}"
   description = var.read_write_policy_description
   policy      = data.aws_iam_policy_document.read_write_policy.0.json
 }
