@@ -1,6 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.24]() (2024-12-26)
+
+### Features
+* AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
+  * Add `var.create_kubernetes_namespace` to specify whether to create a namespace
+  * Add `var.config_map_env_var_name` to overwrite default kubernetes_config_map name
+  * Add `var.secret_env_var_name` to overwrite default kubernetes_secret secret env var name
+* AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
+  * Add output `elasticache_replication_group_configuration_endpoint_address`. 
+* AWS S3: [(./aws/s3)](./aws/s3)
+  * Add attribute `expose_headers` to variable `cors_configuration`.
+
 
 ## [0.1.23]() (2024-12-26)
 
