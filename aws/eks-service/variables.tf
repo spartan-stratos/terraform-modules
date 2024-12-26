@@ -43,3 +43,9 @@ variable "suffix_service_name" {
   type        = string
   default     = "env-var"
 }
+
+variable "create_kubernetes_namespace" {
+  description = "To create kubernetes namespace"
+  type = bool
+  default = false
+}
