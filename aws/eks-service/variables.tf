@@ -38,7 +38,7 @@ variable "eks_oidc_provider" {
   })
 }
 
-variable "suffix_service_name" {
+variable "secret_suffix" {
   description = "To custom name suffix for the kubernetes secret"
   type        = string
   default     = "env-var"
