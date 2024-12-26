@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.24]() (2024-12-26)
 ### Features
-* Add an additional attribute `expose_headers` in variable `cors_configuration`.
+* Add attribute `expose_headers` to variable `cors_configuration`.
 
 ## [0.1.18]() (2024-12-23)
 ### Features
