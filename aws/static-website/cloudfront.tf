@@ -9,4 +9,5 @@ module "cloudfront" {
   viewer_protocol_policy   = var.viewer_protocol_policy
   minimum_protocol_version = var.minimum_protocol_version
   price_class              = var.price_class
+  use_www_domain           = var.use_www_domain
 }

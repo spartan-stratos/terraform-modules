@@ -40,3 +40,9 @@ variable "price_class" {
   type        = string
   default     = "PriceClass_100"
 }
+
+variable "use_www_domain" {
+  description = "Use www domain"
+  type        = bool
+  default     = false
+}

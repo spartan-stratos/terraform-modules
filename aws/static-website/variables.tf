@@ -13,8 +13,8 @@ variable "enabled_create_s3" {
   type        = bool
 }
 
-variable "create_s3_bucket_name" {
-  description = "The name of the S3 bucket to create"
+variable "s3_bucket_name" {
+  description = "The name of custom S3 bucket"
   type        = string
   default     = null
 }
@@ -66,6 +66,12 @@ variable "enabled_read_write_policy" {
 
 variable "enabled_read_only_policy" {
   description = "Enabled create the Read Only Policy to allow access to bucket objects."
+  type        = bool
+  default     = false
+}
+
+variable "use_www_domain" {
+  description = "Use www domain"
   type        = bool
   default     = false
 }
