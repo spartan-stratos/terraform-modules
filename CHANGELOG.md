@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.23]() (2024-12-26)
+
+### Features
+
+* AWS Security Group: Introduce functionality to create default security groups with configurable CIDR blocks and VPC ID.
+* AWS GuardDuty: Init module.
+
 ## [0.1.22]() (2024-12-25)
 
 ### Features
