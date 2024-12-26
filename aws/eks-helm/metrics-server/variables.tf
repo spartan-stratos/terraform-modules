@@ -14,3 +14,24 @@ variable "helm_chart_version" {
   type        = string
   description = "The chart version of ingress controller"
 }
+
+variable "set_configs" {
+  description = "To specify the list of set configs"
+  type = list(object({
+    name = string,
+    value = any
+  }))
+  default = [{
+    name  = "metrics.enabled"
+    value = false
+  }]
+}
+
+variable "set_config_list" {
+  description = "To specify the list value of a single configs"
+  type = list(object({
+    name = string,
+    value = list(any)
+  }))
+  default = []
+}

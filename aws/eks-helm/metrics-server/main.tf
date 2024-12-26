@@ -7,9 +7,26 @@ resource "helm_release" "metrics_server" {
   namespace  = var.namespace
   keyring    = ""
 
-  # If true, allow unauthenticated access to /metrics.
-  set {
-    name  = "metrics.enabled"
-    value = false
+  # # If true, allow unauthenticated access to /metrics.
+  # set {
+  #   name  = "metrics.enabled"
+  #   value = false
+  # }
+
+  dynamic "set" {
+    for_each = var.set_configs
+    content {
+      name = set.value.name
+      value = set.value.value
+    }
+  }
+
+  dynamic "set_list" {
+    for_each = var.set_config_list
+    
+    content {
+      name = set_list.value.name
+      value = setlist.value.value
+    }
   }
 }
