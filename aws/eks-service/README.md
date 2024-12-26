@@ -40,12 +40,13 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_alb_dns"></a> [alb\_dns](#input\_alb\_dns) | The DNS of the ALB from K8s cluster | `string` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | EKS Cluster name | `string` | n/a | yes |
+| <a name="input_config_map_name"></a> [config\_map\_name](#input\_config\_map\_name) | To specifiy config map name | `string` | `null` | no |
 | <a name="input_create_kubernetes_namespace"></a> [create\_kubernetes\_namespace](#input\_create\_kubernetes\_namespace) | To specify whether to create a namespace | `bool` | `false` | no |
 | <a name="input_eks_oidc_provider"></a> [eks\_oidc\_provider](#input\_eks\_oidc\_provider) | The OIDC provider of the EKS cluster | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre> | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region for getting ALB hosted zone ID | `string` | n/a | yes |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | The zone id for adding hostnames for services | `string` | n/a | yes |
+| <a name="input_secret_env_var_name"></a> [secret\_env\_var\_name](#input\_secret\_env\_var\_name) | To specify secret env var name | `string` | `null` | no |
 | <a name="input_service"></a> [service](#input\_service) | Mapping of service name, namespace and their secrets | <pre>object({<br/>    name                       = string<br/>    additional_iam_policy_arns = optional(list(string), [])<br/>    config_map                 = optional(map(any), {})<br/>    hostnames                  = list(string)<br/>    namespace                  = string<br/>    secrets                    = optional(map(any), {})<br/>  })</pre> | n/a | yes |
-| <a name="input_secret_suffix"></a> [secret\_suffix](#input\_secret\_suffix) | To custom name suffix for the kubernetes secret | `string` | `"env-var"` | no |
 
 ## Outputs
 

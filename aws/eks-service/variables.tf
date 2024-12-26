@@ -38,10 +38,16 @@ variable "eks_oidc_provider" {
   })
 }
 
-variable "secret_suffix" {
-  description = "To custom name suffix for the kubernetes secret"
+variable "secret_env_var_name" {
+  description = "To specify secret env var name"
   type        = string
-  default     = "env-var"
+  default     = null
+}
+
+variable "config_map_name" {
+  description = "To specifiy config map name"
+  type        = string
+  default     = null
 }
 
 variable "create_kubernetes_namespace" {

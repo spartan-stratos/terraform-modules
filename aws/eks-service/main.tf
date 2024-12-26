@@ -57,7 +57,7 @@ resource "kubernetes_namespace" "this" {
 resource "kubernetes_config_map" "this" {
   depends_on = [kubernetes_namespace.this]
   metadata {
-    name      = "${var.service.name}-config-map"
+    name      = var.config_map_name != null ? var.config_map_name : "${var.service.name}-config-map"
     namespace = var.service.namespace
   }
 
@@ -67,7 +67,7 @@ resource "kubernetes_config_map" "this" {
 resource "kubernetes_secret" "this" {
   depends_on = [kubernetes_namespace.this]
   metadata {
-    name      = "${var.service.name}-${var.secret_suffix}"
+    name      = var.secret_env_var_name != null ? var.secret_env_var_name : "${var.service.name}-env-var"
     namespace = var.service.namespace
   }
 
