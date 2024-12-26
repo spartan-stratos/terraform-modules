@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.25]() (2024-12-26)
+### Features
+* Add variables: `custom_sg_allow_all_description` and `custom_sg_allow_all_within_all_description` to avoid forces replacement during migration.
+
 ## [0.1.23]() (2024-12-26)
 ### Features
 * Introduced functionality to create default security groups with configurable CIDR blocks and VPC ID
