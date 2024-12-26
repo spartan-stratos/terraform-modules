@@ -27,7 +27,7 @@ variable "set_configs" {
   }]
 }
 
-variable "set_config_list" {
+variable "set_list_config" {
   description = "To specify the list value of a single configs"
   type = list(object({
     name = string,

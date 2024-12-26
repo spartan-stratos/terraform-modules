@@ -22,7 +22,7 @@ resource "helm_release" "metrics_server" {
   }
 
   dynamic "set_list" {
-    for_each = var.set_config_list
+    for_each = var.set_list_config
     
     content {
       name = set_list.value.name
