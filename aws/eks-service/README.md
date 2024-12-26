@@ -53,4 +53,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_pod_role"></a> [pod\_role](#output\_pod\_role) | The ARN of the IAM role for services' pods |
+| <a name="output_service_hostnames"></a> [service\_hostnames](#output\_service\_hostnames) | This output generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs). Each key corresponds to a unique identifier, and its value is the associated FQDN. |
 <!-- END_TF_DOCS -->

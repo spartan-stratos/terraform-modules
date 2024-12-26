@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.26]() (2024-12-26)
+### Features
+* Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs)
+
 ## [0.1.24]() (2024-12-26)
 ### Features
 * Add `var.create_kubernetes_namespace` to specify whether to create a namespace
