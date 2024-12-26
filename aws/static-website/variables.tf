@@ -13,6 +13,12 @@ variable "enabled_create_s3" {
   type        = bool
 }
 
+variable "create_s3_bucket_name" {
+  description = "The name of the S3 bucket to create"
+  type        = string
+  default     = null
+}
+
 variable "global_tls_certificate_arn" {
   description = "The TLS certificate arn for the root domain name"
   type        = string
