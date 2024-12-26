@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.24]() (2024-12-26)
+### Features
+* Add attribute `expose_headers` to variable `cors_configuration`.
+
 ## [0.1.18]() (2024-12-23)
 ### Features
 * Add output `iam_policy_s3_bucket_assets_read_write_arn`.

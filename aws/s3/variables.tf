@@ -26,12 +26,14 @@ variable "cors_configuration" {
   description = "Configuration for CORS settings"
   type = object({
     allowed_headers = optional(list(string))
+    expose_headers  = optional(list(string))
     allowed_methods = list(string)
     allowed_origins = list(string)
     max_age_seconds = optional(number)
   })
   default = {
     allowed_headers = []
+    expose_headers  = []
     allowed_methods = []
     allowed_origins = []
     max_age_seconds = 3600
