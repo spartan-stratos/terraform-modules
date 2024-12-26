@@ -26,16 +26,16 @@ module "elasticache" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version  |
-|------|----------|
+| Name | Version |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
 
 ## Providers
 
-| Name | Version  |
-|------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
 
 ## Modules
 
@@ -68,6 +68,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_elasticache_replication_group_configuration_endpoint_address"></a> [elasticache\_replication\_group\_configuration\_endpoint\_address](#output\_elasticache\_replication\_group\_configuration\_endpoint\_address) | The configuration endpoint address of the ElastiCache replication group. |
 | <a name="output_elasticache_replication_group_port"></a> [elasticache\_replication\_group\_port](#output\_elasticache\_replication\_group\_port) | The port on which the ElastiCache replication group is accessible. |
 | <a name="output_elasticache_replication_group_primary_endpoint_address"></a> [elasticache\_replication\_group\_primary\_endpoint\_address](#output\_elasticache\_replication\_group\_primary\_endpoint\_address) | The primary endpoint address of the ElastiCache replication group. |
 | <a name="output_elasticache_replication_group_reader_endpoint_address"></a> [elasticache\_replication\_group\_reader\_endpoint\_address](#output\_elasticache\_replication\_group\_reader\_endpoint\_address) | The reader endpoint address of the ElastiCache replication group. |
