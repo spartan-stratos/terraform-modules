@@ -44,8 +44,8 @@ variable "secret_env_var_name" {
   default     = null
 }
 
-variable "config_map_name" {
-  description = "To specifiy config map name"
+variable "config_map_env_var_name" {
+  description = "To specifiy config map env var name"
   type        = string
   default     = null
 }
