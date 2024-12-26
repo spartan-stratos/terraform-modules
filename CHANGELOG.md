@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.26]() (2024-12-26)
+
+### Features
+* AWS EKS Service: Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs) [(./aws/eks-service)](./aws/eks-service)
 
 ## [0.1.25]() (2024-12-26)
 
