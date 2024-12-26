@@ -130,8 +130,8 @@ variable "efs_lifecycle_policy" {
 
 variable "efs_filesystem_name" {
   description = "To specify the name of efs filesystem in case overwrite the default one"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "node_groups" {

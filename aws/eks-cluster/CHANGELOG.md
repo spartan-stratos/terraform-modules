@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.19]() (2024-12-23)
 ### Features
+* Add `var.efs_filesystem_name` to overwrite the default efs filesystem name
+
+
+## [0.1.19]() (2024-12-23)
+### Features
 * Add output datadog_agent_cluster_role_name to root module and remove default value of datadog_agent_cluster_role_name in submodule
 * Change assume policy of `eks-node-cluster` from `eks.amazonaws.com` to `ec2.amazonaws.com`
 

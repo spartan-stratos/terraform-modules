@@ -62,6 +62,6 @@ variable "cluster_security_group_id" {
 
 variable "efs_filesystem_name" {
   description = "To specify the name of efs filesystem in case overwrite the default one"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }

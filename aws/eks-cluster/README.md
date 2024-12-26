@@ -144,6 +144,7 @@ module "eks" {
 | <a name="input_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#input\_datadog\_agent\_cluster\_role\_name) | Name of the ClusterRole to create in order to configure Datadog Agents | `string` | `"datadog-agent"` | no |
 | <a name="input_default_service_account"></a> [default\_service\_account](#input\_default\_service\_account) | Default service account name for binding with Datadog | `string` | `"default"` | no |
 | <a name="input_efs_backup_policy_status"></a> [efs\_backup\_policy\_status](#input\_efs\_backup\_policy\_status) | Enable/disable backup for EFS Filesystem.  Value should be ENABLE/DISABLED.  Defaults to DISABLED | `string` | `"DISABLED"` | no |
+| <a name="input_efs_filesystem_name"></a> [efs\_filesystem\_name](#input\_efs\_filesystem\_name) | To specify the name of efs filesystem in case overwrite the default one | `string` | `null` | no |
 | <a name="input_efs_lifecycle_policy"></a> [efs\_lifecycle\_policy](#input\_efs\_lifecycle\_policy) | Lifecycle Policy for the EFS Filesystem | <pre>list(object({<br/>    transition_to_ia                    = string<br/>    transition_to_primary_storage_class = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_efs_storage_class_name"></a> [efs\_storage\_class\_name](#input\_efs\_storage\_class\_name) | n/a | `string` | `"efs"` | no |
 | <a name="input_enabled_cloudwatch_logging"></a> [enabled\_cloudwatch\_logging](#input\_enabled\_cloudwatch\_logging) | Enable logging for Kubernetes Pods through built in EKS Fargate Firelens | `bool` | `false` | no |
