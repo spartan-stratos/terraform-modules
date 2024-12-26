@@ -47,8 +47,6 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "kubernetes_namespace" "this" {
-  count = try(data.kubernetes_namespace_v1.existing.metadata.0.name, var.service.namespace) != var.service.namespace ? 1 : 0
-
   metadata {
     name = var.service.namespace
   }
