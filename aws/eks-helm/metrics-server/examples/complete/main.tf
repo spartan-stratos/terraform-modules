@@ -1,5 +1,5 @@
 module "example" {
-  source = "../"
+  source = "../../"
 
   helm_release_name  = "metrics-server"
   namespace          = "kube-system"
@@ -8,7 +8,7 @@ module "example" {
 
 
 module "metrics_server_with_rbac" {
-  source = "../"
+  source = "../../"
 
   helm_release_name  = "metrics-server"
   namespace          = "kube-system"
@@ -24,4 +24,15 @@ module "metrics_server_with_rbac" {
     value = 10250
   }
   create_eks_rbac = true
+
+  set_list_config = [{
+    name = "defaultArgs"
+    value = [
+      "--cert-dir=/tmp",
+      "--secure-port=10250",
+      "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname",
+      "--kubelet-insecure-tls",
+      "--metric-resolution=15s"
+    ]
+  }]
 }
