@@ -78,8 +78,9 @@ resource "aws_security_group" "this" {
 # Ingress Rules - CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -89,11 +90,11 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
         ip_protocol = var.rules[ingress_rule][2]
         cidr_blocks = sg.ingress_cidr_blocks
       }
-    ] if length(sg.ingress_cidr_blocks) > 0
-  ])
+    ]) if length(sg.ingress_cidr_blocks) > 0
+  }
 
   security_group_id = each.value.sg_id
-  cidr_ipv4         = each.value.ipv4_cidr_blocks
+  cidr_ipv4         = each.value.cidr_blocks
 
   description = each.value.description
   from_port   = each.value.from_port
@@ -106,8 +107,9 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
 # Ingress Rules - IPv6 CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -115,13 +117,13 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
         from_port   = var.rules[ingress_rule][0]
         to_port     = var.rules[ingress_rule][1]
         ip_protocol = var.rules[ingress_rule][2]
-        cidr_blocks = sg.ingress_cidr_blocks
+        cidr_blocks = sg.ingress_ipv6_cidr_blocks
       }
-    ] if length(sg.ingress_cidr_blocks) > 0
-  ])
+    ]) if length(sg.ingress_ipv6_cidr_blocks) > 0
+  }
 
   security_group_id = each.value.sg_id
-  cidr_ipv6         = each.value.ipv6_cidr_blocks
+  cidr_ipv6         = each.value.cidr_blocks
 
   description = each.value.description
   from_port   = each.value.from_port
@@ -161,8 +163,9 @@ resource "aws_security_group_rule" "ingress_self" {
 # Egress Rules - CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_egress_rule" "egress_cidr" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -170,10 +173,10 @@ resource "aws_vpc_security_group_egress_rule" "egress_cidr" {
         from_port   = var.rules[ingress_rule][0]
         to_port     = var.rules[ingress_rule][1]
         ip_protocol = var.rules[ingress_rule][2]
-        cidr_blocks = sg.ingress_cidr_blocks
+        cidr_blocks = sg.egress_cidr_blocks
       }
-    ] if length(sg.ingress_cidr_blocks) > 0
-  ])
+    ]) if length(sg.egress_cidr_blocks) > 0
+  }
 
   security_group_id = each.value.sg_id
   cidr_ipv4         = each.value.cidr_blocks
@@ -188,8 +191,9 @@ resource "aws_vpc_security_group_egress_rule" "egress_cidr" {
 # Egress Rules - IPv6 CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_egress_rule" "egress_ipv6" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -197,12 +201,13 @@ resource "aws_vpc_security_group_egress_rule" "egress_ipv6" {
         from_port   = var.rules[ingress_rule][0]
         to_port     = var.rules[ingress_rule][1]
         ip_protocol = var.rules[ingress_rule][2]
-        cidr_blocks = sg.ingress_cidr_blocks
+        cidr_blocks = sg.egress_ipv6_cidr_blocks
       }
-    ] if length(sg.ingress_cidr_blocks) > 0
-  ])
+    ]) if length(sg.egress_ipv6_cidr_blocks) > 0
+  }
+
   security_group_id = each.value.sg_id
-  cidr_ipv6         = each.value.ipv6_cidr_blocks
+  cidr_ipv6         = each.value.cidr_blocks
 
   description = each.value.description
   from_port   = each.value.from_port
