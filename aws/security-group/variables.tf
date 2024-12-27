@@ -7,24 +7,24 @@ A list of objects defining custom security groups. Each security group object sh
 - `ingress_rules` (list(string)): A list of ingress rule names defined in the `rules` variable.
 - `ingress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the ingress rules. Default is an empty list.
 - `ingress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the ingress rules. Default is an empty list.
-- `ingress_self` (optional, list(bool)): Whether to allow self-referencing ingress rules. Default is an empty list.
+- `ingress_self` (optional, bool): Whether to allow self-referencing ingress rules. Default is `false`.
 - `egress_rules` (list(string)): A list of egress rule names defined in the `rules` variable.
 - `egress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the egress rules. Default is an empty list.
 - `egress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the egress rules. Default is an empty list.
-- `egress_self` (optional, list(bool)): Whether to allow self-referencing egress rules. Default is an empty list.
+- `egress_self` (optional, bool): Whether to allow self-referencing egress rules. Default is `false`.
 EOT
   type = list(object({
     name                     = string
     description              = string
     vpc_id                   = string
     ingress_rules            = list(string)
-    ingress_cidr_blocks      = optional(list(string))
-    ingress_ipv6_cidr_blocks = optional(list(string))
-    ingress_self             = optional(list(bool))
+    ingress_cidr_blocks      = optional(list(string), [])
+    ingress_ipv6_cidr_blocks = optional(list(string), [])
+    ingress_self             = optional(bool, false)
     egress_rules             = list(string)
-    egress_cidr_blocks       = optional(list(string))
-    egress_ipv6_cidr_blocks  = optional(list(string))
-    egress_self              = optional(list(bool))
+    egress_cidr_blocks       = optional(list(string), [])
+    egress_ipv6_cidr_blocks  = optional(list(string), [])
+    egress_self              = optional(bool, false)
   }))
   default = null
 }
