@@ -135,8 +135,9 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
 # Ingress Rules - Self
 ############################################
 resource "aws_security_group_rule" "ingress_self" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -144,10 +145,10 @@ resource "aws_security_group_rule" "ingress_self" {
         from_port   = var.rules[ingress_rule][0]
         to_port     = var.rules[ingress_rule][1]
         ip_protocol = var.rules[ingress_rule][2]
-        self        = sg.ingress_self
+        cidr_blocks = sg.ingress_cidr_blocks
       }
-    ] if sg.ingress_rules
-  ])
+    ]) if sg.ingress_self
+  }
 
   security_group_id        = each.value.sg_id
   type                     = "ingress"
@@ -219,8 +220,9 @@ resource "aws_vpc_security_group_egress_rule" "egress_ipv6" {
 # Egress Rules - Self
 ############################################
 resource "aws_security_group_rule" "egress_self" {
-  for_each = var.create_default_security_group ? {} : flatten([
-    for sg_name, sg in var.security_groups : [
+  for_each = var.create_default_security_group ? {} : {
+    for sg_name, sg in var.security_groups :
+    sg_name => flatten([
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -228,10 +230,10 @@ resource "aws_security_group_rule" "egress_self" {
         from_port   = var.rules[ingress_rule][0]
         to_port     = var.rules[ingress_rule][1]
         ip_protocol = var.rules[ingress_rule][2]
-        self        = sg.egress_self
+        cidr_blocks = sg.ingress_cidr_blocks
       }
-    ] if sg.egress_self
-  ])
+    ]) if sg.egress_self
+  }
 
   security_group_id        = each.value.sg_id
   type                     = "egress"
