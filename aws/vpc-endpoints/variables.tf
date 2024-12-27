@@ -35,3 +35,9 @@ variable "enable_ecr" {
   type        = bool
   default     = false
 }
+
+variable "enable_eks" {
+  description = "Enable vpc endpoint for EKS service"
+  type        = bool
+  default     = false
+}

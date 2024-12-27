@@ -9,4 +9,5 @@ module "vpc_endpoints" {
   enable_s3  = true
   enable_sqs = true
   enable_ecr = true
+  enable_eks = true
 }
