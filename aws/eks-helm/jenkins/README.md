@@ -1,15 +1,20 @@
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | >=2.16.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.33 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | >=2.16.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33 |
 
 ## Modules
 
@@ -35,7 +40,7 @@ No modules.
 | <a name="input_efs_id"></a> [efs\_id](#input\_efs\_id) | EFS is for mounting Jenkins home | `string` | n/a | yes |
 | <a name="input_efs_jenkins_access_point"></a> [efs\_jenkins\_access\_point](#input\_efs\_jenkins\_access\_point) | EFS is for mounting Jenkins home | `string` | `"/jenkins-home"` | no |
 | <a name="input_efs_storage_class_name"></a> [efs\_storage\_class\_name](#input\_efs\_storage\_class\_name) | EFS storage class of Jenkins volume | `string` | `"efs"` | no |
-| <a name="input_enabled_dark_them"></a> [enabled\_dark\_them](#input\_enabled\_dark\_them) | Enable dark theme | `bool` | `true` | no |
+| <a name="input_enabled_dark_them"></a> [enabled\_dark\_them](#input\_enabled\_dark\_them) | Enable dark theme | `bool` | `false` | no |
 | <a name="input_enabled_datadog"></a> [enabled\_datadog](#input\_enabled\_datadog) | Enable Datadog monitoring | `bool` | `true` | no |
 | <a name="input_enabled_github_app_login"></a> [enabled\_github\_app\_login](#input\_enabled\_github\_app\_login) | Enable Github App login | `bool` | `false` | no |
 | <a name="input_enabled_google_login"></a> [enabled\_google\_login](#input\_enabled\_google\_login) | Enable Google login | `bool` | `false` | no |
