@@ -5,7 +5,7 @@ Terraform module which creates VPC endpoint resources on AWS.
 ### Create a Client VPN endpoint
 ```hcl
 module "vpc_endpoints" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/vpn-endpoints?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/vpn-endpoints?ref=v0.1.29"
 
   vpc_id             = "vpc-123456"
   route_table_ids    = ["route_table_1"]
