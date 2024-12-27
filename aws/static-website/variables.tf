@@ -13,6 +13,12 @@ variable "enabled_create_s3" {
   type        = bool
 }
 
+variable "existing_s3_bucket_name" {
+  description = "The name of the existing S3 bucket to use"
+  type        = string
+  default     = null
+}
+
 variable "global_tls_certificate_arn" {
   description = "The TLS certificate arn for the root domain name"
   type        = string
@@ -62,4 +68,16 @@ variable "enabled_read_only_policy" {
   description = "Enabled create the Read Only Policy to allow access to bucket objects."
   type        = bool
   default     = false
+}
+
+variable "use_www_domain" {
+  description = "Use www domain"
+  type        = bool
+  default     = false
+}
+
+variable "cloudfront_distribution_aliases" {
+  description = "List of domain names that is associated with the CloudFront distribution."
+  type        = list(string)
+  default     = null
 }

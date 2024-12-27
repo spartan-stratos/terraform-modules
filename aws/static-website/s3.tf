@@ -1,7 +1,7 @@
 data "aws_s3_bucket" "this" {
   count = var.enabled_create_s3 ? 0 : 1
 
-  bucket = var.name
+  bucket = var.existing_s3_bucket_name != null ? var.existing_s3_bucket_name : var.name
 }
 
 module "s3" {

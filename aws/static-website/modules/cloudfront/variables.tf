@@ -40,3 +40,15 @@ variable "price_class" {
   type        = string
   default     = "PriceClass_100"
 }
+
+variable "use_www_domain" {
+  description = "Use www domain"
+  type        = bool
+  default     = false
+}
+
+variable "distribution_aliases" {
+  description = "List of domain names that associate with the CloudFront distribution."
+  type        = list(string)
+  default     = null
+}
