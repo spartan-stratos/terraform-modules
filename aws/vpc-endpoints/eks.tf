@@ -24,5 +24,8 @@ resource "aws_vpc_endpoint" "eks" {
   vpc_id       = var.vpc_id
   service_name = data.aws_vpc_endpoint_service.eks[0].service_name
 
-  route_table_ids = var.route_table_ids
+  private_dns_enabled = true
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = var.security_group_ids
+  subnet_ids          = var.subnet_ids
 }
