@@ -35,6 +35,7 @@
 | <a name="input_set_container_port"></a> [set\_container\_port](#input\_set\_container\_port) | To specify the port number for a container | <pre>object({<br/>    name  = string<br/>    value = number<br/>  })</pre> | `null` | no |
 | <a name="input_set_list_config"></a> [set\_list\_config](#input\_set\_list\_config) | To specify the list value of a single configs | `list(any)` | `[]` | no |
 | <a name="input_set_metrics_enabled"></a> [set\_metrics\_enabled](#input\_set\_metrics\_enabled) | To allow unauthenticated access to /metrics if value is true | <pre>object({<br/>    name  = string<br/>    value = bool<br/>  })</pre> | <pre>{<br/>  "name": "metrics.enabled",<br/>  "value": false<br/>}</pre> | no |
+| <a name="input_set_rbac_create"></a> [set\_rbac\_create](#input\_set\_rbac\_create) | To enable rbac.create set in metrics\_server | <pre>object({<br/>    name  = string<br/>    value = bool<br/>  })</pre> | `null` | no |
 
 ## Outputs
 

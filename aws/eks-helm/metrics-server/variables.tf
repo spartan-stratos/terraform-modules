@@ -36,6 +36,15 @@ variable "set_container_port" {
   default = null
 }
 
+variable "set_rbac_create" {
+  description = "To enable rbac.create set in metrics_server"
+  type = object({
+    name  = string
+    value = bool
+  })
+  default = null
+}
+
 variable "create_eks_rbac" {
   description = "To create EKS RBAC resources"
   type        = bool

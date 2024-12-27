@@ -18,4 +18,10 @@ module "metrics_server_with_rbac" {
     name  = "rbac.create"
     value = true
   }
+
+  set_container_port = {
+    name  = "containerPort"
+    value = 10250
+  }
+  create_eks_rbac = true
 }

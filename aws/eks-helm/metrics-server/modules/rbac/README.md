@@ -27,10 +27,4 @@ No modules.
 | <a name="input_cluster_role_name"></a> [cluster\_role\_name](#input\_cluster\_role\_name) | n/a | `string` | `"metrics-server"` | no |
 | <a name="input_custom_namespaces"></a> [custom\_namespaces](#input\_custom\_namespaces) | Custom namespaces to be created during initialization | `list(string)` | `[]` | no |
 | <a name="input_service_account"></a> [service\_account](#input\_service\_account) | Service account name for binding with Cluster role | `string` | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| <a name="output_agent_cluster_role_name"></a> [agent\_cluster\_role\_name](#output\_agent\_cluster\_role\_name) | n/a |
 <!-- END_TF_DOCS -->
