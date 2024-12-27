@@ -78,9 +78,8 @@ resource "aws_security_group" "this" {
 # Ingress Rules - CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups :
-    sg_name => flatten([
+  for_each = var.create_default_security_group ? {} : flatten([
+    for sg_name, sg in var.security_groups : [
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
         sg_id       = aws_security_group.this[sg.name].id
@@ -90,8 +89,8 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
         ip_protocol = var.rules[ingress_rule][2]
         cidr_blocks = sg.ingress_cidr_blocks
       }
-    ]) if length(sg.ingress_cidr_blocks) > 0
-  }
+    ]
+  ])
 
   security_group_id = each.value.sg_id
   cidr_ipv4         = each.value.cidr_blocks
