@@ -1,5 +1,5 @@
 locals {
-  filesystem_name = join("-", [var.name, var.environment, "eks", "efs"])
+  filesystem_name = var.efs_filesystem_name != null ? var.efs_filesystem_name : join("-", [var.name, var.environment, "eks", "efs"])
 }
 
 resource "aws_efs_file_system" "eks" {

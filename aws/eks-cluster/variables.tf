@@ -128,6 +128,12 @@ variable "efs_lifecycle_policy" {
   default = []
 }
 
+variable "efs_filesystem_name" {
+  description = "To specify the name of efs filesystem in case overwrite the default one"
+  type        = string
+  default     = null
+}
+
 variable "node_groups" {
   description = "Key-value mapping of Kubernetes node groups attributes"
   default     = {}
