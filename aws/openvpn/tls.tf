@@ -16,7 +16,7 @@ resource "tls_self_signed_cert" "ca" {
     organization = var.organization
   }
 
-  dns_names = [
+  dns_names = var.custom_cert_dns_names != null ? var.custom_cert_dns_names : [
     var.domain_name,
     "*.${var.domain_name}",
   ]
