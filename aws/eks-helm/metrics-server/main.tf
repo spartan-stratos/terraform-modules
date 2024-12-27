@@ -9,23 +9,7 @@ resource "helm_release" "metrics_server" {
 
   # If true, allow unauthenticated access to /metrics.
   dynamic "set" {
-    for_each = var.set_metrics_enabled == null ? [] : [var.set_metrics_enabled]
-    content {
-      name  = set.value.name
-      value = set.value.value
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.set_container_port == null ? [] : [var.set_container_port]
-    content {
-      name  = set.value.name
-      value = set.value.value
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.set_rbac_create == null ? [] : [var.set_rbac_create]
+    for_each = [for v in [var.set_metrics_enabled, var.set_container_port]: v if v != null]
     content {
       name  = set.value.name
       value = set.value.value
