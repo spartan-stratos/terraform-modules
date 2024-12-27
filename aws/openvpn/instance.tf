@@ -91,6 +91,6 @@ resource "aws_instance" "replacable" {
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
  */
 resource "aws_eip" "this" {
-  instance = aws_instance.this.id
+  instance = var.replace_instance_on_update ? aws_instance.replacable[0].id : aws_instance.this[0].id
   domain   = "vpc"
 }
