@@ -1,12 +1,12 @@
 module "static_website" {
   source = "../../"
 
-  name = "example"
+  name        = "example"
   domain_name = "example.com"
 
-  enabled_create_s3      = false
-  dns_name               = "example"
-  route53_zone_id        = "<r53_zone_id>"
+  enabled_create_s3 = false
+  dns_name          = "example"
+  route53_zone_id   = "<r53_zone_id>"
   # route53_zone_name      = "spartan-dev.io"
   viewer_protocol_policy = "allow-all"
 
