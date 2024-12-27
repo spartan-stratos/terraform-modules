@@ -18,7 +18,7 @@ variable "helm_chart_version" {
 variable "set_metrics_enabled" {
   description = "To allow unauthenticated access to /metrics if value is true"
   type = object({
-    name = string
+    name  = string
     value = bool
   })
   default = {
@@ -28,18 +28,18 @@ variable "set_metrics_enabled" {
 }
 
 variable "set_container_port" {
-  description = "To specify the list of set configs"
+  description = "To specify the port number for a container"
   type = object({
-    name = string
+    name  = string
     value = number
   })
   default = null
 }
 
 variable "set_rbac_create" {
-  description = "value"
+  description = "To create EKS RBAC resources"
   type = object({
-    name = string
+    name  = string
     value = bool
   })
   default = null
@@ -47,6 +47,6 @@ variable "set_rbac_create" {
 
 variable "set_list_config" {
   description = "To specify the list value of a single configs"
-  type = list(any)
-  default = []
+  type        = list(any)
+  default     = []
 }
