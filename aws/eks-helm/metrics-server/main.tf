@@ -9,7 +9,7 @@ resource "helm_release" "metrics_server" {
 
   # If true, allow unauthenticated access to /metrics.
   dynamic "set" {
-    for_each = [for v in [var.set_metrics_enabled, var.set_container_port]: v if v != null]
+    for_each = [for v in [var.set_metrics_enabled, var.set_container_port] : v if v != null]
     content {
       name  = set.value.name
       value = set.value.value

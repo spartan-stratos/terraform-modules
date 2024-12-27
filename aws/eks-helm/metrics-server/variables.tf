@@ -38,8 +38,8 @@ variable "set_container_port" {
 
 variable "create_eks_rbac" {
   description = "To create EKS RBAC resources"
-  type = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "set_list_config" {
