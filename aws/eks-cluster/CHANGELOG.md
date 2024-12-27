@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.19]() (2024-12-23)
+## [0.1.28]() (2024-12-27)
 ### Features
 * Add `var.efs_filesystem_name` to overwrite the default efs filesystem name
 
