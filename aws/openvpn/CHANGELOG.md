@@ -3,8 +3,7 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.29]() (2024-12-26)
 ### Fix
-* Remove ignore changes in user_data.
-> This change takes user_data out of the lifecycle.ignore_changes list. This is because updating user_data without recreating the instance is generally not expected behavior. User-data is executed only during the initial instance startup, so subsequent updates to user_data should typically trigger a new instance creation.
+* Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables: `replace_instance_on_update`.
 
 ## [0.1.28]() (2024-12-26)
 ### Features

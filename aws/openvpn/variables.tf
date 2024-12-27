@@ -132,6 +132,12 @@ variable "create_egress_vpn_rule" {
   default     = true
 }
 
+variable "replace_instance_on_update" {
+  type        = bool
+  description = "Whether to replace the instance on update variables"
+  default     = false
+}
+
 # For no change migrations
 variable "init_script_callback_comment" {
   description = "The callback name for the OpenVPN server"
