@@ -78,7 +78,7 @@ resource "aws_security_group" "this" {
 # Ingress Rules - CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_cidr" {
-  for_each = var.create_default_security_group ? {} : flatten([
+  for_each = var.create_default_security_group ? [] : flatten([
     for sg_name, sg in var.security_groups : [
       for ingress_rule in sg.ingress_rules : {
         sg_name     = sg.name
