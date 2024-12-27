@@ -144,7 +144,7 @@ resource "aws_security_group_rule" "ingress_self" {
         ip_protocol = var.rules[ingress_rule][2]
         self        = sg.ingress_self
       }
-    ] if(sg.ingress_rules == true)
+    ] if sg.ingress_rules
   ])
 
   security_group_id        = each.value.sg_id
@@ -225,7 +225,7 @@ resource "aws_security_group_rule" "egress_self" {
         ip_protocol = var.rules[ingress_rule][2]
         self        = sg.egress_self
       }
-    ] if(sg.egress_self == true)
+    ] if sg.egress_self
   ])
 
   security_group_id        = each.value.sg_id
