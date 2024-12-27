@@ -33,14 +33,14 @@ module "static_website" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
 
 ## Modules
 
@@ -59,17 +59,20 @@ module "static_website" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cloudfront_distribution_aliases"></a> [cloudfront\_distribution\_aliases](#input\_cloudfront\_distribution\_aliases) | List of domain names that is associated with the CloudFront distribution. | `list(string)` | `null` | no |
 | <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the static website. | `string` | n/a | yes |
 | <a name="input_enabled_create_s3"></a> [enabled\_create\_s3](#input\_enabled\_create\_s3) | The bool value determining whether to create a new S3 bucket | `bool` | n/a | yes |
 | <a name="input_enabled_public_policy"></a> [enabled\_public\_policy](#input\_enabled\_public\_policy) | Enabled create the Public Policy to allow public access to bucket objects. | `bool` | `false` | no |
 | <a name="input_enabled_read_only_policy"></a> [enabled\_read\_only\_policy](#input\_enabled\_read\_only\_policy) | Enabled create the Read Only Policy to allow access to bucket objects. | `bool` | `false` | no |
 | <a name="input_enabled_read_write_policy"></a> [enabled\_read\_write\_policy](#input\_enabled\_read\_write\_policy) | Enabled create the Read Write Policy to allow access to bucket objects. | `bool` | `false` | no |
+| <a name="input_existing_s3_bucket_name"></a> [existing\_s3\_bucket\_name](#input\_existing\_s3\_bucket\_name) | The name of the existing S3 bucket to use | `string` | `null` | no |
 | <a name="input_global_tls_certificate_arn"></a> [global\_tls\_certificate\_arn](#input\_global\_tls\_certificate\_arn) | The TLS certificate arn for the root domain name | `string` | n/a | yes |
 | <a name="input_minimum_protocol_version"></a> [minimum\_protocol\_version](#input\_minimum\_protocol\_version) | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
 | <a name="input_name"></a> [name](#input\_name) | For creating or retrieving the bucket and cloudfront name | `string` | n/a | yes |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. | `string` | `"PriceClass_100"` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | R53 zone ID | `string` | n/a | yes |
+| <a name="input_use_www_domain"></a> [use\_www\_domain](#input\_use\_www\_domain) | Use www domain | `bool` | `false` | no |
 | <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | `"redirect-to-https"` | no |
 
 ## Outputs

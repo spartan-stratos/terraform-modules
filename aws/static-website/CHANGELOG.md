@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.28]() (2024-12-23)
+### Features
+* Add a flag to enable www domain: `use_www_domain`
+* Add `cloudfront_distribution_aliases` variable to custom distribution aliases
+* Add `s3_bucket_name` variable to specify the name of custom s3 bucket to use
+
 ## [0.1.17]() (2024-12-23)
 ### Features
 * Update aws_cloudfront_distribution.aliases.

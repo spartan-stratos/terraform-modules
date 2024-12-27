@@ -13,8 +13,8 @@ variable "enabled_create_s3" {
   type        = bool
 }
 
-variable "s3_bucket_name" {
-  description = "The name of custom S3 bucket"
+variable "existing_s3_bucket_name" {
+  description = "The name of the existing S3 bucket to use"
   type        = string
   default     = null
 }
