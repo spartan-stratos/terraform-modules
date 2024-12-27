@@ -1,6 +1,21 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.28]() (2024-12-27)
+
+### Features
+* AWS Static Website: [(./aws/static-website)](./aws/static-website/)
+  * Add a flag to enable www domain: `use_www_domain`
+  * Add `cloudfront_distribution_aliases` variable to custom distribution aliases
+  * Add `existing_s3_bucket_name` variable to specify the name of custom s3 bucket to use
+* AWS OpenVPN: [(./aws/openvpn)](./aws/openvpn/)
+  * Allow using this module to use various available OAuth2 provider by adding variables: `oauth2_provider`, `oauth2_issuer`
+  * Allow validate group and role of the authorized identity via `oauth2_validate_groups` and `oauth2_validate_roles`
+  * Make management ssh key optional `create_management_key_pair`
+  * And add some variables for migrations: `custom_cert_dns_names`, `create_egress_vpn_rule`, `init_script_callback_comment`
+* AWS SQS: [(./aws/sqs)](./aws/sqs/)
+  * Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.
+
 ## [0.1.27]() (2024-12-26)
 
 ### Features
