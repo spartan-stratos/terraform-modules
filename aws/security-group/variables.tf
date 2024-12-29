@@ -7,9 +7,9 @@ variable "security_groups" {
       from_port        = string
       to_port          = string
       protocol         = string
-      cidr_blocks      = optional(list(string), [])
-      ipv6_cidr_blocks = optional(list(string), [])
-      description      = optional(string)
+      cidr_blocks      = string
+      ipv6_cidr_blocks = string
+      description      = string
     }))
   }))
 }
