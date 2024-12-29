@@ -1,28 +1,16 @@
 module "aws_custom_security_groups" {
   source = "../.."
 
-  create_default_security_group = false
   security_groups = [
     {
-      name                     = "example-sg"
-      description              = "Example Security Group"
+      name                     = "allow_all_within_vpc"
+      description              = "Allow all inbound traffic within VPC"
       vpc_id                   = "vpc-12345678"
-      ingress_rules            = ["http"]
+      ingress_rules            = ["allow-all"]
       ingress_cidr_blocks      = ["0.0.0.0/0"]
-      ingress_ipv6_cidr_blocks = []
-      ingress_self             = [true]
-      egress_rules             = ["https"]
+      ingress_ipv6_cidr_blocks = ["::/0"]
+      egress_rules             = ["allow-all"]
       egress_cidr_blocks       = ["0.0.0.0/0"]
-      egress_ipv6_cidr_blocks  = []
-      egress_self              = []
     }
   ]
-}
-
-module "aws_default_security_groups" {
-  source = "../.."
-
-  create_default_security_group = true
-  vpc_id                        = "vpc-12345678"
-  cidr_blocks                   = ["10.0.0.0/16"]
 }
