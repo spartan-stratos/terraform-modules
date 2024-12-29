@@ -1,3 +1,11 @@
+resource "aws_security_group" "this" {
+  for_each = { for sg in var.security_groups : sg.name => sg }
+
+  name        = each.value.name
+  description = each.value.description
+  vpc_id      = each.value.vpc_id
+}
+
 resource "aws_vpc_security_group_ingress_rule" "test" {
   for_each = {
     for sg in var.security_groups :
