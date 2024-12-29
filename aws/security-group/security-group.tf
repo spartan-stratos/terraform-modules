@@ -39,3 +39,19 @@ resource "aws_vpc_security_group_ingress_rule" "test" {
   cidr_ipv6   = each.value.ipv6_cidr_blocks
   description = each.value.description
 }
+
+variable "security_groups" {
+  type = map(object({
+    name        = string
+    description = string
+    vpc_id      = string
+    ingress_rules = map(object({
+      from_port        = number
+      to_port          = number
+      protocol         = string
+      cidr_blocks      = list(string)
+      ipv6_cidr_blocks = list(string)
+      description      = string
+    }))
+  }))
+}
