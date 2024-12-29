@@ -1,5 +1,5 @@
 variable "security_groups" {
-  type = list(object({
+  type = map(object({
     name        = string
     description = string
     vpc_id      = string
