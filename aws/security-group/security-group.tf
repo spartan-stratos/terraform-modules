@@ -36,7 +36,6 @@ resource "aws_vpc_security_group_ingress_rule" "test" {
   to_port     = each.value.to_port
   ip_protocol = each.value.ip_protocol
   cidr_ipv4   = each.value.cidr_blocks
-  cidr_ipv6   = each.value.ipv6_cidr_blocks
   description = each.value.description
 }
 
@@ -45,13 +44,14 @@ variable "security_groups" {
     name        = string
     description = string
     vpc_id      = string
-    ingress_rules = map(object({
-      from_port        = number
-      to_port          = number
-      protocol         = string
-      cidr_blocks      = string
-      ipv6_cidr_blocks = string
-      description      = string
-    }))
+    ingress_rules = optional(map(object({
+      from_port        = optional(number, null) # Default to null if not provided
+      to_port          = optional(number, null) # Default to null if not provided
+      protocol         = optional(string, null) # Default to null if not provided
+      cidr_blocks      = optional(string, null) # Default to null if not provided
+      ipv6_cidr_blocks = optional(string, null) # Default to null if not provided
+      description      = optional(string, null) # Default to null if not provided
+    })), null)                                  # Default the whole `ingress_rules` map to null if not provided
   }))
+  default = null # Default to null for the whole security_groups map
 }
