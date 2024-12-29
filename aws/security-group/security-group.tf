@@ -6,11 +6,13 @@ resource "aws_security_group" "this" {
   vpc_id      = each.value.vpc_id
 }
 
-resource "aws_vpc_security_group_ingress_rule" "test" {
-  for_each = flatten([
+locals {
+  # Flatten the list of security group rules into a single list of objects
+  security_group_rules = flatten([
     for sg in var.security_groups : [
       for rule_key, rule in sg.ingress_rules : {
         security_group_name = sg.name
+        rule_key            = rule_key
         from_port           = rule.from_port
         to_port             = rule.to_port
         ip_protocol         = rule.protocol
@@ -20,6 +22,13 @@ resource "aws_vpc_security_group_ingress_rule" "test" {
       }
     ]
   ])
+}
+
+resource "aws_vpc_security_group_ingress_rule" "test" {
+  # Convert the flattened list of rules into a map for `for_each`
+  for_each = tomap({
+    for rule in local.security_group_rules : "${rule.security_group_name}.${rule.rule_key}" => rule
+  })
 
   security_group_id = aws_security_group.this[each.value.security_group_name].id
   from_port         = each.value.from_port
