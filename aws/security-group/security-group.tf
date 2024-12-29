@@ -9,15 +9,10 @@ resource "aws_vpc_security_group_ingress_rule" "test" {
 
   security_group_id = each.value.security_group_id
 
-  dynamic "rule" {
-    for_each = each.value.rules
-    content {
-      from_port   = rule.value.from_port
-      to_port     = rule.value.to_port
-      ip_protocol = rule.value.protocol
-      cidr_ipv4   = lookup(rule.value, "cidr_blocks", [])
-      cidr_ipv6   = lookup(rule.value, "ipv6_cidr_blocks", [])
-      description = lookup(rule.value, "description", "")
-    }
-  }
+  from_port   = each.value.rule.from_port
+  to_port     = each.value.rule.to_port
+  ip_protocol = each.value.rule.protocol
+  cidr_ipv4   = lookup(each.value.rule, "cidr_blocks", [])
+  cidr_ipv6   = lookup(each.value.rule, "ipv6_cidr_blocks", [])
+  description = lookup(each.value.rule, "description", "")
 }
