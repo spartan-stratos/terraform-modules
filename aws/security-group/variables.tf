@@ -4,8 +4,8 @@ variable "security_groups" {
     description = string
     vpc_id      = string
     ingress_rules = map(object({
-      from_port        = number
-      to_port          = number
+      from_port        = string
+      to_port          = string
       protocol         = string
       cidr_blocks      = optional(list(string), [])
       ipv6_cidr_blocks = optional(list(string), [])
