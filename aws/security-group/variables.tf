@@ -1,38 +1,30 @@
 variable "security_groups" {
-  description = <<EOT
-A list of objects defining custom security groups. Each security group object should include the following properties:
-- `name` (string): The name of the security group.
-- `description` (string): A description of the security group's purpose.
-- `vpc_id` (string): The VPC ID where the security group will be created.
-- `ingress_rules` (list(string)): A list of ingress rule names defined in the `rules` variable.
-- `ingress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the ingress rules. Default is an empty list.
-- `ingress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the ingress rules. Default is an empty list.
-- `ingress_self` (optional, list(bool)): Whether to allow self-referencing ingress rules. Default is an empty list.
-- `egress_rules` (list(string)): A list of egress rule names defined in the `rules` variable.
-- `egress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the egress rules. Default is an empty list.
-- `egress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the egress rules. Default is an empty list.
-- `egress_self` (optional, list(bool)): Whether to allow self-referencing egress rules. Default is an empty list.
-EOT
-  type = list(object({
-    name                     = string
-    description              = string
-    vpc_id                   = string
-    ingress_rules            = list(string)
-    ingress_cidr_blocks      = optional(list(string))
-    ingress_ipv6_cidr_blocks = optional(list(string))
-    ingress_self             = optional(list(bool))
-    egress_rules             = list(string)
-    egress_cidr_blocks       = optional(list(string))
-    egress_ipv6_cidr_blocks  = optional(list(string))
-    egress_self              = optional(list(bool))
-  }))
-  default = null
-}
+  description = "A map of security groups with their associated ingress and egress rules, to be applied to a VPC."
+  type = map(object({
+    name        = string
+    description = string
+    vpc_id      = string
+    ingress_rules = optional(map(object({
+      from_port   = optional(number, null) # Port range start for ingress traffic, null means not specified
+      to_port     = optional(number, null) # Port range end for ingress traffic, null means not specified
+      protocol    = optional(string, null) # Protocol for ingress traffic (e.g., 'tcp', 'udp', etc.), null means not specified
+      cidr_ipv4   = optional(string, null) # IPv4 CIDR block for ingress traffic, null means not specified
+      cidr_ipv6   = optional(string, null) # IPv6 CIDR block for ingress traffic, null means not specified
+      description = optional(string, null) # Description of the ingress rule, null means not specified
+      self        = optional(bool, false)  # Whether to allow traffic from the security group itself, defaults to false
+    })), null)                             # A map of ingress rules for the security group, can be null if no ingress rules are specified
 
-variable "rules" {
-  description = "Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description'])"
-  type        = map(list(any))
-  default     = null
+    egress_rules = optional(map(object({
+      from_port   = optional(number, null) # Port range start for egress traffic, null means not specified
+      to_port     = optional(number, null) # Port range end for egress traffic, null means not specified
+      protocol    = optional(string, null) # Protocol for egress traffic (e.g., 'tcp', 'udp', etc.), null means not specified
+      cidr_ipv4   = optional(string, null) # IPv4 CIDR block for egress traffic, null means not specified
+      cidr_ipv6   = optional(string, null) # IPv6 CIDR block for egress traffic, null means not specified
+      description = optional(string, null) # Description of the egress rule, null means not specified
+      self        = optional(bool, false)  # Whether to allow traffic to the security group itself, defaults to false
+    })), null)                             # A map of egress rules for the security group, can be null if no egress rules are specified
+  }))
+  default = null # Default to null if no security groups are defined
 }
 
 variable "create_default_security_group" {

@@ -73,141 +73,152 @@ resource "aws_security_group" "this" {
 ############################################
 # Security Group Rules
 ############################################
+locals {
+  ingress_rules = flatten([
+    for sg_key, sg in var.security_groups : [
+      for rule_key, rule in sg.ingress_rules : {
+        security_group_name = sg_key
+        rule_key            = rule_key
+        from_port           = rule.from_port
+        to_port             = rule.to_port
+        ip_protocol         = rule.protocol
+        cidr_ipv4           = rule.cidr_ipv4
+        cidr_ipv6           = rule.cidr_ipv6
+        self                = rule.self
+        description         = rule.description
+      }
+    ]
+  ])
+
+  egress_rules = flatten([
+    for sg_key, sg in var.security_groups : [
+      for rule_key, rule in sg.egress_rules : {
+        security_group_name = sg_key
+        rule_key            = rule_key
+        from_port           = rule.from_port
+        to_port             = rule.to_port
+        ip_protocol         = rule.protocol
+        cidr_ipv4           = rule.cidr_ipv4
+        cidr_ipv6           = rule.cidr_ipv6
+        self                = rule.self
+        description         = rule.description
+      }
+    ]
+  ])
+}
 
 ############################################
-# Ingress Rules - CIDR Blocks
+# Ingress Rules - IPv4 CIDR Blocks
 ############################################
-resource "aws_security_group_rule" "ingress_cidr" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name       = sg.name
-      sg_id         = aws_security_group.this[sg.name].id
-      ingress_rules = sg.ingress_rules
-      cidr_blocks   = sg.ingress_cidr_blocks
-    } if length(sg.ingress_cidr_blocks) > 0
-  }
+resource "aws_vpc_security_group_ingress_rule" "ingress_ipv4" {
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.ingress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.cidr_ipv4 != null
+  })
 
-  security_group_id = each.value.sg_id
-  type              = "ingress"
-  cidr_blocks       = each.value.cidr_blocks
+  security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  description = var.rules[each.value.ingress_rules[0]][3]
-  from_port   = var.rules[each.value.ingress_rules[0]][0]
-  to_port     = var.rules[each.value.ingress_rules[0]][1]
-  protocol    = var.rules[each.value.ingress_rules[0]][2]
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  ip_protocol = each.value.ip_protocol
+  cidr_ipv4   = each.value.cidr_ipv4
+  description = each.value.description
 }
 
 ############################################
 # Ingress Rules - IPv6 CIDR Blocks
 ############################################
-resource "aws_security_group_rule" "ingress_ipv6" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name          = sg.name
-      sg_id            = aws_security_group.this[sg.name].id
-      ingress_rules    = sg.ingress_rules
-      ipv6_cidr_blocks = sg.ingress_ipv6_cidr_blocks
-    } if length(sg.ingress_ipv6_cidr_blocks) > 0
-  }
+resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.ingress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.cidr_ipv6 != null
+  })
 
-  security_group_id = each.value.sg_id
-  type              = "ingress"
-  ipv6_cidr_blocks  = each.value.ipv6_cidr_blocks
+  security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  description = var.rules[each.value.ingress_rules[0]][3]
-  from_port   = var.rules[each.value.ingress_rules[0]][0]
-  to_port     = var.rules[each.value.ingress_rules[0]][1]
-  protocol    = var.rules[each.value.ingress_rules[0]][2]
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  ip_protocol = each.value.ip_protocol
+  cidr_ipv6   = each.value.cidr_ipv6
+  description = each.value.description
 }
 
 ############################################
 # Ingress Rules - Self
 ############################################
 resource "aws_security_group_rule" "ingress_self" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name       = sg.name
-      sg_id         = aws_security_group.this[sg.name].id
-      ingress_rules = sg.ingress_rules
-      self          = sg.ingress_self
-    } if contains(sg.ingress_self, true)
-  }
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.ingress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.self == true
+  })
 
-  security_group_id        = each.value.sg_id
+  security_group_id        = aws_security_group.this[each.value.security_group_name].id
+  source_security_group_id = aws_security_group.this[each.value.security_group_name].id
   type                     = "ingress"
-  source_security_group_id = each.value.sg_id
 
-  description = var.rules[each.value.ingress_rules[0]][3]
-  from_port   = var.rules[each.value.ingress_rules[0]][0]
-  to_port     = var.rules[each.value.ingress_rules[0]][1]
-  protocol    = var.rules[each.value.ingress_rules[0]][2]
+  protocol    = each.value.ip_protocol
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  description = each.value.description
 }
 
 ############################################
-# Egress Rules - CIDR Blocks
+# Egress Rules - IPv4 CIDR Blocks
 ############################################
-resource "aws_security_group_rule" "egress_cidr" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name      = sg.name
-      sg_id        = aws_security_group.this[sg.name].id
-      egress_rules = sg.egress_rules
-      cidr_blocks  = sg.egress_cidr_blocks
-    } if length(sg.egress_cidr_blocks) > 0
-  }
+resource "aws_vpc_security_group_egress_rule" "egress_ipv4" {
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.egress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.cidr_ipv4 != null
+  })
 
-  security_group_id = each.value.sg_id
-  type              = "egress"
-  cidr_blocks       = each.value.cidr_blocks
+  security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  description = var.rules[each.value.egress_rules[0]][3]
-  from_port   = var.rules[each.value.egress_rules[0]][0]
-  to_port     = var.rules[each.value.egress_rules[0]][1]
-  protocol    = var.rules[each.value.egress_rules[0]][2]
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  ip_protocol = each.value.ip_protocol
+  cidr_ipv4   = each.value.cidr_ipv4
+  description = each.value.description
 }
 
 ############################################
 # Egress Rules - IPv6 CIDR Blocks
 ############################################
-resource "aws_security_group_rule" "egress_ipv6" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name          = sg.name
-      sg_id            = aws_security_group.this[sg.name].id
-      egress_rules     = sg.egress_rules
-      ipv6_cidr_blocks = sg.egress_ipv6_cidr_blocks
-    } if length(sg.egress_ipv6_cidr_blocks) > 0
-  }
+resource "aws_vpc_security_group_egress_rule" "egress_ipv6" {
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.egress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.cidr_ipv6 != null
+  })
 
-  security_group_id = each.value.sg_id
-  type              = "egress"
-  ipv6_cidr_blocks  = each.value.ipv6_cidr_blocks
+  security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  description = var.rules[each.value.egress_rules[0]][3]
-  from_port   = var.rules[each.value.egress_rules[0]][0]
-  to_port     = var.rules[each.value.egress_rules[0]][1]
-  protocol    = var.rules[each.value.egress_rules[0]][2]
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  ip_protocol = each.value.ip_protocol
+  cidr_ipv6   = each.value.cidr_ipv6
+  description = each.value.description
 }
 
 ############################################
 # Egress Rules - Self
 ############################################
 resource "aws_security_group_rule" "egress_self" {
-  for_each = var.create_default_security_group ? {} : {
-    for sg_name, sg in var.security_groups : sg_name => {
-      sg_name      = sg.name
-      sg_id        = aws_security_group.this[sg.name].id
-      egress_rules = sg.egress_rules
-      self         = sg.egress_self
-    } if contains(sg.egress_self, true)
-  }
+  for_each = var.create_default_security_group ? {} : tomap({
+    for rule in local.egress_rules :
+    "${rule.security_group_name}_${rule.rule_key}" => rule
+    if rule.self == true
+  })
 
-  security_group_id        = each.value.sg_id
+  security_group_id        = aws_security_group.this[each.value.security_group_name].id
+  source_security_group_id = aws_security_group.this[each.value.security_group_name].id
   type                     = "egress"
-  source_security_group_id = each.value.sg_id
 
-  description = var.rules[each.value.egress_rules[0]][3]
-  from_port   = var.rules[each.value.egress_rules[0]][0]
-  to_port     = var.rules[each.value.egress_rules[0]][1]
-  protocol    = var.rules[each.value.egress_rules[0]][2]
+  protocol    = each.value.ip_protocol
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  description = each.value.description
 }

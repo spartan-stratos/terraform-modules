@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.29]() (2024-12-30)
+### Features
+* Refactor security group variables for improved flexibility
+
 ## [0.1.27]() (2024-12-26)
 ### Features
 * Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during migration
