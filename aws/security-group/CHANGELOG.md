@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.29]() (2024-12-30)
 ### Features
-* Refactor security group variables for improved flexibility
+* Update Security Group Resources to Support Dynamic Ingress and Egress Rule Management
 
 ## [0.1.27]() (2024-12-26)
 ### Features
