@@ -3,14 +3,29 @@ module "aws_custom_security_groups" {
 
   security_groups = [
     {
-      name                     = "allow_all_within_vpc"
-      description              = "Allow all inbound traffic within VPC"
-      vpc_id                   = "vpc-12345678"
-      ingress_rules            = ["allow-all"]
-      ingress_cidr_blocks      = ["0.0.0.0/0"]
-      ingress_ipv6_cidr_blocks = ["::/0"]
-      egress_rules             = ["allow-all"]
-      egress_cidr_blocks       = ["0.0.0.0/0"]
+      name = "allow_all_within_vpc"
+      ingress_rules = {
+        "allow-all" = {
+          from_port        = 0
+          to_port          = 0
+          protocol         = "-1"
+          cidr_blocks      = ["0.0.0.0/0"]
+          ipv6_cidr_blocks = ["::/0"]
+          description      = "Allow all traffic"
+        }
+      }
+    },
+    {
+      name = "allow_postgres_inbound"
+      ingress_rules = {
+        "allow-postgresql" = {
+          from_port   = 5432
+          to_port     = 5432
+          protocol    = "tcp"
+          cidr_blocks = ["10.0.0.0/16"]
+          description = "Allow PostgreSQL traffic"
+        }
+      }
     }
   ]
 }
