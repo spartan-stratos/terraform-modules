@@ -160,7 +160,7 @@ aws_db_subnet_group provides an RDS DB subnet group resource.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
 */
 resource "aws_db_subnet_group" "private_database" {
-  count = length(aws_subnet.private.*.id) > 0 && create_private_database_subnet_group ? 1 : 0
+  count = length(aws_subnet.private.*.id) > 0 && var.create_private_database_subnet_group ? 1 : 0
 
   name        = "${var.name}-private_database"
   description = "${var.name} private db subnet group"
