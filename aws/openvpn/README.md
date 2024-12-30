@@ -91,7 +91,7 @@ No modules.
 | <a name="input_oauth2_issuer"></a> [oauth2\_issuer](#input\_oauth2\_issuer) | The OAuth2 issuer. | `string` | `"https://accounts.google.com"` | no |
 | <a name="input_oauth2_provider"></a> [oauth2\_provider](#input\_oauth2\_provider) | The OAuth2 provider. | `string` | `"google"` | no |
 | <a name="input_oauth2_validate_groups"></a> [oauth2\_validate\_groups](#input\_oauth2\_validate\_groups) | The OAuth2 groups to validate, separated by comma | `string` | `null` | no |
-| <a name="input_oauth2_validate_roles"></a> [oauth2\_validate\_roles](#input\_oauth2\_validate\_roles) | The OAuth2 roles to validate, separated by comma | `string` | `null` | no |
+| <a name="input_oauth2_validate_roles"></a> [oauth2\_validate\_roles](#input\_oauth2\_validate\_roles) | The OAuth2 roles to validate, separated by comma, for GitHub provider, please note that team name must be slugified | `string` | `null` | no |
 | <a name="input_openvpn_auth_oauth2_version"></a> [openvpn\_auth\_oauth2\_version](#input\_openvpn\_auth\_oauth2\_version) | The version of OpenVPN OAuth2 authentication plugin. | `string` | `"1.22.4"` | no |
 | <a name="input_openvpn_fqdn"></a> [openvpn\_fqdn](#input\_openvpn\_fqdn) | The fully qualified domain name of the OpenVPN. | `string` | `""` | no |
 | <a name="input_openvpn_ip_pool"></a> [openvpn\_ip\_pool](#input\_openvpn\_ip\_pool) | The IP pool for OpenVPN clients. | `string` | `"10.8.0.0"` | no |
