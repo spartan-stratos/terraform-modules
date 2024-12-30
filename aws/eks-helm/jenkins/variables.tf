@@ -199,7 +199,7 @@ variable "enabled_google_login" {
   default     = false
 
   validation {
-    condition     = var.enabled_github_app_login && var.enabled_google_login
+    condition     = !(var.enabled_github_app_login && var.enabled_google_login)
     error_message = "Only one of Github App login or Google login can be enabled"
   }
 }
