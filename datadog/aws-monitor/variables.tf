@@ -30,3 +30,14 @@ variable "tag_slack_channel" {
   type        = bool
   default     = true
 }
+
+variable "enabled_modules" {
+  description = "List of modules to enable"
+  type        = list(string)
+  default     = ["billing", "elasticache", "rds"]
+
+  validation {
+    condition     = alltrue([for module_name in var.enabled_modules : contains(["billing", "elasticache", "rds"], module_name)])
+    error_message = "Invalid module name, must be one of billing, elasticache, rds"
+  }
+}

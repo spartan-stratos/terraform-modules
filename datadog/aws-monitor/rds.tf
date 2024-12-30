@@ -6,7 +6,10 @@ module "rds" {
   environment                       = var.environment
   service                           = "rds"
 
-  monitors = local.rds_monitors
+  monitors = {
+    for monitor, config in local.default_rds_monitors :
+    monitor => merge(config, try(var.override_default_monitors[monitor])) if contains(var.enabled_modules, "rds")
+  }
 }
 
 locals {
@@ -117,9 +120,5 @@ locals {
       threshold_critical_recovery = 0
       renotify_interval           = 50
     }
-  }
-
-  rds_monitors = {
-    for monitor, config in local.default_rds_monitors : monitor => merge(config, try(var.override_default_monitors[monitor]))
   }
 }

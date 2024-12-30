@@ -28,6 +28,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | The AWS account ID | `string` | n/a | yes |
 | <a name="input_dd_users"></a> [dd\_users](#input\_dd\_users) | List of Datadog users to notify | `list(string)` | `[]` | no |
+| <a name="input_enabled_modules"></a> [enabled\_modules](#input\_enabled\_modules) | List of modules to enable | `list(string)` | <pre>[<br/>  "billing",<br/>  "elasticache",<br/>  "rds"<br/>]</pre> | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment monitored by this module | `string` | n/a | yes |
 | <a name="input_notification_slack_channel_prefix"></a> [notification\_slack\_channel\_prefix](#input\_notification\_slack\_channel\_prefix) | The prefix for Slack channels that will receive notifications and alerts | `string` | n/a | yes |
 | <a name="input_override_default_monitors"></a> [override\_default\_monitors](#input\_override\_default\_monitors) | Override default monitors with custom configuration | `map(map(any))` | `{}` | no |

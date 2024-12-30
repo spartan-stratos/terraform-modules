@@ -6,7 +6,10 @@ module "billing" {
   environment                       = var.environment
   service                           = "billing"
 
-  monitors = local.billing_monitors
+  monitors = {
+    for monitor, config in local.default_billing_monitors :
+    monitor => merge(config, try(var.override_default_monitors[monitor])) if contains(var.enabled_modules, "billing")
+  }
 }
 
 locals {
@@ -42,8 +45,5 @@ locals {
       renotify_interval           = 10
       renotify_occurrences        = 1
     }
-  }
-  billing_monitors = {
-    for monitor, config in local.default_billing_monitors : monitor => merge(config, try(var.override_default_monitors[monitor]))
   }
 }

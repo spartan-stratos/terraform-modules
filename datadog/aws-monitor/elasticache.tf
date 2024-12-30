@@ -6,7 +6,10 @@ module "elasticache" {
   environment                       = var.environment
   service                           = "elasticache"
 
-  monitors = local.elasticache_monitors
+  monitors = {
+    for monitor, config in local.default_elasticache_monitors :
+    monitor => merge(config, try(var.override_default_monitors[monitor])) if contains(var.enabled_modules, "elasticache")
+  }
 }
 
 locals {
@@ -87,8 +90,5 @@ locals {
       threshold_critical_recovery = 0
       renotify_interval           = 50
     }
-  }
-  elasticache_monitors = {
-    for monitor, config in local.default_elasticache_monitors : monitor => merge(config, try(var.override_default_monitors[monitor]))
   }
 }

@@ -12,4 +12,6 @@ module "aws_monitor" {
       threshold_critical = 500
     }
   }
+
+  enabled_modules = ["billing", "rds"]
 }
