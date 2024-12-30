@@ -110,7 +110,7 @@ variable "oauth2_validate_groups" {
 
 variable "oauth2_validate_roles" {
   type        = string
-  description = "The OAuth2 roles to validate, separated by comma"
+  description = "The OAuth2 roles to validate, separated by comma. For GitHub provider, please note that team names must be slugified"
   default     = null
 }
 
