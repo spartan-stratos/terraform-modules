@@ -67,8 +67,8 @@ resource "aws_security_group" "this" {
   name        = each.value.name
   description = each.value.description
   vpc_id      = each.value.vpc_id
+  tags        = each.value.tags
 }
-
 
 ############################################
 # Security Group Rules

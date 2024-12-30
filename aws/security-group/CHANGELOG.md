@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.29]() (2024-12-29)
+### Features
+* Add variable `tags` to custom security groups avoid update security group during migration
 
 ## [0.1.29]() (2024-12-30)
 ### Features

@@ -13,7 +13,6 @@ variable "security_groups" {
       description = optional(string, null) # Description of the ingress rule, null means not specified
       self        = optional(bool, false)  # Whether to allow traffic from the security group itself, defaults to false
     })), null)                             # A map of ingress rules for the security group, can be null if no ingress rules are specified
-
     egress_rules = optional(map(object({
       from_port   = optional(number, null) # Port range start for egress traffic, null means not specified
       to_port     = optional(number, null) # Port range end for egress traffic, null means not specified
@@ -22,7 +21,8 @@ variable "security_groups" {
       cidr_ipv6   = optional(string, null) # IPv6 CIDR block for egress traffic, null means not specified
       description = optional(string, null) # Description of the egress rule, null means not specified
       self        = optional(bool, false)  # Whether to allow traffic to the security group itself, defaults to false
-    })), null)                             # A map of egress rules for the security group, can be null if no egress rules are specified
+    })), null)
+    tags = optional(map(string), {}) # A map of egress rules for the security group, can be null if no egress rules are specified
   }))
   default = null # Default to null if no security groups are defined
 }
