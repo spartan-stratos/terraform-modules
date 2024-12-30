@@ -47,3 +47,9 @@ variable "create_flow_log" {
   type        = bool
   default     = false
 }
+
+variable "create_private_database_subnet_group" {
+  description = "Whether to create private database subnet group"
+  type = bool
+  default = false
+}
