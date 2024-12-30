@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.29]() (2024-12-30)
+
+### Features
+* AWS VPC: Add private database subnet groups [(./aws/vpc)](./aws/vpc/)
+* AWS VPC Endpoints: * Add support for EKS VPC endpoint configuration [(./aws/vpc-endpoints)](./aws/vpc-endpoints/)
+* AWS Security Group: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during migration [(./aws/security-group)](./aws/security-group/)
+
 ## [0.1.28]() (2024-12-27)
 
 ### Features
