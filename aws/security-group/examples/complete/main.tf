@@ -2,21 +2,35 @@ module "aws_custom_security_groups" {
   source = "../.."
 
   create_default_security_group = false
-  security_groups = [
-    {
-      name                     = "example-sg"
-      description              = "Example Security Group"
-      vpc_id                   = "vpc-12345678"
-      ingress_rules            = ["http"]
-      ingress_cidr_blocks      = ["0.0.0.0/0"]
-      ingress_ipv6_cidr_blocks = []
-      ingress_self             = [true]
-      egress_rules             = ["https"]
-      egress_cidr_blocks       = ["0.0.0.0/0"]
-      egress_ipv6_cidr_blocks  = []
-      egress_self              = []
+  security_groups = {
+    "example-sg" = {
+      name        = "example-sg"
+      description = "Example Security Group"
+      vpc_id      = "vpc-12345678"
+      ingress_rules = {
+        "rule1" = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          cidr_ipv4   = "0.0.0.0/0"
+          cidr_ipv6   = "::/0"
+          self        = true
+          description = "Example Rule 1"
+        }
+      }
+      egress_rules = {
+        "rule1" = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          cidr_ipv4   = "0.0.0.0/0"
+          cidr_ipv6   = "::/0"
+          self        = true
+          description = "Example Rule 2"
+        }
+      }
     }
-  ]
+  }
 }
 
 module "aws_default_security_groups" {
