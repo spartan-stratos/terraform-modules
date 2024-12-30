@@ -25,6 +25,8 @@ resource "aws_key_pair" "management_ssh_key" {
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
  */
 resource "aws_instance" "this" {
+  count = var.replace_instance_on_update ? 0 : 1
+
   ami           = data.aws_ami.debian.id
   instance_type = var.instance_type
   key_name      = var.create_management_key_pair ? var.vpn_name : null
@@ -54,10 +56,41 @@ resource "aws_instance" "this" {
   }
 }
 
+resource "aws_instance" "replacable" {
+  count = var.replace_instance_on_update ? 1 : 0
+
+  ami           = data.aws_ami.debian.id
+  instance_type = var.instance_type
+  key_name      = var.create_management_key_pair ? var.vpn_name : null
+  subnet_id     = var.subnet_id
+
+  vpc_security_group_ids = concat(
+    var.extra_sg_ids,
+    [aws_security_group.this.id],
+  )
+
+  root_block_device {
+    encrypted = true
+  }
+
+  user_data_replace_on_change = true
+  user_data                   = templatefile("${path.module}/scripts/install_openvpn.sh", local.openvpn_config)
+
+  tags = {
+    "Name" = var.vpn_name
+  }
+
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
+}
+
 /*
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip
  */
 resource "aws_eip" "this" {
-  instance = aws_instance.this.id
+  instance = var.replace_instance_on_update ? aws_instance.replacable[0].id : aws_instance.this[0].id
   domain   = "vpc"
 }

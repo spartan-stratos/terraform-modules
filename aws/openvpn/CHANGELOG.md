@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.29]() (2024-12-26)
+### Fix
+* Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables: `replace_instance_on_update`.
+
 ## [0.1.28]() (2024-12-26)
 ### Features
 * Allow using this module to use various available OAuth2 provider by adding variables: `oauth2_provider`, `oauth2_issuer`

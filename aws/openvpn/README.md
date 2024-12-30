@@ -53,6 +53,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_eip.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
+| [aws_instance.replacable](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_instance.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
 | [aws_key_pair.management_ssh_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_route53_record.vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
@@ -95,6 +96,7 @@ No modules.
 | <a name="input_openvpn_fqdn"></a> [openvpn\_fqdn](#input\_openvpn\_fqdn) | The fully qualified domain name of the OpenVPN. | `string` | `""` | no |
 | <a name="input_openvpn_ip_pool"></a> [openvpn\_ip\_pool](#input\_openvpn\_ip\_pool) | The IP pool for OpenVPN clients. | `string` | `"10.8.0.0"` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | The name of the organization. | `string` | `"Spartan"` | no |
+| <a name="input_replace_instance_on_update"></a> [replace\_instance\_on\_update](#input\_replace\_instance\_on\_update) | Whether to replace the instance on update variables | `bool` | `false` | no |
 | <a name="input_route_network_cidrs"></a> [route\_network\_cidrs](#input\_route\_network\_cidrs) | A list of network CIDRs to route. | `list(string)` | <pre>[<br/>  "10.0.0.0/8"<br/>]</pre> | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet. | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The ID of the VPC. | `string` | n/a | yes |
