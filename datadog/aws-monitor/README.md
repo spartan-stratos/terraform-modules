@@ -16,7 +16,7 @@ No providers.
 |------|--------|---------|
 | <a name="module_billing"></a> [billing](#module\_billing) | ../monitors | n/a |
 | <a name="module_elasticache"></a> [elasticache](#module\_elasticache) | ../monitors | n/a |
-| <a name="module_rds"></a> [rds](#module\_rds) | /home/taind/code/github.com/spartan-stratos/terraform-modules/datadog/monitors | n/a |
+| <a name="module_rds"></a> [rds](#module\_rds) | ../monitors | n/a |
 
 ## Resources
 

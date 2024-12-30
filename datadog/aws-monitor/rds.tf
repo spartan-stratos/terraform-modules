@@ -1,5 +1,5 @@
 module "rds" {
-  source = "/home/taind/code/github.com/spartan-stratos/terraform-modules/datadog/monitors"
+  source = "../monitors"
 
   notification_slack_channel_prefix = var.notification_slack_channel_prefix
   tag_slack_channel                 = var.tag_slack_channel
