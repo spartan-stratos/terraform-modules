@@ -87,7 +87,7 @@ CONFIG_HTTP_BASEURL=https://${openvpn_fqdn}
 CONFIG_OAUTH2_PROVIDER=${oauth2_provider}
 CONFIG_OAUTH2_ISSUER=${oauth2_issuer}
 CONFIG_OAUTH2_CLIENT_ID=${oauth2_client_id}
-%{~ if oauth2_validate_roles != null ~}
+%{if oauth2_validate_roles != null ~}
 CONFIG_OAUTH2_VALIDATE_GROUPS=${oauth2_validate_groups}
 CONFIG_OAUTH2_VALIDATE_ROLES=${oauth2_validate_roles}' > /etc/sysconfig/openvpn-auth-oauth2
 %{~ else ~}
