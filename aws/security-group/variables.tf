@@ -11,7 +11,8 @@ A list of objects defining custom security groups. Each security group object sh
 - `egress_rules` (list(string)): A list of egress rule names defined in the `rules` variable.
 - `egress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the egress rules. Default is an empty list.
 - `egress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the egress rules. Default is an empty list.
-- `egress_self` (optional, list(bool)): Whether to allow self-referencing egress rules. Default is an empty list.
+- `egress_self` (optional, list(bool)): Whether to allow selsf-referencing egress rules. Default is an empty list.
+- `tags` (optional, map(string))): A map of tags to 
 EOT
   type = list(object({
     name                     = string
@@ -19,12 +20,13 @@ EOT
     vpc_id                   = string
     ingress_rules            = list(string)
     ingress_cidr_blocks      = optional(list(string))
-    ingress_ipv6_cidr_blocks = optional(list(string))
-    ingress_self             = optional(list(bool))
+    ingress_ipv6_cidr_blocks = optional(list(string), [])
+    ingress_self             = optional(list(bool), [false])
     egress_rules             = list(string)
     egress_cidr_blocks       = optional(list(string))
-    egress_ipv6_cidr_blocks  = optional(list(string))
-    egress_self              = optional(list(bool))
+    egress_ipv6_cidr_blocks  = optional(list(string), [])
+    egress_self              = optional(list(bool), [false])
+    tags                     = optional(map(string), {})
   }))
   default = null
 }
