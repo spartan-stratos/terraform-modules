@@ -182,15 +182,20 @@ variable "enabled_datadog" {
 }
 
 variable "enabled_github_app_login" {
-  description = "Enable Github App login"
+  description = "Enable Github App login, only one of Github App login or Google login can be enabled"
   type        = bool
   default     = false
 }
 
 variable "enabled_google_login" {
-  description = "Enable Google login"
+  description = "Enable Google login, only one of Github App login or Google login can be enabled"
   type        = bool
   default     = false
+
+  validation {
+    condition     = var.enabled_github_app_login && var.enabled_google_login
+    error_message = "Only one of Github App login or Google login can be enabled"
+  }
 }
 
 variable "google_oauth_client_id" {

@@ -42,8 +42,8 @@ No modules.
 | <a name="input_efs_storage_class_name"></a> [efs\_storage\_class\_name](#input\_efs\_storage\_class\_name) | EFS storage class of Jenkins volume | `string` | `"efs"` | no |
 | <a name="input_enabled_dark_them"></a> [enabled\_dark\_them](#input\_enabled\_dark\_them) | Enable dark theme | `bool` | `false` | no |
 | <a name="input_enabled_datadog"></a> [enabled\_datadog](#input\_enabled\_datadog) | Enable Datadog monitoring | `bool` | `true` | no |
-| <a name="input_enabled_github_app_login"></a> [enabled\_github\_app\_login](#input\_enabled\_github\_app\_login) | Enable Github App login | `bool` | `false` | no |
-| <a name="input_enabled_google_login"></a> [enabled\_google\_login](#input\_enabled\_google\_login) | Enable Google login | `bool` | `false` | no |
+| <a name="input_enabled_github_app_login"></a> [enabled\_github\_app\_login](#input\_enabled\_github\_app\_login) | Enable Github App login, only one of Github App login or Google login can be enabled | `bool` | `false` | no |
+| <a name="input_enabled_google_login"></a> [enabled\_google\_login](#input\_enabled\_google\_login) | Enable Google login, only one of Github App login or Google login can be enabled | `bool` | `false` | no |
 | <a name="input_enabled_init_scripts"></a> [enabled\_init\_scripts](#input\_enabled\_init\_scripts) | Enable init scripts | `bool` | `true` | no |
 | <a name="input_enabled_slack_notification"></a> [enabled\_slack\_notification](#input\_enabled\_slack\_notification) | Enable Slack notification | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name | `string` | n/a | yes |
