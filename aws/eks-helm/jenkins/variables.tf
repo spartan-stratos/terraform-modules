@@ -122,6 +122,12 @@ variable "efs_storage_class_name" {
   default     = "efs"
 }
 
+variable "efs_volume_size" {
+  description = "EFS volume size"
+  type        = string
+  default     = "30Gi"
+}
+
 variable "github_org" {
   description = "The Github org name"
   type        = string

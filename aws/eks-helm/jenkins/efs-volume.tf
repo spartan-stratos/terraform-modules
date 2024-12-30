@@ -54,7 +54,7 @@ resource "kubernetes_persistent_volume_claim" "jenkins_home" {
     storage_class_name = var.efs_storage_class_name
     resources {
       requests = {
-        storage = "30Gi"
+        storage = var.efs_volume_size
       }
     }
     volume_name = kubernetes_persistent_volume.jenkins_home.metadata.0.name

@@ -40,6 +40,7 @@ No modules.
 | <a name="input_efs_id"></a> [efs\_id](#input\_efs\_id) | EFS is for mounting Jenkins home | `string` | n/a | yes |
 | <a name="input_efs_jenkins_access_point"></a> [efs\_jenkins\_access\_point](#input\_efs\_jenkins\_access\_point) | EFS is for mounting Jenkins home | `string` | `"/jenkins-home"` | no |
 | <a name="input_efs_storage_class_name"></a> [efs\_storage\_class\_name](#input\_efs\_storage\_class\_name) | EFS storage class of Jenkins volume | `string` | `"efs"` | no |
+| <a name="input_efs_volume_size"></a> [efs\_volume\_size](#input\_efs\_volume\_size) | EFS volume size | `string` | `"30Gi"` | no |
 | <a name="input_enabled_dark_them"></a> [enabled\_dark\_them](#input\_enabled\_dark\_them) | Enable dark theme | `bool` | `false` | no |
 | <a name="input_enabled_datadog"></a> [enabled\_datadog](#input\_enabled\_datadog) | Enable Datadog monitoring | `bool` | `true` | no |
 | <a name="input_enabled_github_app_login"></a> [enabled\_github\_app\_login](#input\_enabled\_github\_app\_login) | Enable Github App login, only one of Github App login or Google login can be enabled | `bool` | `false` | no |
