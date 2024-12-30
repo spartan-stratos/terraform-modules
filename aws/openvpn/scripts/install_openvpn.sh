@@ -92,7 +92,7 @@ CONFIG_OAUTH2_VALIDATE_GROUPS=${oauth2_validate_groups}
 CONFIG_OAUTH2_VALIDATE_ROLES=${oauth2_validate_roles}' > /etc/sysconfig/openvpn-auth-oauth2
 %{~ else ~}
 CONFIG_OAUTH2_CLIENT_SECRET=${oauth2_client_secret}' > /etc/sysconfig/openvpn-auth-oauth2
-%{~ endif ~}
+%{~ endif}
 systemctl enable --now openvpn-auth-oauth2.service
 
 # Setup nginx and cerbot for the ${init_script_callback_comment}
