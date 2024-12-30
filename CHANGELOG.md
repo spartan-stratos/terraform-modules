@@ -1,6 +1,16 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.30]() (2024-12-30)
+
+### Features
+* AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
+  * Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables: `replace_instance_on_update`.
+* AWS Security Group: [(./aws/security-group/)](./aws/security-group/)
+  * Update Security Group Resources to Support Dynamic Ingress and Egress Rule Management
+* Qdrant: [(./qdrant)](./qdrant)
+  * Initial commit with all the code
+
 ## [0.1.29]() (2024-12-30)
 
 ### Features

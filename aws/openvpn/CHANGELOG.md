@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.29]() (2024-12-26)
+## [0.1.30]() (2024-12-30)
 ### Fix
 * Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables: `replace_instance_on_update`.
 
