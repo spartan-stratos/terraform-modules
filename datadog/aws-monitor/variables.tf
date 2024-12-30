@@ -20,8 +20,8 @@ variable "notification_slack_channel_prefix" {
 }
 
 variable "override_default_monitors" {
-  type = map(map(any))
-  default = {}
+  type        = map(map(any))
+  default     = {}
   description = "Override default monitors with custom configuration"
 }
 
