@@ -1,10 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.31]() (2024-12-30)
+## [0.1.31]() (2024-12-31)
 
 ### Features
 * AWS Helm / Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+  * Init module with all the code
+* Datadog / Monitors: [(./datadog/monitors)](./datadog/monitors)
+  * Init module with all the code
+* Datadog / AWS-Monitors: [(./datadog/aws-monitors)](./datadog/aws-monitors)
   * Init module with all the code
 
 ### Fixes
