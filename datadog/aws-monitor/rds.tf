@@ -8,7 +8,7 @@ module "rds" {
 
   monitors = {
     for monitor, config in local.default_rds_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor], null)) if contains(var.enabled_modules, "rds")
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if contains(var.enabled_modules, "rds")
   }
 }
 
