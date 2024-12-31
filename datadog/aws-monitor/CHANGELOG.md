@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.31]() (2024-12-31)
+## [0.1.32]() (2024-12-31)
 ### Fixes
 * Add a default value for Terraform try functions
 
