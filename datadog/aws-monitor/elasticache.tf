@@ -8,7 +8,7 @@ module "elasticache" {
 
   monitors = {
     for monitor, config in local.default_elasticache_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor])) if contains(var.enabled_modules, "elasticache")
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if contains(var.enabled_modules, "elasticache")
   }
 }
 
