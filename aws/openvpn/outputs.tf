@@ -47,9 +47,9 @@ output "ca_cert" {
 }
 
 output "instance_id" {
-  value = aws_security_group.this.id
+  value = try(aws_security_group.this[0].id, "")
 }
 
 output "instant_arn" {
-  value = aws_security_group.this.arn
+  value = try(aws_security_group.this[0].arn, "")
 }
