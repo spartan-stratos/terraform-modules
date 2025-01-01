@@ -144,3 +144,13 @@ variable "init_script_callback_comment" {
   type        = string
   default     = "Google Oauth 2.0 callback"
 }
+
+variable "http_tokens" {
+  type    = string
+  default = "optional"
+}
+
+variable "http_endpoint" {
+  type    = string
+  default = "enabled"
+}

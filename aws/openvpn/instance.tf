@@ -41,6 +41,11 @@ resource "aws_instance" "this" {
     encrypted = true
   }
 
+  metadata_options {
+    http_tokens   = var.http_tokens
+    http_endpoint = var.http_endpoint
+  }
+
   user_data_replace_on_change = true
   user_data                   = templatefile("${path.module}/scripts/install_openvpn.sh", local.openvpn_config)
 
