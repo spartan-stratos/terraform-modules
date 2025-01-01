@@ -29,65 +29,14 @@ This block generates required actions for Jenkins.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
  */
 data "aws_iam_policy_document" "oidc" {
-  statement {
-    effect = "Allow"
-    actions = [
-      "cloudfront:CreateInvalidation"
-    ]
-    resources = ["*"]
-  }
+  dynamic "statement" {
+    for_each = length(var.custom_oidc_policy_statement) > 0 ? var.custom_oidc_policy_statement : local.default_oidc_policy_statement
 
-  statement {
-    effect = "Allow"
-    actions = [
-      "s3:ListAllMyBuckets",
-      "s3:ListBucket",
-      "s3:PutObject",
-      "s3:GetObject",
-      "s3:DeleteObject",
-      "s3:GetBucketLocation"
-    ]
-    resources = ["*"]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "eks:DescribeCluster",
-      "eks:ListClusters",
-    ]
-    resources = ["*"]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "ecr:BatchGetImage",
-      "ecr:CompleteLayerUpload",
-      "ecr:UploadLayerPart",
-      "ecr:InitiateLayerUpload",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:PutImage",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:DescribeImages",
-      "ecr:BatchGetImage",
-      "ecr:DescribeRepositories",
-      "ecr:GetAuthorizationToken"
-    ]
-    resources = ["*"]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "ssm:PutParameter",
-      "ssm:DeleteParameter",
-      "ssm:GetParametersByPath",
-      "ssm:GetParameters",
-      "ssm:GetParameter",
-      "ssm:DeleteParameters"
-    ]
-    resources = ["*"]
+    content {
+      effect = statement.value.effect
+      actions = statement.value.actions
+      resources = statement.value.resources
+    }
   }
 }
 

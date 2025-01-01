@@ -37,3 +37,15 @@ variable "create_provider" {
   type        = bool
   default     = false
 }
+
+# Custom statement
+
+variable "custom_oidc_policy_statement" {
+  description = "Whether to create a custom oidc policy statement"
+  type = list(object({
+      effect = string
+      actions = list(string)
+      resources = list(string)
+  }))
+  default = []
+}
