@@ -48,4 +48,10 @@ variable "custom_oidc_policy_statement" {
       resources = list(string)
   }))
   default = []
+}_
+
+variable "oidc_policy_name" {
+  description = "Where to overwrite the default oidc policy name"
+  type = string
+  default = null
 }

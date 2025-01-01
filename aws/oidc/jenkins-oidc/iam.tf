@@ -45,7 +45,7 @@ This block create an IAM policy for Jenkins OIDC to access AWS resources.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy
  */
 resource "aws_iam_policy" "oidc" {
-  name   = "jenkins_oidc_policy"
+  name   = var.oidc_policy_name != null ? var.oidc_policy_name : "jenkins_oidc_policy"
   policy = data.aws_iam_policy_document.oidc.json
 }
 
