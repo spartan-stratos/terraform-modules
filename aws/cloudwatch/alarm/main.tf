@@ -24,7 +24,8 @@ resource "aws_cloudwatch_metric_alarm" "this" {
       { LoadBalancer = each.value.alb_name },
       each.value.target_group_name != null ? { TargetGroup = each.value.target_group_name } : {}
     )
-    : {}
+    : {},
+    each.value.namespace == "AWS/EC2" ? { InstanceId = each.value.instance_id } : {}
   )
 }
 

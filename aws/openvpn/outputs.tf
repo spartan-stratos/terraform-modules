@@ -45,3 +45,11 @@ output "ca_cert" {
   value       = tls_self_signed_cert.ca.cert_pem
   description = "The OpenVPN CA certificate."
 }
+
+output "instance_id" {
+  value = aws_security_group.this.id
+}
+
+output "instant_arn" {
+  value = aws_security_group.this.arn
+}
