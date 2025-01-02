@@ -17,7 +17,6 @@ variable "domain" {
 variable "github_org_display_name" {
   description = "The Github org display name. There should be no whitespaces within."
   type        = string
-  default     = "Spartan"
 }
 
 variable "github_credential_id" {
