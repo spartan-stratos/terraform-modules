@@ -3,12 +3,12 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.33]() (2025-01-02)
 ### Features 
-* Cloudwatch Alarm [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm)
+* AWS Cloudwatch Alarm [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm)
   * Ensure InstanceId is included when the namespace is "AWS/EC2".
-* OpenVPN [(./aws/openvpn)](./aws/openvpn)
+* AWS OpenVPN [(./aws/openvpn)](./aws/openvpn)
   * Add outputs for EC2 instance.
   * Introduced `http_tokens` and `http_endpoint` variables to control instance metadata service settings.
-* Security Groups [(./aws/security-group)](./aws/security-group)
+* AWS Security Groups [(./aws/security-group)](./aws/security-group)
   * Updated the logic to set from_port and to_port to -1 when the IP protocol is "-1", ensuring compatibility for security group rules with all protocols.
 
 ## [0.1.32]() (2024-12-31)
