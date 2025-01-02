@@ -1,3 +1,31 @@
+# Amazon CloudWatch Alarm Terraform module
+Terraform module which creates Amazon CloudWatch Alarm resources.
+
+## Usage
+```hcl
+module "cloudwatch-alarm" {
+  source  = "github.com/spartan-stratos/terraform-modules//aws/cloudwatch/alarm?ref=v0.1.33"
+  email = "example-email"
+  environment = "dev"
+  alarms = {
+    CPUUtilization = {
+      name                = "example-alarm"
+      description         = "example"
+      comparison_operator = "example-comparison"
+      evaluation_periods  = "1"
+      metric_name         = "exammple-metric"
+      namespace           = "example-namespace"
+      period              = "example-period"
+      statistic           = "Average"
+      threshold           = "20"
+    }
+  }
+}
+```
+
+## Examples
+- [Example complete](./examples/complete/)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
