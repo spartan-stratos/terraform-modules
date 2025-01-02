@@ -11,7 +11,9 @@ module "eks_helm_jenkins" {
   github_app_oauth_client_id     = "spartan"
   github_app_oauth_client_secret = "super-secure"
   jenkins_shared_lib_repo        = "github.com/example/example-jenkins-shared-lib.git"
-  general_secrets                = "jenkins-secrets"
+  general_secrets                = {
+    "secret" = "value"
+  }
   jenkins_base_agent_image_repo  = "jenkins/jenkins-agent"
   jenkins_base_agent_image_name  = "jenkins-agent"
   jenkins_base_agent_image_tag   = "latest"
