@@ -67,12 +67,12 @@ controller:
                   - string:
                       id: "slack-bot-token"
                       scope: GLOBAL
-                      secret: "${var.slack_bot_token}"
+                      secret: "${sensitive(var.slack_bot_token)}"
                   %{endif}
                   %{for config in local.general_secret_configs}
                   - string:
                       id: "${config.secret_key}"
-                      secret: "${config.secret_value}"
+                      secret: "${sensitive(config.secret_value)}"
                       scope: GLOBAL
                   %{endfor}
       general: |-
@@ -218,6 +218,14 @@ controller:
                       - "View/Read"
                       - "Run/Replay"
               %{endfor}
+              %{for team in var.jenkins_viewer}
+                - group:
+                    name: "${team}"
+                    permissions:
+                      - "Overall/Read"
+                      - "Job/Read"
+                      - "View/Read"
+              %{endfor}
           %{endif}
     %{if var.enabled_github_app_login}
     securityRealm: |-
@@ -278,10 +286,17 @@ controller:
         }
       ]
   %{endif}
-  %{if var.jenkins_env_var != null}
+  %{if var.jenkins_env_var != null || var.jenkins_config_map_name != null}
   containerEnvFrom:
+    %{if var.jenkins_config_map_name != null}
+    - configMapRef:
+        name: ${var.jenkins_config_map_name}
+    %{endif}
+
+    %{if var.jenkins_env_var != null}
     - secretRef:
         name: ${var.jenkins_env_var}
+    %{endif}
   %{endif}
   containerEnv:
     - name: DD_ENV
