@@ -7,7 +7,7 @@ resource "datadog_monitor" "this" {
   for_each = { for name, monitor in var.monitors : name => monitor if monitor.enabled }
 
   name     = "[P${each.value.priority_level}] ${each.value.title_tags}: ${upper(var.environment)} - ${each.value.title}"
-  type     = "query alert"
+  type     = each.value.type
   message  = each.value.priority_level >= 4 ? "" : local.message
   priority = each.value.priority_level
   query = templatestring(each.value.query_template, merge(each.value.query_args, {
@@ -16,6 +16,7 @@ resource "datadog_monitor" "this" {
   monitor_thresholds {
     critical          = each.value.threshold_critical
     critical_recovery = each.value.threshold_critical_recovery
+    ok                = each.value.threshold_ok
   }
 
   renotify_interval        = each.value.renotify_interval
