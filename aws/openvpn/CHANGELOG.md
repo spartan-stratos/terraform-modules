@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 ## [0.1.33]() (2025-01-02)
-### Fix
+### Feature
 * Add outputs for EC2 instance.
 * Introduced `http_tokens` and `http_endpoint` variables to control instance metadata service settings.
 
