@@ -139,7 +139,7 @@ controller:
             configs:
             - credentialsId: "${var.github_app_credential_id}"
               manageHooks: false
-              name: BridgeHealthAI
+              name: "${var.github_org_display_name}"
             hookUrl: "https://${local.jenkins_fqdn}/github-webhook/"
       nodejs: |-
         tool:

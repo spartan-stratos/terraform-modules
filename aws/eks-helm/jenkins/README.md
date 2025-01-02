@@ -54,7 +54,7 @@ No modules.
 | <a name="input_github_app_oauth_client_secret"></a> [github\_app\_oauth\_client\_secret](#input\_github\_app\_oauth\_client\_secret) | The Client Secret of Spartan SSO | `string` | `""` | no |
 | <a name="input_github_credential_id"></a> [github\_credential\_id](#input\_github\_credential\_id) | GitHub credentials key for jenkins | `string` | n/a | yes |
 | <a name="input_github_org"></a> [github\_org](#input\_github\_org) | The Github org name | `string` | n/a | yes |
-| <a name="input_github_org_display_name"></a> [github\_org\_display\_name](#input\_github\_org\_display\_name) | The Github org display name | `string` | `"Spartan"` | no |
+| <a name="input_github_org_display_name"></a> [github\_org\_display\_name](#input\_github\_org\_display\_name) | The Github org display name. There should be no whitespaces within. | `string` | n/a | yes |
 | <a name="input_google_oauth_client_id"></a> [google\_oauth\_client\_id](#input\_google\_oauth\_client\_id) | The Client ID of Google SSO | `string` | `""` | no |
 | <a name="input_google_oauth_client_secret"></a> [google\_oauth\_client\_secret](#input\_google\_oauth\_client\_secret) | The Client Secret of Google SSO | `string` | `""` | no |
 | <a name="input_google_user_list"></a> [google\_user\_list](#input\_google\_user\_list) | List users and roles for accessing Jenkins | `map(list(string))` | `null` | no |
