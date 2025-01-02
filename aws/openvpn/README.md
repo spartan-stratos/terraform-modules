@@ -8,7 +8,7 @@ Terraform module which creates OpenVPN to access internal VPC network.
 
 ```hcl
 module "openvpn" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/openvpn?ref=v0.1.13"
+  source = "github.com/spartan-stratos/terraform-modules//aws/openvpn?ref=v0.1.33"
 
   vpn_name    = "openvpn"
   domain_name = "example.com"
@@ -40,9 +40,9 @@ module "openvpn" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6.3 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0.6 |
 
 ## Modules
 
@@ -82,6 +82,8 @@ No modules.
 | <a name="input_disk_boot_size"></a> [disk\_boot\_size](#input\_disk\_boot\_size) | The size of the boot disk in GB. | `number` | `"10"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name. | `string` | n/a | yes |
 | <a name="input_extra_sg_ids"></a> [extra\_sg\_ids](#input\_extra\_sg\_ids) | A list of additional security group IDs. | `list(string)` | `[]` | no |
+| <a name="input_http_endpoint"></a> [http\_endpoint](#input\_http\_endpoint) | The configuration for enabling or disabling the instance metadata service endpoint. | `string` | `"enabled"` | no |
+| <a name="input_http_tokens"></a> [http\_tokens](#input\_http\_tokens) | The configuration for the instance metadata service tokens. | `string` | `"optional"` | no |
 | <a name="input_image_distro"></a> [image\_distro](#input\_image\_distro) | The distribution of the image. | `string` | `"debian-12-amd64"` | no |
 | <a name="input_image_version"></a> [image\_version](#input\_image\_version) | The version of the image. | `string` | `"20240717-1811"` | no |
 | <a name="input_init_script_callback_comment"></a> [init\_script\_callback\_comment](#input\_init\_script\_callback\_comment) | The callback name for the OpenVPN server | `string` | `"Google Oauth 2.0 callback"` | no |
@@ -107,6 +109,8 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_ca_cert"></a> [ca\_cert](#output\_ca\_cert) | The OpenVPN CA certificate. |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | The ID of the AWS instance. |
+| <a name="output_instant_arn"></a> [instant\_arn](#output\_instant\_arn) | The ARN of the AWS instance. |
 | <a name="output_ovpn_file"></a> [ovpn\_file](#output\_ovpn\_file) | n/a |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | The public IP address of the OpenVPN instance. |
 | <a name="output_ssh_private_key"></a> [ssh\_private\_key](#output\_ssh\_private\_key) | The private key for the management SSH key pair. |

@@ -1,13 +1,10 @@
-<!-- BEGIN_TF_DOCS -->
-
 # Amazon CloudWatch Alarm Terraform module
 Terraform module which creates Amazon CloudWatch Alarm resources.
 
 ## Usage
 ```hcl
 module "cloudwatch-alarm" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/cloudwatch/alarm?ref=v0.1.11"
-
+  source  = "github.com/spartan-stratos/terraform-modules//aws/cloudwatch/alarm?ref=v0.1.33"
   email = "example-email"
   environment = "dev"
   alarms = {
@@ -29,6 +26,7 @@ module "cloudwatch-alarm" {
 ## Examples
 - [Example complete](./examples/complete/)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -58,7 +56,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_alarms"></a> [alarms](#input\_alarms) | A map of alarms to create | <pre>map(object({<br/>    name                = string<br/>    description         = string<br/>    comparison_operator = string<br/>    evaluation_periods  = string<br/>    metric_name         = string<br/>    namespace           = string<br/>    period              = string<br/>    statistic           = string<br/>    threshold           = number<br/>    queue_name          = optional(string)<br/>  }))</pre> | n/a | yes |
+| <a name="input_alarms"></a> [alarms](#input\_alarms) | A map of alarms to create | <pre>map(object({<br/>    name                = string<br/>    description         = string<br/>    comparison_operator = string<br/>    evaluation_periods  = string<br/>    metric_name         = string<br/>    namespace           = string<br/>    period              = string<br/>    statistic           = string<br/>    threshold           = number<br/>    queue_name          = optional(string)<br/>    alb_name            = optional(string)<br/>    target_group_name   = optional(string)<br/>    instance_id         = optional(string)<br/>  }))</pre> | n/a | yes |
 | <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic) | Creates a SNS Topic if `true`. | `bool` | `true` | no |
 | <a name="input_datapoints_to_alarm"></a> [datapoints\_to\_alarm](#input\_datapoints\_to\_alarm) | The number of datapoints that must be breaching to trigger the alarm. | `number` | `null` | no |
 | <a name="input_email"></a> [email](#input\_email) | n/a | `string` | n/a | yes |

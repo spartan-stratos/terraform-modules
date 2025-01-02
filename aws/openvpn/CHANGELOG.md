@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.33]() (2025-01-02)
+### Fix
+* Add outputs for EC2 instance.
+* Introduced `http_tokens` and `http_endpoint` variables to control instance metadata service settings.
+
 ## [0.1.31]() (2024-12-30)
 ### Fix
 * Fix missing a new line in the init script cause server not configure properly.
