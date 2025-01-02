@@ -40,9 +40,9 @@ module "openvpn" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6.3 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0.6 |
 
 ## Modules
 
@@ -107,6 +107,8 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_ca_cert"></a> [ca\_cert](#output\_ca\_cert) | The OpenVPN CA certificate. |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | The ID of the AWS instance. |
+| <a name="output_instant_arn"></a> [instant\_arn](#output\_instant\_arn) | The ARN of the AWS instance. |
 | <a name="output_ovpn_file"></a> [ovpn\_file](#output\_ovpn\_file) | n/a |
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip) | The public IP address of the OpenVPN instance. |
 | <a name="output_ssh_private_key"></a> [ssh\_private\_key](#output\_ssh\_private\_key) | The private key for the management SSH key pair. |
