@@ -119,8 +119,8 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv4" {
 
   security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  from_port   = each.value.from_port
-  to_port     = each.value.to_port
+  from_port   = each.value.ip_protocol == "-1" ? -1 : each.value.from_port
+  to_port     = each.value.ip_protocol == "-1" ? -1 : each.value.to_port
   ip_protocol = each.value.ip_protocol
   cidr_ipv4   = each.value.cidr_ipv4
   description = each.value.description
@@ -138,8 +138,8 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
 
   security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  from_port   = each.value.from_port
-  to_port     = each.value.to_port
+  from_port   = each.value.ip_protocol == "-1" ? -1 : each.value.from_port
+  to_port     = each.value.ip_protocol == "-1" ? -1 : each.value.to_port
   ip_protocol = each.value.ip_protocol
   cidr_ipv6   = each.value.cidr_ipv6
   description = each.value.description
@@ -177,8 +177,8 @@ resource "aws_vpc_security_group_egress_rule" "egress_ipv4" {
 
   security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  from_port   = each.value.from_port
-  to_port     = each.value.to_port
+  from_port   = each.value.ip_protocol == "-1" ? -1 : each.value.from_port
+  to_port     = each.value.ip_protocol == "-1" ? -1 : each.value.to_port
   ip_protocol = each.value.ip_protocol
   cidr_ipv4   = each.value.cidr_ipv4
   description = each.value.description
@@ -196,8 +196,8 @@ resource "aws_vpc_security_group_egress_rule" "egress_ipv6" {
 
   security_group_id = aws_security_group.this[each.value.security_group_name].id
 
-  from_port   = each.value.from_port
-  to_port     = each.value.to_port
+  from_port   = each.value.ip_protocol == "-1" ? -1 : each.value.from_port
+  to_port     = each.value.ip_protocol == "-1" ? -1 : each.value.to_port
   ip_protocol = each.value.ip_protocol
   cidr_ipv6   = each.value.cidr_ipv6
   description = each.value.description
