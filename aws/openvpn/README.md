@@ -82,6 +82,8 @@ No modules.
 | <a name="input_disk_boot_size"></a> [disk\_boot\_size](#input\_disk\_boot\_size) | The size of the boot disk in GB. | `number` | `"10"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name. | `string` | n/a | yes |
 | <a name="input_extra_sg_ids"></a> [extra\_sg\_ids](#input\_extra\_sg\_ids) | A list of additional security group IDs. | `list(string)` | `[]` | no |
+| <a name="input_http_endpoint"></a> [http\_endpoint](#input\_http\_endpoint) | The configuration for enabling or disabling the instance metadata service endpoint. | `string` | `"enabled"` | no |
+| <a name="input_http_tokens"></a> [http\_tokens](#input\_http\_tokens) | The configuration for the instance metadata service tokens. | `string` | `"optional"` | no |
 | <a name="input_image_distro"></a> [image\_distro](#input\_image\_distro) | The distribution of the image. | `string` | `"debian-12-amd64"` | no |
 | <a name="input_image_version"></a> [image\_version](#input\_image\_version) | The version of the image. | `string` | `"20240717-1811"` | no |
 | <a name="input_init_script_callback_comment"></a> [init\_script\_callback\_comment](#input\_init\_script\_callback\_comment) | The callback name for the OpenVPN server | `string` | `"Google Oauth 2.0 callback"` | no |
