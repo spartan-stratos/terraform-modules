@@ -51,6 +51,12 @@ variable "jenkins_executors" {
   description = "List of Jenkins executors"
 }
 
+variable "jenkins_viewer" {
+  description = "List of Jenkins viewer"
+  type        = list(string)
+  default     = []
+}
+
 variable "jenkins_shared_lib_repo" {
   description = "The Jenkins shared library repo"
   type        = string
@@ -278,6 +284,12 @@ variable "enabled_dark_them" {
 
 variable "jenkins_env_var" {
   description = "Jenkins environment variables"
+  type        = string
+  default     = null
+}
+
+variable "jenkins_config_map_name" {
+  description = "Jenkins config map name"
   type        = string
   default     = null
 }
