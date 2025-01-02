@@ -144,3 +144,15 @@ variable "init_script_callback_comment" {
   type        = string
   default     = "Google Oauth 2.0 callback"
 }
+
+variable "http_tokens" {
+  type        = string
+  description = "The configuration for the instance metadata service tokens."
+  default     = "optional"
+}
+
+variable "http_endpoint" {
+  type        = string
+  description = "The configuration for enabling or disabling the instance metadata service endpoint."
+  default     = "enabled"
+}
