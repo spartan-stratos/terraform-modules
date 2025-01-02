@@ -43,21 +43,21 @@ variable "create_provider" {
 variable "custom_oidc_policy_statement" {
   description = "Whether to create a custom oidc policy statement"
   type = list(object({
-      effect = string
-      actions = list(string)
-      resources = list(string)
+    effect    = string
+    actions   = list(string)
+    resources = list(string)
   }))
   default = []
 }
 
 variable "oidc_policy_name" {
   description = "Whether to overwrite the default jenkins oidc policy name"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "oidc_policy_description" {
   description = "Whether to define description for jenkins oidc policy"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
