@@ -3,7 +3,7 @@ module "eks_helm_jenkins" {
   source = "../"
 
   environment             = "dev"
-  github_org_display_name = "Spartain"
+  github_org_display_name = "Spartan"
   shared_lib_name         = "spartan"
 
   domain                         = "example.com"

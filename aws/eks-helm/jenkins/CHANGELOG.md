@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.35]() (2024-01-02)
+### Features
+* Update the Jenkins `gitHubPluginConfig` to match the variable `github_org_display_name`.
+
 ## [0.1.34]() (2024-01-02)
 ### Features
 * Add variable `jenkins_config_map_name` to use configMapRef in containerEnvFrom
