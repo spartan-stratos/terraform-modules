@@ -3,12 +3,6 @@ variable "aws_account_id" {
   type        = string
 }
 
-variable "dd_users" {
-  description = "List of Datadog users to notify"
-  type        = list(string)
-  default     = []
-}
-
 variable "environment" {
   description = "The environment monitored by this module"
   type        = string
