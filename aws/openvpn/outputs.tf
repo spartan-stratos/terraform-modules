@@ -45,3 +45,13 @@ output "ca_cert" {
   value       = tls_self_signed_cert.ca.cert_pem
   description = "The OpenVPN CA certificate."
 }
+
+output "instance_id" {
+  value       = try(aws_instance.this[0].id, "")
+  description = "The ID of the AWS instance."
+}
+
+output "instant_arn" {
+  value       = try(aws_instance.this[0].arn, "")
+  description = "The ARN of the AWS instance."
+}
