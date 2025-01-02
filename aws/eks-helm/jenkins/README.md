@@ -65,6 +65,7 @@ No modules.
 | <a name="input_jenkins_base_agent_image_name"></a> [jenkins\_base\_agent\_image\_name](#input\_jenkins\_base\_agent\_image\_name) | The base image for Jenkins agents | `string` | n/a | yes |
 | <a name="input_jenkins_base_agent_image_repo"></a> [jenkins\_base\_agent\_image\_repo](#input\_jenkins\_base\_agent\_image\_repo) | The base image for Jenkins agents | `string` | n/a | yes |
 | <a name="input_jenkins_base_agent_image_tag"></a> [jenkins\_base\_agent\_image\_tag](#input\_jenkins\_base\_agent\_image\_tag) | The base image for Jenkins agents | `string` | n/a | yes |
+| <a name="input_jenkins_config_map_name"></a> [jenkins\_config\_map\_name](#input\_jenkins\_config\_map\_name) | Jenkins config map name | `string` | `null` | no |
 | <a name="input_jenkins_cpu"></a> [jenkins\_cpu](#input\_jenkins\_cpu) | The CPU request and limit for Jenkins | `string` | `"1950m"` | no |
 | <a name="input_jenkins_dns_name"></a> [jenkins\_dns\_name](#input\_jenkins\_dns\_name) | The Jenkins DNS name | `string` | `"jenkins"` | no |
 | <a name="input_jenkins_env_var"></a> [jenkins\_env\_var](#input\_jenkins\_env\_var) | Jenkins environment variables | `string` | `null` | no |
@@ -72,6 +73,7 @@ No modules.
 | <a name="input_jenkins_fqdn"></a> [jenkins\_fqdn](#input\_jenkins\_fqdn) | FQDN of Jenkins service | `string` | `""` | no |
 | <a name="input_jenkins_memory"></a> [jenkins\_memory](#input\_jenkins\_memory) | The memory request and limit for Jenkins | `string` | `"4.5Gi"` | no |
 | <a name="input_jenkins_shared_lib_repo"></a> [jenkins\_shared\_lib\_repo](#input\_jenkins\_shared\_lib\_repo) | The Jenkins shared library repo | `string` | n/a | yes |
+| <a name="input_jenkins_viewer"></a> [jenkins\_viewer](#input\_jenkins\_viewer) | List of Jenkins viewer | `list(string)` | `[]` | no |
 | <a name="input_kaniko_version"></a> [kaniko\_version](#input\_kaniko\_version) | Version of Kaniko build tool | `string` | `"v1.21.1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"jenkins"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace to install Jenkins. Default is jenkins | `string` | `"jenkins"` | no |

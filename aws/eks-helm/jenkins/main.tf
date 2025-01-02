@@ -67,12 +67,12 @@ controller:
                   - string:
                       id: "slack-bot-token"
                       scope: GLOBAL
-                      secret: "${var.slack_bot_token}"
+                      secret: "${sensitive(var.slack_bot_token)}"
                   %{endif}
                   %{for config in local.general_secret_configs}
                   - string:
                       id: "${config.secret_key}"
-                      secret: "${config.secret_value}"
+                      secret: "${sensitive(config.secret_value)}"
                       scope: GLOBAL
                   %{endfor}
       general: |-
