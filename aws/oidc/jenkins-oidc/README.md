@@ -66,6 +66,9 @@ Check out the [example](examples/default/README.md) for a full example of using 
 | <a name="input_additional_thumbprints"></a> [additional\_thumbprints](#input\_additional\_thumbprints) | List of additional thumbprints to add to the thumbprint list. Reference: https://plugins.jenkins.io/oidc-provider/. | `list(string)` | `[]` | no |
 | <a name="input_client_id_list"></a> [client\_id\_list](#input\_client\_id\_list) | List of client IDs (also known as audiences) for the IAM OIDC provider. Defaults to STS service if not values are provided. | `list(string)` | <pre>[<br/>  "sts.amazonaws.com"<br/>]</pre> | no |
 | <a name="input_create_provider"></a> [create\_provider](#input\_create\_provider) | Whether to create a provider resource for migration purpose on existing provider. | `bool` | `false` | no |
+| <a name="input_custom_oidc_policy_statement"></a> [custom\_oidc\_policy\_statement](#input\_custom\_oidc\_policy\_statement) | Whether to create a custom oidc policy statement | <pre>list(object({<br/>    effect    = string<br/>    actions   = list(string)<br/>    resources = list(string)<br/>  }))</pre> | `[]` | no |
+| <a name="input_oidc_policy_description"></a> [oidc\_policy\_description](#input\_oidc\_policy\_description) | Whether to define description for jenkins oidc policy | `string` | `null` | no |
+| <a name="input_oidc_policy_name"></a> [oidc\_policy\_name](#input\_oidc\_policy\_name) | Whether to overwrite the default jenkins oidc policy name | `string` | `null` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the role to be created. | `string` | n/a | yes |
 | <a name="input_role_name_prefix"></a> [role\_name\_prefix](#input\_role\_name\_prefix) | The name of the role to be created. | `string` | `""` | no |
 | <a name="input_url"></a> [url](#input\_url) | The URL of the identity provider. Corresponds to the iss claim. | `string` | n/a | yes |

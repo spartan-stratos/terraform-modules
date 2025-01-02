@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.34]() (2024-01-02)
+### Features
+* Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
+* Add `var.oidc_policy_name` and `var.oidc_policy_description` to overwrite the existed default name and description
 
 ## [0.1.21]() (2024-12-24)
 ### Features
