@@ -46,6 +46,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
  */
 resource "aws_iam_policy" "oidc" {
   name   = var.oidc_policy_name != null ? var.oidc_policy_name : "jenkins_oidc_policy"
+  description = var.oidc_policy_description
   policy = data.aws_iam_policy_document.oidc.json
 }
 

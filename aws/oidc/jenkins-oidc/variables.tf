@@ -48,10 +48,16 @@ variable "custom_oidc_policy_statement" {
       resources = list(string)
   }))
   default = []
-}_
+}
 
 variable "oidc_policy_name" {
-  description = "Where to overwrite the default oidc policy name"
+  description = "Whether to overwrite the default jenkins oidc policy name"
+  type = string
+  default = null
+}
+
+variable "oidc_policy_description" {
+  description = "Whether to define description for jenkins oidc policy"
   type = string
   default = null
 }
