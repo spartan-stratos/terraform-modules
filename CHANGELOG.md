@@ -1,6 +1,15 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.34]() (2025-01-02)
+### Features 
+* AWS Jenkins OIDC: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
+  * Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
+  * Add `var.oidc_policy_name` and `var.oidc_policy_description` to overwrite the existed default name and description
+* AWS Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+  * Add variable `jenkins_config_map_name` to use configMapRef in containerEnvFrom
+  * Add variable `jenkins_viewer` to add permission for GitHub team groups that defined in jenkins viewer
+
 ## [0.1.33]() (2025-01-02)
 ### Features 
 * AWS Cloudwatch Alarm [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm)
