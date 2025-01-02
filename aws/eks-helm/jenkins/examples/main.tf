@@ -7,7 +7,7 @@ module "eks_helm_jenkins" {
   shared_lib_name         = "spartan"
 
   domain                         = "example.com"
-  github_org                     = module.config_github.organization
+  github_org                     = "spartan"
   github_app_oauth_client_id     = "spartan"
   github_app_oauth_client_secret = "super-secure"
   jenkins_shared_lib_repo        = "github.com/example/example-jenkins-shared-lib.git"
