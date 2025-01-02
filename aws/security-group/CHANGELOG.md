@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.33]() (2025-01-02)
+### Features
+* Updated the logic to set from_port and to_port to -1 when the IP protocol is "-1", ensuring compatibility for security group rules with all protocols.
+
 ## [0.1.30]() (2024-12-30)
 ### Features
 * Update Security Group Resources to Support Dynamic Ingress and Egress Rule Management

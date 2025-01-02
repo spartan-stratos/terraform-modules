@@ -9,34 +9,35 @@ This module will create the following components:
 ### Create Custom Security Groups
 ```hcl
 module "security_groups" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.30"
+  source = "github.com/spartan-stratos/terraform-modules//aws/security-group?ref=v0.1.33"
   
   create_default_security_group = false
   security_groups = {
     "example-sg" = {
       name        = "example-sg"
-      description              = "Example Security Group"
-      vpc_id                   = "vpc-12345678"
+      description = "Example Security Group"
+      vpc_id      = "vpc-12345678"
       ingress_rules = {
         "rule1" = {
-          from_port        = 0
-          to_port          = 0
-          protocol         = "-1"
-          cidr_ipv4        = "0.0.0.0/0"
-          cidr_ipv6        = "::/0"
-          self             = true
-          description      = "Example Rule 1"
+          protocol    = "-1"
+          cidr_ipv4   = "0.0.0.0/0"
+          cidr_ipv6   = "::/0"
+          description = "Example Rule 1"
+        }
+        "rule2" = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          self        = true
+          description = "Allow unrestricted traffic within this security group"
         }
       }
       egress_rules = {
         "rule1" = {
-          from_port   = 0
-          to_port     = 0
           protocol    = "-1"
-          cidr_ipv4 = "0.0.0.0/0"
-          cidr_ipv6        = "::/0"
-          self             = true
-          description = "Example Rule 2"
+          cidr_ipv4   = "0.0.0.0/0"
+          cidr_ipv6   = "::/0"
+          description = "Example Rule 1"
         }
       }
     }
@@ -99,9 +100,7 @@ No modules.
 | <a name="input_custom_sg_allow_all_description"></a> [custom\_sg\_allow\_all\_description](#input\_custom\_sg\_allow\_all\_description) | Custom description for security group allow all `aws_security_group.allow_all`. | `string` | `null` | no |
 | <a name="input_custom_sg_allow_all_within_vpc_description"></a> [custom\_sg\_allow\_all\_within\_vpc\_description](#input\_custom\_sg\_allow\_all\_within\_vpc\_description) | Custom description for security group allow all within vpc `aws_security_group.allow_all_within_vpc`. | `string` | `null` | no |
 | <a name="input_custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks"></a> [custom\_sg\_allow\_all\_within\_vpc\_egress\_ipv6\_cidr\_blocks](#input\_custom\_sg\_allow\_all\_within\_vpc\_egress\_ipv6\_cidr\_blocks) | Custom IPv6 CIDR blocks to allow in the egress rules for the security group allow\_all\_within\_vpc | `list(string)` | <pre>[<br/>  "::/0"<br/>]</pre> | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A map of security groups with their associated ingress and egress rules, to be applied to a VPC. | <pre>map(object({<br/>    name        = string<br/>    description = string<br/>    vpc_id      = string<br/>    ingress_rules = optional(map(object({<br/>      from_port   = optional(number, null)  # Port range start for ingress traffic, null means not specified<br/>      to_port     = optional(number, null)  # Port range end for ingress traffic, null means not specified<br/>      protocol    = optional(string, null)  # Protocol for ingress traffic (e.g., 'tcp', 'udp', etc.), null means not specified<br/>      cidr_ipv4   = optional(string, null)  # IPv4 CIDR block for ingress traffic, null means not specified<br/>      cidr_ipv6   = optional(string, null)  # IPv6 CIDR block for ingress traffic, null means not specified<br/>      description = optional(string, null)  # Description of the ingress rule, null means not specified<br/>      self        = optional(bool, false)   # Whether to allow traffic from the security group itself, defaults to false<br/>    })), null)  # A map of ingress rules for the security group, can be null if no ingress rules are specified<br/><br/>    egress_rules = optional(map(object({<br/>      from_port   = optional(number, null)  # Port range start for egress traffic, null means not specified<br/>      to_port     = optional(number, null)  # Port range end for egress traffic, null means not specified<br/>      protocol    = optional(string, null)  # Protocol for egress traffic (e.g., 'tcp', 'udp', etc.), null means not specified<br/>      cidr_ipv4   = optional(string, null)  # IPv4 CIDR block for egress traffic, null means not specified<br/>      cidr_ipv6   = optional(string, null)  # IPv6 CIDR block for egress traffic, null means not specified<br/>      description = optional(string, null)  # Description of the egress rule, null means not specified<br/>      self        = optional(bool, false)   # Whether to allow traffic to the security group itself, defaults to false<br/>    })), null)  # A map of egress rules for the security group, can be null if no egress rules are specified<br/>  }))</pre> | `null` | no |
-| <a name="input_rules"></a> [rules](#input\_rules) | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | `map(list(any))` | `null` | no |
-| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A list of objects defining custom security groups. Each security group object should include the following properties:<br/>- `name` (string): The name of the security group.<br/>- `description` (string): A description of the security group's purpose.<br/>- `vpc_id` (string): The VPC ID where the security group will be created.<br/>- `ingress_rules` (list(string)): A list of ingress rule names defined in the `rules` variable.<br/>- `ingress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the ingress rules. Default is an empty list.<br/>- `ingress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the ingress rules. Default is an empty list.<br/>- `ingress_self` (optional, list(bool)): Whether to allow self-referencing ingress rules. Default is an empty list.<br/>- `egress_rules` (list(string)): A list of egress rule names defined in the `rules` variable.<br/>- `egress_cidr_blocks` (optional, list(string)): CIDR blocks to allow in the egress rules. Default is an empty list.<br/>- `egress_ipv6_cidr_blocks` (optional, list(string)): IPv6 CIDR blocks to allow in the egress rules. Default is an empty list.<br/>- `egress_self` (optional, list(bool)): Whether to allow selsf-referencing egress rules. Default is an empty list.<br/>- `tags` (optional, map(string))): A map of tags to | <pre>list(object({<br/>    name                     = string<br/>    description              = string<br/>    vpc_id                   = string<br/>    ingress_rules            = list(string)<br/>    ingress_cidr_blocks      = optional(list(string))<br/>    ingress_ipv6_cidr_blocks = optional(list(string), [])<br/>    ingress_self             = optional(list(bool), [false])<br/>    egress_rules             = list(string)<br/>    egress_cidr_blocks       = optional(list(string))<br/>    egress_ipv6_cidr_blocks  = optional(list(string), [])<br/>    egress_self              = optional(list(bool), [false])<br/>    tags                     = optional(map(string), {})<br/>  }))</pre> | `null` | no |
+| <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | A map of security groups with their associated ingress and egress rules, to be applied to a VPC. | <pre>map(object({<br/>    name        = string<br/>    description = string<br/>    vpc_id      = string<br/>    ingress_rules = optional(map(object({<br/>      from_port   = optional(number, null) # Port range start for ingress traffic, null means not specified<br/>      to_port     = optional(number, null) # Port range end for ingress traffic, null means not specified<br/>      protocol    = optional(string, null) # Protocol for ingress traffic (e.g., 'tcp', 'udp', etc.), null means not specified<br/>      cidr_ipv4   = optional(string, null) # IPv4 CIDR block for ingress traffic, null means not specified<br/>      cidr_ipv6   = optional(string, null) # IPv6 CIDR block for ingress traffic, null means not specified<br/>      description = optional(string, null) # Description of the ingress rule, null means not specified<br/>      self        = optional(bool, false)  # Whether to allow traffic from the security group itself, defaults to false<br/>    })), null)                             # A map of ingress rules for the security group, can be null if no ingress rules are specified<br/>    egress_rules = optional(map(object({<br/>      from_port   = optional(number, null) # Port range start for egress traffic, null means not specified<br/>      to_port     = optional(number, null) # Port range end for egress traffic, null means not specified<br/>      protocol    = optional(string, null) # Protocol for egress traffic (e.g., 'tcp', 'udp', etc.), null means not specified<br/>      cidr_ipv4   = optional(string, null) # IPv4 CIDR block for egress traffic, null means not specified<br/>      cidr_ipv6   = optional(string, null) # IPv6 CIDR block for egress traffic, null means not specified<br/>      description = optional(string, null) # Description of the egress rule, null means not specified<br/>      self        = optional(bool, false)  # Whether to allow traffic to the security group itself, defaults to false<br/>    })), null)<br/>    tags = optional(map(string), {}) # A map of egress rules for the security group, can be null if no egress rules are specified<br/>  }))</pre> | `null` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the main VPC associated with the security groups. Can be null if not provided. | `string` | `null` | no |
 
 ## Outputs

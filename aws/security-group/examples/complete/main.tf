@@ -9,24 +9,25 @@ module "aws_custom_security_groups" {
       vpc_id      = "vpc-12345678"
       ingress_rules = {
         "rule1" = {
-          from_port   = 0
-          to_port     = 0
           protocol    = "-1"
           cidr_ipv4   = "0.0.0.0/0"
           cidr_ipv6   = "::/0"
-          self        = true
           description = "Example Rule 1"
+        }
+        "rule2" = {
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          self        = true
+          description = "Allow unrestricted traffic within this security group"
         }
       }
       egress_rules = {
         "rule1" = {
-          from_port   = 0
-          to_port     = 0
           protocol    = "-1"
           cidr_ipv4   = "0.0.0.0/0"
           cidr_ipv6   = "::/0"
-          self        = true
-          description = "Example Rule 2"
+          description = "Example Rule 1"
         }
       }
     }
