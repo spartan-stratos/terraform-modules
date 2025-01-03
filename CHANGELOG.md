@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.35]() (2025-01-02)
+## [0.1.35]() (2025-01-03)
 ### Features 
 * All modules: add an `override.tofu` file to override terraform version constraint to opentofu version constraint
 * AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster/)
