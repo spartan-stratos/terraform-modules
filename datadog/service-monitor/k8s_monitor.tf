@@ -16,9 +16,9 @@ locals {
   default_k8s_monitors = merge(
     local.restart_monitors,
     {
-      crash_loop_back_off = local.crash_loop_back_off,
+      crash_loop_back_off         = local.crash_loop_back_off,
       image_pull_back_off_monitor = local.image_pull_back_off,
-      image_pull_back_off_monitor = local.failed
+      failed                      = local.failed
     }
   )
 
