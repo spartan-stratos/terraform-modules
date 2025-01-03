@@ -30,7 +30,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/i
  */
 data "aws_iam_policy_document" "oidc" {
   dynamic "statement" {
-    for_each = length(var.custom_oidc_policy_statement) > 0 ? var.custom_oidc_policy_statement : local.default_oidc_policy_statement
+    for_each = length(var.custom_oidc_policy_statement) > 0 ? var.custom_oidc_policy_statement : toset(local.default_oidc_policy_statement)
 
     content {
       effect    = statement.value.effect
