@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.36]() (2024-01-03)
+### Features
+* Fix `for_each argument must be a map, or set of strings`: wrap the argument in `toset`
+
 ## [0.1.34]() (2024-01-02)
 ### Features
 * Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
