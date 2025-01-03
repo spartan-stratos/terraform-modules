@@ -203,10 +203,12 @@ variable "enabled_google_login" {
   type        = bool
   default     = false
 
-  validation {
-    condition     = !(var.enabled_github_app_login && var.enabled_google_login)
-    error_message = "Only one of Github App login or Google login can be enabled"
-  }
+  # References in Variable Validation is not yet supported in OpenTofu
+  # We need to wait for v1.9.0 to release https://github.com/opentofu/opentofu/pull/2216
+  # validation {
+  #   condition     = !(var.enabled_github_app_login && var.enabled_google_login)
+  #   error_message = "Only one of Github App login or Google login can be enabled"
+  # }
 }
 
 variable "google_oauth_client_id" {
