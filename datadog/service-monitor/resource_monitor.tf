@@ -8,6 +8,6 @@ module "resource" {
 
   monitors = {
     for monitor, config in local.default_resource_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if contains(var.enabled_modules, "resource")
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.create_resource_monitors
   }
 }

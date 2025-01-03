@@ -8,6 +8,6 @@ module "k8s" {
 
   monitors = {
     for monitor, config in local.default_k8s_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if contains(var.enabled_modules, "k8s")
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.create_k8s_monitors
   }
 }

@@ -8,6 +8,6 @@ module "service" {
 
   monitors = {
     for monitor, config in local.default_service_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if contains(var.enabled_modules, "service")
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.service_names != null
   }
 }
