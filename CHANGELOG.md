@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.35]() (2025-01-03)
+### Features
+* Datadog monitors: Add `monitor_thresholds.ok` and customize query type. [(./datadog/monitors)](./datadog/monitors)
+* Datadog AWS monitors: Remove unused variables `dd_users`. [(./datadog/aws-monitor)](./datadog/aws-monitor)
+* Datadog service monitor: Init module. [(./datadog/service-monitor)](./datadog/service-monitor)
+
 ## [0.1.34]() (2025-01-02)
 ### Features 
 * AWS Jenkins OIDC: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
