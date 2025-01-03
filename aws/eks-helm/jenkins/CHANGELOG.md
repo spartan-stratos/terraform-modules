@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.36]() (2024-01-02)
+### Features
+* Remove variable validation with ref to other var since this feature hasn't been supported in OpenTofu
+
 ## [0.1.35]() (2024-01-02)
 ### Features
 * Update the Jenkins `gitHubPluginConfig` to match the variable `github_org_display_name`.
