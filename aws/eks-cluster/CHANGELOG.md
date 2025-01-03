@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.35]() (2025-01-03)
+### Features
+* Update provider urls (remove `registry.terraform.io`) in order for OpenTofu to map to their registry.
+
 ## [0.1.28]() (2024-12-27)
 ### Features
 * Add `var.efs_filesystem_name` to overwrite the default efs filesystem name

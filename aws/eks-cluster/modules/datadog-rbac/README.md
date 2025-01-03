@@ -37,8 +37,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| kubernetes_cluster_role.datadog_agent | resource |
-| kubernetes_cluster_role_binding_v1.datadog_agent | resource |
+| [kubernetes_cluster_role.datadog_agent](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role) | resource |
+| [kubernetes_cluster_role_binding_v1.datadog_agent](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding_v1) | resource |
 
 ## Inputs
 
