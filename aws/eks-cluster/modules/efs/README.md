@@ -26,18 +26,18 @@ module "efs" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version    |
-|------|------------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8   |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75   |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | \>= 2.33.0 |
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.33.0 |
 
 ## Providers
 
-| Name | Version    |
-|------|------------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75   |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | \>= 2.33.0 |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33.0 |
 
 ## Modules
 
@@ -50,7 +50,7 @@ No modules.
 | [aws_efs_backup_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_backup_policy) | resource |
 | [aws_efs_file_system.eks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_file_system) | resource |
 | [aws_efs_mount_target.mount_target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/efs_mount_target) | resource |
-| kubernetes_storage_class.this | resource |
+| [kubernetes_storage_class.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/storage_class) | resource |
 
 ## Inputs
 
