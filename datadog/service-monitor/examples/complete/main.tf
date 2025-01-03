@@ -5,7 +5,10 @@ module "service_monitor" {
   environment                       = "dev"
   tag_slack_channel                 = false
   cluster_name                      = "proj-service-dev"
-  enabled_modules                   = ["http_check", "k8s", "resource", "service"]
+
+  create_http_check_monitors = true
+  create_k8s_monitors        = true
+  create_resource_monitors   = true
 
   service_names = {
     "service-platform" = {
