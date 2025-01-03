@@ -38,7 +38,7 @@ locals {
 
   memory_monitors = {
     for service_name, monitor in var.service_names :
-    "cpu_${service_name}" => {
+    "memory_${service_name}" => {
       priority_level = 3
       title_tags     = "[High Memory Utilization]"
       title          = "Service ${service_name} Memory utilization is high"

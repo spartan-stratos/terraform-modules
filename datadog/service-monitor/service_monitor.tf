@@ -45,7 +45,7 @@ locals {
       title_tags     = "[High Request Hits]"
       title          = "Service ${service_name} Request Hits is high"
 
-      query_template = "percentile($${timeframe}):p95:$${metric}{env:${var.environment},service:${service_name}}.as_count() > $${threshold_critical}"
+      query_template = "percentile($${timeframe}):sum:$${metric}{env:${var.environment},service:${service_name}}.as_count() > $${threshold_critical}"
       query_args = {
         timeframe = "last_5m"
         metric    = local.request_hit_metric
@@ -64,7 +64,7 @@ locals {
       title_tags     = "[High Error Hits]"
       title          = "Service ${service_name} Error Hits is high"
 
-      query_template = "percentile($${timeframe}):p95:$${metric}{env:${var.environment},service:${service_name}}.as_count() > $${threshold_critical}"
+      query_template = "percentile($${timeframe}):sum:$${metric}{env:${var.environment},service:${service_name}}.as_count() > $${threshold_critical}"
       query_args = {
         timeframe = "last_5m"
         metric    = local.error_hit_metric
