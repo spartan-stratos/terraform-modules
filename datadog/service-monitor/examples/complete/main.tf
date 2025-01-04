@@ -1,21 +1,14 @@
 module "service_monitor" {
   source = "../../"
 
-  notification_slack_channel_prefix = "proj-service-x-"
+  cluster_name                      = "proj-service-dev"
+  service_name                      = "service-platform"
   environment                       = "dev"
   tag_slack_channel                 = false
-  cluster_name                      = "proj-service-dev"
+  notification_slack_channel_prefix = "proj-service-x-"
 
-  create_http_check_monitors = true
-  create_k8s_monitors        = true
-  create_resource_monitors   = true
-
-  service_names = {
-    "service-platform" = {
-      enabled_pods_monitor    = true
-      enabled_cpu_monitor     = true
-      enabled_memory_monitor  = false
-      enabled_service_monitor = true
-    }
-  }
+  pod_monitor_enabled     = true
+  cpu_monitor_enabled     = true
+  memory_monitor_enabled  = true
+  service_monitor_enabled = true
 }

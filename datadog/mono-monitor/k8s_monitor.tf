@@ -1,4 +1,4 @@
-module "k8s" {
+module "pod" {
   source = "../monitors"
 
   notification_slack_channel_prefix = var.notification_slack_channel_prefix
@@ -7,7 +7,7 @@ module "k8s" {
   service                           = "k8s"
 
   monitors = {
-    for monitor, config in local.default_k8s_monitors :
-    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.create_k8s_monitors
+    for monitor, config in local.default_pod_monitors :
+    monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.pod_monitor_enabled
   }
 }

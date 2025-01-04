@@ -3,16 +3,6 @@ variable "environment" {
   type        = string
 }
 
-variable "service_name" {
-  description = "Specify the service name for monitoring. Navigate to Datadog dashboard to have accurate determination."
-  type        = string
-}
-
-variable "cluster_name" {
-  description = "The Kubernetes cluster name"
-  type        = string
-}
-
 variable "tag_slack_channel" {
   description = "Whether to tag the Slack channel in the message"
   type        = bool
@@ -21,6 +11,11 @@ variable "tag_slack_channel" {
 
 variable "notification_slack_channel_prefix" {
   description = "The prefix for Slack channels that will receive notifcations and alerts"
+  type        = string
+}
+
+variable "cluster_name" {
+  description = "The Kubernetes cluster name"
   type        = string
 }
 
@@ -67,32 +62,14 @@ variable "override_default_monitors" {
   default = {}
 }
 
-variable "cpu_monitor_enabled" {
-  description = "Whether cpu monitors should be created. Set to 'true' to create the monitors, 'false' to disable."
-  type        = bool
-  default     = false
-}
-
-variable "memory_monitor_enabled" {
-  description = "Whether memory monitors should be created. Set to 'true' to create the monitors, 'false' to disable."
-  type        = bool
-  default     = false
-}
-
 variable "pod_monitor_enabled" {
-  description = "Whether pod monitors (e.g., pod restarts.) should be created. Set to 'true' to create the monitors, 'false' to disable."
+  description = "Whether pod monitors (e.g., pod statuses: crash_loop_back_off, image_pull_back_off, failed.) should be created. Set to 'true' to create the monitors, 'false' to disable."
   type        = bool
   default     = false
 }
 
-variable "service_monitor_enabled" {
-  description = "Whether service monitors (e.g., p95 latency, request and error hit.) should be created. Set to 'true' to create the monitors, 'false' to disable."
+variable "http_check_enabled" {
+  description = "Whether http check monitors should be created. Set to 'true' to create the monitors, 'false' to disable."
   type        = bool
   default     = false
-}
-
-variable "overwrite_container_name" {
-  description = "Specify the service's container name if it is different from variable `service_name`."
-  type        = string
-  default     = null
 }
