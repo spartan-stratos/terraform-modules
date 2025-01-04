@@ -21,7 +21,7 @@ module "cpu" {
   service                           = var.service_name
 
   monitors = {
-    for monitor, config in local.default_cpu_monitor :
+    for monitor, config in local.default_cpu_monitors :
     monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.cpu_monitor_enabled
   }
 }
@@ -35,7 +35,7 @@ module "memory" {
   service                           = var.service_name
 
   monitors = {
-    for monitor, config in local.default_memory_monitor :
+    for monitor, config in local.default_memory_monitors :
     monitor => merge(config, try(var.override_default_monitors[monitor], {})) if var.memory_monitor_enabled
   }
 }

@@ -20,36 +20,40 @@ locals {
     renotify_interval           = 60
   }
 
-  default_cpu_monitor = {
-    priority_level = 3
-    title_tags     = "[High CPU Utilization]"
-    title          = "Service ${var.service_name} CPU utilization is high"
+  default_cpu_monitors = {
+    cpu = {
+      priority_level = 3
+      title_tags     = "[High CPU Utilization]"
+      title          = "Service ${var.service_name} CPU utilization is high"
 
-    query_template = "avg($${timeframe}):(avg:kubernetes.cpu.usage.total{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}} / avg:kubernetes.cpu.limits{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}}) / 10e6 > $${threshold_critical}"
-    query_args = {
-      timeframe           = "last_5m"
-      kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
+      query_template = "avg($${timeframe}):(avg:kubernetes.cpu.usage.total{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}} / avg:kubernetes.cpu.limits{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}}) / 10e6 > $${threshold_critical}"
+      query_args = {
+        timeframe           = "last_5m"
+        kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
+      }
+
+      threshold_critical          = 80
+      threshold_critical_recovery = 70
+      renotify_interval           = 60
     }
-
-    threshold_critical          = 80
-    threshold_critical_recovery = 70
-    renotify_interval           = 60
   }
 
-  default_memory_monitor = {
-    priority_level = 3
-    title_tags     = "[High Memory Utilization]"
-    title          = "Service ${var.service_name} Memory utilization is high"
+  default_memory_monitors = {
+    memory = {
+      priority_level = 3
+      title_tags     = "[High Memory Utilization]"
+      title          = "Service ${var.service_name} Memory utilization is high"
 
-    query_template = "avg($${timeframe}):(avg:kubernetes.memory.usage{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}} / avg:kubernetes.memory.limits{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}}) * 100 > $${threshold_critical}"
-    query_args = {
-      timeframe           = "last_5m"
-      kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
+      query_template = "avg($${timeframe}):(avg:kubernetes.memory.usage{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}} / avg:kubernetes.memory.limits{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}}) * 100 > $${threshold_critical}"
+      query_args = {
+        timeframe           = "last_5m"
+        kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
+      }
+
+      threshold_critical          = 80
+      threshold_critical_recovery = 70
+      renotify_interval           = 60
     }
-
-    threshold_critical          = 80
-    threshold_critical_recovery = 70
-    renotify_interval           = 60
   }
 
   # service monitor
