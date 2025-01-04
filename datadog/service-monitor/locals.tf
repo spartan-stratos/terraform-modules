@@ -44,7 +44,7 @@ locals {
     query_template = "avg($${timeframe}):(avg:kubernetes.memory.usage{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}} / avg:kubernetes.memory.limits{kube_service:${var.service_name}, kube_container_name:$${kube_container_name}, kube_cluster_name:${var.cluster_name}}) * 100 > $${threshold_critical}"
     query_args = {
       timeframe           = "last_5m"
-      kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : service_name
+      kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
     }
 
     threshold_critical          = 80
