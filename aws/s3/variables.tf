@@ -145,3 +145,17 @@ variable "public_policy_name_prefix" {
   type        = string
   default     = "S3PublicAssetsWrite"
 }
+
+# Custom name
+
+variable "custom_readonly_policy_name" {
+  description = "The custom read only policy name to overwrite default one"
+  type = string
+  default = null
+}
+
+variable "custom_read_write_policy_name" {
+  description = "The custom read write policy name to overwrite default one"
+  type = string
+  default = null
+}

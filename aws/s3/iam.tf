@@ -70,7 +70,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
 */
 resource "aws_iam_policy" "readonly" {
   count       = var.enabled_read_only_policy ? 1 : 0
-  name        = "${var.readonly_policy_name_prefix}-${local.bucket.bucket}"
+  name        = var.custom_readonly_policy_name != null ? var.custom_readonly_policy_name : "${var.readonly_policy_name_prefix}-${local.bucket.bucket}"
   description = var.readonly_policy_description
 
   policy = data.aws_iam_policy_document.readonly_policy.0.json
@@ -83,7 +83,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
 */
 resource "aws_iam_policy" "read_write" {
   count       = var.enabled_read_write_policy ? 1 : 0
-  name        = "${var.read_write_policy_name_prefix}-${local.bucket.bucket}"
+  name        = var.custom_read_write_policy_name != null ? var.custom_read_write_policy_name : "${var.read_write_policy_name_prefix}-${local.bucket.bucket}"
   description = var.read_write_policy_description
   policy      = data.aws_iam_policy_document.read_write_policy.0.json
 }
