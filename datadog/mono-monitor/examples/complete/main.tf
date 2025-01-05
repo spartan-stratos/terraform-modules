@@ -8,4 +8,19 @@ module "mono_monitor" {
 
   pod_monitor_enabled = true
   http_check_enabled  = true
+
+  override_default_monitors = {
+    http_check = {
+      priority_level = 2
+      title_tags     = "[HTTP Check]"
+      title          = "URLs are not healthy"
+
+      type           = "service check"
+      query_template = "\"http.can_connect\".over(\"env:dev\").by(\"url\").last(2).count_by_status()"
+
+      threshold_critical = 1
+      ok                 = 1
+      renotify_interval  = 60
+    }
+  }
 }
