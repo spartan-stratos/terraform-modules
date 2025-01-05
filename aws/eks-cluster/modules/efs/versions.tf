@@ -8,7 +8,7 @@ terraform {
     }
 
     kubernetes = {
-      source  = "registry.terraform.io/hashicorp/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = ">= 2.33.0"
     }
   }

@@ -8,12 +8,12 @@ terraform {
     }
 
     kubernetes = {
-      source  = "registry.terraform.io/hashicorp/kubernetes"
+      source  = "hashicorp/kubernetes"
       version = ">= 2.33.0"
     }
 
     tls = {
-      source  = "registry.terraform.io/hashicorp/tls"
+      source  = "hashicorp/tls"
       version = ">= 4.0"
     }
   }

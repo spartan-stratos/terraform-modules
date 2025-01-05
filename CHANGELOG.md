@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.35]() (2025-01-03)
+### Features 
+* All modules: add an `override.tofu` file to override terraform version constraint to opentofu version constraint
+* AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster/)
+  * Update provider urls (remove `registry.terraform.io`) in order for OpenTofu to map to their registry.
+
 ## [0.1.34]() (2025-01-02)
 ### Features 
 * AWS Jenkins OIDC: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
