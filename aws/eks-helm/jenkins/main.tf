@@ -6,16 +6,10 @@ resource "helm_release" "jenkins" {
   create_namespace = false
   namespace        = var.namespace
   force_update     = false
-
-  values = [local.manifest]
+  timeout          = var.timeout
+  values           = [local.manifest]
 
   depends_on = [kubernetes_persistent_volume.jenkins_home]
-
-  lifecycle {
-    ignore_changes = [
-      timeout
-    ]
-  }
 }
 
 locals {

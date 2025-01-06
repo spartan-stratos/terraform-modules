@@ -298,3 +298,8 @@ variable "kaniko_version" {
   type        = string
   default     = "v1.21.1"
 }
+
+variable "timeout" {
+  type = number
+  default = 600
+}
