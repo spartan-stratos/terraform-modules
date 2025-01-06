@@ -39,6 +39,10 @@ resource "aws_sqs_queue" "queue" {
   deduplication_scope   = var.fifo_deduplication_scope
   fifo_throughput_limit = var.fifo_throughput_limit
 
+  redrive_policy = var.enabled_dead_letter_queue ? local.redrive_policy : null
+}
+
+locals {
   redrive_policy = <<POLICY
 {
   "deadLetterTargetArn":"${aws_sqs_queue.dlq.arn}",
