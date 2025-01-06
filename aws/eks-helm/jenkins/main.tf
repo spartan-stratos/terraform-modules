@@ -7,6 +7,7 @@ resource "helm_release" "jenkins" {
   namespace        = var.namespace
   force_update     = false
   timeout          = var.timeout
+  wait             = false
   values           = [local.manifest]
 
   depends_on = [kubernetes_persistent_volume.jenkins_home]

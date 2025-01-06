@@ -300,6 +300,6 @@ variable "kaniko_version" {
 }
 
 variable "timeout" {
-  type = number
+  type    = number
   default = 1200
 }
