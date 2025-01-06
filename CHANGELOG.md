@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
   * Add monitor_thresholds.ok and customize query type.
 * Datadog mono-monitor: Init module [(./datadog/mono-monitor)](./datadog/mono-monitor/)
 * Datadog service-monitor: Init module [(./datadog/service-monitor)](./datadog/service-monitor/)
+* AWS S3: Add variables to overwrite policy name: `custom_readonly_policy_name`, `custom_read_write_policy_name` [(./aws/s3)](./aws/s3/)
 
 ## [0.1.35]() (2025-01-03)
 ### Features 
