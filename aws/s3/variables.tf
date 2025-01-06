@@ -150,12 +150,12 @@ variable "public_policy_name_prefix" {
 
 variable "custom_readonly_policy_name" {
   description = "The custom read only policy name to overwrite default one"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "custom_read_write_policy_name" {
   description = "The custom read write policy name to overwrite default one"
-  type = string
-  default = null
+  type        = string
+  default     = null
 }

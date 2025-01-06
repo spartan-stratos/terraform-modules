@@ -72,6 +72,8 @@ No modules.
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The bucket name to be created. | `string` | `null` | no |
 | <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix) | The bucket prefix to be created. | `string` | `null` | no |
 | <a name="input_cors_configuration"></a> [cors\_configuration](#input\_cors\_configuration) | Configuration for CORS settings | <pre>object({<br/>    allowed_headers = optional(list(string))<br/>    expose_headers  = optional(list(string))<br/>    allowed_methods = list(string)<br/>    allowed_origins = list(string)<br/>    max_age_seconds = optional(number)<br/>  })</pre> | <pre>{<br/>  "allowed_headers": [],<br/>  "allowed_methods": [],<br/>  "allowed_origins": [],<br/>  "expose_headers": [],<br/>  "max_age_seconds": 3600<br/>}</pre> | no |
+| <a name="input_custom_read_write_policy_name"></a> [custom\_read\_write\_policy\_name](#input\_custom\_read\_write\_policy\_name) | The custom read write policy name to overwrite default one | `string` | `null` | no |
+| <a name="input_custom_readonly_policy_name"></a> [custom\_readonly\_policy\_name](#input\_custom\_readonly\_policy\_name) | The custom read only policy name to overwrite default one | `string` | `null` | no |
 | <a name="input_enabled_cors"></a> [enabled\_cors](#input\_enabled\_cors) | Enable to configure the CORS | `bool` | `false` | no |
 | <a name="input_enabled_iam_policy"></a> [enabled\_iam\_policy](#input\_enabled\_iam\_policy) | Enabled create the IAM Policies. | `bool` | `false` | no |
 | <a name="input_enabled_public_policy"></a> [enabled\_public\_policy](#input\_enabled\_public\_policy) | Enabled create the Public Policy to allow public access to bucket objects. | `bool` | `false` | no |
