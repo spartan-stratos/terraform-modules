@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.37]() (2024-12-27)
+### Features
+* Add `override.tofu` to override Terraform version constrain with OpenTofu
+
 ## [0.1.28]() (2024-12-27)
 ### Features
 * Add a flag to enable www domain: `use_www_domain`
