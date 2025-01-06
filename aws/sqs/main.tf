@@ -45,7 +45,7 @@ resource "aws_sqs_queue" "queue" {
 locals {
   redrive_policy = <<POLICY
 {
-  "deadLetterTargetArn":"${aws_sqs_queue.dlq.arn}",
+  "deadLetterTargetArn":"${try(aws_sqs_queue.dlq[0].arn, "")}",
   "maxReceiveCount": ${var.max_receive_count}
 }
 POLICY
