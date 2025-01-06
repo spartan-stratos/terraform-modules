@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.37]() (2025-01-06)
+### Features
+* Add variable `enabled_dead_letter_queue` to optionally disable dlq
+* Add variable `enabled_read_write_policy` and `read_write_policy_name` to optionally configure a read-write policy
+
 ## [0.1.28]() (2024-12-26)
 ### Features
 * Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.

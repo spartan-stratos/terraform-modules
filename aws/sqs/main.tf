@@ -12,6 +12,7 @@ Configured with default SQS settings and optional FIFO settings based on input v
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue
 */
 resource "aws_sqs_queue" "dlq" {
+  count                     = var.enabled_dead_letter_queue ? 1 : 0
   name                      = local.dlq_queue_name
   delay_seconds             = "0"
   max_message_size          = var.max_size
@@ -38,9 +39,13 @@ resource "aws_sqs_queue" "queue" {
   deduplication_scope   = var.fifo_deduplication_scope
   fifo_throughput_limit = var.fifo_throughput_limit
 
+  redrive_policy = var.enabled_dead_letter_queue ? local.redrive_policy : null
+}
+
+locals {
   redrive_policy = <<POLICY
 {
-  "deadLetterTargetArn":"${aws_sqs_queue.dlq.arn}",
+  "deadLetterTargetArn":"${try(aws_sqs_queue.dlq[0].arn, "")}",
   "maxReceiveCount": ${var.max_receive_count}
 }
 POLICY
