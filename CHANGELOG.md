@@ -1,6 +1,17 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.36]() (2025-01-05)
+### Features
+* Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
+  * Remove unused variables `dd_users`.
+* Datadog monitors: [(./datadog/monitors)](./datadog/monitors/)
+  * Add monitor_thresholds.ok and customize query type.
+* Datadog mono-monitor: Init module [(./datadog/mono-monitor)](./datadog/mono-monitor/)
+* Datadog service-monitor: Init module [(./datadog/service-monitor)](./datadog/service-monitor/)
+* AWS S3: Add variables to overwrite policy name: `custom_readonly_policy_name`, `custom_read_write_policy_name` [(./aws/s3)](./aws/s3/)
+
 ## [0.1.35]() (2025-01-03)
 ### Features 
 * All modules: add an `override.tofu` file to override terraform version constraint to opentofu version constraint
