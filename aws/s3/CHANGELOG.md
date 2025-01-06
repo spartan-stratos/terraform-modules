@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.36]() (2024-01-06)
+### Features
+* Add variables to avoid forced resource replacements during rollout: `custom_readonly_policy_name`, `custom_read_write_policy_name`.
 
 ## [0.1.27]() (2024-12-26)
 ### Features
