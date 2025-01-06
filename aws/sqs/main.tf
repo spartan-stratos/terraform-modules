@@ -12,6 +12,7 @@ Configured with default SQS settings and optional FIFO settings based on input v
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue
 */
 resource "aws_sqs_queue" "dlq" {
+  count                     = var.enabled_dead_letter_queue ? 1 : 0
   name                      = local.dlq_queue_name
   delay_seconds             = "0"
   max_message_size          = var.max_size
