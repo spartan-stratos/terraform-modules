@@ -4,10 +4,12 @@ variable "monitors" {
     priority_level              = number
     title_tags                  = string
     title                       = string
+    type                        = optional(string, "query alert")
     query_template              = string
-    query_args                  = map(string)
+    query_args                  = optional(map(string), {})
     threshold_critical          = number
-    threshold_critical_recovery = number
+    threshold_critical_recovery = optional(number, null)
+    threshold_ok                = optional(number, null)
     renotify_interval           = number
     renotify_occurrences        = optional(number)
     require_full_window         = optional(bool, true)
@@ -21,10 +23,12 @@ variable "monitors" {
     - priority_level: The priority level of the monitor.
     - title_tags: The tags to include in the title of the monitor.
     - title: The title of the monitor.
+    - type: The type of the monitor.
     - query_template: The template for the monitor query.
     - query_args: The arguments for the monitor query.
     - threshold_critical: The critical threshold for the monitor.
     - threshold_critical_recovery: The critical recovery threshold for the monitor.
+    - threshold_ok: The recovery threshold for the monitor. Only supported in monitor type `service check`.
     - renotify_interval: The renotify interval for the monitor.
 
     The following attributes are optional:
