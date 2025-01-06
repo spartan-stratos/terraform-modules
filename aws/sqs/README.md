@@ -83,6 +83,7 @@ No modules.
 |------|-------------|
 | <a name="output_dlq"></a> [dlq](#output\_dlq) | The SQS dead letter queue info |
 | <a name="output_iam_policy_sqs_read_arn"></a> [iam\_policy\_sqs\_read\_arn](#output\_iam\_policy\_sqs\_read\_arn) | n/a |
+| <a name="output_iam_policy_sqs_read_write_arn"></a> [iam\_policy\_sqs\_read\_write\_arn](#output\_iam\_policy\_sqs\_read\_write\_arn) | The ARN of the IAM policy for read-write access to the SQS queue |
 | <a name="output_iam_policy_sqs_write_arn"></a> [iam\_policy\_sqs\_write\_arn](#output\_iam\_policy\_sqs\_write\_arn) | n/a |
 | <a name="output_queue"></a> [queue](#output\_queue) | The SQS queue info |
 <!-- END_TF_DOCS -->
