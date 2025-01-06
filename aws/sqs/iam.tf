@@ -48,7 +48,7 @@ resource "aws_iam_policy" "write" {
 
 resource "aws_iam_policy" "read_write" {
   count       = var.enabled_read_write_policy ? 1 : 0
-  name = var.read_write_policy_name != null ? var.read_write_policy_name : "SQSReadWrite-${var.name}"
+  name        = var.read_write_policy_name != null ? var.read_write_policy_name : "SQSReadWrite-${var.name}"
   description = "Policy that allows send and receive message from a shared queue."
   policy      = data.aws_iam_policy_document.read_write[0].json
 }
