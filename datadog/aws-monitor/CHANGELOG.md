@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.37]() (2024-01-07)
+## [0.1.38]() (2024-01-07)
 ### Features
 * Update `renotify_occurrences` for each default services
 
