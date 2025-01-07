@@ -80,3 +80,21 @@ variable "write_policy_name" {
   type        = string
   default     = null
 }
+
+variable "read_write_policy_name" {
+  description = "Custom name for the read-write policy"
+  type        = string
+  default     = null
+}
+
+variable "enabled_read_write_policy" {
+  description = "Enable read-write policy"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_dead_letter_queue" {
+  description = "Enable dead letter queue"
+  type        = bool
+  default     = true
+}

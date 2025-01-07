@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.37]() (2025-01-06)
+### Features
+* AWS SQS: [(./aws/sqs)](./aws/sqs)
+  * Add variable `enabled_dead_letter_queue` to optionally disable dlq
+  * Add variable `enabled_read_write_policy` and `read_write_policy_name` to optionally configure a read-write policy
+* AWS StaticWebsite/Cloudfront: [(./aws/static-website/modules/cloudfront/)](./aws/static-website/modules/cloudfront/)
+  * Add `override.tofu` to override Terraform version constrain with OpenTofu
+* AWS OIDC/Jenkins: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
+  * Fix `for_each argument must be a map, or set of strings`: wrap the argument in `toset`
+
 ## [0.1.36]() (2025-01-05)
 ### Features
 * Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
