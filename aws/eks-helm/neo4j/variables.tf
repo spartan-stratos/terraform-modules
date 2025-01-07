@@ -50,3 +50,14 @@ variable "neo4j_fqdn" {
   type        = string
   default     = ""
 }
+
+variable "domain" {
+  description = "The root domain of project"
+  type        = string
+}
+
+variable "neo4j_dns_name" {
+  description = "The Neo4j DNS name"
+  type        = string
+  default     = "neo4j"
+}
