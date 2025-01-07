@@ -14,13 +14,15 @@ This module creates the following components:
 
 ```hcl
 module "mwaa" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/mwaa?ref=v0.1.38"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/mwaa?ref=v0.1.39"
 
   name                         = "example-mwaa-environment"
   private_subnet_ids           = ["subnet-12345", "subnet-67890"]
   source_bucket_arn            = "arn:aws:s3:::example-bucket"
   create_iam_role              = true
   create_s3_bucket             = true
+  iam_role_name                = "example-mwaa-role"
+  source_bucket_name           = "example-mwaa-bucket"
   dag_s3_path                  = "dags"
   environment_class            = "mw1.medium"
   webserver_access_mode        = "PRIVATE_ONLY"
@@ -100,7 +102,6 @@ No modules.
 | <a name="input_startup_script_s3_object_version"></a> [startup\_script\_s3\_object\_version](#input\_startup\_script\_s3\_object\_version) | (Optional) The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script. | `string` | `null` | no |
 | <a name="input_startup_script_s3_path"></a> [startup\_script\_s3\_path](#input\_startup\_script\_s3\_path) | (Optional) The relative path to the script hosted in your bucket. The script runs as your environment starts before starting the Apache Airflow process. Use this script to install dependencies, modify configuration options, and set environment variables. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of resource tags to associate with the resource | `map(string)` | `{}` | no |
-| <a name="input_use_source_bucket_name_as_prefix"></a> [use\_source\_bucket\_name\_as\_prefix](#input\_use\_source\_bucket\_name\_as\_prefix) | Whether or not to use the `var.source_bucket_name` as the S3 bucket name prefix | `bool` | `true` | no |
 | <a name="input_webserver_access_mode"></a> [webserver\_access\_mode](#input\_webserver\_access\_mode) | (Optional) Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE\_ONLY (default) and PUBLIC\_ONLY | `string` | `"PRIVATE_ONLY"` | no |
 | <a name="input_weekly_maintenance_window_start"></a> [weekly\_maintenance\_window\_start](#input\_weekly\_maintenance\_window\_start) | (Optional) Specifies the start date for the weekly maintenance window | `string` | `null` | no |
 
