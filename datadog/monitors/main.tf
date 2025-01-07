@@ -17,10 +17,13 @@ resource "datadog_monitor" "this" {
     critical          = each.value.threshold_critical
     critical_recovery = each.value.threshold_critical_recovery
     ok                = each.value.threshold_ok
+    warning           = each.value.threshold_warning
+    warning_recovery  = each.value.threshold_warning_recovery
   }
 
-  renotify_interval        = each.value.renotify_interval
-  renotify_statuses        = ["alert"]
+  renotify_interval = each.value.renotify_interval
+  renotify_statuses = ["alert"]
+
   timeout_h                = 1
   renotify_occurrences     = try(each.value.renotify_occurrences)
   require_full_window      = each.value.require_full_window
