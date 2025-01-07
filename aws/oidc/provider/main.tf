@@ -4,7 +4,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/i
  */
 data "aws_iam_openid_connect_provider" "this" {
   count = var.create_provider ? 0 : 1
-  url = var.url
+  url   = var.url
 }
 
 /**
