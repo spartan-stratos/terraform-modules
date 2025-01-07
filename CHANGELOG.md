@@ -1,6 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.38]() (2025-01-07)
+### Features
+* Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
+  * Update `renotify_occurrences` for each default services
+* Datadog monitors: [(./datadog/monitors)](./datadog/monitors/)
+  * Add monitor_threshold `warning` and `warning_recovery`.
+* AWS Neo4j module: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
+  * Add Neo4j helm deployment module
 
 ## [0.1.37]() (2025-01-06)
 ### Features
