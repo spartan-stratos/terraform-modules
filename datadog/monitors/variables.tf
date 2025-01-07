@@ -10,8 +10,8 @@ variable "monitors" {
     threshold_critical          = number
     threshold_critical_recovery = optional(number, null)
     threshold_ok                = optional(number, null)
-    threshold_warning                = optional(number, null)
-    threshold_warning_recovery                = optional(number, null)
+    threshold_warning           = optional(number, null)
+    threshold_warning_recovery  = optional(number, null)
     renotify_interval           = number
     renotify_occurrences        = optional(number)
     require_full_window         = optional(bool, true)
