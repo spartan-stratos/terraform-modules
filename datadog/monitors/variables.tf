@@ -10,6 +10,8 @@ variable "monitors" {
     threshold_critical          = number
     threshold_critical_recovery = optional(number, null)
     threshold_ok                = optional(number, null)
+    threshold_warning                = optional(number, null)
+    threshold_warning_recovery                = optional(number, null)
     renotify_interval           = number
     renotify_occurrences        = optional(number)
     require_full_window         = optional(bool, true)
@@ -29,6 +31,8 @@ variable "monitors" {
     - threshold_critical: The critical threshold for the monitor.
     - threshold_critical_recovery: The critical recovery threshold for the monitor.
     - threshold_ok: The recovery threshold for the monitor. Only supported in monitor type `service check`.
+    - threshold_warning: The monitor WARNING threshold.
+    - threshold_warning_recovery: The monitor WARNING recovery threshold.
     - renotify_interval: The renotify interval for the monitor.
 
     The following attributes are optional:
