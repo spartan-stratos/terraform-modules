@@ -27,6 +27,7 @@ locals {
       threshold_critical          = 80
       threshold_critical_recovery = 40
       renotify_interval           = 20
+      renotify_occurrences        = 3
     }
 
     elasticache_cpu_o1 = {
@@ -42,6 +43,7 @@ locals {
       threshold_critical          = 70
       threshold_critical_recovery = 40
       renotify_interval           = 50
+      renotify_occurrences        = 3
     }
 
     elasticache_memory = {
@@ -57,6 +59,7 @@ locals {
       threshold_critical          = 80
       threshold_critical_recovery = 70
       renotify_interval           = 30
+      renotify_occurrences        = 3
       require_full_window         = false
     }
 
@@ -73,6 +76,7 @@ locals {
       threshold_critical          = 70
       threshold_critical_recovery = 40
       renotify_interval           = 50
+      renotify_occurrences        = 3
       require_full_window         = false
     }
 
@@ -89,6 +93,7 @@ locals {
       threshold_critical          = 15
       threshold_critical_recovery = 0
       renotify_interval           = 50
+      renotify_occurrences        = 3
     }
   }
 }
