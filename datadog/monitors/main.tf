@@ -17,8 +17,8 @@ resource "datadog_monitor" "this" {
     critical          = each.value.threshold_critical
     critical_recovery = each.value.threshold_critical_recovery
     ok                = each.value.threshold_ok
-    warning           = each.value.warning
-    warning_recovery  = each.value.warning_recovery
+    warning           = each.value.threshold_warning
+    warning_recovery  = each.value.threshold_warning_recovery
   }
 
   renotify_interval = each.value.renotify_interval
