@@ -13,8 +13,7 @@ Use this data source to get information, such as SHA1 fingerprint or serial numb
 https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate
  */
 data "tls_certificate" "this" {
-  count = var.create_provider ? 0 : 1
-  url   = var.url
+  url = var.url
 }
 
 /**
@@ -27,5 +26,5 @@ resource "aws_iam_openid_connect_provider" "this" {
 
   url             = var.url
   client_id_list  = var.client_id_list
-  thumbprint_list = distinct(concat([data.tls_certificate.this[0].certificates[0].sha1_fingerprint], var.additional_thumbprints))
+  thumbprint_list = distinct(concat([data.tls_certificate.this.certificates[0].sha1_fingerprint], var.additional_thumbprints))
 }

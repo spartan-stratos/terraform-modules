@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.40]() (2024-01-08)
 ### Bug fixes
-* Fix `data.tls_certificate.this` use index because of it has "count" set
+* Remove create `var.create_provider` from `tls_certificate` to prevent bugs.
 
 ## [0.1.39]() (2024-01-08)
 ### Bug fixes
