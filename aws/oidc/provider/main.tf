@@ -27,5 +27,5 @@ resource "aws_iam_openid_connect_provider" "this" {
 
   url             = var.url
   client_id_list  = var.client_id_list
-  thumbprint_list = distinct(concat([data.tls_certificate.this[0].certificates[0].sha1_fingerprint], var.additional_thumbprints))
+  thumbprint_list = distinct(concat([try(data.tls_certificate.this[0].certificates[0].sha1_fingerprint, [])], var.additional_thumbprints))
 }
