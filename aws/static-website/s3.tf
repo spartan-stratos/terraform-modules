@@ -13,4 +13,10 @@ module "s3" {
   force_destroy             = true
   enabled_read_only_policy  = var.enabled_read_only_policy
   enabled_read_write_policy = var.enabled_read_write_policy
+
+  custom_readonly_policy_name = var.s3_custom_readonly_policy_name
+  readonly_policy_description = var.s3_readonly_policy_description
+
+  custom_read_write_policy_name = var.s3_custom_read_write_policy_name
+  read_write_policy_description = var.s3_read_write_policy_description
 }

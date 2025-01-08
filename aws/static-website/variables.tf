@@ -82,7 +82,34 @@ variable "cloudfront_distribution_aliases" {
   default     = null
 }
 
+# avoid recreating policies and their dependent resources during migration
+variable "s3_read_write_policy_description" {
+  description = "Description for read write policy"
+  type        = string
+  default     = "Policy that allows writing to the S3 bucket"
+}
+
+variable "s3_readonly_policy_description" {
+  description = "Description for readonly policy"
+  type        = string
+  default     = "Policy that allows reading from the s3 assets bucket"
+}
+
+# Custom name
 variable "bucket_prefix" {
-  type    = string
-  default = null
+  description = "Overwrite bucket prefix name."
+  type        = string
+  default     = null
+}
+
+variable "s3_custom_readonly_policy_name" {
+  description = "The custom read only policy name to overwrite default one"
+  type        = string
+  default     = null
+}
+
+variable "s3_custom_read_write_policy_name" {
+  description = "The custom read write policy name to overwrite default one"
+  type        = string
+  default     = null
 }
