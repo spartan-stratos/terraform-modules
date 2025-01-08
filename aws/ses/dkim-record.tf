@@ -3,7 +3,7 @@ This resource enables DomainKeys Identified Mail (DKIM) signing for the domain
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_domain_dkim
  */
 resource "aws_ses_domain_dkim" "this" {
-  count  = var.publish_dkim_record ? 1 : 0
+  count = var.publish_dkim_record ? 1 : 0
 
   domain = aws_ses_domain_identity.this.domain
 }

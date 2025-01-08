@@ -54,6 +54,6 @@ variable "publish_dkim_record" {
 
 variable "email_receiving_endpoint" {
   description = "The SMTP endpoint used for receiving emails. This is typically the inbound email receiving endpoint for Amazon SES in the specified region, such as 'inbound-smtp.us-west-2.amazonaws.com'. Update this if using a custom or alternative email receiving service."
-  type = string
-  default = "inbound-smtp.us-west-2.amazonaws.com"
+  type        = string
+  default     = "inbound-smtp.us-west-2.amazonaws.com"
 }
