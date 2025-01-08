@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 ## [0.1.39]() (2025-01-08)
 ### Features
+* AWS MWAA: [(./aws/mwaa)](./aws/mwaa)
+  * Add AWS MWAA Terraform module
+### Bug Fixes
+* AWS OIDC Provider: [(./aws/oidc/provider)](./aws/oidc/provider)
+  * Remove create `var.create_provider` from `tls_certificate` to prevent bugs.
+
+## [0.1.39]() (2025-01-08)
+### Features
 * AWS SES:  [(./aws/ses)](./aws/ses)
   * Add DKIM records and MX records options.
 
