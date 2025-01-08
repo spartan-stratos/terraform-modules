@@ -3,7 +3,8 @@ This data source can be used to fetch information about a specific IAM OpenID Co
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider
  */
 data "aws_iam_openid_connect_provider" "this" {
-  url = var.url
+  count = var.create_provider ? 0 : 1
+  url   = var.url
 }
 
 /**
