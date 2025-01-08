@@ -1,6 +1,16 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.39]() (2025-01-08)
+### Features
+* AWS SES:  [(./aws/ses)](./aws/ses)
+  * Add DKIM records and MX records options.
+
+### Bug Fixes
+* AWS OIDC Provider: [(./aws/oidc/provider)](./aws/oidc/provider)
+  * Update `var.create_provider` for `aws_iam_openid_connect_provider` to prevent bugs from not found
+
+
 ## [0.1.38]() (2025-01-07)
 ### Features
 * Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
