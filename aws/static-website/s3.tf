@@ -9,8 +9,14 @@ module "s3" {
 
   count = var.enabled_create_s3 ? 1 : 0
 
-  bucket_prefix             = var.name
+  bucket_prefix             = var.bucket_prefix != null ? var.bucket_prefix : var.name
   force_destroy             = true
   enabled_read_only_policy  = var.enabled_read_only_policy
   enabled_read_write_policy = var.enabled_read_write_policy
+
+  custom_readonly_policy_name = var.s3_custom_readonly_policy_name
+  readonly_policy_description = var.s3_readonly_policy_description
+
+  custom_read_write_policy_name = var.s3_custom_read_write_policy_name
+  read_write_policy_description = var.s3_read_write_policy_description
 }

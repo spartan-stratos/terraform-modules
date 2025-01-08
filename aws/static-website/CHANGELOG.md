@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.41]() (2025-01-09)
+### Features
+* Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`, `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource recreation.
+
 ## [0.1.37]() (2025-01-06)
 ### Features
 * Add `override.tofu` to override Terraform version constrain with OpenTofu

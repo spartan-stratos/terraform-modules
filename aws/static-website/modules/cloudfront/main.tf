@@ -34,7 +34,6 @@ resource "aws_cloudfront_distribution" "this" {
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
 
-
     forwarded_values {
       query_string = false
 
