@@ -81,3 +81,8 @@ variable "cloudfront_distribution_aliases" {
   type        = list(string)
   default     = null
 }
+
+variable "bucket_prefix" {
+  type    = string
+  default = null
+}
