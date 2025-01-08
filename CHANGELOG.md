@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.41]() (2025-01-09)
+### Features
+* AWS static-website: Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`, `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource recreation. [(./aws/static-website)](./aws/static-website)
+
 ## [0.1.40]() (2025-01-08)
 ### Features
 * AWS MWAA: [(./aws/mwaa)](./aws/mwaa)
