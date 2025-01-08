@@ -26,9 +26,6 @@ module "mwaa" {
   dag_s3_path                  = "dags"
   environment_class            = "mw1.medium"
   webserver_access_mode        = "PRIVATE_ONLY"
-  tags = {
-    Environment = "Dev"
-  }
 }
 ```
 

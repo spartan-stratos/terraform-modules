@@ -5,8 +5,6 @@ resource "aws_s3_bucket" "this" {
   count = var.create_s3_bucket ? 1 : 0
 
   bucket = var.source_bucket_name
-
-  tags = var.tags
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {

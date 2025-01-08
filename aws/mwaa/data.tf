@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "mwaa_assume" {
     }
   }
 }
-#tfsec:ignore:AWS099
+
 data "aws_iam_policy_document" "mwaa" {
   statement {
     effect = "Allow"

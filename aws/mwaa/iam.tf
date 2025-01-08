@@ -7,8 +7,6 @@ resource "aws_iam_role" "this" {
   name               = var.iam_role_name != null ? var.iam_role_name : null
   description        = "MWAA IAM Role"
   assume_role_policy = data.aws_iam_policy_document.mwaa_assume.json
-
-  tags = var.tags
 }
 
 resource "aws_iam_role_policy" "this" {

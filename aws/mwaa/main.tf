@@ -24,8 +24,6 @@ resource "aws_mwaa_environment" "this" {
   webserver_access_mode           = var.webserver_access_mode
   weekly_maintenance_window_start = var.weekly_maintenance_window_start
 
-  tags = var.tags
-
   network_configuration {
     security_group_ids = var.security_group_ids
     subnet_ids         = var.private_subnet_ids
