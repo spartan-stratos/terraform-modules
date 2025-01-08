@@ -53,6 +53,7 @@ No modules.
 | <a name="input_private_subnet"></a> [private\_subnet](#input\_private\_subnet) | List private subnet of cluster for creating aws internal load balancer | `list(string)` | n/a | yes |
 | <a name="input_public_subnet"></a> [public\_subnet](#input\_public\_subnet) | List public subnet of cluster for creating aws external load balancer | `list(string)` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region where the resources will be created. | `string` | n/a | yes |
+| <a name="input_role_policy_document_version"></a> [role\_policy\_document\_version](#input\_role\_policy\_document\_version) | Version of the policy (associated with ALB controller):<br/>  - default (null): controller version < 2.9, chart version < 1.9<br/>  - v2: controller version >= 2.9, chart version >= 1.9 | `string` | `null` | no |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | SSL policy for AWS Load Balancer | `string` | `"ELBSecurityPolicy-TLS13-1-2-2021-06"` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | ID of the VPC that the resources reside in. | `string` | n/a | yes |
 

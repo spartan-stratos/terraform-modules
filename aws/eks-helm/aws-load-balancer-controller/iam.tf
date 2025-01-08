@@ -21,8 +21,15 @@ resource "aws_iam_role" "aws_load_balancer_controller" {
   name               = "${var.cluster_name}-aws-load-balancer-controller-role"
 }
 
+locals {
+  policy_file = format(
+    "%s/policies/AWSLoadBalancerControllerIAMPolicy%s.json",
+    path.module,
+    var.role_policy_document_version != null ? "-${var.role_policy_document_version}" : ""
+  )
+}
 resource "aws_iam_policy" "aws_load_balancer_controller" {
-  policy = file("${path.module}/policies/AWSLoadBalancerControllerIAMPolicy.json")
+  policy = file(local.policy_file)
   name   = "${var.cluster_name}-load-balancer-controller-policy"
 }
 

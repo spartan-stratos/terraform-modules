@@ -92,3 +92,13 @@ variable "internal_group_name" {
   default     = "internal"
   description = "Group name of internal aws load balancer"
 }
+
+variable "role_policy_document_version" {
+  type        = string
+  default     = null
+  description = <<DESCRIPTION
+Version of the policy (associated with ALB controller):
+  - default (null): controller version < 2.9, chart version < 1.9
+  - v2: controller version >= 2.9, chart version >= 1.9
+DESCRIPTION
+}
