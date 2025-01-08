@@ -13,7 +13,7 @@ Use this data source to get information, such as SHA1 fingerprint or serial numb
 https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate
  */
 data "tls_certificate" "this" {
-  url   = var.url
+  url = var.url
 }
 
 /**
