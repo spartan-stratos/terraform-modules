@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.39]() (2025-01-08)
+### Features
+* Add DKIM records and MX records options.
+
 ## [0.1.21]() (2024-12-24)
 ### Features
 * Add prefix to verify domain
