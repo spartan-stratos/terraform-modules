@@ -59,6 +59,7 @@ module "static_website" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix) | n/a | `string` | `null` | no |
 | <a name="input_cloudfront_distribution_aliases"></a> [cloudfront\_distribution\_aliases](#input\_cloudfront\_distribution\_aliases) | List of domain names that is associated with the CloudFront distribution. | `list(string)` | `null` | no |
 | <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the static website. | `string` | n/a | yes |
@@ -72,6 +73,10 @@ module "static_website" {
 | <a name="input_name"></a> [name](#input\_name) | For creating or retrieving the bucket and cloudfront name | `string` | n/a | yes |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. | `string` | `"PriceClass_100"` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | R53 zone ID | `string` | n/a | yes |
+| <a name="input_s3_custom_read_write_policy_name"></a> [s3\_custom\_read\_write\_policy\_name](#input\_s3\_custom\_read\_write\_policy\_name) | The custom read write policy name to overwrite default one | `string` | `null` | no |
+| <a name="input_s3_custom_readonly_policy_name"></a> [s3\_custom\_readonly\_policy\_name](#input\_s3\_custom\_readonly\_policy\_name) | The custom read only policy name to overwrite default one | `string` | `null` | no |
+| <a name="input_s3_read_write_policy_description"></a> [s3\_read\_write\_policy\_description](#input\_s3\_read\_write\_policy\_description) | Description for read write policy | `string` | `"Policy that allows writing to the S3 bucket"` | no |
+| <a name="input_s3_readonly_policy_description"></a> [s3\_readonly\_policy\_description](#input\_s3\_readonly\_policy\_description) | Description for readonly policy | `string` | `"Policy that allows reading from the s3 assets bucket"` | no |
 | <a name="input_use_www_domain"></a> [use\_www\_domain](#input\_use\_www\_domain) | Use www domain | `bool` | `false` | no |
 | <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | `"redirect-to-https"` | no |
 
