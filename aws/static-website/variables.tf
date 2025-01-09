@@ -113,3 +113,20 @@ variable "s3_custom_read_write_policy_name" {
   type        = string
   default     = null
 }
+
+variable "ordered_cache_behaviors" {
+  description = "List of ordered cache behaviors with path patterns and settings."
+  type = list(object({
+    path_pattern     = string
+    allowed_methods  = list(string)
+    cached_methods   = list(string)
+    target_origin_id = string
+    query_string     = bool
+    cookies_forward  = string
+    min_ttl          = number
+    default_ttl      = number
+    max_ttl          = number
+    compress         = bool
+  }))
+  default = []
+}

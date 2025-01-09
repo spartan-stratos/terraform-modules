@@ -49,25 +49,28 @@ resource "aws_cloudfront_distribution" "this" {
     compress               = true
   }
 
-  ordered_cache_behavior {
-    path_pattern     = "/index.html"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = local.s3_origin_id
+  dynamic "ordered_cache_behavior" {
+    for_each = var.ordered_cache_behaviors
+    content {
+      path_pattern     = ordered_cache_behavior.value.path_pattern
+      allowed_methods  = ordered_cache_behavior.value.allowed_methods
+      cached_methods   = ordered_cache_behavior.value.cached_methods
+      target_origin_id = ordered_cache_behavior.value.target_origin_id
 
-    forwarded_values {
-      query_string = false
+      forwarded_values {
+        query_string = ordered_cache_behavior.value.query_string
 
-      cookies {
-        forward = "none"
+        cookies {
+          forward = ordered_cache_behavior.value.cookies_forward
+        }
       }
-    }
 
-    viewer_protocol_policy = var.viewer_protocol_policy
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-    compress               = true
+      viewer_protocol_policy = var.viewer_protocol_policy
+      min_ttl                = ordered_cache_behavior.value.min_ttl
+      default_ttl            = ordered_cache_behavior.value.default_ttl
+      max_ttl                = ordered_cache_behavior.value.max_ttl
+      compress               = ordered_cache_behavior.value.compress
+    }
   }
 
   price_class = var.price_class
