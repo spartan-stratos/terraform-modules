@@ -57,3 +57,9 @@ variable "email_receiving_endpoint" {
   type        = string
   default     = "inbound-smtp.us-west-2.amazonaws.com"
 }
+
+variable "enabled_ses_identity_policy" {
+  description = "Whether to enable the SES identity policy."
+  type        = bool
+  default     = true
+}
