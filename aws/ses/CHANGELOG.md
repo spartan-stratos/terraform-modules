@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.46]() (2025-01-09)
+### Features
+* Add variable `enabled_ses_identity_policy` to make ses_identity_policy optional.
+
 ## [0.1.39]() (2025-01-08)
 ### Features
 * Add DKIM records and MX records options.

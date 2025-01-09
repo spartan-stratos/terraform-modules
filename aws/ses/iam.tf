@@ -23,6 +23,8 @@ Used here to define and attach permissions to the domain identity specified in `
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_identity_policy
 */
 resource "aws_ses_identity_policy" "this" {
+  count = var.enabled_ses_identity_policy ? 1 : 0
+
   identity = aws_ses_domain_identity.this.arn
   name     = "SES"
   policy   = data.aws_iam_policy_document.identity_policy.json
