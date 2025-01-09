@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.48]() (2025-01-09)
+### Features
+* Add output `rds_secret_arn`
+
 ## [0.1.22]() (2024-12-25)
 ### Features
 * Correct conditions to create security group `aws_security_group.this` when variable `vpc_security_group_ids` is null.

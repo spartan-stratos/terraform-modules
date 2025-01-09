@@ -36,16 +36,16 @@ module "instance" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | \>= 3.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
-| <a name="provider_random"></a> [random](#provider\_random) | \>= 3.6 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6 |
 
 ## Modules
 
@@ -106,7 +106,9 @@ module "instance" {
 |------|-------------|
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name) | The database name. |
 | <a name="output_db_password"></a> [db\_password](#output\_db\_password) | The database password. |
+| <a name="output_db_port"></a> [db\_port](#output\_db\_port) | The database port. |
 | <a name="output_db_username"></a> [db\_username](#output\_db\_username) | The database username. |
 | <a name="output_main_address"></a> [main\_address](#output\_main\_address) | The primary instance hostname. |
+| <a name="output_rds_secret_arn"></a> [rds\_secret\_arn](#output\_rds\_secret\_arn) | The ARN of the RDS secret. |
 | <a name="output_replica_address"></a> [replica\_address](#output\_replica\_address) | The replica hostname, fallback to the hostname of main instance if there is no replica. |
 <!-- END_TF_DOCS -->

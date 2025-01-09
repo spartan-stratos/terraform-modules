@@ -27,3 +27,8 @@ output "db_password" {
   description = "The database password."
   value       = random_password.this.result
 }
+
+output "rds_secret_arn" {
+  description = "The ARN of the RDS secret."
+  value       = aws_secretsmanager_secret.rds_secret.arn
+}
