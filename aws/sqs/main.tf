@@ -1,11 +1,3 @@
-locals {
-  suffix         = var.fifo_enabled ? ".fifo" : ""
-  dlq_queue_name = "${var.name}-dlq${local.suffix}"
-  queue_name     = "${var.name}${local.suffix}"
-  aws_account_id = data.aws_caller_identity.current.account_id
-  aws_region     = data.aws_region.current.name
-}
-
 /*
 aws_sqs_queue dlq creates a dead-letter queue (DLQ) for handling messages that can't be processed successfully.
 Configured with default SQS settings and optional FIFO settings based on input variables.
