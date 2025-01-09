@@ -1,3 +1,3 @@
-output "domain_arn" {
-  value = module.ses.domain_identity_arn
+output "arn" {
+  value = module.sns.arn
 }
