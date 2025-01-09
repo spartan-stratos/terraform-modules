@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.43]() (2025-01-09)
+### Features
+* AWS elasticache: Add output `elasticache_replication_group_configuration_endpoint_address` and variable `transit_encryption_enabled`. [(./aws/elasticache)](./aws/elasticache)
+
 ## [0.1.42]() (2025-01-09)
 ### Features
 * AWS Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](./aws/eks-helm/aws-load-balancer-controller/)
