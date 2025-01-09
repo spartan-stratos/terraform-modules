@@ -1,5 +1,8 @@
-
-resource "random_string" "transition_encryption_auth_token" {
+/**
+`random_string` generates a random permutation of alphanumeric characters and optionally special characters.
+https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
+ */
+resource "random_string" "this" {
   length           = 32
   special          = true
   override_special = "!&#$^<>-"
@@ -44,6 +47,6 @@ resource "aws_elasticache_replication_group" "this" {
 
   # The following blocks specified only if (var.transit_encryption_enabled == true)
   transit_encryption_enabled = var.transit_encryption_enabled
-  auth_token                 = random_string.transition_encryption_auth_token.result
+  auth_token                 = random_string.this.result
   auth_token_update_strategy = "ROTATE"
 }
