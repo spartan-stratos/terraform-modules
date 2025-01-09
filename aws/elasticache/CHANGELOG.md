@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.49]() (2025-01-10)
+### Features
+* Remove random string password when `transit_encryption_enabled` is `false`.
+
 ## [0.1.43]() (2025-01-09)
 ### Features
 * Add output `elasticache_replication_group_configuration_endpoint_address` and variable `transit_encryption_enabled`.

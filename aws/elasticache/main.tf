@@ -3,6 +3,7 @@
 https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
  */
 resource "random_string" "this" {
+  count            = var.transit_encryption_enabled ? 1 : 0
   length           = 32
   special          = true
   override_special = "!&#$^<>-"
@@ -47,6 +48,6 @@ resource "aws_elasticache_replication_group" "this" {
 
   # The following blocks specified only if (var.transit_encryption_enabled == true)
   transit_encryption_enabled = var.transit_encryption_enabled
-  auth_token                 = random_string.this.result
+  auth_token                 = try(random_string.this[0].result, null)
   auth_token_update_strategy = "ROTATE"
 }
