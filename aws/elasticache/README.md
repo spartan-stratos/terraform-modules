@@ -30,12 +30,14 @@ module "elasticache" {
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.6 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.6 |
 
 ## Modules
 
@@ -47,6 +49,7 @@ No modules.
 |------|------|
 | [aws_elasticache_replication_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_replication_group) | resource |
 | [aws_elasticache_subnet_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_subnet_group) | resource |
+| [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 
 ## Inputs
 
@@ -63,6 +66,7 @@ No modules.
 | <a name="input_security_group_allow_all_within_vpc_id"></a> [security\_group\_allow\_all\_within\_vpc\_id](#input\_security\_group\_allow\_all\_within\_vpc\_id) | The security group allow all connection within vpc id | `string` | n/a | yes |
 | <a name="input_snapshot_window"></a> [snapshot\_window](#input\_snapshot\_window) | The time to do the backup, default 01:00-02:00 | `string` | `"01:00-02:00"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The subnet ids of this cluster | `list(string)` | n/a | yes |
+| <a name="input_transit_encryption_enabled"></a> [transit\_encryption\_enabled](#input\_transit\_encryption\_enabled) | Specifies whether to enable in-transit encryption for the ElastiCache replication group. When set to true, it ensures that data between nodes and clients is encrypted in transit. | `bool` | `false` | no |
 
 ## Outputs
 
@@ -72,4 +76,5 @@ No modules.
 | <a name="output_elasticache_replication_group_port"></a> [elasticache\_replication\_group\_port](#output\_elasticache\_replication\_group\_port) | The port on which the ElastiCache replication group is accessible. |
 | <a name="output_elasticache_replication_group_primary_endpoint_address"></a> [elasticache\_replication\_group\_primary\_endpoint\_address](#output\_elasticache\_replication\_group\_primary\_endpoint\_address) | The primary endpoint address of the ElastiCache replication group. |
 | <a name="output_elasticache_replication_group_reader_endpoint_address"></a> [elasticache\_replication\_group\_reader\_endpoint\_address](#output\_elasticache\_replication\_group\_reader\_endpoint\_address) | The reader endpoint address of the ElastiCache replication group. |
+| <a name="output_transition_encryption_auth_token"></a> [transition\_encryption\_auth\_token](#output\_transition\_encryption\_auth\_token) | The authentication token for enabling encryption in transit for the ElastiCache replication group. This token is used to secure client-to-node and node-to-node communications. |
 <!-- END_TF_DOCS -->

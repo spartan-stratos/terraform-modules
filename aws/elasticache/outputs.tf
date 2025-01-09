@@ -17,3 +17,8 @@ output "elasticache_replication_group_port" {
   description = "The port on which the ElastiCache replication group is accessible."
   value       = aws_elasticache_replication_group.this.port
 }
+
+output "transition_encryption_auth_token" {
+  description = "The authentication token for enabling encryption in transit for the ElastiCache replication group. This token is used to secure client-to-node and node-to-node communications."
+  value       = random_string.this.result
+}

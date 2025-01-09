@@ -58,3 +58,9 @@ variable "snapshot_window" {
   type        = string
   default     = "01:00-02:00"
 }
+
+variable "transit_encryption_enabled" {
+  description = "Specifies whether to enable in-transit encryption for the ElastiCache replication group. When set to true, it ensures that data between nodes and clients is encrypted in transit."
+  type        = bool
+  default     = false
+}
