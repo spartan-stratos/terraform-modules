@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "read" {
       "sqs:DeleteMessage",
       "sqs:GetQueueAttributes",
     ]
-    resources = [aws_sqs_queue.queue.arn]
+    resources = local.queue_resources
   }
 }
 
@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "write" {
     actions = [
       "sqs:SendMessage",
     ]
-    resources = [aws_sqs_queue.queue.arn]
+    resources = local.queue_resources
   }
 }
 
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "read_write" {
       "sqs:GetQueueAttributes",
       "sqs:SendMessage",
     ]
-    resources = [aws_sqs_queue.queue.arn]
+    resources = local.queue_resources
   }
 }
 

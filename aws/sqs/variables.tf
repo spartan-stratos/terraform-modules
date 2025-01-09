@@ -59,8 +59,8 @@ variable "wait_seconds" {
 
 variable "max_receive_count" {
   description = "Max receive message count"
-  type        = string
-  default     = "3"
+  type        = number
+  default     = 3
 }
 
 variable "principal_roles" {
