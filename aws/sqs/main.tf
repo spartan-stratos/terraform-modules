@@ -31,7 +31,7 @@ resource "aws_sqs_queue" "dlq" {
 
   redrive_allow_policy = jsonencode({
     redrivePermission = "byQueue",
-    sourceQueueArns   = local.queue_resources
+    sourceQueueArns   = [aws_sqs_queue.queue.arn]
   })
 }
 
@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "this" {
     }
 
     actions   = ["sqs:*"]
-    resources = local.queue_resources
+    resources = [aws_sqs_queue.queue.arn]
   }
 }
 
