@@ -1,3 +1,10 @@
+
+resource "random_string" "transition_encryption_auth_token" {
+  length           = 32
+  special          = true
+  override_special = "!&#$^<>-"
+}
+
 /*
 aws_elasticache_subnet_group creates a subnet group for Amazon ElastiCache.
 This subnet group defines the VPC subnets where cache nodes will be deployed, ensuring they are isolated within specific subnets.
@@ -34,4 +41,9 @@ resource "aws_elasticache_replication_group" "this" {
   apply_immediately          = var.apply_immediately
   snapshot_window            = var.snapshot_window
   automatic_failover_enabled = var.automatic_failover_enabled
+
+  # The following blocks specified only if (var.transit_encryption_enabled == true)
+  transit_encryption_enabled = var.transit_encryption_enabled
+  auth_token                 = random_string.transition_encryption_auth_token.result
+  auth_token_update_strategy = "ROTATE"
 }
