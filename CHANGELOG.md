@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.47]() (2025-01-09)
+### Features
+* AWS static-website: Add `ordered_cache_behaviors` to custom `aws_cloudfront_distribution.ordered_cache_behavior`. [(./aws/static-website)](./aws/static-website)
+
 ## [0.1.46]() (2025-01-09)
 ### Features
 * AWS SES: [(./aws/ses)](./aws/ses)
