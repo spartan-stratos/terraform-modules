@@ -15,6 +15,20 @@ module "cloudfront" {
   route53_zone_name   = var.route53_zone_name
   s3_bucket_id        = module.s3.s3_bucket_id
   ssl_certificate_arn = var.global_tls_certificate_arn
+  
+  ordered_cache_behaviors = [{
+    path_pattern           = "/index.html"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id       = "s3_origin_id"
+    query_string           = false
+    cookies_forward        = "none"
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    compress               = true
+  }]
 }
 ```
 
@@ -60,6 +74,7 @@ No modules.
 | <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the static website. | `string` | n/a | yes |
 | <a name="input_minimum_protocol_version"></a> [minimum\_protocol\_version](#input\_minimum\_protocol\_version) | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
+| <a name="input_ordered_cache_behaviors"></a> [ordered\_cache\_behaviors](#input\_ordered\_cache\_behaviors) | List of ordered cache behaviors with path patterns and settings. | <pre>list(object({<br/>    path_pattern     = string<br/>    allowed_methods  = list(string)<br/>    cached_methods   = list(string)<br/>    target_origin_id = string<br/>    query_string     = bool<br/>    cookies_forward  = string<br/>    min_ttl          = number<br/>    default_ttl      = number<br/>    max_ttl          = number<br/>    compress         = bool<br/>  }))</pre> | `[]` | no |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. | `string` | `"PriceClass_100"` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 zone id | `string` | n/a | yes |
 | <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id) | The origin S3 bucket id | `string` | n/a | yes |

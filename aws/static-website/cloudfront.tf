@@ -11,4 +11,5 @@ module "cloudfront" {
   price_class              = var.price_class
   use_www_domain           = var.use_www_domain
   distribution_aliases     = var.cloudfront_distribution_aliases
+  ordered_cache_behaviors  = var.ordered_cache_behaviors
 }

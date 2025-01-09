@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.47]() (2025-01-09)
+### Features
+* Add `ordered_cache_behaviors` to custom `aws_cloudfront_distribution.ordered_cache_behavior`.
+
 ## [0.1.41]() (2025-01-09)
 ### Features
 * Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`, `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource recreation.
