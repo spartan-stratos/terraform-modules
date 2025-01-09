@@ -1,9 +1,17 @@
 locals {
-  suffix         = var.fifo_enabled ? ".fifo" : ""
-  dlq_queue_name = "${var.name}-dlq${local.suffix}"
-  queue_name     = "${var.name}${local.suffix}"
-  aws_account_id = data.aws_caller_identity.current.account_id
-  aws_region     = data.aws_region.current.name
+  suffix          = var.fifo_enabled ? ".fifo" : ""
+  dlq_queue_name  = "${var.name}-dlq${local.suffix}"
+  queue_name      = "${var.name}${local.suffix}"
+  aws_account_id  = data.aws_caller_identity.current.account_id
+  aws_region      = data.aws_region.current.name
+  queue_resources = concat([aws_sqs_queue.queue.arn], (var.enabled_dead_letter_queue == true ? [aws_sqs_queue.dlq[0].arn] : []))
+
+  redrive_policy = <<POLICY
+{
+  "deadLetterTargetArn":"${try(aws_sqs_queue.dlq[0].arn, "")}",
+  "maxReceiveCount": ${var.max_receive_count}
+}
+POLICY
 }
 
 /*
@@ -20,11 +28,15 @@ resource "aws_sqs_queue" "dlq" {
   receive_wait_time_seconds = "0"
 
   fifo_queue = var.fifo_enabled
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = "byQueue",
+    sourceQueueArns   = [aws_sqs_queue.queue.arn]
+  })
 }
 
 /*
 aws_sqs_queue queue creates the main SQS queue with configuration for visibility, delay, retention, and optional FIFO.
-Supports dead-letter queue policies and FIFO settings.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue
 */
 resource "aws_sqs_queue" "queue" {
@@ -38,17 +50,6 @@ resource "aws_sqs_queue" "queue" {
   fifo_queue            = var.fifo_enabled
   deduplication_scope   = var.fifo_deduplication_scope
   fifo_throughput_limit = var.fifo_throughput_limit
-
-  redrive_policy = var.enabled_dead_letter_queue ? local.redrive_policy : null
-}
-
-locals {
-  redrive_policy = <<POLICY
-{
-  "deadLetterTargetArn":"${try(aws_sqs_queue.dlq[0].arn, "")}",
-  "maxReceiveCount": ${var.max_receive_count}
-}
-POLICY
 }
 
 /*
@@ -78,4 +79,14 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_
 resource "aws_sqs_queue_policy" "this" {
   queue_url = aws_sqs_queue.queue.id
   policy    = data.aws_iam_policy_document.this.json
+}
+
+resource "aws_sqs_queue_redrive_policy" "redrive_policy" {
+  count = var.enabled_dead_letter_queue ? 1 : 0
+
+  queue_url = aws_sqs_queue.queue.id
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.dlq[0].arn
+    maxReceiveCount     = var.max_receive_count
+  })
 }
