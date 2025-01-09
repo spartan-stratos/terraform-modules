@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.45]() (2025-01-09)
+### Features
+* AWS SQS: [(./aws/sqs)](./aws/sqs)
+  * Change `max_receive_count` type to number.
+  * Separate `aws_sqs_queue.queue.redrive_policy` to `aws_sqs_queue_redrive_policy.this`.
+  * Add attribute `redrive_allow_policy` to `aws_sqs_queue.dlq`.
+
 ## [0.1.44]() (2025-01-09)
 ### Features
 * AWS SNS: Init module. [(./aws/sns)](./aws/sns)
