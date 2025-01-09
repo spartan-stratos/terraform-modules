@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.42]() (2025-01-09)
+### Features
+* AWS Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](./aws/eks-helm/aws-load-balancer-controller/)
+  * Add new policy documents and auto map associated policy based on chart_version.
+
 ## [0.1.41]() (2025-01-09)
 ### Features
 * AWS static-website: Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`, `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource recreation. [(./aws/static-website)](./aws/static-website)
