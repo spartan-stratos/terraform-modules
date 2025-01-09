@@ -81,7 +81,7 @@ resource "aws_sqs_queue_policy" "this" {
   policy    = data.aws_iam_policy_document.this.json
 }
 
-resource "aws_sqs_queue_redrive_policy" "redrive_policy" {
+resource "aws_sqs_queue_redrive_policy" "this" {
   count = var.enabled_dead_letter_queue ? 1 : 0
 
   queue_url = aws_sqs_queue.queue.id

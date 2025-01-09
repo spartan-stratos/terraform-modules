@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.45]() (2025-01-09)
+### Features
+* Change `max_receive_count` type to number.
+* Separate `aws_sqs_queue.queue.redrive_policy` to `aws_sqs_queue_redrive_policy.this`.
+* Add attribute `redrive_allow_policy` to `aws_sqs_queue.dlq`.
+
 ## [0.1.37]() (2025-01-06)
 ### Features
 * Add variable `enabled_dead_letter_queue` to optionally disable dlq
