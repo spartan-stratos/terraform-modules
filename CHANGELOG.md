@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.48]() (2025-01-09)
+### Features
+* AWS Opensearch: [(./aws/opensearch)](./aws/opensearch/)
+  * Add option to create service link role via variable `create_linked_role`
+
 ## [0.1.47]() (2025-01-09)
 ### Features
 * AWS static-website: Add `ordered_cache_behaviors` to custom `aws_cloudfront_distribution.ordered_cache_behavior`. [(./aws/static-website)](./aws/static-website)
