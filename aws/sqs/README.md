@@ -67,7 +67,7 @@ No modules.
 | <a name="input_fifo_deduplication_scope"></a> [fifo\_deduplication\_scope](#input\_fifo\_deduplication\_scope) | Specifies whether message deduplication occurs at the message group or queue level. (perQueue or perMessageGroupId) | `string` | `null` | no |
 | <a name="input_fifo_enabled"></a> [fifo\_enabled](#input\_fifo\_enabled) | Specify whether enable FIFO or not for the SQS queue | `bool` | `false` | no |
 | <a name="input_fifo_throughput_limit"></a> [fifo\_throughput\_limit](#input\_fifo\_throughput\_limit) | Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group (perQueue or perMessageGroupId) | `string` | `null` | no |
-| <a name="input_max_receive_count"></a> [max\_receive\_count](#input\_max\_receive\_count) | Max receive message count | `string` | `"3"` | no |
+| <a name="input_max_receive_count"></a> [max\_receive\_count](#input\_max\_receive\_count) | Max receive message count | `number` | `3` | no |
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size) | The limit of how many bytes a message can contain before Amazon SQS rejects it | `string` | `"2048"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name for creating queue names | `string` | n/a | yes |
 | <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles) | A list of IAM roles that a specific principal (user, service, or account) can assume. | `list(string)` | `null` | no |
