@@ -162,3 +162,9 @@ variable "custom_key_pair_name" {
   description = "The name of the custom key pair to use for the instance."
   default     = null
 }
+
+variable "custom_key_pair_public_key" {
+  type        = string
+  description = "The public key of the custom key pair to use for the instance."
+  default     = null
+}

@@ -80,6 +80,7 @@ No modules.
 | <a name="input_create_management_key_pair"></a> [create\_management\_key\_pair](#input\_create\_management\_key\_pair) | Whether to create a management key pair. | `bool` | `true` | no |
 | <a name="input_custom_cert_dns_names"></a> [custom\_cert\_dns\_names](#input\_custom\_cert\_dns\_names) | A list of custom DNS names to add to the certificate. | `list(string)` | `null` | no |
 | <a name="input_custom_key_pair_name"></a> [custom\_key\_pair\_name](#input\_custom\_key\_pair\_name) | The name of the custom key pair to use for the instance. | `string` | `null` | no |
+| <a name="input_custom_key_pair_public_key"></a> [custom\_key\_pair\_public\_key](#input\_custom\_key\_pair\_public\_key) | The public key of the custom key pair to use for the instance. | `string` | `null` | no |
 | <a name="input_disk_boot_size"></a> [disk\_boot\_size](#input\_disk\_boot\_size) | The size of the boot disk in GB. | `number` | `"10"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name. | `string` | n/a | yes |
 | <a name="input_extra_sg_ids"></a> [extra\_sg\_ids](#input\_extra\_sg\_ids) | A list of additional security group IDs. | `list(string)` | `[]` | no |
