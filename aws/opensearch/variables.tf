@@ -48,3 +48,9 @@ variable "ebs_storage_size" {
   type        = number
   default     = 10
 }
+
+variable "create_linked_role" {
+  description = "Create a service linked role for Amazon OpenSearch Service to access VPC resources"
+  type        = bool
+  default     = false
+}

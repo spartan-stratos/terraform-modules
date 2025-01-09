@@ -23,16 +23,16 @@ module "opensearch" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-| Name | Version  |
-|------|----------|
+| Name | Version |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | \>= 5.75 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
 
 ## Providers
 
-| Name | Version  |
-|------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
 
 ## Modules
 
@@ -42,6 +42,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [aws_iam_service_linked_role.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_service_linked_role) | resource |
 | [aws_opensearch_domain.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -51,6 +52,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_create_linked_role"></a> [create\_linked\_role](#input\_create\_linked\_role) | Create a service linked role for Amazon OpenSearch Service to access VPC resources | `bool` | `false` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The domain for creating open search | `string` | n/a | yes |
 | <a name="input_ebs_enabled"></a> [ebs\_enabled](#input\_ebs\_enabled) | Enable EBS | `bool` | `false` | no |
 | <a name="input_ebs_storage_size"></a> [ebs\_storage\_size](#input\_ebs\_storage\_size) | Enable EBS | `number` | `10` | no |

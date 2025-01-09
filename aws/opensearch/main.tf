@@ -20,3 +20,9 @@ resource "aws_opensearch_domain" "this" {
   }
   access_policies = data.aws_iam_policy_document.this.json
 }
+
+resource "aws_iam_service_linked_role" "opensearch" {
+  count = var.create_linked_role ? 1 : 0
+
+  aws_service_name = "es.amazonaws.com"
+}
