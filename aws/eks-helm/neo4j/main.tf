@@ -13,8 +13,6 @@ resources:
   limits:
     cpu: ${var.neo4j_cpu}
     memory: ${var.neo4j_memory}
-auth:
-  existingSecret: password
 ingress:
   enabled: true
   annotations:
