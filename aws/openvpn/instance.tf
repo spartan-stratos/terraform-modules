@@ -18,7 +18,7 @@ resource "tls_private_key" "management_ssh_key" {
 resource "aws_key_pair" "management_ssh_key" {
   count      = var.create_management_key_pair ? 1 : 0
   key_name   = var.custom_key_pair_name != null ? var.custom_key_pair_name : var.vpn_name
-  public_key = coalesce(var.custom_key_pair_public_key, tls_private_key.management_ssh_key[0].public_key_openssh)
+  public_key = try(tls_private_key.management_ssh_key[0].public_key_openssh, var.custom_key_pair_public_key)
 }
 
 /*
