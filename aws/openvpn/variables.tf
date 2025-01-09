@@ -156,3 +156,9 @@ variable "http_endpoint" {
   description = "The configuration for enabling or disabling the instance metadata service endpoint."
   default     = "enabled"
 }
+
+variable "custom_key_pair_name" {
+  type        = string
+  description = "The name of the custom key pair to use for the instance."
+  default     = null
+}

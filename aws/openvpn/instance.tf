@@ -17,7 +17,7 @@ resource "tls_private_key" "management_ssh_key" {
 
 resource "aws_key_pair" "management_ssh_key" {
   count      = var.create_management_key_pair ? 1 : 0
-  key_name   = var.vpn_name
+  key_name   = var.custom_key_pair_name != null ? var.custom_key_pair_name : var.vpn_name
   public_key = tls_private_key.management_ssh_key[0].public_key_openssh
 }
 
@@ -29,7 +29,7 @@ resource "aws_instance" "this" {
 
   ami           = data.aws_ami.debian.id
   instance_type = var.instance_type
-  key_name      = var.create_management_key_pair ? var.vpn_name : null
+  key_name      = var.create_management_key_pair ? try(var.custom_key_pair_name, var.vpn_name) : null
   subnet_id     = var.subnet_id
 
   vpc_security_group_ids = concat(
