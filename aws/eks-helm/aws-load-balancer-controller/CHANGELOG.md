@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.1.41]() (2025-01-08)
+## [0.1.42]() (2025-01-09)
 # Features
 * Add new policy documents for chart versions and auto get policy version based on chart_version.
 
