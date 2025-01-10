@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "assume_role" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
-      identifiers = ["arn:aws:iam::${var.vanta_role}:role/scanner"]
+      identifiers = ["arn:aws:iam::${var.vanta_aws_account_id}:role/scanner"]
       type        = "AWS"
     }
     condition {

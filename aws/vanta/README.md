@@ -58,7 +58,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | The name of the IAM policy created to provide additional permissions required by Vanta. | `string` | `"VantaAdditionalPermissions"` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | The name of the IAM role created for Vanta to use for auditing and monitoring purposes. | `string` | `"vanta-auditor"` | no |
-| <a name="input_vanta_role"></a> [vanta\_role](#input\_vanta\_role) | The ID of the Vanta role used for managing access and permissions in the environment. | `string` | `"956993596390"` | no |
+| <a name="input_vanta_aws_account_id"></a> [vanta\_aws\_account\_id](#input\_vanta\_aws\_account\_id) | The ID of the Vanta role used for managing access and permissions in the environment. | `string` | `"956993596390"` | no |
 
 ## Outputs
 
