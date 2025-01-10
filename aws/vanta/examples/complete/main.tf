@@ -1,5 +1,7 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
+
+  alias = "aws.global"
 }
 
 module "vanta" {
