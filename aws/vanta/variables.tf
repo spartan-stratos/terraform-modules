@@ -3,3 +3,15 @@ variable "vanta_role" {
   default     = "956993596390"
   description = "The ID of the Vanta role used for managing access and permissions in the environment."
 }
+
+variable "policy_name" {
+  type        = string
+  default     = "VantaAdditionalPermissions"
+  description = "The name of the IAM policy created to provide additional permissions required by Vanta."
+}
+
+variable "role_name" {
+  type        = string
+  default     = "vanta-auditor"
+  description = "The name of the IAM role created for Vanta to use for auditing and monitoring purposes."
+}
