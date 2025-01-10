@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.50]() (2025-01-10)
+### Features
+* AWS Vanta: [(./aws/vanta)](./aws/vanta/)
+  * Make vanta External Scanner ID customizable via `vanta_scanner_external_id`
+
 ## [0.1.49]() (2025-01-10)
 ### Features
 * AWS Vanta: [(./aws/vanta)](./aws/vanta/)
