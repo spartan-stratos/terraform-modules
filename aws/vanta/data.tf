@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "assume_role" {
     }
     condition {
       test     = "StringEquals"
-      values   = ["48831EA4DBFBCDD"]
+      values   = [var.vanta_scanner_external_id]
       variable = "sts:ExternalId"
     }
   }

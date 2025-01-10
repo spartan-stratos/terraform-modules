@@ -15,3 +15,8 @@ variable "role_name" {
   default     = "vanta-auditor"
   description = "The name of the IAM role created for Vanta to use for auditing and monitoring purposes."
 }
+
+variable "vanta_scanner_external_id" {
+  type        = string
+  description = "The external ID used by Vanta to verify the trust relationship with the Vanta role."
+}
