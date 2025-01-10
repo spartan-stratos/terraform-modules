@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.49]() (2025-01-10)
+### Features
+* AWS Vanta: [(./aws/vanta)](./aws/vanta/)
+  * Add IAM role and IAM policy for Vanta Auditor
+* AWS Neo4j: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
+  * Set Neo4j auth secret and update ingress HTTP port
+
 ## [0.1.48]() (2025-01-09)
 ### Features
 * AWS Opensearch: [(./aws/opensearch)](./aws/opensearch/)
