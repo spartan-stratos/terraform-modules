@@ -9,5 +9,5 @@ module "vanta" {
     aws = aws.global
   }
 
-  vanta_scanner_external_id = "48831EA4DBFBCDD"
+  vanta_scanner_external_id = "GET_THIS_FROM_VANTA"
 }
