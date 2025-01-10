@@ -20,7 +20,7 @@ ingress:
     kubernetes.io/ingress.class: ${var.ingress_class_name}
     alb.ingress.kubernetes.io/target-type: "ip"
     alb.ingress.kubernetes.io/scheme: "internet-facing"
-    alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+    alb.ingress.kubernetes.io/listen-ports: "[{\"HTTP\": 7474}, {\"HTTPS\": 443}]"
   hostname: ${local.neo4j_fqdn}
   path: /*
 service:
@@ -42,6 +42,11 @@ resource "helm_release" "neo4j" {
   namespace        = var.namespace
   force_update     = var.force_update
   timeout          = 1000
+
+  set {
+    name  = "auth.password"
+    value = local.neo4j_password
+  }
 
   values = [local.manifest]
 

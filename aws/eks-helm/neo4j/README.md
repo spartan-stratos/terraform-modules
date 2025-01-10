@@ -9,7 +9,9 @@ for persistent storage and various Kubernetes and Helm configurations.
 
 ```hcl
 module "neo4j" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/neo4j?ref=v0.1.38"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/neo4j?ref=v0.1.49"
+  
+  domain = "example.com"
   efs_id = "example-id"
 }
 
