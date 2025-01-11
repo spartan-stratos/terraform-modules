@@ -42,7 +42,7 @@ resource "aws_mwaa_environment" "this" {
 
     task_logs {
       enabled   = try(var.logging_configuration.task_logs.enabled, true)
-      log_level = try(var.logging_configuration.task_logs.log_level, "WARNING")
+      log_level = try(var.logging_configuration.task_logs.log_level, "INFO")
     }
 
     webserver_logs {
