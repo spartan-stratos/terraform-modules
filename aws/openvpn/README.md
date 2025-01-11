@@ -58,6 +58,7 @@ No modules.
 | [aws_key_pair.management_ssh_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair) | resource |
 | [aws_route53_record.vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.default_ssh_vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.egress_vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.http_vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.https_vpn](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
@@ -81,6 +82,7 @@ No modules.
 | <a name="input_custom_cert_dns_names"></a> [custom\_cert\_dns\_names](#input\_custom\_cert\_dns\_names) | A list of custom DNS names to add to the certificate. | `list(string)` | `null` | no |
 | <a name="input_disk_boot_size"></a> [disk\_boot\_size](#input\_disk\_boot\_size) | The size of the boot disk in GB. | `number` | `"10"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name. | `string` | n/a | yes |
+| <a name="input_ec2_public_key"></a> [ec2\_public\_key](#input\_ec2\_public\_key) | The existing value of ec2 public key. If not set, create and use `tls_private_key`. | `string` | `null` | no |
 | <a name="input_extra_sg_ids"></a> [extra\_sg\_ids](#input\_extra\_sg\_ids) | A list of additional security group IDs. | `list(string)` | `[]` | no |
 | <a name="input_http_endpoint"></a> [http\_endpoint](#input\_http\_endpoint) | The configuration for enabling or disabling the instance metadata service endpoint. | `string` | `"enabled"` | no |
 | <a name="input_http_tokens"></a> [http\_tokens](#input\_http\_tokens) | The configuration for the instance metadata service tokens. | `string` | `"optional"` | no |
@@ -88,6 +90,7 @@ No modules.
 | <a name="input_image_version"></a> [image\_version](#input\_image\_version) | The version of the image. | `string` | `"20240717-1811"` | no |
 | <a name="input_init_script_callback_comment"></a> [init\_script\_callback\_comment](#input\_init\_script\_callback\_comment) | The callback name for the OpenVPN server | `string` | `"Google Oauth 2.0 callback"` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The type of the instance. | `string` | `"t3.micro"` | no |
+| <a name="input_key_name"></a> [key\_name](#input\_key\_name) | The name of the key. If not set, the value of the key will default to the variable vpn\_name. | `string` | `null` | no |
 | <a name="input_oauth2_client_id"></a> [oauth2\_client\_id](#input\_oauth2\_client\_id) | The OAuth2 client ID. | `string` | n/a | yes |
 | <a name="input_oauth2_client_secret"></a> [oauth2\_client\_secret](#input\_oauth2\_client\_secret) | The OAuth2 client secret. | `string` | n/a | yes |
 | <a name="input_oauth2_issuer"></a> [oauth2\_issuer](#input\_oauth2\_issuer) | The OAuth2 issuer. | `string` | `"https://accounts.google.com"` | no |
