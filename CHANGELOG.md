@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 * AWS Vanta: [(./aws/vanta)](./aws/vanta/)
   * Add IAM role and IAM policy for Vanta Auditor
-* AWS Neo4j: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
+* AWS Neo4j: [(./aws/eks-helm/neo4j)](aws/eks-fargate/eks-helm/neo4j)
   * Set Neo4j auth secret and update ingress HTTP port
 
 ## [0.1.48]() (2025-01-09)
@@ -45,7 +45,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.42]() (2025-01-09)
 ### Features
-* AWS Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](./aws/eks-helm/aws-load-balancer-controller/)
+* AWS Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](aws/eks-fargate/eks-helm/aws-load-balancer-controller/)
   * Add new policy documents and auto map associated policy based on chart_version.
 
 ## [0.1.41]() (2025-01-09)
@@ -75,7 +75,7 @@ All notable changes to this project will be documented in this file.
   * Update `renotify_occurrences` for each default services
 * Datadog monitors: [(./datadog/monitors)](./datadog/monitors/)
   * Add monitor_threshold `warning` and `warning_recovery`.
-* AWS Neo4j module: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
+* AWS Neo4j module: [(./aws/eks-helm/neo4j)](aws/eks-fargate/eks-helm/neo4j)
   * Add Neo4j helm deployment module
 
 ## [0.1.37]() (2025-01-06)
@@ -101,7 +101,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.35]() (2025-01-03)
 ### Features 
 * All modules: add an `override.tofu` file to override terraform version constraint to opentofu version constraint
-* AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster/)
+* AWS eks-cluster: [(./aws/eks-cluster)](aws/eks-fargate/eks-cluster/)
   * Update provider urls (remove `registry.terraform.io`) in order for OpenTofu to map to their registry.
 
 ## [0.1.34]() (2025-01-02)
@@ -109,7 +109,7 @@ All notable changes to this project will be documented in this file.
 * AWS Jenkins OIDC: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
   * Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
   * Add `var.oidc_policy_name` and `var.oidc_policy_description` to overwrite the existed default name and description
-* AWS Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+* AWS Jenkins: [(./aws/eks-helm/jenkins)](aws/eks-fargate/eks-helm/jenkins)
   * Add variable `jenkins_config_map_name` to use configMapRef in containerEnvFrom
   * Add variable `jenkins_viewer` to add permission for GitHub team groups that defined in jenkins viewer
 
@@ -131,7 +131,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.31]() (2024-12-31)
 
 ### Features
-* AWS Helm / Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+* AWS Helm / Jenkins: [(./aws/eks-helm/jenkins)](aws/eks-fargate/eks-helm/jenkins)
   * Init module with all the code
 * Datadog / Monitors: [(./datadog/monitors)](./datadog/monitors)
   * Init module with all the code
@@ -184,7 +184,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.26]() (2024-12-26)
 
 ### Features
-* AWS EKS Service: Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs) [(./aws/eks-service)](./aws/eks-service)
+* AWS EKS Service: Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs) [(./aws/eks-service)](aws/eks-fargate/eks-service)
 
 ## [0.1.25]() (2024-12-26)
 
@@ -194,7 +194,7 @@ All notable changes to this project will be documented in this file.
 ## [0.1.24]() (2024-12-26)
 
 ### Features
-* AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
+* AWS EKS Service: [(./aws/eks-service)](aws/eks-fargate/eks-service)
   * Add `var.create_kubernetes_namespace` to specify whether to create a namespace
   * Add `var.config_map_env_var_name` to overwrite default kubernetes_config_map name
   * Add `var.secret_env_var_name` to overwrite default kubernetes_secret secret env var name
@@ -214,8 +214,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS EKS-Service: Init module. [(./aws/eks-service)](./aws/eks-service)
-* AWS EKS-Helm / Datadog: Init module. [(./aws/eks-helm/datadog)](./aws/eks-helm/datadog)
+* AWS EKS-Service: Init module. [(./aws/eks-service)](aws/eks-fargate/eks-service)
+* AWS EKS-Helm / Datadog: Init module. [(./aws/eks-helm/datadog)](aws/eks-fargate/eks-helm/datadog)
 * AWS Amplify: [(./aws/amplify)](./aws/amplify)
   * Add `var.enable_backend` to enable backend or use frontend format only
   * Add `aws_amplify_webhook` to provides an Amplify Webhook resource
@@ -233,8 +233,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS EKS-Helm Metrics Server: Init module. [(./aws/eks-helm/metrics-server)](./aws/eks-helm/metrics-server)
-* AWS EKS-RBAC: Init module. [(./aws/eks-rbac)](./aws/eks-rbac)
+* AWS EKS-Helm Metrics Server: Init module. [(./aws/eks-helm/metrics-server)](aws/eks-fargate/eks-helm/metrics-server)
+* AWS EKS-RBAC: Init module. [(./aws/eks-rbac)](aws/eks-fargate/eks-rbac)
 * AWS SES: Rename `use_route53` to `verify_domain` and add prefix `_amazonses.` to route53 record to validate SES domain. [(./aws/ses)](./aws/ses)
 * AWS OIDC provider: refactor and generalized [(./aws/github-oidc/modules/provider)]() to dedicated module at [(./aws/oidc/provider)](./aws/oidc/provider).
 * AWS Jenkins OIDC: Init jenkins-oidc module. [(aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc)
@@ -248,7 +248,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS eks-helm/aws-load-balancer-controller: init module [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller/)
+* AWS eks-helm/aws-load-balancer-controller: init module [(./aws/eks-helm/aws-load-balancer-controller)](aws/eks-fargate/eks-helm/aws-load-balancer-controller/)
 * AWS SQS [(./aws/sqs)](./aws/sqs)
   * Refactor components.
   * Update policies Send Receive resources principal to created queue only.
@@ -259,7 +259,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS eks-cluster [(./aws/eks-cluster)](./aws/eks-cluster/)
+* AWS eks-cluster [(./aws/eks-cluster)](aws/eks-fargate/eks-cluster/)
   * Add output `datadog_agent_cluster_role_name`
   * Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
 
