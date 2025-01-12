@@ -64,8 +64,5 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
     ]
   }
 
-  depends_on = [
-    aws_eks_node_group.default,
-    module.fargate_profile
-  ]
+  // todo: depend on fargate profile
 }

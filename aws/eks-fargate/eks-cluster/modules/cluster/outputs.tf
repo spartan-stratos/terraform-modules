@@ -24,19 +24,9 @@ output "aws_security_group_cluster" {
   description = "The security group applied to the EKS cluster for network control"
 }
 
-output "fargate_profile" {
-  value       = module.fargate_profile
-  description = "Details of the Fargate profile configured for the EKS cluster"
-}
-
 output "oidc_provider" {
   value       = aws_iam_openid_connect_provider.eks
   description = "The OpenID Connect (OIDC) provider associated with the EKS cluster for IAM roles"
-}
-
-output "efs" {
-  value       = try(module.efs[0].efs, null)
-  description = "The Amazon EFS (Elastic File System) configuration for the cluster, if available"
 }
 
 output "aws_eks_cluster_auth_data" {
