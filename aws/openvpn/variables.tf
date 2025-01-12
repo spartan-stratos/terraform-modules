@@ -1,4 +1,3 @@
-
 variable "vpn_name" {
   type        = string
   description = "The name of the VPN."
@@ -155,4 +154,18 @@ variable "http_endpoint" {
   type        = string
   description = "The configuration for enabling or disabling the instance metadata service endpoint."
   default     = "enabled"
+}
+
+# Custom for migration
+
+variable "key_name" {
+  description = "The name of the key. If not set, the value of the key will default to the variable vpn_name."
+  type        = string
+  default     = null
+}
+
+variable "ec2_public_key" {
+  description = "The existing value of ec2 public key. If not set, create and use `tls_private_key`."
+  type        = string
+  default     = null
 }

@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.51]() (2025-01-12)
+### Feature
+* Add optional existing public key value `ec2_public_key` and custom key name `key_name`.
+* Add security group to allow ssh access to vpn `default_ssh_vpn`.
+* Remove resource tag.
+
 ## [0.1.33]() (2025-01-02)
 ### Feature
 * Add outputs for EC2 instance.

@@ -61,3 +61,17 @@ resource "aws_security_group_rule" "https_vpn" {
   to_port   = "443"
   protocol  = "tcp"
 }
+
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+# Allow SSH access to VPN instances
+ */
+resource "aws_security_group_rule" "default_ssh_vpn" {
+  security_group_id = aws_security_group.this.id
+  cidr_blocks       = ["0.0.0.0/0"]
+
+  type      = "ingress"
+  from_port = "22"
+  to_port   = "22"
+  protocol  = "tcp"
+}
