@@ -6,39 +6,6 @@ data "aws_lb_hosted_zone_id" "this" {
   region = var.region
 }
 
-data "aws_iam_policy_document" "this" {
-  version = "2012-10-17"
-  statement {
-    effect = "Allow"
-    actions = [
-      "sts:AssumeRoleWithWebIdentity"
-    ]
-
-    principals {
-      type        = "Federated"
-      identifiers = [var.eks_oidc_provider.arn]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "${var.eks_oidc_provider.url}:sub"
-
-      values = [
-        "system:serviceaccount:${var.service.name}:${local.service_account_name}"
-      ]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "${var.eks_oidc_provider.url}:aud"
-
-      values = [
-        "sts.amazonaws.com"
-      ]
-    }
-  }
-}
-
 resource "kubernetes_namespace" "this" {
   for_each = var.services
 
@@ -89,7 +56,26 @@ resource "aws_iam_role" "this" {
   for_each = var.services
 
   name               = "${var.cluster_name}-${each.key}-eksPodRole"
-  assume_role_policy = data.aws_iam_policy_document.this.json
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+        "Effect": "Allow",
+        "Principal": {
+            "Federated": "${var.eks_oidc_provider.arn}"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+            "StringEquals": {
+                "${var.eks_oidc_provider.url}:sub": "system:serviceaccount:${each.key}:${local.service_account_name}",
+                "${var.eks_oidc_provider.url}:aud": "sts.amazonaws.com"
+            }
+        }
+    }
+  ]
+}
+EOF
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
