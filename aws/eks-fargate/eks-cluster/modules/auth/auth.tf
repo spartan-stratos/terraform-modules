@@ -4,16 +4,6 @@ locals {
   aws_auth_configmap_data = {
     mapRoles = yamlencode(concat(
       [{
-        rolearn  = aws_iam_role.node.arn
-        username = "system:node:{{EC2PrivateDNSName}}"
-        groups = [
-          "system:bootstrappers",
-          "system:nodes",
-        ]
-        }
-      ]
-      ,
-      [{
         rolearn  = aws_iam_role.auth_role.arn
         username = "master-role"
         groups = [
@@ -63,6 +53,4 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
       data
     ]
   }
-
-  // todo: depend on fargate profile
 }

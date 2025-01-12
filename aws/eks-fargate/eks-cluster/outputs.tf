@@ -4,19 +4,9 @@ output "aws_eks_cluster" {
   description = "The EKS cluster master details, including API server endpoint and certificate authority"
 }
 
-output "aws_iam_role_node" {
-  value       = module.cluster.aws_iam_role_node
-  description = "The IAM role assigned to the EKS worker nodes for managing permissions"
-}
-
 output "eks_default_auth_role_arn" {
-  value       = module.cluster.eks_default_auth_role_arn
+  value       = module.auth.eks_default_auth_role_arn
   description = "The ARN of the IAM role used for default EKS authentication"
-}
-
-output "aws_iam_instance_profile_node" {
-  value       = module.cluster.aws_iam_instance_profile_node
-  description = "The instance profile associated with the EKS worker nodes"
 }
 
 output "fargate_profile" {
@@ -35,7 +25,7 @@ output "efs" {
 }
 
 output "aws_eks_cluster_auth_data" {
-  value       = module.cluster.aws_eks_cluster_auth_data
+  value       = module.auth.aws_eks_cluster_auth_data
   description = "The ConfigMap data for managing EKS cluster authentication"
 }
 

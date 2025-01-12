@@ -44,24 +44,6 @@ variable "private_subnet_ids" {
   description = "The private subnet IDs in the associated VPC"
 }
 
-variable "k8s_core_dns_compute_type" {
-  type        = string
-  description = "The compute type for the core DNS"
-  default     = "ec2"
-}
-
-variable "aws_auth_users" {
-  type        = list(any)
-  description = "AWS users for authenticating with Kubernetes"
-  default     = []
-}
-
-variable "aws_auth_accounts" {
-  type        = list(any)
-  description = "AWS accounts for authenticating with Kubernetes"
-  default     = []
-}
-
 variable "efs_backup_policy_status" {
   description = "Enable/disable backup for EFS Filesystem.  Value should be ENABLE/DISABLED.  Defaults to DISABLED"
   type        = string
@@ -70,12 +52,6 @@ variable "efs_backup_policy_status" {
     condition     = var.efs_backup_policy_status == "ENABLED" || var.efs_backup_policy_status == "DISABLED"
     error_message = "Sorry, value must be either 'ENABLED' or 'DISABLED'."
   }
-}
-
-variable "administrator_role_arn" {
-  type        = string
-  default     = null
-  description = "AWS Administrator role arn for mapping with K8s RBAC"
 }
 
 variable "datadog_agent_cluster_role_name" {
@@ -94,10 +70,4 @@ variable "custom_namespaces" {
   type        = list(string)
   description = "Custom namespaces to be created during initialization"
   default     = []
-}
-
-variable "fargate_profile_pod_execution_role_arn" {
-  type        = string
-  description = "The ARN of the IAM role that provides permissions for the EKS Fargate profile"
-  default     = null
 }

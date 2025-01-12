@@ -36,9 +36,10 @@ data "aws_iam_policy_document" "auth_policy" {
   }
 
   statement {
-    effect    = "Allow"
-    actions   = ["eks:DescribeCluster"]
-    resources = [aws_eks_cluster.master.arn]
+    effect  = "Allow"
+    actions = ["eks:DescribeCluster"]
+    # resources = [aws_eks_cluster.master.arn]
+    resources = [var.aws_eks_cluster_arn]
     sid       = "ReadAllEKSclusters"
   }
 }
@@ -63,7 +64,6 @@ resource "aws_iam_role_policy" "eks_policy" {
 
   policy = data.aws_iam_policy_document.auth_policy.json
 }
-
 
 resource "aws_iam_group" "eks_users" {
   name = "${local.cluster_name}-users"

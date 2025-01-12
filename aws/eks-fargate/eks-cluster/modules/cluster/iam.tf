@@ -170,17 +170,6 @@ locals {
   ]
 }
 
-data "aws_iam_policy_document" "node_assume_role_policy" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
-    }
-  }
-}
 
 data "aws_iam_policy_document" "custom_worker_policy" {
   statement {
@@ -228,27 +217,8 @@ data "aws_iam_policy_document" "custom_worker_policy" {
   }
 }
 
-resource "aws_iam_role" "node" {
-  name = "${local.cluster_name}-node-cluster"
-
-  assume_role_policy = data.aws_iam_policy_document.node_assume_role_policy.json
-}
-
 resource "aws_iam_policy" "custom_worker" {
   name = "${local.cluster_name}-custom-worker"
 
   policy = data.aws_iam_policy_document.custom_worker_policy.json
-}
-
-resource "aws_iam_role_policy_attachment" "node_policy_attachments" {
-  count      = length(local.node_policy_arns)
-  policy_arn = local.node_policy_arns[count.index]
-  role       = aws_iam_role.node.name
-
-  depends_on = [aws_iam_policy.custom_worker]
-}
-
-resource "aws_iam_instance_profile" "node" {
-  name = "${local.cluster_name}-node-cluster-profile"
-  role = aws_iam_role.node.name
 }
