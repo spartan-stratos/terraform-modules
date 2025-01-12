@@ -1,4 +1,4 @@
-resource "kubernetes_cluster_role" "this" {
+resource "kubernetes_cluster_role" "this" { //TODO: Move datadog rbac here
   count = local.cluster_roles_count
   metadata {
     name = "${var.cluster_roles[count.index].name}-clusterrole"

@@ -6,13 +6,6 @@ data "aws_lb_hosted_zone_id" "this" {
   region = var.region
 }
 
-# Check if the namespace exists
-data "kubernetes_namespace_v1" "existing" {
-  metadata {
-    name = var.service.namespace
-  }
-}
-
 data "aws_iam_policy_document" "this" {
   version = "2012-10-17"
   statement {
@@ -47,37 +40,40 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "kubernetes_namespace" "this" {
-  count = try(data.kubernetes_namespace_v1.existing.metadata.0.name) != var.service.namespace || var.create_kubernetes_namespace ? 1 : 0
+  for_each = var.services
 
   metadata {
-    name = var.service.namespace
+    name = each.value.namespace
   }
 }
 
+
 resource "kubernetes_config_map" "this" {
-  depends_on = [kubernetes_namespace.this]
+  for_each = var.services
+
   metadata {
-    name      = var.config_map_env_var_name != null ? var.config_map_env_var_name : "${var.service.name}-config-map"
-    namespace = var.service.namespace
+    name      = "${each.key}-config-map"
+    namespace = each.value.namespace
   }
 
-  data = var.service.config_map != null ? var.service.config_map : {}
+  data = each.value.config_map != null ? each.value.config_map : {}
 }
 
 resource "kubernetes_secret" "this" {
-  depends_on = [kubernetes_namespace.this]
+  for_each = var.services
+
   metadata {
-    name      = var.secret_env_var_name != null ? var.secret_env_var_name : "${var.service.name}-env-var"
-    namespace = var.service.namespace
+    name      = "${each.key}-env-var"
+    namespace = each.value.namespace
   }
 
-  data = var.service.secrets
+  data = each.value.secrets
 
   type = "Opaque"
 }
 
 resource "aws_route53_record" "this" {
-  for_each = toset(var.service.hostnames)
+  for_each = toset(flatten([for service, values in var.services : values.hostnames]))
   name     = each.key
   type     = "A"
   zone_id  = var.route53_zone_id
@@ -90,24 +86,26 @@ resource "aws_route53_record" "this" {
 }
 
 resource "aws_iam_role" "this" {
-  name = "${var.cluster_name}-${var.service.name}-eksPodRole"
+  for_each = var.services
 
+  name               = "${var.cluster_name}-${each.key}-eksPodRole"
   assume_role_policy = data.aws_iam_policy_document.this.json
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  count      = length(var.service.additional_iam_policy_arns)
+  count      = length(var.services.additional_iam_policy_arns)
   role       = aws_iam_role.this.name
-  policy_arn = var.service.additional_iam_policy_arns[count.index]
+  policy_arn = var.services.additional_iam_policy_arns[count.index]
 }
 
-resource "kubernetes_annotations" "default" {
-  depends_on  = [kubernetes_namespace.this]
+resource "kubernetes_annotations" "this" {
+  for_each = var.services
+
   api_version = "v1"
   kind        = "ServiceAccount"
   metadata {
     name      = local.service_account_name
-    namespace = var.service.namespace
+    namespace = each.value.namespace
   }
   annotations = {
     "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn

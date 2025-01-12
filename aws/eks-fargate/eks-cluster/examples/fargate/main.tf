@@ -41,4 +41,3 @@ module "eks" {
   administrator_role_arn = null
   aws_auth_users         = []
 }
-
