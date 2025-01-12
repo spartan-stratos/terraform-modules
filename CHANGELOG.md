@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.51]() (2025-01-12)
+### Features
+* AWS OpenVPN: [(./aws/openvpn)](./aws/openvpn/)
+  * Add optional existing public key value `ec2_public_key` and custom key name `key_name`.
+  * Add security group to allow ssh access to vpn `default_ssh_vpn`.
+  * Remove resource tag.
+
 ## [0.1.50]() (2025-01-10)
 ### Features
 * AWS Vanta: [(./aws/vanta)](./aws/vanta/)
