@@ -79,9 +79,10 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  count      = length(var.services.additional_iam_policy_arns)
+  for_each = var.services
+
   role       = aws_iam_role.this.name
-  policy_arn = var.services.additional_iam_policy_arns[count.index]
+  policy_arn = each.value.additional_iam_policy_arns
 }
 
 resource "kubernetes_annotations" "this" {
@@ -94,6 +95,6 @@ resource "kubernetes_annotations" "this" {
     namespace = each.value.namespace
   }
   annotations = {
-    "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
+    "eks.amazonaws.com/role-arn" = aws_iam_role.this[each.key].arn
   }
 }
