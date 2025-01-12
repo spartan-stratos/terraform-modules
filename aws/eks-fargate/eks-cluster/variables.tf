@@ -138,3 +138,15 @@ variable "cluster_name" {
   type        = string
   description = "The name of the EKS cluster"
 }
+
+variable "cluster_version" {
+  type        = string
+  description = "The Kubernetes version to use for the EKS cluster"
+  default     = "1.31"
+}
+
+variable "k8s_core_dns_compute_type" {
+  type        = string
+  description = "The compute type for the core DNS"
+  default     = "ec2"
+}
