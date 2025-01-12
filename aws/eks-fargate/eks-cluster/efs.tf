@@ -1,5 +1,5 @@
 module "efs" {
-  source = "modules/efs"
+  source = "../eks-cluster/modules/efs"
 
   count                     = var.enabled_efs == true ? 1 : 0
   name                      = local.cluster_name

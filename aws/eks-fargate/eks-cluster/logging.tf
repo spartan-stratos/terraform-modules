@@ -1,5 +1,5 @@
 module "cloudwatch_logging" {
-  source = "modules/cloudwatch-logging"
+  source = "../eks-cluster/modules/cloudwatch-logging"
 
   count                                   = var.create_fargate_profile == true && var.enabled_cloudwatch_logging == true ? 1 : 0
   name                                    = local.cluster_name

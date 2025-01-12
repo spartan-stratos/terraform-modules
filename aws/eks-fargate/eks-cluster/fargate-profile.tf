@@ -1,5 +1,5 @@
 module "fargate_profile" {
-  source = "modules/fargate-profile"
+  source = "../eks-cluster/modules/fargate-profile"
   create = var.create_fargate_profile
 
   # Fargate Profile

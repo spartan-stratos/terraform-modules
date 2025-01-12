@@ -1,5 +1,5 @@
 module "cluster" {
-  source = "modules/cluster"
+  source = "../eks-cluster/modules/cluster"
 
   environment        = var.environment
   name               = var.name
