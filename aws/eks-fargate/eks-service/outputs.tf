@@ -1,5 +1,5 @@
 output "pod_role" {
-  value       = aws_iam_role.this.arn
+  value       = { for k, v in aws_iam_role.this : k => v.arn }
   description = "The ARN of the IAM role for services' pods"
 }
 

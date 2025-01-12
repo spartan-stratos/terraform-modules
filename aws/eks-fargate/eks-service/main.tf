@@ -81,7 +81,7 @@ EOF
 resource "aws_iam_role_policy_attachment" "this" {
   for_each = var.services
 
-  role       = aws_iam_role.this.name
+  role       = aws_iam_role.this[each.key].name
   policy_arn = each.value.additional_iam_policy_arns
 }
 
