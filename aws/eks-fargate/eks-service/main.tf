@@ -79,10 +79,10 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  for_each = var.services
+  for_each = tomap({ for key, value in var.services : key => value.additional_iam_policy_arns })
 
   role       = aws_iam_role.this[each.key].name
-  policy_arn = each.value.additional_iam_policy_arns
+  policy_arn = each.value
 }
 
 resource "kubernetes_annotations" "this" {
