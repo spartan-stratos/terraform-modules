@@ -62,6 +62,7 @@ variable "ssl_policy" {
 variable "region" {
   type        = string
   description = "Region where the resources will be created."
+  default     = null
 }
 
 variable "idle_timeout" {
