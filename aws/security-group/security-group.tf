@@ -131,7 +131,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv4" {
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
   for_each = var.create_default_security_group ? {} : tomap({
-    for rule in local.ingress_rules :
+    for rule, X in local.ingress_rules :
     "${rule.security_group_name}_${rule.rule_key}" => rule
     if rule.cidr_ipv6 != null
   })

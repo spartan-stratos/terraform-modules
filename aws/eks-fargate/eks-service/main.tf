@@ -79,7 +79,13 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  for_each = { for key, policy_arn in flatten([for service in var.services : [for arn in service.additional_iam_policy_arns : { role = aws_iam_role.this[key].name, arn = arn }]]) : "${policy_arn.role}-${policy_arn.arn}" => policy_arn }
+  for_each = {
+    for service_key, service in var.services :
+    "${service_key}-${arn}" => {
+      role = aws_iam_role.this[service_key].name
+      arn  = arn
+    }
+  }
 
   role       = each.value.role
   policy_arn = each.value.arn
