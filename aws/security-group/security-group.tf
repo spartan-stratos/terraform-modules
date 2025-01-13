@@ -130,8 +130,22 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_ipv4" {
 # Ingress Rules - IPv6 CIDR Blocks
 ############################################
 resource "aws_vpc_security_group_ingress_rule" "ingress_ipv6" {
-  for_each = var.create_default_security_group ? {} : tomap({
-    for rule, X in local.ingress_rules :
+  for_each = tomap({
+    for rule in flatten([
+      for sg_key, sg in var.security_groups : [
+        for rule_key, rule in sg.ingress_rules : {
+          security_group_name = sg_key
+          rule_key            = rule_key
+          from_port           = rule.from_port
+          to_port             = rule.to_port
+          ip_protocol         = rule.protocol
+          cidr_ipv4           = rule.cidr_ipv4
+          cidr_ipv6           = rule.cidr_ipv6
+          self                = rule.self
+          description         = rule.description
+        }
+      ]
+    ]) :
     "${rule.security_group_name}_${rule.rule_key}" => rule
     if rule.cidr_ipv6 != null
   })
