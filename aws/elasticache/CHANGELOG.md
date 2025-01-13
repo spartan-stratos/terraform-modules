@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.54]() (2025-01-13)
+
+### Bug Fixes
+
+* Fix `auth_token` is enabled if `transit_encryption_enabled` is true
+
 ## [0.1.43]() (2025-01-09)
 
 ### Features
