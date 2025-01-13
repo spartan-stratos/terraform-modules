@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 * AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
-  * Disable the Auth Token if transit_encryption_enabled is false
+  * Fix `auth_token` is enabled if `transit_encryption_enabled` is true
 
 ## [0.1.53]() (2025-01-13)
 
