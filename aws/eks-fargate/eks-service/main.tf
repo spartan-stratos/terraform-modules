@@ -86,7 +86,7 @@ locals {
     service => [
       for policy_arn in service_configuration.additional_iam_policy_arns :
       {
-        service    = service.name
+        service    = service
         policy_arn = policy_arn
       }
       if length(service_configuration.additional_iam_policy_arns) > 0
