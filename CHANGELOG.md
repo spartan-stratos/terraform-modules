@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.52]() (2025-01-13)
+### Features
+* AWS password policy: [(./aws/password-policy)](./aws/password-policy/)
+  * Configures an IAM account password policy in AWS 
+  * Enforcing security requirements such as minimum password length, required character types, and user password management capabilities.
+* AWS MWAA: [(./aws/mwaa)](./aws/mwaa)
+  * Set MWAA task log level to INFO by default.
+
 ## [0.1.51]() (2025-01-12)
 ### Features
 * AWS OpenVPN: [(./aws/openvpn)](./aws/openvpn/)
