@@ -6,4 +6,6 @@ locals {
   policy_document_version = "v2.${local.chart_version_parts[1]}"
 
   policy_file = "${path.module}/policies/AWSLoadBalancerControllerIAMPolicy-${local.policy_document_version}.json"
+
+  region = var.region != null ? var.region : data.aws_region.current.name
 }
