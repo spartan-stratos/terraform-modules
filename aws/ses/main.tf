@@ -23,7 +23,7 @@ This data source is used here to get the hosted zone details of the domain speci
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone
 */
 data "aws_route53_zone" "this" {
-  count = var.verify_domain ? 1 : 0
+  count = var.verify_domain || var.publish_dkim_record || var.publish_mx_record ? 1 : 0
   name  = var.email_domain
 }
 
