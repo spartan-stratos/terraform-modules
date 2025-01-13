@@ -2,13 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.54]() (2025-01-13)
+
+### Bug Fixes
+
+* AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
+  * Fix `auth_token` is enabled if `transit_encryption_enabled` is true
+
 ## [0.1.53]() (2025-01-13)
 
 ### Features
 
 * AWS EKS Helm AWS Load Balancer
   Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
-    * Change `region` variable as optional, using `data aws_region` if it it null
+    * Change `region` variable as optional, using `data aws_region` if it is null
 
 ### Bug Fixes
 
