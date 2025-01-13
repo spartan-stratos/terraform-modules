@@ -2,227 +2,312 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.52]() (2025-01-13)
+## [0.1.53]() (2025-01-13)
+
 ### Features
+
+* AWS EKS Helm AWS Load Balancer
+  Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
+    * Change `region` variable as optional, using `data aws_region` if it it null
+
+### Bug Fixes
+
+* AWS SES: [(./aws/ses)](./aws/ses)
+    * Handle data aws route53 zone, support when publishing the MX and DKIM records
+
+## [0.1.52]() (2025-01-13)
+
+### Features
+
 * AWS password policy: [(./aws/password-policy)](./aws/password-policy/)
-  * Configures an IAM account password policy in AWS 
-  * Enforcing security requirements such as minimum password length, required character types, and user password management capabilities.
+    * Configures an IAM account password policy in AWS
+    * Enforcing security requirements such as minimum password length, required character types, and user password
+      management capabilities.
 * AWS MWAA: [(./aws/mwaa)](./aws/mwaa)
-  * Set MWAA task log level to INFO by default.
+    * Set MWAA task log level to INFO by default.
 
 ## [0.1.51]() (2025-01-12)
+
 ### Features
+
 * AWS OpenVPN: [(./aws/openvpn)](./aws/openvpn/)
-  * Add optional existing public key value `ec2_public_key` and custom key name `key_name`.
-  * Add security group to allow ssh access to vpn `default_ssh_vpn`.
-  * Remove resource tag.
+    * Add optional existing public key value `ec2_public_key` and custom key name `key_name`.
+    * Add security group to allow ssh access to vpn `default_ssh_vpn`.
+    * Remove resource tag.
 
 ## [0.1.50]() (2025-01-10)
+
 ### Features
+
 * AWS Vanta: [(./aws/vanta)](./aws/vanta/)
-  * Make vanta External Scanner ID customizable via `vanta_scanner_external_id`
+    * Make vanta External Scanner ID customizable via `vanta_scanner_external_id`
 
 ## [0.1.49]() (2025-01-10)
+
 ### Features
+
 * AWS Vanta: [(./aws/vanta)](./aws/vanta/)
-  * Add IAM role and IAM policy for Vanta Auditor
+    * Add IAM role and IAM policy for Vanta Auditor
 * AWS Neo4j: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
-  * Set Neo4j auth secret and update ingress HTTP port
+    * Set Neo4j auth secret and update ingress HTTP port
 
 ## [0.1.48]() (2025-01-09)
+
 ### Features
+
 * AWS Opensearch: [(./aws/opensearch)](./aws/opensearch/)
-  * Add option to create service link role via variable `create_linked_role`
+    * Add option to create service link role via variable `create_linked_role`
 
 ## [0.1.47]() (2025-01-09)
+
 ### Features
-* AWS static-website: Add `ordered_cache_behaviors` to custom `aws_cloudfront_distribution.ordered_cache_behavior`. [(./aws/static-website)](./aws/static-website)
+
+* AWS static-website: Add `ordered_cache_behaviors` to custom
+  `aws_cloudfront_distribution.ordered_cache_behavior`. [(./aws/static-website)](./aws/static-website)
 
 ## [0.1.46]() (2025-01-09)
+
 ### Features
+
 * AWS SES: [(./aws/ses)](./aws/ses)
-  * Add variable enabled_ses_identity_policy to make ses_identity_policy optional
+    * Add variable enabled_ses_identity_policy to make ses_identity_policy optional
 
 ## [0.1.45]() (2025-01-09)
+
 ### Features
+
 * AWS SQS: [(./aws/sqs)](./aws/sqs)
-  * Change `max_receive_count` type to number.
-  * Separate `aws_sqs_queue.queue.redrive_policy` to `aws_sqs_queue_redrive_policy.this`.
-  * Add attribute `redrive_allow_policy` to `aws_sqs_queue.dlq`.
+    * Change `max_receive_count` type to number.
+    * Separate `aws_sqs_queue.queue.redrive_policy` to `aws_sqs_queue_redrive_policy.this`.
+    * Add attribute `redrive_allow_policy` to `aws_sqs_queue.dlq`.
 
 ## [0.1.44]() (2025-01-09)
+
 ### Features
+
 * AWS SNS: Init module. [(./aws/sns)](./aws/sns)
 
 ## [0.1.43]() (2025-01-09)
+
 ### Features
-* AWS elasticache: Add output `elasticache_replication_group_configuration_endpoint_address` and variable `transit_encryption_enabled`. [(./aws/elasticache)](./aws/elasticache)
+
+* AWS elasticache: Add output `elasticache_replication_group_configuration_endpoint_address` and variable
+  `transit_encryption_enabled`. [(./aws/elasticache)](./aws/elasticache)
 
 ## [0.1.42]() (2025-01-09)
+
 ### Features
-* AWS Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](./aws/eks-helm/aws-load-balancer-controller/)
-  * Add new policy documents and auto map associated policy based on chart_version.
+
+* AWS
+  Eks-Helm/ALB-Controller [(./aws/eks-helm/aws-load-balancer-controller/)](./aws/eks-helm/aws-load-balancer-controller/)
+    * Add new policy documents and auto map associated policy based on chart_version.
 
 ## [0.1.41]() (2025-01-09)
+
 ### Features
-* AWS static-website: Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`, `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource recreation. [(./aws/static-website)](./aws/static-website)
+
+* AWS static-website: Add `bucket_prefix`, `s3_custom_readonly_policy_name`, `s3_custom_read_write_policy_name`,
+  `s3_readonly_policy_description`, `s3_read_write_policy_description` to avoid resource
+  recreation. [(./aws/static-website)](./aws/static-website)
 
 ## [0.1.40]() (2025-01-08)
+
 ### Features
+
 * AWS MWAA: [(./aws/mwaa)](./aws/mwaa)
-  * Add AWS MWAA Terraform module
+    * Add AWS MWAA Terraform module
+
 ### Bug Fixes
+
 * AWS OIDC Provider: [(./aws/oidc/provider)](./aws/oidc/provider)
-  * Remove create `var.create_provider` from `tls_certificate` to prevent bugs.
+    * Remove create `var.create_provider` from `tls_certificate` to prevent bugs.
 
 ## [0.1.39]() (2025-01-08)
+
 ### Features
+
 * AWS SES:  [(./aws/ses)](./aws/ses)
-  * Add DKIM records and MX records options.
+    * Add DKIM records and MX records options.
 
 ### Bug Fixes
+
 * AWS OIDC Provider: [(./aws/oidc/provider)](./aws/oidc/provider)
-  * Update `var.create_provider` for `aws_iam_openid_connect_provider` to prevent bugs from not found
+    * Update `var.create_provider` for `aws_iam_openid_connect_provider` to prevent bugs from not found
 
 ## [0.1.38]() (2025-01-07)
+
 ### Features
+
 * Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
-  * Update `renotify_occurrences` for each default services
+    * Update `renotify_occurrences` for each default services
 * Datadog monitors: [(./datadog/monitors)](./datadog/monitors/)
-  * Add monitor_threshold `warning` and `warning_recovery`.
+    * Add monitor_threshold `warning` and `warning_recovery`.
 * AWS Neo4j module: [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
-  * Add Neo4j helm deployment module
+    * Add Neo4j helm deployment module
 
 ## [0.1.37]() (2025-01-06)
+
 ### Features
+
 * AWS SQS: [(./aws/sqs)](./aws/sqs)
-  * Add variable `enabled_dead_letter_queue` to optionally disable dlq
-  * Add variable `enabled_read_write_policy` and `read_write_policy_name` to optionally configure a read-write policy
+    * Add variable `enabled_dead_letter_queue` to optionally disable dlq
+    * Add variable `enabled_read_write_policy` and `read_write_policy_name` to optionally configure a read-write policy
 * AWS StaticWebsite/Cloudfront: [(./aws/static-website/modules/cloudfront/)](./aws/static-website/modules/cloudfront/)
-  * Add `override.tofu` to override Terraform version constrain with OpenTofu
+    * Add `override.tofu` to override Terraform version constrain with OpenTofu
 * AWS OIDC/Jenkins: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
-  * Fix `for_each argument must be a map, or set of strings`: wrap the argument in `toset`
+    * Fix `for_each argument must be a map, or set of strings`: wrap the argument in `toset`
 
 ## [0.1.36]() (2025-01-05)
+
 ### Features
+
 * Datadog aws-monitor: [(./datadog/aws-monitor)](./datadog/aws-monitor/)
-  * Remove unused variables `dd_users`.
+    * Remove unused variables `dd_users`.
 * Datadog monitors: [(./datadog/monitors)](./datadog/monitors/)
-  * Add monitor_thresholds.ok and customize query type.
+    * Add monitor_thresholds.ok and customize query type.
 * Datadog mono-monitor: Init module [(./datadog/mono-monitor)](./datadog/mono-monitor/)
 * Datadog service-monitor: Init module [(./datadog/service-monitor)](./datadog/service-monitor/)
-* AWS S3: Add variables to overwrite policy name: `custom_readonly_policy_name`, `custom_read_write_policy_name` [(./aws/s3)](./aws/s3/)
+* AWS S3: Add variables to overwrite policy name: `custom_readonly_policy_name`,
+  `custom_read_write_policy_name` [(./aws/s3)](./aws/s3/)
 
 ## [0.1.35]() (2025-01-03)
-### Features 
+
+### Features
+
 * All modules: add an `override.tofu` file to override terraform version constraint to opentofu version constraint
 * AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster/)
-  * Update provider urls (remove `registry.terraform.io`) in order for OpenTofu to map to their registry.
+    * Update provider urls (remove `registry.terraform.io`) in order for OpenTofu to map to their registry.
 
 ## [0.1.34]() (2025-01-02)
-### Features 
+
+### Features
+
 * AWS Jenkins OIDC: [(./aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc/)
-  * Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
-  * Add `var.oidc_policy_name` and `var.oidc_policy_description` to overwrite the existed default name and description
+    * Add provider `custom_oidc_policy_statement` to customize oidc policy statement.
+    * Add `var.oidc_policy_name` and `var.oidc_policy_description` to overwrite the existed default name and description
 * AWS Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
-  * Add variable `jenkins_config_map_name` to use configMapRef in containerEnvFrom
-  * Add variable `jenkins_viewer` to add permission for GitHub team groups that defined in jenkins viewer
+    * Add variable `jenkins_config_map_name` to use configMapRef in containerEnvFrom
+    * Add variable `jenkins_viewer` to add permission for GitHub team groups that defined in jenkins viewer
 
 ## [0.1.33]() (2025-01-02)
-### Features 
+
+### Features
+
 * AWS Cloudwatch Alarm [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm)
-  * Ensure InstanceId is included when the namespace is "AWS/EC2".
+    * Ensure InstanceId is included when the namespace is "AWS/EC2".
 * AWS OpenVPN [(./aws/openvpn)](./aws/openvpn)
-  * Add outputs for EC2 instance.
-  * Introduced `http_tokens` and `http_endpoint` variables to control instance metadata service settings.
+    * Add outputs for EC2 instance.
+    * Introduced `http_tokens` and `http_endpoint` variables to control instance metadata service settings.
 * AWS Security Groups [(./aws/security-group)](./aws/security-group)
-  * Updated the logic to set from_port and to_port to -1 when the IP protocol is "-1", ensuring compatibility for security group rules with all protocols.
+    * Updated the logic to set from_port and to_port to -1 when the IP protocol is "-1", ensuring compatibility for
+      security group rules with all protocols.
 
 ## [0.1.32]() (2024-12-31)
+
 ### Fixes
+
 * Datadog / AWS-Monitors: [(./datadog/aws-monitors)](./datadog/aws-monitors)
-  * Add a default value for Terraform try functions
+    * Add a default value for Terraform try functions
 
 ## [0.1.31]() (2024-12-31)
 
 ### Features
+
 * AWS Helm / Jenkins: [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
-  * Init module with all the code
+    * Init module with all the code
 * Datadog / Monitors: [(./datadog/monitors)](./datadog/monitors)
-  * Init module with all the code
+    * Init module with all the code
 * Datadog / AWS-Monitors: [(./datadog/aws-monitors)](./datadog/aws-monitors)
-  * Init module with all the code
+    * Init module with all the code
 
 ### Fixes
+
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
-  * Add missing a new line in the init script template
+    * Add missing a new line in the init script template
 
 ## [0.1.30]() (2024-12-30)
 
 ### Features
+
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
-  * Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables: `replace_instance_on_update`.
+    * Add a flag to determine whenever to recreate OpenVPN instance when there is update in some variables:
+      `replace_instance_on_update`.
 * AWS Security Group: [(./aws/security-group/)](./aws/security-group/)
-  * Update Security Group Resources to Support Dynamic Ingress and Egress Rule Management
+    * Update Security Group Resources to Support Dynamic Ingress and Egress Rule Management
 * Qdrant: [(./qdrant)](./qdrant)
-  * Initial commit with all the code
+    * Initial commit with all the code
 
 ## [0.1.29]() (2024-12-30)
 
 ### Features
+
 * AWS VPC: Add private database subnet groups [(./aws/vpc)](./aws/vpc/)
 * AWS VPC Endpoints: * Add support for EKS VPC endpoint configuration [(./aws/vpc-endpoints)](./aws/vpc-endpoints/)
-* AWS Security Group: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during migration [(./aws/security-group)](./aws/security-group/)
+* AWS Security Group: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during
+  migration [(./aws/security-group)](./aws/security-group/)
 
 ## [0.1.28]() (2024-12-27)
 
 ### Features
+
 * AWS Static Website: [(./aws/static-website)](./aws/static-website/)
-  * Add a flag to enable www domain: `use_www_domain`
-  * Add `cloudfront_distribution_aliases` variable to custom distribution aliases
-  * Add `existing_s3_bucket_name` variable to specify the name of custom s3 bucket to use
+    * Add a flag to enable www domain: `use_www_domain`
+    * Add `cloudfront_distribution_aliases` variable to custom distribution aliases
+    * Add `existing_s3_bucket_name` variable to specify the name of custom s3 bucket to use
 * AWS OpenVPN: [(./aws/openvpn)](./aws/openvpn/)
-  * Allow using this module to use various available OAuth2 provider by adding variables: `oauth2_provider`, `oauth2_issuer`
-  * Allow validate group and role of the authorized identity via `oauth2_validate_groups` and `oauth2_validate_roles`
-  * Make management ssh key optional `create_management_key_pair`
-  * And add some variables for migrations: `custom_cert_dns_names`, `create_egress_vpn_rule`, `init_script_callback_comment`
+    * Allow using this module to use various available OAuth2 provider by adding variables: `oauth2_provider`,
+      `oauth2_issuer`
+    * Allow validate group and role of the authorized identity via `oauth2_validate_groups` and `oauth2_validate_roles`
+    * Make management ssh key optional `create_management_key_pair`
+    * And add some variables for migrations: `custom_cert_dns_names`, `create_egress_vpn_rule`,
+      `init_script_callback_comment`
 * AWS SQS: [(./aws/sqs)](./aws/sqs/)
-  * Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.
+    * Make read/write policy's name customizable via variables `read_policy_name` and `write_policy_name`.
 
 ## [0.1.27]() (2024-12-26)
 
 ### Features
+
 * AWS S3: [(./aws/s3)](./aws/s3)
-  * Add variables to avoid forced resource replacements during rollout: `read_write_policy_description`, `read_write_policy_name_prefix`, `readonly_policy_description`, `readonly_policy_name_prefix`, `public_policy_description`, and `public_policy_name_prefix`.
-* AWS Security Groups: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during migration [(./aws/security-group)](./aws/security-group)
+    * Add variables to avoid forced resource replacements during rollout: `read_write_policy_description`,
+      `read_write_policy_name_prefix`, `readonly_policy_description`, `readonly_policy_name_prefix`,
+      `public_policy_description`, and `public_policy_name_prefix`.
+* AWS Security Groups: Add variable `custom_sg_allow_all_within_vpc_egress_ipv6_cidr_blocks` to avoid update sg during
+  migration [(./aws/security-group)](./aws/security-group)
 
 ## [0.1.26]() (2024-12-26)
 
 ### Features
-* AWS EKS Service: Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53 records and extracting their fully qualified domain names (FQDNs) [(./aws/eks-service)](./aws/eks-service)
+
+* AWS EKS Service: Add output `service_hostnames` to generates a map of service hostnames by iterating over the Route 53
+  records and extracting their fully qualified domain names (FQDNs) [(./aws/eks-service)](./aws/eks-service)
 
 ## [0.1.25]() (2024-12-26)
 
 ### Features
-* AWS Security Group: Add variables: custom_sg_allow_all_description and custom_sg_allow_all_within_all_description to avoid forces replacement during migration. [(./aws/security-group)](./aws/security-group)
+
+* AWS Security Group: Add variables: custom_sg_allow_all_description and custom_sg_allow_all_within_all_description to
+  avoid forces replacement during migration. [(./aws/security-group)](./aws/security-group)
 
 ## [0.1.24]() (2024-12-26)
 
 ### Features
+
 * AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
-  * Add `var.create_kubernetes_namespace` to specify whether to create a namespace
-  * Add `var.config_map_env_var_name` to overwrite default kubernetes_config_map name
-  * Add `var.secret_env_var_name` to overwrite default kubernetes_secret secret env var name
+    * Add `var.create_kubernetes_namespace` to specify whether to create a namespace
+    * Add `var.config_map_env_var_name` to overwrite default kubernetes_config_map name
+    * Add `var.secret_env_var_name` to overwrite default kubernetes_secret secret env var name
 * AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
-  * Add output `elasticache_replication_group_configuration_endpoint_address`. 
+    * Add output `elasticache_replication_group_configuration_endpoint_address`.
 * AWS S3: [(./aws/s3)](./aws/s3)
-  * Add attribute `expose_headers` to variable `cors_configuration`.
+    * Add attribute `expose_headers` to variable `cors_configuration`.
 
 ## [0.1.23]() (2024-12-26)
 
 ### Features
 
-* AWS Security Group: Introduce functionality to create default security groups with configurable CIDR blocks and VPC ID.
+* AWS Security Group: Introduce functionality to create default security groups with configurable CIDR blocks and VPC
+  ID.
 * AWS GuardDuty: Init module.
 
 ## [0.1.22]() (2024-12-25)
@@ -232,17 +317,20 @@ All notable changes to this project will be documented in this file.
 * AWS EKS-Service: Init module. [(./aws/eks-service)](./aws/eks-service)
 * AWS EKS-Helm / Datadog: Init module. [(./aws/eks-helm/datadog)](./aws/eks-helm/datadog)
 * AWS Amplify: [(./aws/amplify)](./aws/amplify)
-  * Add `var.enable_backend` to enable backend or use frontend format only
-  * Add `aws_amplify_webhook` to provides an Amplify Webhook resource
+    * Add `var.enable_backend` to enable backend or use frontend format only
+    * Add `aws_amplify_webhook` to provides an Amplify Webhook resource
 * AWS VPC: [(./aws/vpc)](./aws/vpc)
-  * Separate the VPC and Security Group
-  * Introduced a conditional mechanism to control the creation of VPC flow logs.
+    * Separate the VPC and Security Group
+    * Introduced a conditional mechanism to control the creation of VPC flow logs.
 * Datadog/AWS Integration: Init module. [(./datadog/aws-integration)](./datadog/aws-integration)
 * Datadog/GCP Integration: Init module. [(./datadog/gcp-integration)](./datadog/gcp-integration)
-* AWS Postgres: Add `var.publicly_accessible` to allow external machine connect to rds if `true` [(./aws/postgres)](./aws/postgres)
+* AWS Postgres: Add `var.publicly_accessible` to allow external machine connect to rds if
+  `true` [(./aws/postgres)](./aws/postgres)
 
 ### Fixes
-* AWS Postgres: Correct conditions to create security group `aws_security_group.this` when variable `vpc_security_group_ids` is null [(./aws/postgres)](./aws/postgres)
+
+* AWS Postgres: Correct conditions to create security group `aws_security_group.this` when variable
+  `vpc_security_group_ids` is null [(./aws/postgres)](./aws/postgres)
 
 ## [0.1.21]() (2024-12-24)
 
@@ -250,33 +338,36 @@ All notable changes to this project will be documented in this file.
 
 * AWS EKS-Helm Metrics Server: Init module. [(./aws/eks-helm/metrics-server)](./aws/eks-helm/metrics-server)
 * AWS EKS-RBAC: Init module. [(./aws/eks-rbac)](./aws/eks-rbac)
-* AWS SES: Rename `use_route53` to `verify_domain` and add prefix `_amazonses.` to route53 record to validate SES domain. [(./aws/ses)](./aws/ses)
-* AWS OIDC provider: refactor and generalized [(./aws/github-oidc/modules/provider)]() to dedicated module at [(./aws/oidc/provider)](./aws/oidc/provider).
+* AWS SES: Rename `use_route53` to `verify_domain` and add prefix `_amazonses.` to route53 record to validate SES
+  domain. [(./aws/ses)](./aws/ses)
+* AWS OIDC provider: refactor and generalized [(./aws/github-oidc/modules/provider)]() to dedicated module
+  at [(./aws/oidc/provider)](./aws/oidc/provider).
 * AWS Jenkins OIDC: Init jenkins-oidc module. [(aws/oidc/jenkins-oidc)](./aws/oidc/jenkins-oidc)
 * AWS GitHub OIDC: [(aws/oidc/github-oidc)](./aws/oidc/github-oidc)
-  * Add provider `tls` version constraints.
-  * Replace `var.aws_account_id` with `data.aws_caller_identity` to use runtime AWS identity.
-  * Add variables: `additional_thumbprints`, `client_id_list`, `url`, `create_provider`.
-  * Add outputs: `provider_arn`, `provider_url`, `github_tf_ops_role_arn`.
+    * Add provider `tls` version constraints.
+    * Replace `var.aws_account_id` with `data.aws_caller_identity` to use runtime AWS identity.
+    * Add variables: `additional_thumbprints`, `client_id_list`, `url`, `create_provider`.
+    * Add outputs: `provider_arn`, `provider_url`, `github_tf_ops_role_arn`.
 
 ## [0.1.20]() (2024-12-24)
 
 ### Features
 
-* AWS eks-helm/aws-load-balancer-controller: init module [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller/)
+* AWS eks-helm/aws-load-balancer-controller: init
+  module [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller/)
 * AWS SQS [(./aws/sqs)](./aws/sqs)
-  * Refactor components.
-  * Update policies Send Receive resources principal to created queue only.
-  * Update policy Receive with 2 additional permissions: `sqs:DeleteMessage`, `sqs:GetQueueAttributes`.
-  * Remove redundant policy in `aws_sqs_queue.queue`.
+    * Refactor components.
+    * Update policies Send Receive resources principal to created queue only.
+    * Update policy Receive with 2 additional permissions: `sqs:DeleteMessage`, `sqs:GetQueueAttributes`.
+    * Remove redundant policy in `aws_sqs_queue.queue`.
 
 ## [0.1.19]() (2024-12-23)
 
 ### Features
 
 * AWS eks-cluster [(./aws/eks-cluster)](./aws/eks-cluster/)
-  * Add output `datadog_agent_cluster_role_name`
-  * Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
+    * Add output `datadog_agent_cluster_role_name`
+    * Update assume policy of eks-node-cluster from `eks.amazonaws.com` to `ec2.amazonaws.com`
 
 ## [0.1.18]() (2024-12-23)
 
@@ -289,15 +380,18 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS KMS: Update key policy statement [(./aws/kms)](./aws/kms).
-* AWS static-website: Update `aws_cloudfront_distribution.aliases`. Add variable `domain_name`, `enabled_read_write_policy`, `enabled_read_only_policy`. [(./aws/static-website)](./aws/static-website).
+* AWS static-website: Update `aws_cloudfront_distribution.aliases`. Add variable `domain_name`,
+  `enabled_read_write_policy`, `enabled_read_only_policy`. [(./aws/static-website)](./aws/static-website).
 
 ## [0.1.16]() (2024-12-20)
 
 ### Features
 
-* AWS Cloudwatch Alarm: Add support for specifying target group in alarms [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm).
+* AWS Cloudwatch Alarm: Add support for specifying target group in
+  alarms [(./aws/cloudwatch/alarm)](./aws/cloudwatch/alarm).
 
 ### Fix Bugs
+
 * AWS KMS: Add policy `kms:PutKeyPolicy` to fix cannot apply because of error KMS: PutKeyPolicy [(./aws/kms)](./aws/kms)
 
 ## [0.1.15]() (2024-12-19)
@@ -305,16 +399,21 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Add AWS Cloud Trail module [(./aws/cloudtrail)](./aws/cloudtrail).
-* AWS Postgres: Update security group to use vpc existing security groups and allow user to overwrite rds parameter group name.
-* AWS KMS: Change from `aws_iam_policy.this[*].arn` to `values(aws_iam_policy.this)[*].arn` in order to fix the null list output.
+* AWS Postgres: Update security group to use vpc existing security groups and allow user to overwrite rds parameter
+  group name.
+* AWS KMS: Change from `aws_iam_policy.this[*].arn` to `values(aws_iam_policy.this)[*].arn` in order to fix the null
+  list output.
 * AWS S3: Add variable `acl` and resource `aws_s3_bucket_acl`.
 
 ## [0.1.14]() (2024-12-18)
 
 ### Features
 
-* AWS Postgre: Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/postgres)
-* AWS VPC: Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet creation logics. Correct `aws_security_group.allow_all_within_vpc` ingress rule `cidr_blocks`. Remove `environment` from resource tags.[(./aws/vpc)](./aws/vpc)
+* AWS Postgre: Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and
+  `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/postgres)
+* AWS VPC: Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet
+  creation logics. Correct `aws_security_group.allow_all_within_vpc` ingress rule `cidr_blocks`. Remove `environment`
+  from resource tags.[(./aws/vpc)](./aws/vpc)
 * AWS Route53: Add `r53_main_name_servers` output for route53 [(./aws/route53)](./aws/route53)
 
 ## [0.1.13]() (2024-12-17)
