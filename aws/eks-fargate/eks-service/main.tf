@@ -78,20 +78,31 @@ resource "aws_iam_role" "this" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "this" {
-  for_each = tomap({
-    for service in flatten(
-      [for service_key, service in var.services : {
-        for policy_arn in service.additional_iam_policy_arns : "${service_key}-${policy_arn}" => {
-          role = aws_iam_role.this[service_key].name
-          arn  = each.value.additional_iam_policy_arns
-        }
-      }]
-    ) : service_key => service
+// Extracting the additional IAM policy mappings into a separate variable for better readability
+# Flatten the nested loop logic into a local variable for readability
+locals {
+  iam_policy_attachments = tomap({
+    for service, service_configuration in var.services :
+    service => [
+      for policy_arn in service_configuration.additional_iam_policy_arns :
+      {
+        service    = service.name
+        policy_arn = policy_arn
+      }
+      if length(service_configuration.additional_iam_policy_arns) > 0
+    ]
   })
+}
 
-  role       = each.value.role
-  policy_arn = each.value.arn
+# Flatten the list of policies and add a unique key for each
+resource "aws_iam_role_policy_attachment" "this" {
+  for_each = {
+    for service, policies in local.iam_policy_attachments :
+    service => policies
+  }
+
+  role       = aws_iam_role.this[each.value.service].name
+  policy_arn = each.value.policy_arn
 }
 
 resource "kubernetes_annotations" "this" {
