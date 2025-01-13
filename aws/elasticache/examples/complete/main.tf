@@ -2,7 +2,6 @@ module "redis" {
   source = "../../"
 
   cluster_name                           = "example"
-  environment                            = "dev"
   subnet_ids                             = ["subnet-1234567899a", "subnet-1234567899b"]
   node_type                              = "cache.t3.micro"
   cache_node_count                       = 1
