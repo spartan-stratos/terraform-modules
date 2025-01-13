@@ -30,6 +30,11 @@ persistence:
   existingClaim: ${kubernetes_persistent_volume_claim.neo4j_home.metadata.0.name}
   accessModes:
     - ReadWriteMany
+config:
+  server.directories.plugins: "/var/lib/neo4j/labs"
+  dbms.security.procedures.unrestricted: "apoc.*"
+  server.config.strict_validation.enabled: "false"
+  dbms.security.procedures.allowlist: "apoc.math.*,apoc.cypher.*"
 YAML
 }
 
