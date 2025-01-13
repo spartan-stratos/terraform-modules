@@ -89,7 +89,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 
   role = each.value.role
 
-  policy_arn = toset(each.value.policies)
+  policy_arn = each.value.policies
 }
 
 resource "kubernetes_annotations" "this" {
