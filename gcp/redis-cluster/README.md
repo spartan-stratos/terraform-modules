@@ -3,7 +3,9 @@
 This Terraform module creates a GCP redis cluster.
 
 ## Usage
+
 ### Create GCP Redis cluter
+
 ```hcl
 module "redis_cluster" {
   source = "../../"
@@ -19,9 +21,11 @@ module "redis_cluster" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                            | Version  |
@@ -41,9 +45,9 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                                 | Type     |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| [google_redis_cluster.this](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/redis_cluster)                      | resource |
+| Name                                                                                                                           | Type     |
+|--------------------------------------------------------------------------------------------------------------------------------|----------|
+| [google_redis_cluster.this](https://registry.terraform.io/providers/hashicorp/google-beta/latest/docs/resources/redis_cluster) | resource |
 
 ## Inputs
 
@@ -63,4 +67,5 @@ No modules.
 | Name                                             | Description                                                                                                    |
 |--------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | <a name="output_host"></a> [host](#output\_host) | The connection endpoint for the Redis cluster, combining the address and port of the first discovery endpoint. |
+
 <!-- END_TF_DOCS -->

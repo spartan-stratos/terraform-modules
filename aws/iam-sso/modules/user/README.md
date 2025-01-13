@@ -1,8 +1,11 @@
 # AWS Identity Store User sub-module
+
 Terraform AWS Identity Store User sub-module which creates Identity Store User resource on AWS.
 
 ## Usage
+
 ### Create AWS Identity Store User
+
 ```hcl
 module "iam_sso_user" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/iam-sso/modules/user?ref=v0.1.0"
@@ -18,6 +21,7 @@ module "iam_sso_user" {
 ## Examples
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -27,9 +31,9 @@ module "iam_sso_user" {
 
 ## Providers
 
-| Name                                                                      | Version  |
-|---------------------------------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)                         | \>=5.75  |
+| Name                                              | Version |
+|---------------------------------------------------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>=5.75 |
 
 ## Modules
 
@@ -56,4 +60,5 @@ No modules.
 | Name                                                        | Description |
 |-------------------------------------------------------------|-------------|
 | <a name="output_user_id"></a> [user\_id](#output\_user\_id) | n/a         |
+
 <!-- END_TF_DOCS -->

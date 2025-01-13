@@ -3,7 +3,9 @@
 This Terraform module provisions a Google Kubernetes Engine (GKE) Autopilot cluster with configurable options.
 
 ## Usage
+
 ### Create GKE Autopilot Cluster
+
 ```hcl
 module "gke_autopilot" {
   source  = "../modules/gcp/gke-autopilot"
@@ -46,9 +48,11 @@ module "gke_autopilot" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -68,9 +72,9 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                              | Type      |
-|-----------------------------------------------------------------------------------------------------------------------------------|-----------|
-| [google_container_cluster.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster) | resource  |
+| Name                                                                                                                              | Type     |
+|-----------------------------------------------------------------------------------------------------------------------------------|----------|
+| [google_container_cluster.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster) | resource |
 
 ## Inputs
 
@@ -108,4 +112,5 @@ No modules.
 | <a name="output_cluster_self_link"></a> [cluster\_self\_link](#output\_cluster\_self\_link) | The server-defined URL for the GKE resource.                                                                |
 | <a name="output_endpoint"></a> [endpoint](#output\_endpoint)                                | The IP address of this cluster's Kubernetes master.                                                         |
 | <a name="output_master_auth"></a> [master\_auth](#output\_master\_auth)                     | Base64 encoded public certificate used by clients to authenticate to the cluster endpoint.                  |
+
 <!-- END_TF_DOCS -->

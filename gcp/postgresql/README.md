@@ -10,7 +10,9 @@ This module will create the following components:
 - Create user-defined username password to access database.
 
 ## Usage
+
 ### Create Google Cloud SQL instance and replicas
+
 ```hcl
 module "postgresql" {
   source = "../../"
@@ -30,9 +32,11 @@ module "postgresql" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -87,7 +91,7 @@ No modules.
 | <a name="input_transaction_log_retention_days"></a> [transaction\_log\_retention\_days](#input\_transaction\_log\_retention\_days)                       | The number of days of transaction logs we retain for point in time restore, from 1-7 for standard instance.                                                          | number      | `7`           |    no    |
 | <a name="input_database_version"></a> [database\_version](#input\_database\_version)                                                                     | The Cloud SQL database version to use.                                                                                                                               | string      | `POSTGRES_16` |    no    |
 | <a name="input_enabled_disk_autoresize"></a> [enabled\_disk\_autoresize](#input\_enabled\_disk\_autoresize)                                              | Enables auto-resizing of the storage size. Defaults to true.                                                                                                         | bool        | `true`        |    no    |
- 
+
 ## Outputs
 
 | Name                                                                                                                                                                   | Description                                                                                                                |
@@ -101,4 +105,5 @@ No modules.
 | <a name="output_db_username"></a> [db\_username](#output\_db\_username)                                                                                                | The database username.                                                                                                     |
 | <a name="output_db_password"></a> [db\_password](#output\_db\_password)                                                                                                | The database password.                                                                                                     |
 | <a name="output_db_name"></a> [db\_name](#output\_db\_name)                                                                                                            | The database name.                                                                                                         |
+
 <!-- END_TF_DOCS -->

@@ -1,8 +1,11 @@
 # AWS SSO Admin Account Assignment sub-module
+
 Terraform AWS SSO Admin Account Assignment sub-module to manage account assignments on AWS.
 
 ## Usage
+
 ### Create AWS SSO Admin Account Assignment
+
 ```hcl
 module "iam_sso_group_assignment" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/iam-sso/modules/group_assignment?ref=v0.1.0"
@@ -19,6 +22,7 @@ module "iam_sso_group_assignment" {
 ## Examples
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -28,9 +32,9 @@ module "iam_sso_group_assignment" {
 
 ## Providers
 
-| Name                                                                      | Version  |
-|---------------------------------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)                         | \>=5.75  |
+| Name                                              | Version |
+|---------------------------------------------------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>=5.75 |
 
 ## Modules
 

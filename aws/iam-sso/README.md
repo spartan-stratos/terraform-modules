@@ -1,8 +1,12 @@
 # AWS IAM SSO module
-Terraform AWS IAM SSO module to manage AWS Single Sign-On (SSO) settings, users, groups, assignments, and identity store resources.
+
+Terraform AWS IAM SSO module to manage AWS Single Sign-On (SSO) settings, users, groups, assignments, and identity store
+resources.
 
 ## Usage
+
 ### Create AWS IAM SSO
+
 ```hcl
 module "iam_sso" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/iam-sso?ref=v0.1.0"
@@ -28,9 +32,11 @@ module "iam_sso" {
 ```
 
 ## Examples
+
 - [Example complete](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -40,9 +46,9 @@ module "iam_sso" {
 
 ## Providers
 
-| Name                                                                      | Version  |
-|---------------------------------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)                         | \>=5.75  |
+| Name                                              | Version |
+|---------------------------------------------------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | \>=5.75 |
 
 ## Modules
 

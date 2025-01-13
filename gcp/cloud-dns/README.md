@@ -1,12 +1,16 @@
 # GCP DNS record Terraform module
+
 Terraform module which creates Cloud DNS resources on GCP.
 
 This module will create the following components:
+
 - DNS managed zone with provided zone name and DNS name.
 - DNS records name with provided type, ttl, and rrdatas.
 
 ## Usage
+
 ### Create Cloud DNS
+
 ```hcl
 module "cloud_dns" {
   source  = "github.com/spartan-stratos/terraform-modules//gcp/cloud-dns?ref=v0.1.0"
@@ -29,9 +33,11 @@ module "cloud_dns" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -51,11 +57,11 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                | Type        |
-|-------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| [google_dns_record_set.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_record_set)         | resource    |
-| [google_dns_managed_zone.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_managed_zone)     | resource    |
-| [google_dns_managed_zone.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/dns_managed_zone)  | data source |
+| Name                                                                                                                               | Type        |
+|------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| [google_dns_record_set.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_record_set)        | resource    |
+| [google_dns_managed_zone.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_managed_zone)    | resource    |
+| [google_dns_managed_zone.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/dns_managed_zone) | data source |
 
 ## Inputs
 
@@ -70,7 +76,8 @@ No modules.
 
 ## Outputs
 
-| Name                                                                                     | Description                                |
-|------------------------------------------------------------------------------------------|--------------------------------------------|
-| <a name="output_dns_record_names"></a> [dns\_record\_names](#output\_dns\_record\_names) | The DNS record list of the Cloud DNS zone  |
+| Name                                                                                     | Description                               |
+|------------------------------------------------------------------------------------------|-------------------------------------------|
+| <a name="output_dns_record_names"></a> [dns\_record\_names](#output\_dns\_record\_names) | The DNS record list of the Cloud DNS zone |
+
 <!-- END_TF_DOCS -->
