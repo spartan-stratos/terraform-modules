@@ -7,5 +7,6 @@ module "aws_scheduler" {
     type = "cronjob"
     kind = "example-payload"
   })
-  queue_url = "https://sqs.<region>.amazonaws.com/<account_id>:<queue_name>"
+  schedule_expression = "cron(0 0/1 * * ? *)"
+  queue_url           = "https://sqs.<region>.amazonaws.com/<account_id>:<queue_name>"
 }

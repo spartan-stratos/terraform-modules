@@ -9,7 +9,7 @@ password length, required character types, and user password management capabili
 
 ```hcl
 module "password_policy" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/password-policy?ref=v0.1.51"
+  source = "github.com/spartan-stratos/terraform-modules//aws/password-policy?ref=v0.1.52"
 
   minimum_password_length        = 8
   require_lowercase_characters   = true
