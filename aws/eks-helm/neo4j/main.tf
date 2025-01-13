@@ -31,7 +31,7 @@ persistence:
   accessModes:
     - ReadWriteMany
 config:
-  server.directories.plugins: "/var/lib/neo4j/labs"
+  server.directories.plugins: "/opt/bitnami/neo4j/labs"
   dbms.security.procedures.unrestricted: "apoc.*"
   server.config.strict_validation.enabled: "false"
   dbms.security.procedures.allowlist: "apoc.math.*,apoc.cypher.*"
