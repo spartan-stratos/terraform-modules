@@ -3,7 +3,9 @@
 This Terraform module provisions workspace group resources that manages workspace members.
 
 ## Usage
+
 ### Create Google Workspace module
+
 ```hcl
 module "google_workspace" {
   source = "github.com/spartan-stratos/terraform-modules//gcp/google_workspace?ref=v0.1.5"
@@ -23,14 +25,16 @@ module "google_workspace" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
-| Name | Version   |
-|------|-----------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | \>= 1.9.8 |
+| Name                                                                                        | Version   |
+|---------------------------------------------------------------------------------------------|-----------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform)                   | \>= 1.9.8 |
 | <a name="requirement_googleworkspace"></a> [googleworkspace](#requirement\_googleworkspace) | \>= 0.7.0 |
 
 ## Providers
@@ -39,9 +43,9 @@ No providers.
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_group"></a> [group](#module\_group) | ./modules/group | n/a |
+| Name                                                | Source          | Version |
+|-----------------------------------------------------|-----------------|---------|
+| <a name="module_group"></a> [group](#module\_group) | ./modules/group | n/a     |
 
 ## Resources
 
@@ -49,10 +53,10 @@ No resources.
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_domain"></a> [domain](#input\_domain) | The domain associated with the Google Workspace account. | `string` | n/a | yes |
-| <a name="input_groups"></a> [groups](#input\_groups) | A map of Google Workspace groups, where each group has a description, a name, and a list of member email addresses. This configuration allows for dynamic management of multiple groups and their members. | <pre>map(object({<br/>    description = string<br/>    name        = string<br/>    members     = list(string)<br/>  }))</pre> | n/a | yes |
+| Name                                                 | Description                                                                                                                                                                                                | Type                                                                                                                           | Default | Required |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|---------|:--------:|
+| <a name="input_domain"></a> [domain](#input\_domain) | The domain associated with the Google Workspace account.                                                                                                                                                   | `string`                                                                                                                       | n/a     |   yes    |
+| <a name="input_groups"></a> [groups](#input\_groups) | A map of Google Workspace groups, where each group has a description, a name, and a list of member email addresses. This configuration allows for dynamic management of multiple groups and their members. | <pre>map(object({<br/>    description = string<br/>    name        = string<br/>    members     = list(string)<br/>  }))</pre> | n/a     |   yes    |
 
 ## Outputs
 

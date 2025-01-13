@@ -3,30 +3,44 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.1.53]() (2025-01-13)
+
 ### Features
+
 * Handle reading the aws_route53_zone to publish dkim or mx records
 
 ## [0.1.46]() (2025-01-09)
+
 ### Features
+
 * Add variable `enabled_ses_identity_policy` to make ses_identity_policy optional.
 
 ## [0.1.39]() (2025-01-08)
+
 ### Features
+
 * Add DKIM records and MX records options.
 
 ## [0.1.21]() (2024-12-24)
+
 ### Features
+
 * Add prefix to verify domain
 * Rename `use_route53` to `verify_domain` for more information
 
 ## [0.1.7]() (2024-12-09)
+
 ### Features
+
 * Fix the SES module
 
 ## [0.1.4]() (2024-12-05)
+
 ### Features
-* Update terraform version constraint from `~> 1.9.8` to `>= 1.9.8` 
+
+* Update terraform version constraint from `~> 1.9.8` to `>= 1.9.8`
 
 ## [0.1.3]() (2024-12-04)
+
 ### Features
+
 * Initial commit with all the code

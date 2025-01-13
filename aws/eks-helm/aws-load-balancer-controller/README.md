@@ -12,9 +12,9 @@ module "aws_eks_lb" {
 
   cluster_name        = "my-eks-cluster"
   oidc_provider       = "eks-oidc-example"
-  certificate_arn     = ["arn:aws:acm:Region:123456789012:certificate/certificate_ID"]
-  private_subnet      = ["subnet-abcd", "subnet-cdef"]
-  public_subnet       = ["subnet-01234", "subnet-23456"]
+  certificate_arn = ["arn:aws:acm:Region:123456789012:certificate/certificate_ID"]
+  private_subnet = ["subnet-abcd", "subnet-cdef"]
+  public_subnet = ["subnet-01234", "subnet-23456"]
   vpc_id              = "vpc-xxx"
   enable_internal_alb = true
   region              = "us-west-2"
@@ -26,6 +26,7 @@ module "aws_eks_lb" {
 - [Example](./examples/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                         | Version   |
@@ -92,4 +93,5 @@ No modules.
 | <a name="output_external_group_name"></a> [external\_group\_name](#output\_external\_group\_name) | Group name of external aws load balancer    |
 | <a name="output_internal_alb_cname"></a> [internal\_alb\_cname](#output\_internal\_alb\_cname)    | CNAME address of internal aws load balancer |
 | <a name="output_internal_group_name"></a> [internal\_group\_name](#output\_internal\_group\_name) | Group name of internal aws load balancer    |
+
 <!-- END_TF_DOCS -->

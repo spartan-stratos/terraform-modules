@@ -3,7 +3,9 @@
 Terraform module which creates OpenVPN to access internal VPC network.
 
 ## Usage
+
 ### Create GCP OpenVPN
+
 ```hcl
 module "openvpn" {
   source  = "github.com/spartan-stratos/terraform-modules//gcp/openvpn?ref=v0.1.5"
@@ -20,9 +22,11 @@ module "openvpn" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -42,13 +46,14 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                              | Type      |
-|-----------------------------------------------------------------------------------------------------------------------------------|-----------|
-| [random_password.management_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource  |
-| [tls_private_key.management_ssh_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key) | resource  |
-| [google_compute_address.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address) | resource  |
-| [random_password.management_password](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall) | resource  |
-| [google_compute_instance.default](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource  |
+| Name                                                                                                                                   | Type     |
+|----------------------------------------------------------------------------------------------------------------------------------------|----------|
+| [random_password.management_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password)         | resource |
+| [tls_private_key.management_ssh_key](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/resources/private_key)          | resource |
+| [google_compute_address.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address)          | resource |
+| [random_password.management_password](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall) | resource |
+| [google_compute_instance.default](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password)             | resource |
+
 ## Inputs
 
 | Name                                                                                                                      | Description                                          | Type           | Default                               | Required |
@@ -77,4 +82,5 @@ No modules.
 | <a name="output_public_ip"></a> [public\_ip](#output\_public\_ip)                     | n/a         |
 | <a name="output_ssh_private_key"></a> [ssh\_private\_key](#output\_ssh\_private\_key) | n/a         |
 | <a name="output_ssh_public_key"></a> [ssh\_public\_key](#output\_ssh\_public\_key)    | n/a         |
+
 <!-- END_TF_DOCS -->

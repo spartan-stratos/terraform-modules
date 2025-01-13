@@ -1,6 +1,8 @@
 # Terraform Google Cloud VPC Module
 
-This Terraform module creates a Virtual Private Cloud (VPC) network along with application, data subnetworks, and NAT in Google Cloud. The module is designed to be reusable and configurable with various options for CIDR blocks, flow logs, and Google API access.
+This Terraform module creates a Virtual Private Cloud (VPC) network along with application, data subnetworks, and NAT in
+Google Cloud. The module is designed to be reusable and configurable with various options for CIDR blocks, flow logs,
+and Google API access.
 
 This module will create the following components:
 
@@ -11,7 +13,9 @@ This module will create the following components:
 - Create NAT.
 
 ## Usage
+
 ### Create VPC
+
 ```hcl
 module "vpc" {
   source = "../../"
@@ -29,9 +33,11 @@ module "vpc" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -51,16 +57,16 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                                                             | Type        |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| [google_compute_network.vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network)                                                     | resource    |
-| [google_compute_global_address.private_ip_peering](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address)                        | resource    |
-| [google_service_networking_connection.private_vpc_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection.html) | resource    |
-| [google_compute_subnetwork.application](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)                                       | resource    |
-| [google_compute_subnetwork.data](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)                                              | resource    |
-| [google_compute_address.nat_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address)                                                  | resource    |
-| [google_compute_router.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router)                                                      | resource    |
-| [google_compute_router_nat.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat)                                                                                                                                               | resource    |
+| Name                                                                                                                                                                             | Type     |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| [google_compute_network.vpc](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network)                                                     | resource |
+| [google_compute_global_address.private_ip_peering](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address)                        | resource |
+| [google_service_networking_connection.private_vpc_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection.html) | resource |
+| [google_compute_subnetwork.application](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)                                       | resource |
+| [google_compute_subnetwork.data](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork)                                              | resource |
+| [google_compute_address.nat_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address)                                                  | resource |
+| [google_compute_router.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router)                                                      | resource |
+| [google_compute_router_nat.this](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat)                                              | resource |
 
 ## Inputs
 
@@ -87,4 +93,5 @@ No modules.
 | <a name="output_cloud_router"></a> [cloud\_router](#output\_cloud\_router)                                                        | A reference (self_link) to the Cloud Router.                                      |
 | <a name="output_cloud_nat_id"></a> [cloud\_nat\_id](#output\_cloud\_nat\_id)                                                      | A full resource identifier of the Cloud NAT.                                      |
 | <a name="output_google_compute_address"></a> [google\_compute\_address](#output\_google\_compute\_address)                        | A reference (self_link) to the Google Compute Address.                            |
+
 <!-- END_TF_DOCS -->

@@ -1,8 +1,11 @@
 # AWS Identity SAML Provider module - Base module for AWS VPN CLIENT
+
 Terraform module which creates Identity SAML Provider resource on AWS.
 
 ## Usage
+
 ### Create Identity SAML Provider
+
 ```hcl
 module "saml_vpn" {
   source  = "github.com/spartan-stratos/terraform-modules//aws/identity-provider/saml?ref=v0.1.0"
@@ -14,9 +17,11 @@ module "saml_vpn" {
 ```
 
 ## Examples
+
 - [Example](./examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version  |
@@ -51,4 +56,5 @@ No modules.
 | Name                                                                                          | Description                              |
 |-----------------------------------------------------------------------------------------------|------------------------------------------|
 | <a name="output_saml_provider_arns"></a> [saml\_provider\_arns](#output\_saml\_provider_arns) | The map of SAML provider arn(s) created. |
+
 <!-- END_TF_DOCS -->
