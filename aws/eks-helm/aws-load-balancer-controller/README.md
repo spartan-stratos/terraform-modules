@@ -1,3 +1,30 @@
+# EKS-Helm AWS Loadbalancer Controller
+
+Terraform module which install an ALB Controller to EKS cluster and configure the necessary role and permissions.
+
+## Usage
+
+### Install ALB Controller
+
+```hcl
+module "aws_eks_lb" {
+  source = "../../"
+
+  cluster_name        = "my-eks-cluster"
+  oidc_provider       = "eks-oidc-example"
+  certificate_arn     = ["arn:aws:acm:Region:123456789012:certificate/certificate_ID"]
+  private_subnet      = ["subnet-abcd", "subnet-cdef"]
+  public_subnet       = ["subnet-01234", "subnet-23456"]
+  vpc_id              = "vpc-xxx"
+  enable_internal_alb = true
+  region              = "us-west-2"
+}
+```
+
+## Examples
+
+- [Example](./examples/)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
