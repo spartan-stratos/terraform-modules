@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "this" {
       identifiers = ["logging.s3.amazonaws.com"]
     }
     actions   = ["s3:PutObject"]
-    resources = toset(["${var.access_log_bucket.s3_bucket_id}/s3-access-logs/*"])
+    resources = toset(["${var.access_logs_bucket_id}/s3-access-logs/*"])
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
@@ -26,5 +26,5 @@ data "aws_iam_policy_document" "this" {
 
 resource "aws_s3_bucket_policy" "s3_server_write_access_log" {
   policy = data.aws_iam_policy_document.this.json
-  bucket = var.access_logs_bucket.s3_bucket_id
+  bucket = var.access_logs_bucket_id
 }
