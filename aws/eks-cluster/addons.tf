@@ -23,7 +23,7 @@ data "aws_eks_addon_version" "kube_proxy_latest" {
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name                = local.cluster_name
   addon_name                  = "kube-proxy"
-  addon_version               = try(data.aws_eks_addon_version.kube_proxy_latest.version, var.addons_kube_proxy_version)
+  addon_version               = try(data.aws_eks_addon_version.kube_proxy_latest[0].version, var.addons_kube_proxy_version)
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
@@ -40,7 +40,7 @@ resource "aws_eks_addon" "coredns_ec2" {
   count = var.k8s_core_dns_compute_type == "ec2" ? 1 : 0
 
   addon_name                  = "coredns"
-  addon_version               = try(data.aws_eks_addon_version.coredns_latest.version, var.addons_coredns_version)
+  addon_version               = try(data.aws_eks_addon_version.coredns_latest[0].version, var.addons_coredns_version)
   cluster_name                = local.cluster_name
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
@@ -52,7 +52,7 @@ resource "aws_eks_addon" "coredns_fargate" {
   count = var.k8s_core_dns_compute_type == "fargate" ? 1 : 0
 
   addon_name                  = "coredns"
-  addon_version               = try(data.aws_eks_addon_version.coredns_latest.version, var.addons_coredns_version)
+  addon_version               = try(data.aws_eks_addon_version.coredns_latest[0].version, var.addons_coredns_version)
   cluster_name                = local.cluster_name
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
