@@ -64,7 +64,7 @@ variable "aws_auth_accounts" {
 
 variable "create_fargate_profile" {
   type        = bool
-  description = "Specify whether creaing the Fargate profile for running pods."
+  description = "Specify whether creating the Fargate profile for running pods."
   default     = false
 }
 
@@ -186,4 +186,22 @@ variable "custom_namespaces" {
   type        = list(string)
   description = "Custom namespaces to be created during initialization"
   default     = []
+}
+
+variable "addons_vpc_cni_version" {
+  type        = string
+  description = "The version of the VPC CNI addon, latest by default"
+  default     = null
+}
+
+variable "addons_kube_proxy_version" {
+  type        = string
+  description = "The version of the kube-proxy addon, latest by default"
+  default     = null
+}
+
+variable "addons_coredns_version" {
+  type        = string
+  description = "The version of the CoreDNS addon, latest by default"
+  default     = null
 }

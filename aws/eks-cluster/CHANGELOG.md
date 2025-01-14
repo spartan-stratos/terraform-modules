@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.55]() (2025-01-14)
+
+### Features
+* Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the version of addons.
+
 ## [0.1.35]() (2025-01-03)
 
 ### Features
