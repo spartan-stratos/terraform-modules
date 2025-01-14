@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.55]() (2025-01-14)
+
+### Features
+* AWS S3: [(./aws/s3)](./aws/s3)
+  * Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the bucket.
+
+* AWS EKS-Cluster [(./aws/eks-cluster/)](./aws/eks-cluster/)
+  * Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the version of addons.
+
 ## [0.1.54]() (2025-01-13)
 
 ### Bug Fixes
