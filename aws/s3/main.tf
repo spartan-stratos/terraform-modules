@@ -138,7 +138,7 @@ resource "aws_s3_bucket_logging" "this" {
 module "access_log_policy" {
   count = length(var.write_access_logs_source_bucket_arns) > 0 ? 1 : 0
 
-  source = "./access-logs"
+  source = "./access-log-policy"
 
   access_logs_bucket_id = local.bucket.id
   source_bucket_arns    = var.write_access_logs_source_bucket_arns
