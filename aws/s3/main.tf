@@ -125,3 +125,12 @@ resource "aws_s3_bucket_acl" "this" {
   bucket = local.bucket.id
   acl    = var.acl
 }
+
+resource "aws_s3_bucket_logging" "this" {
+  count = var.enabled_access_logging ? 1 : 0
+
+  bucket = try(aws_s3_bucket.with_prefix[0].id, aws_s3_bucket.without_prefix[0].id)
+
+  target_bucket = var.access_log_target_bucket_id
+  target_prefix = var.access_log_target_prefix
+}
