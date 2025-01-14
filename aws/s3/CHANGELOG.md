@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.55] (2025-01-14)
+### Features
+* Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the bucket.
+
 ## [0.1.36]() (2024-01-06)
 
 ### Features
