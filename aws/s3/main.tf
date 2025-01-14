@@ -134,3 +134,12 @@ resource "aws_s3_bucket_logging" "this" {
   target_bucket = var.access_log_target_bucket_id
   target_prefix = var.access_log_target_prefix
 }
+
+module "access_log_policy" {
+  count = length(var.write_access_logs_source_bucket_arns) > 0 ? 1 : 0
+
+  source = "./access-logs"
+
+  access_logs_bucket_id = try(aws_s3_bucket.with_prefix[0].id, aws_s3_bucket.without_prefix[0].id)
+  source_bucket_arns    = var.write_access_logs_source_bucket_arns
+}

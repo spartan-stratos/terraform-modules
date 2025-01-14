@@ -177,3 +177,9 @@ variable "access_log_target_bucket_id" {
   type        = string
   default     = null
 }
+
+variable "write_access_logs_source_bucket_arns" {
+  description = "If specified, the bucket will have a policy that allows the specified source buckets to write access logs to it."
+  type        = list(string)
+  default     = []
+}

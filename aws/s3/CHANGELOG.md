@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.55] (2025-01-14)
+## [0.1.56]() (2025-01-14)
+### Features
+* Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
+
+## [0.1.55]() (2025-01-14)
 ### Features
 * Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the bucket.
 
