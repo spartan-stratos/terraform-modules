@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-resource "aws_iam_policy_document" "this" {
+data "aws_iam_policy_document" "this" {
   statement {
     sid    = "S3ServerAccessLogsPolicy"
     effect = "Allow"
@@ -25,6 +25,6 @@ resource "aws_iam_policy_document" "this" {
 }
 
 resource "aws_s3_bucket_policy" "s3_server_write_access_log" {
-  policy = aws_iam_policy_document.this.json
+  policy = data.aws_iam_policy_document.this.json
   bucket = var.access_logs_bucket.s3_bucket_id
 }
