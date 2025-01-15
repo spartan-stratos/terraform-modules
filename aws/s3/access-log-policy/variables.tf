@@ -8,3 +8,8 @@ variable "access_logs_bucket_id" {
   description = "The access logs bucket"
   type        = string
 }
+
+variable "access_logs_bucket_arn" {
+  description = "The arn of the access logs bucket"
+  type        = string
+}

@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "this" {
       identifiers = ["logging.s3.amazonaws.com"]
     }
     actions   = ["s3:PutObject"]
-    resources = toset(["${var.access_logs_bucket_id}/s3-access-logs/*"])
+    resources = toset(["${var.access_logs_bucket_arn}/s3-access-logs/*"])
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
