@@ -8,11 +8,6 @@ variable "environment" {
   type        = string
 }
 
-variable "project_id" {
-  description = "The project ID to create associating resources within."
-  type        = string
-}
-
 variable "namespace" {
   description = "The namespace to create k8s secrets and configmap."
   type        = string

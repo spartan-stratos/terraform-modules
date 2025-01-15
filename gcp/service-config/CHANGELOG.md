@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.56]() (2025-01-15)
+
+### Fixed Bugs
+
+* Fixed a bug where the variable `project_id` is redundant and vulnerable.
+
 ## [0.1.6]() (2024-12-08)
 
 ### Fixed Bugs
