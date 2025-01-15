@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 * AWS S3 [(./aws/s3/)](./aws/s3/)
   * Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
 
+### Bug Fixes
+
 * GPC ServiceConfig [(./gcp/service-config/)](./gcp/service-config/)
   * Fixed a bug where the variable `project_id` is redundant and vulnerable.
 
