@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.57]() (2024-12-05)
+
+### Features
+
+* Add variables `custom_ecr_scanning`, `scan_type`, `scan_frequency` to configure ecr scanning.
+
 ## [0.1.4]() (2024-12-05)
 
 ### Features

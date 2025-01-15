@@ -62,3 +62,18 @@ resource "aws_ecr_lifecycle_policy" "this" {
 
   policy = data.aws_ecr_lifecycle_policy_document.this.json
 }
+
+
+# https://registry.terraform.io/providers/hashicorp/aws/5.83.1/docs/resources/ecr_registry_scanning_configuration
+resource "aws_ecr_registry_scanning_configuration" "this" {
+  scan_type = var.scan_type
+
+  rule {
+    scan_frequency = var.scan_frequency
+    repository_filter {
+      # currently only WILDCARD is supported
+      filter_type = "WILDCARD"
+      filter      = var.name
+    }
+  }
+}
