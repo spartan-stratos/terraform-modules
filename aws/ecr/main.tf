@@ -66,7 +66,7 @@ resource "aws_ecr_lifecycle_policy" "this" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/5.83.1/docs/resources/ecr_registry_scanning_configuration
 resource "aws_ecr_registry_scanning_configuration" "this" {
-  count     = var.custom_ecr_scanning ? 1 : 0
+  count = var.custom_ecr_scanning ? 1 : 0
 
   scan_type = var.scan_type
 
