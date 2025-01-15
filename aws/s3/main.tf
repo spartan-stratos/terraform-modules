@@ -140,6 +140,7 @@ module "access_log_policy" {
 
   source = "./access-log-policy"
 
-  access_logs_bucket_id = local.bucket.id
-  source_bucket_arns    = var.write_access_logs_source_bucket_arns
+  access_logs_bucket_id  = local.bucket.id
+  access_logs_bucket_arn = local.bucket.arn
+  source_bucket_arns     = var.write_access_logs_source_bucket_arns
 }

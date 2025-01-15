@@ -38,14 +38,15 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy_document) | resource |
 | [aws_s3_bucket_policy.s3_server_write_access_log](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_access_logs_bucket_arn"></a> [access\_logs\_bucket\_arn](#input\_access\_logs\_bucket\_arn) | The arn of the access logs bucket | `string` | n/a | yes |
 | <a name="input_access_logs_bucket_id"></a> [access\_logs\_bucket\_id](#input\_access\_logs\_bucket\_id) | The access logs bucket | `string` | n/a | yes |
 | <a name="input_source_bucket_arns"></a> [source\_bucket\_arns](#input\_source\_bucket\_arns) | The source buckets that can write to the access logs bucket | `list(string)` | `[]` | no |
 

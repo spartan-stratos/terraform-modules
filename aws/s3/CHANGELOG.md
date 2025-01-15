@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.57]() (2025-01-15)
+
+### Bug fixes
+* Correct access-log-policy resource (use bucket arn instead of id)
+
 ## [0.1.56]() (2025-01-14)
 ### Features
 * Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
