@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.57]() (2025-01-15)
+
+### Features
+* AWS ECR [(./aws/ecr/)](./aws/ecr/)
+  * Add variables `custom_ecr_scanning`, `scan_type`, `scan_frequency` to configure ecr scanning.
+
+### Bug Fixes
+* AWS S3 [(./aws/s3/)](./aws/s3/)
+  * Correct access-log-policy resource (use bucket arn instead of id)
+
 ## [0.1.56]() (2025-01-15)
 
 ### Features
