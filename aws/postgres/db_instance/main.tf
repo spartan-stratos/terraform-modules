@@ -25,6 +25,7 @@ resource "aws_db_instance" "this" {
   final_snapshot_identifier    = var.final_snapshot_identifier
   skip_final_snapshot          = var.skip_final_snapshot
   copy_tags_to_snapshot        = var.copy_tags_to_snapshot
+  snapshot_identifier          = var.snapshot_identifier
   lifecycle {
     ignore_changes = [
       storage_type,

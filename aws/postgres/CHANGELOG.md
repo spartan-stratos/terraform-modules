@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.56]() (2025-01-15)
+### Features
+
+* Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
+
 ## [0.1.22]() (2024-12-25)
 
 ### Features

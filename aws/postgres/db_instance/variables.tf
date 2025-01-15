@@ -160,3 +160,9 @@ variable "replicate_source_db" {
   type        = string
   default     = null
 }
+
+variable "snapshot_identifier" {
+  description = "Specifies whether or not to create this database from a snapshot"
+  type        = string
+  default     = null
+}
