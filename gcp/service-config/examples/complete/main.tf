@@ -1,7 +1,6 @@
 module "service" {
   source = "../../"
 
-  project_id       = "example-project"
   environment      = "dev"
   name             = "service"
   namespace        = "example"
