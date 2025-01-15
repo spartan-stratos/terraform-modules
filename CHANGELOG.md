@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.1.56]() (2025-01-15)
+
+### Features
 * AWS Postgres [(./aws/postgres/)](./aws/postgres/)
   * Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
 
@@ -12,7 +14,6 @@ All notable changes to this project will be documented in this file.
 * GPC ServiceConfig [(./gcp/service-config/)](./gcp/service-config/)
   * Fixed a bug where the variable `project_id` is redundant and vulnerable.
 
-### Features
 
 ## [0.1.55]() (2025-01-14)
 
