@@ -45,6 +45,12 @@ variable "cidr_blocks" {
   default     = []
 }
 
+variable "ipv6_cidr_blocks" {
+  description = "List of allowed IPv6 CIDR blocks used to define ingress/egress rules for the security groups."
+  type        = list(string)
+  default     = []
+}
+
 # migration purpose
 variable "custom_sg_allow_all_description" {
   description = "Custom description for security group allow all `aws_security_group.allow_all`."
