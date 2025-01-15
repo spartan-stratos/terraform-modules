@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.56]() (2025-01-15)
+* AWS Postgres [(./aws/postgres/)](./aws/postgres/)
+  * Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
+
+* AWS S3 [(./aws/s3/)](./aws/s3/)
+  * Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
+
+* GPC ServiceConfig [(./gcp/service-config/)](./gcp/service-config/)
+  * Fixed a bug where the variable `project_id` is redundant and vulnerable.
+
+### Features
+
 ## [0.1.55]() (2025-01-14)
 
 ### Features
