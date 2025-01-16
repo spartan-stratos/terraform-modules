@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.58]() (2025-01-16)
+
+### Features
+* AWS Security Group: [(./aws/security-group/)](./aws/security-group/)
+  * Add variable to custom ipv6_cidr_blocks of the default security group `allow_all_within_vpc`.
+
 ## [0.1.57]() (2025-01-15)
 
 ### Features
