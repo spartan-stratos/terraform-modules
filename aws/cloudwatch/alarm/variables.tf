@@ -46,6 +46,8 @@ variable "alarms" {
     alb_name            = optional(string)
     target_group_name   = optional(string)
     instance_id         = optional(string)
+    currency            = optional(string)
+    linked_account      = optional(string)
   }))
 }
 

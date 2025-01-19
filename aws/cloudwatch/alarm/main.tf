@@ -19,13 +19,15 @@ resource "aws_cloudwatch_metric_alarm" "this" {
   dimensions = merge(
     {},
     each.value.namespace == "AWS/SQS" ? { QueueName = each.value.queue_name } : {},
-    each.value.namespace == "AWS/ApplicationELB" ?
-    merge(
+    each.value.namespace == "AWS/ApplicationELB" ? merge(
       { LoadBalancer = each.value.alb_name },
       each.value.target_group_name != null ? { TargetGroup = each.value.target_group_name } : {}
-    )
-    : {},
-    each.value.namespace == "AWS/EC2" ? { InstanceId = each.value.instance_id } : {}
+    ) : {},
+    each.value.namespace == "AWS/EC2" ? { InstanceId = each.value.instance_id } : {},
+    each.value.namespace == "AWS/Billing" ? merge(
+      { Currency = each.value.currency },
+      { LinkedAccount = each.value.linked_account }
+    ) : {}
   )
 }
 
