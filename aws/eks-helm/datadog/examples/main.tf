@@ -1,4 +1,3 @@
-
 module "eks_helm_datadog" {
   source = "../"
 
