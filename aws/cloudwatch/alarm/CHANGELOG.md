@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.59]() (2025-01-20)
+
+### Features
+
+* Extended CloudWatch alarm configuration to include `Currency` and `LinkedAccount` dimensions for AWS/Billing namespace.
+
 ## [0.1.33]() (2025-01-02)
 
 ### Feature
