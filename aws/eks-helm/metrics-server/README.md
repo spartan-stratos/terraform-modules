@@ -1,3 +1,26 @@
+# EKS-Helm/Metrics-Server
+
+This module helps install and configure Metrics Server for EKS cluster via Helm chart.
+
+## Usage
+
+### Install Metrics Server
+
+```hcl
+module "eks_helm_datadog" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/metrics-server?ref=v0.1.59"
+
+  helm_release_name  = "metrics-server"
+  namespace          = "kube-system"
+  helm_chart_version = "3.12.2"
+}
+
+```
+
+## Examples
+
+- [Example](./examples/)
+
 <!-- BEGIN_TF_DOCS -->
 
 ## Requirements

@@ -1,6 +1,34 @@
 # EKS-Helm/Datadog
 
-This module help instal and configure Datadog agents for EKS cluster via Helm chart.
+This module helps install and configure Datadog agents for EKS cluster via Helm chart.
+
+## Usage
+
+### Install Datadog
+
+```hcl
+module "eks_helm_datadog" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/datadog?ref=v0.1.59"
+
+  cluster_name    = "my-eks-cluster"
+  namespace       = "datadog"
+  datadog_api_key = "YOUR_SUPER_SECRET_API_KEY"
+  datadog_app_key = "YOUR_SUPER_SECRET_APP_KEY"
+  environment     = "DEV"
+  datadog_site    = "datadoghq.com"
+  datadog_envs = [
+    {
+      name  = "DD_APM_ENABLED"
+      value = "true"
+    }
+  ]
+}
+
+```
+
+## Examples
+
+- [Example](./examples/)
 
 <!-- BEGIN_TF_DOCS -->
 
