@@ -5,8 +5,8 @@ resource "aws_eks_cluster" "master" {
   vpc_config {
     security_group_ids      = concat(var.security_group_ids, tolist([aws_security_group.cluster.id]))
     subnet_ids              = concat(var.private_subnet_ids, var.public_subnet_ids)
-    endpoint_private_access = true
-    endpoint_public_access  = true
+    endpoint_private_access = var.enabled_endpoint_private_access
+    endpoint_public_access  = var.enabled_endpoint_public_access
   }
 
   enabled_cluster_log_types = var.enabled_cluster_log_types
