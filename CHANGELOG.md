@@ -2,52 +2,77 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.59]() (2025-01-21)
+
+### Features
+
+* AWS Cloudwatch Alarm: [(./aws/cloudwatch/alarm/)](./aws/cloudwatch/alarm/)
+    * Extended CloudWatch alarm configuration to include `Currency` and `LinkedAccount` dimensions for AWS/Billing
+      namespace.
+
+* AWS EKS-Cluster: [(./aws/eks-cluster/)](./aws/eks-cluster/)
+    * Add variables `enabled_endpoint_private_access`, `enabled_endpoint_public_access`, `addons_coredns_version` to
+      restrict private access or public access for the Kubernetes API server endpoint.
+
+* AWS EKS-Helm: [(./aws/eks-helm/)](./aws/eks-helm/)
+    * Updated README files to include usage details for installing and configuring EKS Helm modules.
+
+* AWS Github Self-Hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
+    * Initial implementation of Github Actions Self Hosted Runner on AWS EC2
+
 ## [0.1.58]() (2025-01-16)
 
 ### Features
+
 * AWS Security Group: [(./aws/security-group/)](./aws/security-group/)
-  * Add variable to custom ipv6_cidr_blocks of the default security group `allow_all_within_vpc`.
+    * Add variable to custom ipv6_cidr_blocks of the default security group `allow_all_within_vpc`.
 
 ## [0.1.57]() (2025-01-15)
 
 ### Features
+
 * AWS ECR [(./aws/ecr/)](./aws/ecr/)
-  * Add variables `custom_ecr_scanning`, `scan_type`, `scan_frequency` to configure ecr scanning.
+    * Add variables `custom_ecr_scanning`, `scan_type`, `scan_frequency` to configure ecr scanning.
 
 ### Bug Fixes
+
 * AWS S3 [(./aws/s3/)](./aws/s3/)
-  * Correct access-log-policy resource (use bucket arn instead of id)
+    * Correct access-log-policy resource (use bucket arn instead of id)
 
 ## [0.1.56]() (2025-01-15)
 
 ### Features
+
 * AWS Postgres [(./aws/postgres/)](./aws/postgres/)
-  * Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
+    * Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
 
 * AWS S3 [(./aws/s3/)](./aws/s3/)
-  * Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
+    * Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from
+      other services/buckets.
 
 ### Bug Fixes
 
 * GPC ServiceConfig [(./gcp/service-config/)](./gcp/service-config/)
-  * Fixed a bug where the variable `project_id` is redundant and vulnerable.
-
+    * Fixed a bug where the variable `project_id` is redundant and vulnerable.
 
 ## [0.1.55]() (2025-01-14)
 
 ### Features
+
 * AWS S3: [(./aws/s3)](./aws/s3)
-  * Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the bucket.
+    * Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for
+      the bucket.
 
 * AWS EKS-Cluster [(./aws/eks-cluster/)](./aws/eks-cluster/)
-  * Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the version of addons.
+    * Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the
+      version of addons.
 
 ## [0.1.54]() (2025-01-13)
 
 ### Bug Fixes
 
 * AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
-  * Fix `auth_token` is enabled if `transit_encryption_enabled` is true
+    * Fix `auth_token` is enabled if `transit_encryption_enabled` is true
 
 ## [0.1.53]() (2025-01-13)
 
