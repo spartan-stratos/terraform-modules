@@ -217,3 +217,9 @@ variable "enabled_endpoint_public_access" {
   default     = true
   description = "Enable public access for the Kubernetes API server endpoint."
 }
+
+variable "public_access_cidrs" {
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = "List of CIDR blocks allowed for public access to the Kubernetes API server endpoint."
+}

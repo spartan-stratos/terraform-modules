@@ -7,6 +7,7 @@ resource "aws_eks_cluster" "master" {
     subnet_ids              = concat(var.private_subnet_ids, var.public_subnet_ids)
     endpoint_private_access = var.enabled_endpoint_private_access
     endpoint_public_access  = var.enabled_endpoint_public_access
+    public_access_cidrs     = var.public_access_cidrs
   }
 
   enabled_cluster_log_types = var.enabled_cluster_log_types
