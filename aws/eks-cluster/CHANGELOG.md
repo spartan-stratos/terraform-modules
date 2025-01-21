@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.59]() (2025-01-21)
+
+### Features
+* Add variables `enabled_endpoint_private_access`, `enabled_endpoint_public_access`, `addons_coredns_version` to restrict private access or public access for the Kubernetes API server endpoint
+
 ## [0.1.55]() (2025-01-14)
 
 ### Features

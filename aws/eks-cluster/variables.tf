@@ -205,3 +205,21 @@ variable "addons_coredns_version" {
   description = "The version of the CoreDNS addon, latest by default"
   default     = null
 }
+
+variable "enabled_endpoint_private_access" {
+  type        = bool
+  default     = true
+  description = "Enable private access for the Kubernetes API server endpoint."
+}
+
+variable "enabled_endpoint_public_access" {
+  type        = bool
+  default     = true
+  description = "Enable public access for the Kubernetes API server endpoint."
+}
+
+variable "public_access_cidrs" {
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = "List of CIDR blocks allowed for public access to the Kubernetes API server endpoint."
+}
