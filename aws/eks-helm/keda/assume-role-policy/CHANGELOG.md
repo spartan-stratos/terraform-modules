@@ -6,11 +6,4 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Separate the Assume Role Policy to other module
-
-
-## [0.1.59]() (2025-01-22)
-
-### Features
-
 * Init module with all the code

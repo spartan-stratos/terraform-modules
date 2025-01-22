@@ -8,16 +8,12 @@ This Terraform module is used to deploy the Keda Helm chart on an AWS EKS cluste
 
 ```hcl
 module "keda" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/keda?ref=v0.1.59"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/keda?ref=v0.1.60"
 
   oidc_provider = {
     url = "arn:aws:iam::000000000000:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/14BAEE13AC4C24FC396BE87C8DF5XXXX"
     arn = "oidc.eks.us-west-2.amazonaws.com/id/14BAEE13AC4C24FC396BE87C8DF5XXXX"
   }
-
-  assume_role_arns = [
-    "arn:aws:iam::000000000000:role/service-platform-eksPodRole"
-  ]
 }
 
 ```
