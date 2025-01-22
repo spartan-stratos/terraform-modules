@@ -42,16 +42,6 @@ resource "helm_release" "keda" {
 
   values = [local.manifest]
 
-  set {
-    name  = "podIdentity.aws.irsa.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "podIdentity.aws.irsa.roleArn"
-    value = aws_iam_role.keda-operator.arn
-  }
-
   lifecycle {
     ignore_changes = [
       timeout
