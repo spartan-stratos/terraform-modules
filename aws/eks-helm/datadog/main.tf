@@ -2,14 +2,14 @@ locals {
   manifest = <<YAML
 datadog:
   logs:
-    enabled: true
-    containerCollectAll: true
+    enabled: ${var.enabled_logs}
+    containerCollectAll: ${var.enabled_container_collect_all_logs}
 agents:
-  enabled: false
+  enabled: ${var.enabled_agent}
 clusterAgent:
-  enabled: true
+  enabled: ${var.enabled_cluster_agent}
   metricsProvider:
-    enabled: true
+    enabled: ${var.enabled_metric_provider}
   env:
 %{~for env in var.datadog_envs}
     - name: ${env.name}
@@ -17,7 +17,7 @@ clusterAgent:
 %{~endfor~}
   confd:
     http_check.yaml: |-
-      cluster_check: true
+      cluster_check: ${var.enabled_cluster_check}
       init_config:
       instances:
 %{for url in var.http_check_urls}

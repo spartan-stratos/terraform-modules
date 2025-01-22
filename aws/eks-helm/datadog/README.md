@@ -32,7 +32,7 @@ module "eks_helm_datadog" {
 
 <!-- BEGIN_TF_DOCS -->
 
-## Requirements
+# Requirements
 
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
@@ -60,19 +60,25 @@ No modules.
 
 ## Inputs
 
-| Name                                                                                      | Description                                      | Type                                                                             | Default     | Required |
-|-------------------------------------------------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------------|-------------|:--------:|
-| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version)               | The version of the datadog chart                 | `string`                                                                         | `"3.85.0"`  |    no    |
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                  | The EKS cluster name                             | `string`                                                                         | n/a         |   yes    |
-| <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key)       | The datadog api key                              | `string`                                                                         | n/a         |   yes    |
-| <a name="input_datadog_app_key"></a> [datadog\_app\_key](#input\_datadog\_app\_key)       | The datadog app key                              | `string`                                                                         | n/a         |   yes    |
-| <a name="input_datadog_envs"></a> [datadog\_envs](#input\_datadog\_envs)                  | Environment variables for datadog agents         | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]`        |    no    |
-| <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site)                  | The datadog site                                 | `string`                                                                         | n/a         |   yes    |
-| <a name="input_environment"></a> [environment](#input\_environment)                       | Environment where the resources will be created. | `string`                                                                         | n/a         |   yes    |
-| <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name) | The Helm release of the services.                | `string`                                                                         | `"datadog"` |    no    |
-| <a name="input_http_check_urls"></a> [http\_check\_urls](#input\_http\_check\_urls)       | The list of urls for http check                  | `list(string)`                                                                   | `[]`        |    no    |
-| <a name="input_namespace"></a> [namespace](#input\_namespace)                             | The Namespace of the services.                   | `string`                                                                         | `"datadog"` |    no    |
-| <a name="input_timeout"></a> [timeout](#input\_timeout)                                   | Default timeout of datadog                       | `number`                                                                         | `1200`      |    no    |
+| Name                                                                                                                                             | Description                                      | Type                                                                             | Default     | Required |
+|--------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------------|-------------|:--------:|
+| <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version)                                                                      | The version of the datadog chart                 | `string`                                                                         | `"3.88.2"`  |    no    |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                                                                         | The EKS cluster name                             | `string`                                                                         | n/a         |   yes    |
+| <a name="input_datadog_api_key"></a> [datadog\_api\_key](#input\_datadog\_api\_key)                                                              | The datadog api key                              | `string`                                                                         | n/a         |   yes    |
+| <a name="input_datadog_app_key"></a> [datadog\_app\_key](#input\_datadog\_app\_key)                                                              | The datadog app key                              | `string`                                                                         | n/a         |   yes    |
+| <a name="input_datadog_envs"></a> [datadog\_envs](#input\_datadog\_envs)                                                                         | Environment variables for datadog agents         | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]`        |    no    |
+| <a name="input_datadog_site"></a> [datadog\_site](#input\_datadog\_site)                                                                         | The datadog site                                 | `string`                                                                         | n/a         |   yes    |
+| <a name="input_enabled_agent"></a> [enabled\_agent](#input\_enabled\_agent)                                                                      | Toggle to enable or disable the agent.           | `bool`                                                                           | `false`     |    no    |
+| <a name="input_enabled_cluster_agent"></a> [enabled\_cluster\_agent](#input\_enabled\_cluster\_agent)                                            | Toggle to enable or disable the cluster agent.   | `bool`                                                                           | `true`      |    no    |
+| <a name="input_enabled_cluster_check"></a> [enabled\_cluster\_check](#input\_enabled\_cluster\_check)                                            | Toggle to enable or disable the cluster check.   | `bool`                                                                           | `true`      |    no    |
+| <a name="input_enabled_container_collect_all_logs"></a> [enabled\_container\_collect\_all\_logs](#input\_enabled\_container\_collect\_all\_logs) | Toggle to enable or disable the container logs.  | `bool`                                                                           | `true`      |    no    |
+| <a name="input_enabled_logs"></a> [enabled\_logs](#input\_enabled\_logs)                                                                         | Toggle to enable or disable the logs.            | `bool`                                                                           | `true`      |    no    |
+| <a name="input_enabled_metric_provider"></a> [enabled\_metric\_provider](#input\_enabled\_metric\_provider)                                      | Toggle to enable or disable the metric provider. | `bool`                                                                           | `true`      |    no    |
+| <a name="input_environment"></a> [environment](#input\_environment)                                                                              | Environment where the resources will be created. | `string`                                                                         | n/a         |   yes    |
+| <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name)                                                        | The Helm release of the services.                | `string`                                                                         | `"datadog"` |    no    |
+| <a name="input_http_check_urls"></a> [http\_check\_urls](#input\_http\_check\_urls)                                                              | The list of urls for http check                  | `list(string)`                                                                   | `[]`        |    no    |
+| <a name="input_namespace"></a> [namespace](#input\_namespace)                                                                                    | The Namespace of the services.                   | `string`                                                                         | `"datadog"` |    no    |
+| <a name="input_timeout"></a> [timeout](#input\_timeout)                                                                                          | Default timeout of datadog                       | `number`                                                                         | `1200`      |    no    |
 
 ## Outputs
 
