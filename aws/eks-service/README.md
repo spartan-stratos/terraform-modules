@@ -3,20 +3,53 @@
 This module helps configure an 'EKS Service' by creating a correlation set
 of  [Kubernetes and AWS resources](#resources).
 
+```hcl
+module "keda" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-service?ref=v0.1.60"
+
+  cluster_name = "my-eks-cluster"
+  eks_oidc_provider = {
+    arn = "arn:aws:iam::123456789012:oidc-provider/my-eks-cluster-oidc-provider"
+    url = "https://oidc.github.com/id/example-id-1234"
+  }
+  alb_dns = "my-alb-dns"
+  service = {
+    name      = "my-service"
+    namespace = "my-namespace"
+    hostnames = ["my-service.example.com"]
+    config_map = {
+      "HELLO" = "WORLD"
+    }
+    secrets = {
+      "SECRET" = "super-secret"
+    }
+  }
+  route53_zone_id = "my-route53-zone-id"
+  region          = "us-west-2"
+
+  keda_role_arn = null
+}
+```
+
+## Examples
+
+- [Example](./examples/complete/)
+
 <!-- BEGIN_TF_DOCS -->
 
 ## Requirements
 
-| Name                                                                         | Version |
-|------------------------------------------------------------------------------|---------|
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.33 |
+| Name                                                                         | Version   |
+|------------------------------------------------------------------------------|-----------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws)                      | >= 5.75.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.33   |
 
 ## Providers
 
-| Name                                                                   | Version |
-|------------------------------------------------------------------------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)                      | n/a     |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33 |
+| Name                                                                   | Version   |
+|------------------------------------------------------------------------|-----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws)                      | >= 5.75.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33   |
 
 ## Modules
 
@@ -46,6 +79,7 @@ No modules.
 | <a name="input_config_map_env_var_name"></a> [config\_map\_env\_var\_name](#input\_config\_map\_env\_var\_name)         | To specifiy config map env var name                  | `string`                                                                                                                                                                                                                                                                                                                                                       | `null`  |    no    |
 | <a name="input_create_kubernetes_namespace"></a> [create\_kubernetes\_namespace](#input\_create\_kubernetes\_namespace) | To specify whether to create a namespace             | `bool`                                                                                                                                                                                                                                                                                                                                                         | `false` |    no    |
 | <a name="input_eks_oidc_provider"></a> [eks\_oidc\_provider](#input\_eks\_oidc\_provider)                               | The OIDC provider of the EKS cluster                 | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre>                                                                                                                                                                                                                                                                                         | n/a     |   yes    |
+| <a name="input_keda_role_arn"></a> [keda\_role\_arn](#input\_keda\_role\_arn)                                           | To set keda irsa role arn.                           | `string`                                                                                                                                                                                                                                                                                                                                                       | `null`  |    no    |
 | <a name="input_region"></a> [region](#input\_region)                                                                    | Region for getting ALB hosted zone ID                | `string`                                                                                                                                                                                                                                                                                                                                                       | n/a     |   yes    |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                                     | The zone id for adding hostnames for services        | `string`                                                                                                                                                                                                                                                                                                                                                       | n/a     |   yes    |
 | <a name="input_secret_env_var_name"></a> [secret\_env\_var\_name](#input\_secret\_env\_var\_name)                       | To specify secret env var name                       | `string`                                                                                                                                                                                                                                                                                                                                                       | `null`  |    no    |

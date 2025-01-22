@@ -6,9 +6,11 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Separate `Keda` to 2 modules:
+* Separate `keda` to 2 modules:
   * Install `Keda` and `IAM Role` [(./aws/eks-helm/keda/)](./aws/eks-helm/keda/)
   * Attach `assume_role_arns` to `Keda IAM Role Policy` [(./aws/eks-helm/keda/assume-role-policy/)](./aws/eks-helm/keda/assume-role-policy/))
+* Update `eks-service` [(./aws/eks-service/)](./aws/eks-service/)
+  * Add variable `keda_arn` to set keda irsa role arn.
 
 ## [0.1.59]() (2025-01-22)
 

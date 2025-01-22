@@ -53,7 +53,7 @@ No modules.
 | Name                                                                                                    | Description                                                                       | Type           | Default | Required |
 |---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------------|---------|:--------:|
 | <a name="input_assume_role_arns"></a> [assume\_role\_arns](#input\_assume\_role\_arns)                  | A list of ARNs that Keda will use to assume the IAM role to access AWS resources. | `list(string)` | `[]`    |    no    |
-| <a name="input_keda_operator_role_id"></a> [keda\_operator\_role\_id](#input\_keda\_operator\_role\_id) | The ARN of the IAM role that Keda will use to access AWS resources.               | `string`       | n/a     |   yes    |
+| <a name="input_keda_operator_role_id"></a> [keda\_operator\_role\_id](#input\_keda\_operator\_role\_id) | The ID of the IAM role that Keda will use to access AWS resources.                | `string`       | n/a     |   yes    |
 
 ## Outputs
 

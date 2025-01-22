@@ -44,6 +44,21 @@ data "aws_iam_policy_document" "this" {
       ]
     }
   }
+
+  dynamic "statement" {
+    for_each = var.keda_role_arn != null ? [1] : []
+    content {
+      sid    = "AssumeRoleKedaOperator"
+      effect = "Allow"
+      actions = [
+        "sts:AssumeRole",
+      ]
+      principals {
+        type        = "AWS"
+        identifiers = [var.keda_role_arn]
+      }
+    }
+  }
 }
 
 resource "kubernetes_namespace" "this" {

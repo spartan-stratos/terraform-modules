@@ -1,5 +1,5 @@
 module "eks_service" {
-  source = "../"
+  source = "../.."
 
   cluster_name = "my-eks-cluster"
   eks_oidc_provider = {
@@ -20,4 +20,6 @@ module "eks_service" {
   }
   route53_zone_id = "my-route53-zone-id"
   region          = "us-west-2"
+
+  keda_role_arn = null
 }

@@ -55,3 +55,9 @@ variable "create_kubernetes_namespace" {
   type        = bool
   default     = false
 }
+
+variable "keda_role_arn" {
+  description = "To set keda irsa role arn."
+  type        = string
+  default     = null
+}
