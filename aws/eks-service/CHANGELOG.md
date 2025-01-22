@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.60]() (2025-01-22)
+
+### Features
+
+* Add variable `keda_arn` to set keda irsa role arn.
+
+
 ## [0.1.26]() (2024-12-26)
 
 ### Features
