@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file.
 
 * Updated README files to include usage details for installing and configuring EKS Helm modules
 * Custom the Datadog helm chart by using the variables to enable/disable features
-* Add `Keda` terraform module
 
 ## [0.1.22]() (2024-12-25)
 
