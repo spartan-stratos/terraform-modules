@@ -1,6 +1,6 @@
 locals {
   keda_role_arn = var.enabled_aws_irsa ? aws_iam_role.this[0].arn : ""
-  keda_role_id = var.enabled_aws_irsa ? aws_iam_role.this[0].id : null
+  keda_role_id  = var.enabled_aws_irsa ? aws_iam_role.this[0].id : null
 }
 
 data "aws_iam_policy_document" "this" {

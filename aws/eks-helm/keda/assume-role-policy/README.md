@@ -8,9 +8,9 @@ This Terraform module is used to attach the assume role arns to kera-operator ro
 
 ```hcl
 module "keda" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/keda/assume-role-policy?ref=v0.1.59"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/keda/assume-role-policy?ref=v0.1.60"
 
-  keda_operator_role_arn = "arn:aws:iam::000000000000:role/keda-operator"
+  keda_operator_role_id = "keda-operator"
   assume_role_arns = [
     "arn:aws:iam::000000000000:role/service-platform-eksPodRole"
   ]
@@ -50,10 +50,10 @@ No modules.
 
 ## Inputs
 
-| Name                                                                                                       | Description                                                                       | Type           | Default | Required |
-|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------------|---------|:--------:|
-| <a name="input_assume_role_arns"></a> [assume\_role\_arns](#input\_assume\_role\_arns)                     | A list of ARNs that Keda will use to assume the IAM role to access AWS resources. | `list(string)` | `[]`    |    no    |
-| <a name="input_keda_operator_role_arn"></a> [keda\_operator\_role\_arn](#input\_keda\_operator\_role\_arn) | The ARN of the IAM role that Keda will use to access AWS resources.               | `string`       | n/a     |   yes    |
+| Name                                                                                                    | Description                                                                       | Type           | Default | Required |
+|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------------|---------|:--------:|
+| <a name="input_assume_role_arns"></a> [assume\_role\_arns](#input\_assume\_role\_arns)                  | A list of ARNs that Keda will use to assume the IAM role to access AWS resources. | `list(string)` | `[]`    |    no    |
+| <a name="input_keda_operator_role_id"></a> [keda\_operator\_role\_id](#input\_keda\_operator\_role\_id) | The ARN of the IAM role that Keda will use to access AWS resources.               | `string`       | n/a     |   yes    |
 
 ## Outputs
 
