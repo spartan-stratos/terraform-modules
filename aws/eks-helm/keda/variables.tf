@@ -1,7 +1,7 @@
 variable "chart_version" {
   description = "The version of the Keda Helm chart being deployed."
   type        = string
-  default     = "0.2.0"
+  default     = "2.16.1"
 }
 
 variable "helm_release_name" {
