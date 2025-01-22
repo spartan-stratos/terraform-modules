@@ -36,12 +36,6 @@ variable "keda_operator_role_name" {
   default     = "keda-operator"
 }
 
-variable "assume_role_arns" {
-  description = "A list of ARNs that Keda will use to assume the IAM role to access AWS resources."
-  type        = list(string)
-  default     = []
-}
-
 variable "operator_cpu" {
   description = "The amount of CPU resources allocated to the operator."
   type        = string
