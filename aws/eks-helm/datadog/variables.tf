@@ -48,7 +48,7 @@ variable "cluster_name" {
 
 variable "chart_version" {
   type        = string
-  default     = "3.85.0"
+  default     = "3.88.2"
   description = "The version of the datadog chart"
 }
 
@@ -59,4 +59,40 @@ variable "datadog_envs" {
     value = string
   }))
   default = []
+}
+
+variable "enabled_logs" {
+  description = "Toggle to enable or disable the logs."
+  type        = bool
+  default     = true
+}
+
+variable "enabled_container_collect_all_logs" {
+  description = "Toggle to enable or disable the container logs."
+  type        = bool
+  default     = true
+}
+
+variable "enabled_agent" {
+  description = "Toggle to enable or disable the agent."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_cluster_agent" {
+  description = "Toggle to enable or disable the cluster agent."
+  type        = bool
+  default     = true
+}
+
+variable "enabled_metric_provider" {
+  description = "Toggle to enable or disable the metric provider."
+  type        = bool
+  default     = true
+}
+
+variable "enabled_cluster_check" {
+  description = "Toggle to enable or disable the cluster check."
+  type        = bool
+  default     = true
 }
