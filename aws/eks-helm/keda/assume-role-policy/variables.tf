@@ -1,4 +1,4 @@
-variable "keda_operator_role_arn" {
+variable "keda_operator_role_id" {
   description = "The ARN of the IAM role that Keda will use to access AWS resources."
   type        = string
 }
