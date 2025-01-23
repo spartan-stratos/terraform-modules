@@ -8,6 +8,8 @@ resource "aws_launch_template" "this" {
 
   user_data = base64encode(templatefile("${path.module}/scripts/bootstrap.tmpl", { GITHUB_ORG = var.org_name, GITHUB_ACTIONS_RUNNER_REGISTRATION_TOKEN = var.github_actions_runner_registration_token, RUNNER_VERSION = var.runner_version, RUNNER_HOME = var.runner_home, RUNNER_LABELS = var.runner_labels }))
 
+  update_default_version = var.update_default_launch_template_version
+
   tags = {
     Name = "github_runner"
   }
