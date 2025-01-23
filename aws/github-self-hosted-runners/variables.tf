@@ -67,7 +67,7 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "vpc_zone_identifier" {
+variable "subnet_ids" {
   description = "The list of subnets for the EC2 instances of the Auto Scaling Group."
   type        = list(string)
 }

@@ -62,8 +62,8 @@ No modules.
 | <a name="input_runner_labels"></a> [runner\_labels](#input\_runner\_labels) | Labels assigned to the GitHub Runner. | `string` | `"self-hosted,ec2"` | no |
 | <a name="input_runner_version"></a> [runner\_version](#input\_runner\_version) | The version of the GitHub Runner software to be installed. | `string` | `"2.321.0"` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | The list of security group IDs. | `list(string)` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The list of subnets for the EC2 instances of the Auto Scaling Group. | `list(string)` | n/a | yes |
 | <a name="input_update_default_launch_template_version"></a> [update\_default\_launch\_template\_version](#input\_update\_default\_launch\_template\_version) | Whether to update the default version of the launch template. | `bool` | `true` | no |
-| <a name="input_vpc_zone_identifier"></a> [vpc\_zone\_identifier](#input\_vpc\_zone\_identifier) | The list of subnets for the EC2 instances of the Auto Scaling Group. | `list(string)` | n/a | yes |
 
 ## Outputs
 
