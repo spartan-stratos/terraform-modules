@@ -67,7 +67,13 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "vpc_zone_identifier" {
+variable "subnet_ids" {
   description = "The list of subnets for the EC2 instances of the Auto Scaling Group."
   type        = list(string)
+}
+
+variable "update_default_launch_template_version" {
+  description = "Whether to update the default version of the launch template."
+  type        = bool
+  default     = true
 }

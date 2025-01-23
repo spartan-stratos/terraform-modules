@@ -8,6 +8,8 @@ resource "aws_launch_template" "this" {
 
   user_data = base64encode(templatefile("${path.module}/scripts/bootstrap.tmpl", { GITHUB_ORG = var.org_name, GITHUB_ACTIONS_RUNNER_REGISTRATION_TOKEN = var.github_actions_runner_registration_token, RUNNER_VERSION = var.runner_version, RUNNER_HOME = var.runner_home, RUNNER_LABELS = var.runner_labels }))
 
+  update_default_version = var.update_default_launch_template_version
+
   tags = {
     Name = "github_runner"
   }
@@ -20,7 +22,7 @@ resource "aws_autoscaling_group" "this" {
   desired_capacity          = var.desired_capacity
   min_size                  = var.min_size
   max_size                  = var.max_size
-  vpc_zone_identifier       = var.vpc_zone_identifier
+  vpc_zone_identifier       = var.subnet_ids
   launch_template {
     id      = aws_launch_template.this.id
     version = "$Latest"
