@@ -8,7 +8,7 @@ Terraform module which creates resources for managing GitHub Actions Self-Hosted
 
 ```hcl
 module "github_self_host_runner" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/github-self-host-runner?ref=v0.1.59"
+  source = "github.com/spartan-stratos/terraform-modules//aws/github-self-host-runner?ref=v0.1.60"
 
   github_actions_runner_registration_token = "example"
   org_name                                 = "example"
