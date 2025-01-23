@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.60]() (2025-01-21)
+
+### Features
+- Add variable `update_default_launch_template_version` to allowed update the default launch template version automatically (default = true)
+
 ## [0.1.59]() (2025-01-21)
 
 ### Features
