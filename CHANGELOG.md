@@ -5,9 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [0.1.61]() (2025-01-23)
 
 ### Features
-AWS / GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
-- Add variable `update_default_launch_template_version` to allowed update the default launch template version automatically (default = true)
-- Rename variable `vpc_zone_identifier` to `subnet_ids`
+* AWS / GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
+  * Add variable `update_default_launch_template_version` to allowed update the default launch template version automatically (default = true)
+  * Rename variable `vpc_zone_identifier` to `subnet_ids`
 
 ## [0.1.60]() (2025-01-22)
 
