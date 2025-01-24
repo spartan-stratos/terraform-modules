@@ -148,15 +148,6 @@ variable "force_new_deployment" {
   default     = true
 }
 
-variable "shared_data" {
-  description = "Shared data for synchorizing with other modules"
-  type = object({
-    aws_account_id = string
-    dd_agent_image = string
-    dd_site        = string
-  })
-}
-
 variable "additional_iam_policy_arns" {
   description = "Additional policies for ECS task role"
   type        = list(string)
@@ -167,9 +158,4 @@ variable "additional_container_definitions" {
   description = "Custom container definition"
   type        = list(any)
   default     = []
-}
-
-variable "dd_api_key_arn" {
-  description = "DD API key for integrating with Datadog"
-  type        = string
 }
