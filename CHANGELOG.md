@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.62]() (2025-01-24)
+
+### Features
+* AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
+  * Make ssh rule in security group optional and disable by default, var: `allow_remote_ssh_access`
+
+* AWS Cloudwatch/Alarm: [(./aws/cloudwatch/alarm/)](./aws/cloudwatch/alarm/)
+  * Extended CloudWatch alarm configuration to support EC2 AutoScalingGroup
+
+### Bug fixes
+
+* AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
+  * Correct instance id and instance arn output
+
+* AWS ACM: [(./aws/acm/)](./aws/acm/)
+  * Fix `validation_record_fqdns` value in `aws_acm_certificate_validation`.
+
 ## [0.1.61]() (2025-01-23)
 
 ### Features
