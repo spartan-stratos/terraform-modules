@@ -13,7 +13,7 @@ This module will create the components below:
 
 ```hcl
 module "static_website" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/static-website?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/static-website?ref=v0.1.64"
 
   name              = "example"
   bucket_prefix     = "example"
