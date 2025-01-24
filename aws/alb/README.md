@@ -11,12 +11,12 @@ Terraform module which creates external Application Load Balancer resources on A
 
 ```hcl
 module "alb" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/alb?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/alb?ref=v0.1.63"
 
   name              = "example"
   vpc_id            = "vpc-1234567899"
-  public_subnets    = [] 
-  security_groups   = ["sg-1234567899"]
+  public_subnets = []
+  security_groups = ["sg-1234567899"]
   certificate_arn   = ""
   health_check_path = "/health"
   idle_timeout      = 4000
