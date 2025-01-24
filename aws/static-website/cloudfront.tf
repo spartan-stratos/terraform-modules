@@ -1,5 +1,5 @@
 module "cloudfront" {
-  source = "./modules/cloudfront"
+  source = "modulesloudfront"
 
   dns_name                 = var.dns_name
   domain_name              = var.domain_name

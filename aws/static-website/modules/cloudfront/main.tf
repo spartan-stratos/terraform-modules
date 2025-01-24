@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "this" {
     origin_id                = local.s3_origin_id
   }
 
-  aliases = var.distribution_aliases != null ? var.distribution_aliases : ["${var.dns_name}.${var.domain_name}"]
+  aliases = var.distribution_aliases != null ? var.distribution_aliases : [local.dns_name]
 
   enabled         = true
   is_ipv6_enabled = true

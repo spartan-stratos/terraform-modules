@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.64]() (2025-01-24)
+
+### Features
+
+* Update cloudfront module to support root domain.
+
+
 ## [0.1.47]() (2025-01-09)
 
 ### Features

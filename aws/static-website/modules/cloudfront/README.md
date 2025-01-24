@@ -37,18 +37,17 @@ module "cloudfront" {
 - [Example](../../examples/complete/)
 
 <!-- BEGIN_TF_DOCS -->
-
 ## Requirements
 
-| Name                                                                      | Version  |
-|---------------------------------------------------------------------------|----------|
+| Name | Version |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.75  |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.75 |
 
 ## Providers
 
-| Name                                              | Version |
-|---------------------------------------------------|---------|
+| Name | Version |
+|------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
 
 ## Modules
@@ -57,37 +56,36 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                                      | Type        |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
-| [aws_cloudfront_distribution.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution)                   | resource    |
-| [aws_cloudfront_origin_access_control.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control) | resource    |
-| [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record)                                     | resource    |
-| [aws_route53_record.www](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record)                                      | resource    |
-| [aws_s3_bucket_policy.react_app_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy)              | resource    |
-| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)                        | data source |
-| [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket)                                            | data source |
+| Name | Type |
+|------|------|
+| [aws_cloudfront_distribution.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
+| [aws_cloudfront_origin_access_control.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control) | resource |
+| [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_route53_record.www](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
+| [aws_s3_bucket_policy.react_app_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket) | data source |
 
 ## Inputs
 
-| Name                                                                                                           | Description                                                                                    | Type                                                                                                                                                                                                                                                                                                                                                                                           | Default               | Required |
-|----------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|:--------:|
-| <a name="input_distribution_aliases"></a> [distribution\_aliases](#input\_distribution\_aliases)               | List of domain names that associate with the CloudFront distribution.                          | `list(string)`                                                                                                                                                                                                                                                                                                                                                                                 | `null`                |    no    |
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                   | The DNS name for the static website                                                            | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                   |   yes    |
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name)                                          | The domain name for the static website.                                                        | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                   |   yes    |
-| <a name="input_minimum_protocol_version"></a> [minimum\_protocol\_version](#input\_minimum\_protocol\_version) | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `"TLSv1.2_2021"`      |    no    |
-| <a name="input_ordered_cache_behaviors"></a> [ordered\_cache\_behaviors](#input\_ordered\_cache\_behaviors)    | List of ordered cache behaviors with path patterns and settings.                               | <pre>list(object({<br/>    path_pattern     = string<br/>    allowed_methods  = list(string)<br/>    cached_methods   = list(string)<br/>    target_origin_id = string<br/>    query_string     = bool<br/>    cookies_forward  = string<br/>    min_ttl          = number<br/>    default_ttl      = number<br/>    max_ttl          = number<br/>    compress         = bool<br/>  }))</pre> | `[]`                  |    no    |
-| <a name="input_price_class"></a> [price\_class](#input\_price\_class)                                          | The price class for this distribution.                                                         | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `"PriceClass_100"`    |    no    |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                            | Route53 zone id                                                                                | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                   |   yes    |
-| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id)                                     | The origin S3 bucket id                                                                        | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                   |   yes    |
-| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn)                | SSL certificate arn for attaching to the Cloudfront distribution                               | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                   |   yes    |
-| <a name="input_use_www_domain"></a> [use\_www\_domain](#input\_use\_www\_domain)                               | Use www domain                                                                                 | `bool`                                                                                                                                                                                                                                                                                                                                                                                         | `false`               |    no    |
-| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy)       | Determines the protocols that viewers can use to access your CloudFront distribution.          | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `"redirect-to-https"` |    no    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_distribution_aliases"></a> [distribution\_aliases](#input\_distribution\_aliases) | List of domain names that associate with the CloudFront distribution. | `list(string)` | `null` | no |
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name) | The DNS name for the static website | `string` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name for the static website. | `string` | n/a | yes |
+| <a name="input_minimum_protocol_version"></a> [minimum\_protocol\_version](#input\_minimum\_protocol\_version) | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
+| <a name="input_ordered_cache_behaviors"></a> [ordered\_cache\_behaviors](#input\_ordered\_cache\_behaviors) | List of ordered cache behaviors with path patterns and settings. | <pre>list(object({<br/>    path_pattern     = string<br/>    allowed_methods  = list(string)<br/>    cached_methods   = list(string)<br/>    target_origin_id = string<br/>    query_string     = bool<br/>    cookies_forward  = string<br/>    min_ttl          = number<br/>    default_ttl      = number<br/>    max_ttl          = number<br/>    compress         = bool<br/>  }))</pre> | `[]` | no |
+| <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. | `string` | `"PriceClass_100"` | no |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 zone id | `string` | n/a | yes |
+| <a name="input_s3_bucket_id"></a> [s3\_bucket\_id](#input\_s3\_bucket\_id) | The origin S3 bucket id | `string` | n/a | yes |
+| <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn) | SSL certificate arn for attaching to the Cloudfront distribution | `string` | n/a | yes |
+| <a name="input_use_www_domain"></a> [use\_www\_domain](#input\_use\_www\_domain) | Use www domain | `bool` | `false` | no |
+| <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy) | Determines the protocols that viewers can use to access your CloudFront distribution. | `string` | `"redirect-to-https"` | no |
 
 ## Outputs
 
-| Name                                                                          | Description                            |
-|-------------------------------------------------------------------------------|----------------------------------------|
+| Name | Description |
+|------|-------------|
 | <a name="output_cloudfront_id"></a> [cloudfront\_id](#output\_cloudfront\_id) | The Cloudfront ID that hosting the web |
-| <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name)       | n/a                                    |
-
+| <a name="output_domain_name"></a> [domain\_name](#output\_domain\_name) | n/a |
 <!-- END_TF_DOCS -->

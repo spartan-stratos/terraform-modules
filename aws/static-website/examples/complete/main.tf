@@ -1,5 +1,5 @@
 module "static_website" {
-  source = "../../"
+  source = "../../static-website"
 
   name        = "example"
   domain_name = "example.com"
