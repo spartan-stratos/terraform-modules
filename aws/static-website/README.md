@@ -25,19 +25,21 @@ module "static_website" {
   cloudfront_distribution_aliases = ["app.example.com"]
   global_tls_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/abcd1234-efgh-5678-ijkl-9012mnopqrst"
 
-  ordered_cache_behaviors = [{
-    path_pattern           = "/index.html"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id       = "s3_origin_id"
-    query_string           = false
-    cookies_forward        = "none"
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-    compress               = true
-  }]
+  ordered_cache_behaviors = [
+    {
+      path_pattern           = "/index.html"
+      allowed_methods = ["GET", "HEAD", "OPTIONS"]
+      cached_methods = ["GET", "HEAD", "OPTIONS"]
+      target_origin_id       = "s3_origin_id"
+      query_string           = false
+      cookies_forward        = "none"
+      viewer_protocol_policy = "redirect-to-https"
+      min_ttl                = 0
+      default_ttl            = 0
+      max_ttl                = 0
+      compress               = true
+    }
+  ]
 }
 ```
 
@@ -79,7 +81,7 @@ module "static_website" {
 |----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|:--------:|
 | <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix)                                                                  | Overwrite bucket prefix name.                                                                  | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `null`                                                   |    no    |
 | <a name="input_cloudfront_distribution_aliases"></a> [cloudfront\_distribution\_aliases](#input\_cloudfront\_distribution\_aliases)          | List of domain names that is associated with the CloudFront distribution.                      | `list(string)`                                                                                                                                                                                                                                                                                                                                                                                 | `null`                                                   |    no    |
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                                                 | The DNS name for the static website                                                            | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                                                      |   yes    |
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                                                 | The DNS name for the static website                                                            | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `null`                                                   |    no    |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name)                                                                        | The domain name for the static website.                                                        | `string`                                                                                                                                                                                                                                                                                                                                                                                       | n/a                                                      |   yes    |
 | <a name="input_enabled_create_s3"></a> [enabled\_create\_s3](#input\_enabled\_create\_s3)                                                    | The bool value determining whether to create a new S3 bucket                                   | `bool`                                                                                                                                                                                                                                                                                                                                                                                         | n/a                                                      |   yes    |
 | <a name="input_enabled_public_policy"></a> [enabled\_public\_policy](#input\_enabled\_public\_policy)                                        | Enabled create the Public Policy to allow public access to bucket objects.                     | `bool`                                                                                                                                                                                                                                                                                                                                                                                         | `false`                                                  |    no    |
