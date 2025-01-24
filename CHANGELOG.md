@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
   * Correct instance id and instance arn output
 
+* AWS ACM: [(./aws/acm/)](./aws/acm/)
+  * Fix `validation_record_fqdns` value in `aws_acm_certificate_validation`.
+
 ## [0.1.61]() (2025-01-23)
 
 ### Features
