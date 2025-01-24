@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.62]() (2025-01-24)
+
+### Features
+
+* Fix `validation_record_fqdns` value in `aws_acm_certificate_validation`.
+
 ## [0.1.12]() (2024-12-17)
 
 ### Features
