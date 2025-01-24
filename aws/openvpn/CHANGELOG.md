@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.62]() (2025-01-24)
+
+### Feature
+
+* Make ssh rule in security group optional and disable by default, var: `allow_remote_ssh_access`
+
+### Bug fixes
+
+* Correct instance id and instance arn output
+
 ## [0.1.51]() (2025-01-12)
 
 ### Feature

@@ -67,6 +67,8 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secu
 # Allow SSH access to VPN instances
  */
 resource "aws_security_group_rule" "default_ssh_vpn" {
+  count = var.allow_remote_ssh_access ? 1 : 0
+
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
 

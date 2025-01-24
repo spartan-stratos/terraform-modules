@@ -20,4 +20,6 @@ locals {
     route_network_cidrs          = var.route_network_cidrs
     init_script_callback_comment = var.init_script_callback_comment
   }
+
+  instance = var.replace_instance_on_update ? aws_instance.replacable[0] : aws_instance.this[0]
 }

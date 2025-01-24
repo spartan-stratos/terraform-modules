@@ -47,11 +47,11 @@ output "ca_cert" {
 }
 
 output "instance_id" {
-  value       = try(aws_instance.this[0].id, "")
+  value       = local.instance.id
   description = "The ID of the AWS instance."
 }
 
 output "instant_arn" {
-  value       = try(aws_instance.this[0].arn, "")
+  value       = local.instance.arn
   description = "The ARN of the AWS instance."
 }

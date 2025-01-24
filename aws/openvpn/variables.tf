@@ -169,3 +169,9 @@ variable "ec2_public_key" {
   type        = string
   default     = null
 }
+
+variable "allow_remote_ssh_access" {
+  description = "Whether to enable the SSH security group rule to allow remote access."
+  type        = bool
+  default     = false
+}
