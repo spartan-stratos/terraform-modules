@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.63]() (2025-01-24)
+
+### Features
+* AWS ECS Application: [(./aws/ecs-application/)](./aws/ecs-application/)
+  * Refactor and remove Datadog configuration
+
+* AWS ALB: [(./aws/alb/)](./aws/alb/)
+  * Remove unused target group
+  
 ## [0.1.62]() (2025-01-24)
 
 ### Features
