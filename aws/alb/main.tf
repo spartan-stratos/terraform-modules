@@ -17,32 +17,6 @@ resource "aws_lb" "main" {
 }
 
 /*
-aws_alb_target_group provides a HTTP Target Group resource for use with Load Balancer resources.
-https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
-*/
-resource "aws_alb_target_group" "main" {
-  name        = "${var.name}-tg-http"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = var.vpc_id
-  target_type = "ip"
-
-  health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
-    protocol            = "HTTP"
-    matcher             = "200"
-    timeout             = "3"
-    path                = var.health_check_path
-    unhealthy_threshold = "2"
-  }
-
-  tags = merge({
-    Name = "${var.name}-tg-http"
-  }, var.tags)
-}
-
-/*
 aws_alb_listener provides a Load Balancer Listener resource to redirect to https listener.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 */

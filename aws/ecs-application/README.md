@@ -18,13 +18,12 @@ This module will create the components below:
 
 ```hcl
 module "application" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.0"
+  source  = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.63"
 
   name                          = "example-service"
   environment                   = "dev"
   region                        = "us-west-2"
   subnet_ids                    = [] # the subnet objects should be passed
-  security_group_ids            = ["sg-0ea3ae12345678"]
   additional_iam_policy_arns    = []
   container_port                = 8080
   container_cpu                 = 512
@@ -36,34 +35,17 @@ module "application" {
   aws_lb_listener_rule_priority = 100
   container_environment = [
     {
-      name  = "AWS_REGION",
-      value = "us-west-2"
-    },
-    {
-      name  = "LOG_LEVEL",
-      value = "INFO"
-    },
-    {
       name  = "MICRONAUT_ENVIRONMENTS",
       value = "dev"
-    },
-    {
-      name  = "PORT",
-      value = 8080
     }
   ]
   container_secrets = [
     {
       name      = "DB_PASSWORD",
-      valueFrom = "example"
-    },
-    {
-      name      = "DD_API_KEY",
-      valueFrom = "example"
+      valueFrom = "arn:aws:ssm:us-west-2:1234567899:parameter/DB_PASSWORD"
     }
   ]
   container_image           = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:latest"
-  dd_api_key_arn            = "example"
   dns_name                  = "example"
   ecs_cluster_id            = "example-cluster-id"
   ecs_cluster_name          = "example-cluster-name"
@@ -72,16 +54,11 @@ module "application" {
   vpc_id                    = "vpc-0131eae12345678"
   service_desired_count     = 2
   service_max_capacity      = 2
-  shared_data = {
-    aws_account_id = ""
-    dd_agent_image = ""
-    dd_site        = ""
-  }
 
   additional_container_definitions = [
     {
       name        = "api-migration"
-      image       = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:latest-migration"
+      image       = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:migration-latest"
       essential   = false
       cpu         = 10
       memory      = 256
@@ -93,19 +70,10 @@ module "application" {
           "value" : "true"
         }
       ]
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = "example-api-loggroup"
-          awslogs-stream-prefix = "migration"
-          awslogs-region        = "us-west-2"
-        }
-      }
-
       secrets = [
         {
           name      = "DB_PASSWORD"
-          valueFrom = "example"
+          valueFrom = "arn:aws:ssm:us-west-2:1234567899:parameter/DB_PASSWORD"
         }
       ]
     }
@@ -144,9 +112,9 @@ No modules.
 | [aws_appautoscaling_policy.ecs_policy_memory](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy)                                           | resource |
 | [aws_appautoscaling_target.ecs_target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target)                                                  | resource |
 | [aws_cloudwatch_log_group.firelens](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group)                                                      | resource |
-| [aws_cloudwatch_log_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group)                                                          | resource |
-| [aws_ecs_service.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service)                                                                            | resource |
-| [aws_ecs_task_definition.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition)                                                            | resource |
+| [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group)                                                          | resource |
+| [aws_ecs_service.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service)                                                                            | resource |
+| [aws_ecs_task_definition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition)                                                            | resource |
 | [aws_iam_policy.secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)                                                                           | resource |
 | [aws_iam_policy.ses_send_emails](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)                                                                   | resource |
 | [aws_iam_role.task_execution_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                                                   | resource |
@@ -156,10 +124,10 @@ No modules.
 | [aws_iam_role_policy_attachment.ecs_task_execution_role_secrets_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.ecs_task_role_additional_policies_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)      | resource |
 | [aws_iam_role_policy_attachment.ecs_task_role_ses_send_emails_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource |
-| [aws_lb_listener_rule.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule)                                                                  | resource |
-| [aws_lb_target_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group)                                                                    | resource |
-| [aws_route53_record.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record)                                                                      | resource |
-| [aws_security_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)                                                                      | resource |
+| [aws_lb_listener_rule.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule)                                                                  | resource |
+| [aws_lb_target_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group)                                                                    | resource |
+| [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record)                                                                      | resource |
+| [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)                                                                      | resource |
 
 ## Inputs
 

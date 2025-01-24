@@ -29,7 +29,7 @@ module "alb" {
 
 ## Examples
 
-- [Example](./examples/external-alb/).
+- [Example](examples/complete/).
 
 <!-- BEGIN_TF_DOCS -->
 

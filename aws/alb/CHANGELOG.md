@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.63]() (2025-01-24)
+
+### Features
+
+* Remove unused http target group
+
 ## [0.1.4]() (2024-12-05)
 
 ### Features

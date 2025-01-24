@@ -1,16 +1,16 @@
 output "alb_target_group_arn" {
   description = "The ALB ARN of ECS application"
-  value       = aws_lb_target_group.main.arn
+  value       = aws_lb_target_group.this.arn
 }
 
 output "application_domain_name" {
   description = "The domain name of ECS application"
-  value       = aws_route53_record.main.fqdn
+  value       = aws_route53_record.this.fqdn
 }
 
 output "ecs_service_name" {
   description = "The ECS service name"
-  value       = aws_ecs_service.main.name
+  value       = aws_ecs_service.this.name
 }
 
 output "container_definitions" {
