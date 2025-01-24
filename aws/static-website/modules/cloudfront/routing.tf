@@ -1,5 +1,5 @@
 resource "aws_route53_record" "this" {
-  name    = var.dns_name
+  name    = local.dns_name
   zone_id = var.route53_zone_id
   type    = "A"
 
@@ -13,7 +13,7 @@ resource "aws_route53_record" "this" {
 resource "aws_route53_record" "www" {
   count = var.use_www_domain ? 1 : 0
 
-  name    = "www.${var.dns_name}"
+  name    = "www.${local.dns_name}"
   zone_id = var.route53_zone_id
   type    = "A"
 

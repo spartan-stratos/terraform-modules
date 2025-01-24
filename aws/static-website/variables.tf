@@ -1,6 +1,7 @@
 variable "dns_name" {
   description = "The DNS name for the static website"
   type        = string
+  default     = null
 }
 
 variable "domain_name" {
