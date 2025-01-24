@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.62]() (2025-01-24)
+
+### Features
+
+* Extended CloudWatch alarm configuration to support EC2 AutoScalingGroup
+
+
 ## [0.1.59]() (2025-01-20)
 
 ### Features
