@@ -16,12 +16,13 @@ This module will create the components below
 
 ```hcl
 module "eks" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.59"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.65"
 
   region          = "us-west-2"
   environment     = "test"
   cluster_version = "1.28"
-  name = "example"
+  name            = "example"
+  enabled_api_and_config_map = true
 
   # networking
   security_group_ids = []
@@ -47,10 +48,12 @@ module "eks" {
       ]
     }
   }
+
   fargate_timeouts = {
     create = "20m"
     delete = "20m"
   }
+
   custom_namespaces = ["jenkins", "datadog", "service-bot"]
   k8s_core_dns_compute_type = "fargate"
 
@@ -97,6 +100,12 @@ module "eks" {
 
 | Name                                                                                                                                                               | Type        |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| [aws_eks_access_entry.auth_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_entry)                                     | resource    |
+| [aws_eks_access_entry.fargate_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_entry)                               | resource    |
+| [aws_eks_access_entry.node_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_entry)                                     | resource    |
+| [aws_eks_access_policy_association.auth_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_policy_association)           | resource    |
+| [aws_eks_access_policy_association.fargate_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_policy_association)     | resource    |
+| [aws_eks_access_policy_association.node_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_policy_association)           | resource    |
 | [aws_eks_addon.coredns_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon)                                                 | resource    |
 | [aws_eks_addon.coredns_fargate](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon)                                             | resource    |
 | [aws_eks_addon.kube_proxy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon)                                                  | resource    |
@@ -151,8 +160,11 @@ module "eks" {
 | <a name="input_efs_filesystem_name"></a> [efs\_filesystem\_name](#input\_efs\_filesystem\_name)                                         | To specify the name of efs filesystem in case overwrite the default one                           | `string`                                                                                                                                     | `null`                                                                                                             |    no    |
 | <a name="input_efs_lifecycle_policy"></a> [efs\_lifecycle\_policy](#input\_efs\_lifecycle\_policy)                                      | Lifecycle Policy for the EFS Filesystem                                                           | <pre>list(object({<br/>    transition_to_ia                    = string<br/>    transition_to_primary_storage_class = string<br/>  }))</pre> | `[]`                                                                                                               |    no    |
 | <a name="input_efs_storage_class_name"></a> [efs\_storage\_class\_name](#input\_efs\_storage\_class\_name)                              | n/a                                                                                               | `string`                                                                                                                                     | `"efs"`                                                                                                            |    no    |
+| <a name="input_enabled_api"></a> [enabled\_api](#input\_enabled\_api)                                                                   | Enable API authentication                                                                         | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
+| <a name="input_enabled_api_and_config_map"></a> [enabled\_api\_and\_config\_map](#input\_enabled\_api\_and\_config\_map)                | Enable API\_AND\_CONFIG\_MAP authentication                                                       | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
 | <a name="input_enabled_cloudwatch_logging"></a> [enabled\_cloudwatch\_logging](#input\_enabled\_cloudwatch\_logging)                    | Enable logging for Kubernetes Pods through built in EKS Fargate Firelens                          | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
 | <a name="input_enabled_cluster_log_types"></a> [enabled\_cluster\_log\_types](#input\_enabled\_cluster\_log\_types)                     | Enabled logging types for EKS Control Plane                                                       | `list(string)`                                                                                                                               | <pre>[<br/>  "api",<br/>  "audit",<br/>  "authenticator",<br/>  "controllerManager",<br/>  "scheduler"<br/>]</pre> |    no    |
+| <a name="input_enabled_config_map"></a> [enabled\_config\_map](#input\_enabled\_config\_map)                                            | Enable CONFIG\_MAP authentication                                                                 | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
 | <a name="input_enabled_datadog_agent"></a> [enabled\_datadog\_agent](#input\_enabled\_datadog\_agent)                                   | Enable datadog integration RBAC creation                                                          | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
 | <a name="input_enabled_efs"></a> [enabled\_efs](#input\_enabled\_efs)                                                                   | Enable EFS creation for persistence volumes                                                       | `bool`                                                                                                                                       | `false`                                                                                                            |    no    |
 | <a name="input_enabled_endpoint_private_access"></a> [enabled\_endpoint\_private\_access](#input\_enabled\_endpoint\_private\_access)   | Enable private access for the Kubernetes API server endpoint.                                     | `bool`                                                                                                                                       | `true`                                                                                                             |    no    |

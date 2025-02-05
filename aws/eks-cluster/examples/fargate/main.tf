@@ -1,10 +1,11 @@
 module "eks" {
   source = "../../"
 
-  region          = "us-west-2"
-  environment     = "test"
-  cluster_version = "1.28"
-  name            = "example"
+  region                     = "us-west-2"
+  environment                = "test"
+  cluster_version            = "1.28"
+  name                       = "example"
+  enabled_api_and_config_map = true
 
   # networking
   security_group_ids = []
@@ -30,10 +31,12 @@ module "eks" {
       ]
     }
   }
+
   fargate_timeouts = {
     create = "20m"
     delete = "20m"
   }
+
   custom_namespaces         = ["jenkins", "datadog", "service-bot"]
   k8s_core_dns_compute_type = "fargate"
 

@@ -223,3 +223,21 @@ variable "public_access_cidrs" {
   default     = ["0.0.0.0/0"]
   description = "List of CIDR blocks allowed for public access to the Kubernetes API server endpoint."
 }
+
+variable "enabled_config_map" {
+  description = "Enable CONFIG_MAP authentication"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_api" {
+  description = "Enable API authentication"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_api_and_config_map" {
+  description = "Enable API_AND_CONFIG_MAP authentication"
+  type        = bool
+  default     = false
+}

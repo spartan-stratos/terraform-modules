@@ -49,6 +49,7 @@ locals {
 }
 
 resource "kubernetes_config_map_v1_data" "aws_auth" {
+  count = anytrue([var.enabled_api_and_config_map, var.enabled_config_map]) ? 1 : 0
   force = true
 
   metadata {
