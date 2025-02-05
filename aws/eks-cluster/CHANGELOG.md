@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.65]() (2025-02-05)
+
+### Features
+* Add EKS access entries and API/config map authentication options
+
 ## [0.1.59]() (2025-01-21)
 
 ### Features

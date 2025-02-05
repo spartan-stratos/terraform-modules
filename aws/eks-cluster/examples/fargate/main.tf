@@ -5,6 +5,7 @@ module "eks" {
   environment     = "test"
   cluster_version = "1.28"
   name            = "example"
+  enabled_api_and_config_map = true
 
   # networking
   security_group_ids = []
@@ -19,6 +20,16 @@ module "eks" {
   create_fargate_profile     = true
   enabled_datadog_agent      = true
   enabled_efs                = true
+
+  access_entries = {
+    developer = {
+      principal_arn = "arn:aws:iam::<account-id>:role/<role-name>"
+      policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+    }
+    admin = {
+      principal_arn = "arn:aws:iam::<account-id>:role/<role-name>"
+    }
+  }
 
   # fargate
   fargate_profiles = {

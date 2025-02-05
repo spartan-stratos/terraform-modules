@@ -223,3 +223,34 @@ variable "public_access_cidrs" {
   default     = ["0.0.0.0/0"]
   description = "List of CIDR blocks allowed for public access to the Kubernetes API server endpoint."
 }
+
+variable "enabled_config_map" {
+  description = "Enable CONFIG_MAP authentication"
+  type        = bool
+  default     = true
+}
+
+variable "enabled_api" {
+  description = "Enable API authentication"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_api_and_config_map" {
+  description = "Enable API_AND_CONFIG_MAP authentication"
+  type        = bool
+  default     = false
+}
+
+variable "access_entries" {
+  description = "List of access entries for EKS access entries and policies"
+  type = map(object({
+    principal_arn     = string
+    kubernetes_groups = optional(list(string))
+    type              = optional(string)
+    policy_arn        = optional(string)
+    namespaces        = optional(list(string))
+    access_type       = optional(string, "CLUSTER")
+  }))
+  default = {}
+}
