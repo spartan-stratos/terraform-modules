@@ -26,7 +26,7 @@ module "eks-access-entry" {
       trusted_role_arn = [
         "arn:aws:iam::<account-id>:role/aws-reserved/sso.amazonaws.com/us-west-2/SpartanAdministratorAccess"
       ]
-      access_type = "NAMESPACE"
+      access_type = "namespace"
       namespaces  = ["service-platform"]
     }
   }

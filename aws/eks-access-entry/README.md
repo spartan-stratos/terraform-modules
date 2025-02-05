@@ -28,7 +28,7 @@ module "eks-access-entry" {
     }
     developer-role = {
       principal_name = "developer-role"
-      policy_arn     = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterViewPolicy"
+      policy_arn     = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
       trusted_role_arn = [
         "arn:aws:iam::<account-id>:role/aws-reserved/sso.amazonaws.com/us-west-2/SpartanAdministratorAccess"
       ]
@@ -39,7 +39,7 @@ module "eks-access-entry" {
       trusted_role_arn = [
         "arn:aws:iam::<account-id>:role/aws-reserved/sso.amazonaws.com/us-west-2/SpartanAdministratorAccess"
       ]
-      access_type = "NAMESPACE"
+      access_type = "namespace"
       namespaces = ["service-platform"]
     }
   }
@@ -85,7 +85,7 @@ No modules.
 
 | Name                                                                                             | Description                                                                         | Type                                                                                                                                                                                                                                                                                                                                                                            | Default | Required |
 |--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|:--------:|
-| <a name="input_access_entries"></a> [access\_entries](#input\_access\_entries)                   | List of access entries for EKS access entries and policies                          | <pre>map(object({<br/>    principal_name    = string<br/>    kubernetes_groups = optional(list(string))<br/>    type              = optional(string)<br/>    policy_arn        = optional(string)<br/>    namespaces        = optional(list(string))<br/>    trusted_role_arn  = optional(list(string))<br/>    access_type       = optional(string, "CLUSTER")<br/>  }))</pre> | `{}`    |    no    |
+| <a name="input_access_entries"></a> [access\_entries](#input\_access\_entries)                   | List of access entries for EKS access entries and policies                          | <pre>map(object({<br/>    principal_name    = string<br/>    kubernetes_groups = optional(list(string))<br/>    type              = optional(string)<br/>    policy_arn        = optional(string)<br/>    namespaces        = optional(list(string))<br/>    trusted_role_arn  = optional(list(string))<br/>    access_type       = optional(string, "cluster")<br/>  }))</pre> | `{}`    |    no    |
 | <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id)                 | The AWS account ID to which the IAM SSO group will be assigned.                     | `string`                                                                                                                                                                                                                                                                                                                                                                        | n/a     |   yes    |
 | <a name="input_custom_namespaces"></a> [custom\_namespaces](#input\_custom\_namespaces)          | Custom namespaces to be created during initialization                               | `list(string)`                                                                                                                                                                                                                                                                                                                                                                  | `[]`    |    no    |
 | <a name="input_environment"></a> [environment](#input\_environment)                              | The environment name, will be used in components's name.                            | `string`                                                                                                                                                                                                                                                                                                                                                                        | n/a     |   yes    |
