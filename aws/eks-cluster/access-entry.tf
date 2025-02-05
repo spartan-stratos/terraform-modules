@@ -1,26 +1,59 @@
-resource "aws_eks_access_entry" "this" {
-  for_each = { for k, v in var.access_entries : k => v if var.enabled_api || var.enabled_api_and_config_map }
+resource "aws_eks_access_entry" "node_role" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
 
-  cluster_name      = local.cluster_name
-  kubernetes_groups = try(each.value.kubernetes_groups, null)
-  principal_arn     = each.value.principal_arn
-  type              = try(each.value.type, "STANDARD")
+  cluster_name  = local.cluster_name
+  principal_arn = aws_iam_role.node.arn
 }
 
-resource "aws_eks_access_policy_association" "this" {
-  for_each = { for k, v in var.access_entries : k => v if var.enabled_api || var.enabled_api_and_config_map && v.policy_arn != null }
-
-  access_scope {
-    namespaces = try(each.value.namespaces, [])
-    type       = try(each.value.access_type, "CLUSTER")
-  }
+resource "aws_eks_access_policy_association" "node_role" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
 
   cluster_name = local.cluster_name
 
-  policy_arn    = each.value.policy_arn
-  principal_arn = each.value.principal_arn
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = aws_iam_role.node.arn
 
-  depends_on = [
-    aws_eks_access_entry.this,
-  ]
+  access_scope {
+    type = "cluster"
+  }
+}
+
+resource "aws_eks_access_entry" "auth_role" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
+
+  cluster_name  = local.cluster_name
+  principal_arn = aws_iam_role.auth_role.arn
+}
+
+resource "aws_eks_access_policy_association" "auth_role" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
+
+  cluster_name = local.cluster_name
+
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = aws_iam_role.auth_role.arn
+
+  access_scope {
+    type = "cluster"
+  }
+}
+
+resource "aws_eks_access_entry" "fargate_profile" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
+
+  cluster_name  = local.cluster_name
+  principal_arn = module.fargate_profile.fargate_profile_pod_execution_role_arn
+}
+
+resource "aws_eks_access_policy_association" "fargate_profile" {
+  count = var.enabled_api || var.enabled_api_and_config_map ? 1 : 0
+
+  cluster_name = local.cluster_name
+
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  principal_arn = module.fargate_profile.fargate_profile_pod_execution_role_arn
+
+  access_scope {
+    type = "cluster"
+  }
 }
