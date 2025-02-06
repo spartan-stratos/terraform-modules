@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.65]() (2025-02-06)
+
+### Features
+* AWS EKS Cluster: [(./aws/eks-cluster/)](./aws/eks-cluster/)
+  * Add EKS access entries and API/config map authentication options
+  
+* AWS EKS Access Entry: [(./aws/eks-access-entry/)](./aws/eks-access-entry/)
+  * Init EKS access entries module
+
+* AWS GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
+  * Updated configurations to utilize the new custom AMI for launch templates.
+
 ## [0.1.64]() (2025-01-24)
 
 ### Features
