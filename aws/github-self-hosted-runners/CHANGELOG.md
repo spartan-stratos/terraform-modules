@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.66]() (2025-02-06)
+
+### Features
+- Update Terraform installation to allow version suffix support
+
 ## [0.1.65]() (2025-02-06)
 
 ### Features
