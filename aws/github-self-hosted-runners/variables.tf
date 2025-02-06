@@ -100,3 +100,9 @@ variable "custom_ami_name" {
   type        = string
   description = "The name of the custom AMI to use for the EC2 instances."
 }
+
+variable "terraform_version" {
+  type        = string
+  default     = "1.10.1"
+  description = "The version of Terraform to be used."
+}

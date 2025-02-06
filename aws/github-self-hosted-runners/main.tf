@@ -15,7 +15,7 @@ resource "aws_instance" "this" {
   }
 
   user_data_replace_on_change = true
-  user_data                   = base64encode(templatefile("${path.module}/scripts/setup-environment.tmpl", {}))
+  user_data                   = base64encode(templatefile("${path.module}/scripts/setup-environment.tmpl", { TERRAFORM_VERSION = var.terraform_version }))
 
   lifecycle {
     ignore_changes = [
