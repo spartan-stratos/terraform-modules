@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.65]() (2025-02-06)
+
+### Features
+- Introduced resources for creating a custom AMI from a source instance
+- Updated configurations to utilize the new custom AMI for launch templates.
+
 ## [0.1.61]() (2025-01-21)
 
 ### Features
