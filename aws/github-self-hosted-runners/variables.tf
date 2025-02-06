@@ -1,7 +1,13 @@
-variable "ami" {
-  description = "The AMI ID for the EC2 instance used by the GitHub Runner."
+variable "source_ami" {
+  description = "The AMI ID for the EC2 instance used by the source instance."
   type        = string
   default     = "ami-00c257e12d6828491"
+}
+
+variable "source_instance_type" {
+  description = "The EC2 instance type to use by the source instance"
+  type        = string
+  default     = "t3.micro"
 }
 
 variable "instance_type" {
@@ -76,4 +82,21 @@ variable "update_default_launch_template_version" {
   description = "Whether to update the default version of the launch template."
   type        = bool
   default     = true
+}
+
+variable "http_tokens" {
+  type        = string
+  description = "The configuration for the instance metadata service tokens."
+  default     = "optional"
+}
+
+variable "http_endpoint" {
+  type        = string
+  description = "The configuration for enabling or disabling the instance metadata service endpoint."
+  default     = "enabled"
+}
+
+variable "custom_ami_name" {
+  type        = string
+  description = "The name of the custom AMI to use for the EC2 instances."
 }
