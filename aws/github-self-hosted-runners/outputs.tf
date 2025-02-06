@@ -17,3 +17,13 @@ output "aws_autoscaling_group_id" {
   value       = aws_autoscaling_group.this.id
   description = "Auto Scaling Group id."
 }
+
+output "source_instance_id" {
+  value       = aws_instance.this.id
+  description = "The ID of the source instance."
+}
+
+output "custom_ami_id" {
+  value       = aws_ami_from_instance.this.id
+  description = "The ID of the custom AMI created from the source instance."
+}
