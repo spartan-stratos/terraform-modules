@@ -1,7 +1,7 @@
 variable "chart_version" {
   description = "The Jenkins chart version"
   type        = string
-  default     = "5.2.2"
+  default     = "5.8.10"
 }
 
 variable "name" {
@@ -240,10 +240,10 @@ variable "install_plugins" {
   description = "List of Jenkins plugins to install"
   type        = list(string)
   default = [
-    "configuration-as-code:1836.vccda_4a_122a_a_e",
-    "git:5.2.2",
-    "kubernetes:4246.v5a_12b_1fe120e",
-    "workflow-aggregator:596.v8c21c963d92d"
+    "configuration-as-code:1932.v75cb_b_f1b_698d",
+    "git:5.7.0",
+    "kubernetes:4306.vc91e951ea_eb_d",
+    "workflow-aggregator:600.vb_57cdd26fdd7"
   ]
 }
 
@@ -251,29 +251,29 @@ variable "additional_plugins" {
   description = "List of additional Jenkins plugins to install"
   type        = list(string)
   default = [
-    "ansicolor:1.0.4",
-    "blueocean:1.27.13",
-    "config-file-provider:973.vb_a_80ecb_9a_4d0",
-    "credentials:1378.v81ef4269d764",
-    "dark-theme:439.vdef09f81f85e",
-    "extended-read-permission:53.v6499940139e5",
-    "github:1.39.0",
-    "github-oauth:597.ve0c3480fcb_d0",
+    "ansicolor:1.0.6",
+    "blueocean:1.27.16",
+    "config-file-provider:982.vb_a_e458a_37021",
+    "credentials:1408.va_622a_b_f5b_1b_1",
+    "dark-theme:524.vd675b_22b_30cb_",
+    "extended-read-permission:61.vf24570ff3b_e9",
+    "github:1.41.0",
+    "github-oauth:621.v33b_4394dda_4d",
     "google-login:109.v022b_cf87b_e5b_",
-    "http_request:1.18",
-    "job-dsl:1.87",
-    "matrix-auth:3.2.2",
-    "nodejs:1.6.1",
-    "oidc-provider:62.vd67c19f76766",
-    "pipeline-stage-view:2.34",
-    "pipeline-utility-steps:2.16.2",
-    "role-strategy:727.vd344b_eec783d",
-    "slack:722.vd07f1ea_7ff40",
-    "sonar:2.17.2",
-    "sshd:3.330.vc866a_8389b_58",
-    "theme-manager:262.vc57ee4a_eda_5d",
-    "timestamper:1.27",
-    "ws-cleanup:0.46"
+    "http_request:1.20",
+    "job-dsl:1.90",
+    "matrix-auth:3.2.4",
+    "nodejs:1.6.3",
+    "oidc-provider:89.v3dfb_6d89b_618",
+    "pipeline-stage-view:2.35",
+    "pipeline-utility-steps:2.18.0",
+    "role-strategy:756.v978cb_392eb_d3",
+    "slack:761.v2a_8770f0d169",
+    "sonar:2.18",
+    "sshd:3.350.v1080103a_10fd",
+    "theme-manager:278.v2e3c063e42cc",
+    "timestamper:1.28",
+    "ws-cleanup:0.48"
   ]
 }
 
