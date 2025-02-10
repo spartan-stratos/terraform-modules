@@ -15,28 +15,29 @@ Defines a CloudFront Response Headers Policy to enforce security-related HTTP he
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_response_headers_policy#content-type-options
  */
 resource "aws_cloudfront_response_headers_policy" "this" {
-  name = local.cloudfront_response_headers_policy_name
+  count = var.enabled_response_headers_policy ? 1 : 0
+  name  = local.cloudfront_response_headers_policy_name
 
   security_headers_config {
     referrer_policy {
-      override        = false
-      referrer_policy = "strict-origin-when-cross-origin"
+      override        = var.referrer_policy.override
+      referrer_policy = var.referrer_policy.referrer_policy
     }
 
     content_security_policy {
-      content_security_policy = "default-src 'self'; object-src 'none'; script-src 'self' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; font-src 'self' https:; img-src 'self' https: data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
-      override                = false
+      override                = var.content_security_policy.override
+      content_security_policy = var.content_security_policy.content_security_policy
     }
 
     strict_transport_security {
-      access_control_max_age_sec = 63072000 # 2 year
-      include_subdomains         = true
-      preload                    = true
-      override                   = true
+      override                   = var.strict_transport_security.override
+      access_control_max_age_sec = var.strict_transport_security.access_control_max_age_sec
+      include_subdomains         = var.strict_transport_security.include_subdomains
+      preload                    = var.strict_transport_security.preload
     }
 
     content_type_options {
-      override = true
+      override = var.content_type_options.override
     }
   }
 }
@@ -87,7 +88,7 @@ resource "aws_cloudfront_distribution" "this" {
       allowed_methods            = ordered_cache_behavior.value.allowed_methods
       cached_methods             = ordered_cache_behavior.value.cached_methods
       target_origin_id           = ordered_cache_behavior.value.target_origin_id
-      response_headers_policy_id = var.enabled_response_headers_policy ? aws_cloudfront_response_headers_policy.this.id : null
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
 
       forwarded_values {
         query_string = ordered_cache_behavior.value.query_string
