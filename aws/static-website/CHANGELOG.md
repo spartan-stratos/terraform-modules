@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.67]() (2025-02-11)
+
+### Features
+
+* Add response header configuration option for cloud front
+
 ## [0.1.64]() (2025-01-24)
 
 ### Features

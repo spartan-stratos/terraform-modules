@@ -88,7 +88,7 @@ resource "aws_cloudfront_distribution" "this" {
       allowed_methods            = ordered_cache_behavior.value.allowed_methods
       cached_methods             = ordered_cache_behavior.value.cached_methods
       target_origin_id           = ordered_cache_behavior.value.target_origin_id
-      response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
+      response_headers_policy_id = var.enabled_response_headers_policy ? aws_cloudfront_response_headers_policy.this[0].id : null
 
       forwarded_values {
         query_string = ordered_cache_behavior.value.query_string
