@@ -5,6 +5,10 @@ resource "aws_eks_access_entry" "this" {
   kubernetes_groups = try(each.value.kubernetes_groups, null)
   principal_arn     = "arn:aws:iam::${var.aws_account_id}:role/${each.value.principal_name}"
   type              = try(each.value.type, "STANDARD")
+
+  depends_on = [
+    aws_iam_role.this
+  ]
 }
 
 resource "aws_eks_access_policy_association" "this" {

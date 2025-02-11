@@ -2,6 +2,19 @@ resource "aws_eks_cluster" "master" {
   name     = local.cluster_name
   role_arn = aws_iam_role.master.arn
 
+  dynamic "access_config" {
+    for_each = var.enable_access_config ? [1] : []
+
+    content {
+      authentication_mode = (
+        var.enabled_config_map ? "CONFIG_MAP" :
+        var.enabled_api ? "API" :
+        var.enabled_api_and_config_map ? "API_AND_CONFIG_MAP" :
+        "API"
+      )
+    }
+  }
+
   vpc_config {
     security_group_ids      = concat(var.security_group_ids, tolist([aws_security_group.cluster.id]))
     subnet_ids              = concat(var.private_subnet_ids, var.public_subnet_ids)
