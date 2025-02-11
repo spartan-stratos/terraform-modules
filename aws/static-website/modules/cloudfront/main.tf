@@ -11,6 +11,38 @@ resource "aws_cloudfront_origin_access_control" "this" {
 }
 
 /*
+Defines a CloudFront Response Headers Policy to enforce security-related HTTP headers.
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_response_headers_policy#content-type-options
+ */
+resource "aws_cloudfront_response_headers_policy" "this" {
+  count = var.enabled_response_headers_policy ? 1 : 0
+  name  = local.cloudfront_response_headers_policy_name
+
+  security_headers_config {
+    referrer_policy {
+      override        = var.referrer_policy.override
+      referrer_policy = var.referrer_policy.referrer_policy
+    }
+
+    content_security_policy {
+      override                = var.content_security_policy.override
+      content_security_policy = var.content_security_policy.content_security_policy
+    }
+
+    strict_transport_security {
+      override                   = var.strict_transport_security.override
+      access_control_max_age_sec = var.strict_transport_security.access_control_max_age_sec
+      include_subdomains         = var.strict_transport_security.include_subdomains
+      preload                    = var.strict_transport_security.preload
+    }
+
+    content_type_options {
+      override = var.content_type_options.override
+    }
+  }
+}
+
+/*
 aws_cloudfront_distribution defines a CloudFront distribution that serves content from an S3 bucket with custom caching and error responses.
 This configuration includes SSL, origin access control, cache behavior, and custom error pages.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
@@ -52,10 +84,11 @@ resource "aws_cloudfront_distribution" "this" {
   dynamic "ordered_cache_behavior" {
     for_each = var.ordered_cache_behaviors
     content {
-      path_pattern     = ordered_cache_behavior.value.path_pattern
-      allowed_methods  = ordered_cache_behavior.value.allowed_methods
-      cached_methods   = ordered_cache_behavior.value.cached_methods
-      target_origin_id = ordered_cache_behavior.value.target_origin_id
+      path_pattern               = ordered_cache_behavior.value.path_pattern
+      allowed_methods            = ordered_cache_behavior.value.allowed_methods
+      cached_methods             = ordered_cache_behavior.value.cached_methods
+      target_origin_id           = ordered_cache_behavior.value.target_origin_id
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
 
       forwarded_values {
         query_string = ordered_cache_behavior.value.query_string

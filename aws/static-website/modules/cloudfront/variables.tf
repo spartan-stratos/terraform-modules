@@ -70,3 +70,60 @@ variable "ordered_cache_behaviors" {
   }))
   default = []
 }
+
+variable "enabled_response_headers_policy" {
+  description = "Enable response headers policy configuration"
+  type        = bool
+  default     = false
+}
+
+variable "referrer_policy" {
+  description = "Referrer Policy settings"
+  type = object({
+    override        = bool
+    referrer_policy = string
+  })
+  default = {
+    override        = true
+    referrer_policy = "strict-origin-when-cross-origin"
+  }
+}
+
+variable "content_security_policy" {
+  description = "Content Security Policy settings"
+  type = object({
+    override                = bool
+    content_security_policy = string
+  })
+  default = {
+    override                = true
+    content_security_policy = "default-src 'self'; object-src 'none'; script-src 'self' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; font-src 'self' https:; img-src 'self' https: data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+  }
+}
+
+variable "strict_transport_security" {
+  description = "Strict Transport Security settings"
+  type = object({
+    override                   = bool
+    access_control_max_age_sec = number
+    include_subdomains         = bool
+    preload                    = bool
+  })
+  default = {
+    override                   = true
+    access_control_max_age_sec = 63072000 # 2 years
+    include_subdomains         = true
+    preload                    = true
+  }
+}
+
+variable "content_type_options" {
+  description = "Content Type Options settings"
+  type = object({
+    override = bool
+  })
+  default = {
+    override = true
+  }
+}
+
