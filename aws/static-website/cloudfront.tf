@@ -16,4 +16,5 @@ module "cloudfront" {
   referrer_policy                 = var.referrer_policy
   content_security_policy         = var.content_security_policy
   strict_transport_security       = var.strict_transport_security
+  content_type_options            = var.content_type_options
 }

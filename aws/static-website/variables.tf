@@ -145,7 +145,7 @@ variable "referrer_policy" {
     referrer_policy = string
   })
   default = {
-    override        = false
+    override        = true
     referrer_policy = "strict-origin-when-cross-origin"
   }
 }
@@ -157,7 +157,7 @@ variable "content_security_policy" {
     content_security_policy = string
   })
   default = {
-    override                = false
+    override                = true
     content_security_policy = "default-src 'self'; object-src 'none'; script-src 'self' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; font-src 'self' https:; img-src 'self' https: data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
   }
 }

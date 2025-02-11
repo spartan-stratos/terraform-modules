@@ -40,6 +40,29 @@ module "static_website" {
       compress               = true
     }
   ]
+
+  enabled_response_headers_policy = true
+
+  referrer_policy = {
+    override        = true
+    referrer_policy = "strict-origin-when-cross-origin"
+  }
+
+  content_security_policy = {
+    override                = true
+    content_security_policy = "default-src 'self'; object-src 'none'; script-src 'self' 'strict-dynamic' https:; style-src 'self' 'unsafe-inline'; font-src 'self' https:; img-src 'self' https: data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+  }
+
+  strict_transport_security = {
+    override                   = true
+    access_control_max_age_sec = 63072000
+    include_subdomains         = true
+    preload                    = true
+  }
+
+  content_type_options = {
+    override = true
+  }
 }
 ```
 
@@ -100,6 +123,11 @@ module "static_website" {
 | <a name="input_s3_readonly_policy_description"></a> [s3\_readonly\_policy\_description](#input\_s3\_readonly\_policy\_description)           | Description for readonly policy                                                                | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `"Policy that allows reading from the s3 assets bucket"` |    no    |
 | <a name="input_use_www_domain"></a> [use\_www\_domain](#input\_use\_www\_domain)                                                             | Use www domain                                                                                 | `bool`                                                                                                                                                                                                                                                                                                                                                                                         | `false`                                                  |    no    |
 | <a name="input_viewer_protocol_policy"></a> [viewer\_protocol\_policy](#input\_viewer\_protocol\_policy)                                     | Determines the protocols that viewers can use to access your CloudFront distribution.          | `string`                                                                                                                                                                                                                                                                                                                                                                                       | `"redirect-to-https"`                                    |    no    |
+| <a name="input_enabled_response_headers_policy"></a> [enabled\_response\_headers\_policy](#input\_enabled\_response\_headers\_policy) | Enable response headers policy configuration | bool                                                                 | false                                                                                                          | no       |
+| <a name="input_referrer_policy"></a> [referrer\_policy](#input\_referrer\_policy)                         | Referrer Policy settings                                | object({ override = bool, referrer_policy = string })                | { override = true, referrer_policy = "strict-origin-when-cross-origin" }                                      | no       |
+| <a name="input_content_security_policy"></a> [content\_security\_policy](#input\_content\_security\_policy) | Content Security Policy settings                        | object({ override = bool, content_security_policy = string })         | { override = true, content_security_policy = "default-src 'self'; object-src 'none'; script-src 'self' ..." } | no       |
+| <a name="input_strict_transport_security"></a> [strict\_transport\_security](#input\_strict\_transport\_security) | Strict Transport Security settings                      | object({ override = bool, access_control_max_age_sec = number, include_subdomains = bool, preload = bool }) | { override = true, access_control_max_age_sec = 63072000, include_subdomains = true, preload = true }         | no       |
+| <a name="input_content_type_options"></a> [content\_type\_options](#input\_content\_type\_options)        | Content Type Options settings                           | object({ override = bool })                                          | { override = true }                                                                                            | no       |
 
 ## Outputs
 

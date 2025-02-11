@@ -72,7 +72,7 @@ variable "ordered_cache_behaviors" {
 }
 
 variable "enabled_response_headers_policy" {
-  description = "Enable response headers policy configuration."
+  description = "Enable response headers policy configuration"
   type        = bool
   default     = false
 }
