@@ -239,3 +239,9 @@ variable "authentication_mode" {
     error_message = "Invalid value for authentication_mode. Allowed values are CONFIG_MAP, API, or API_AND_CONFIG_MAP."
   }
 }
+
+variable "create_fargate_profile_access_entry" {
+  description = "Create access entry for Fargate profile"
+  type        = bool
+  default     = false
+}
