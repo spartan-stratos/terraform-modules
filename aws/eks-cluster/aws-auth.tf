@@ -49,8 +49,7 @@ locals {
 }
 
 resource "kubernetes_config_map_v1_data" "aws_auth" {
-  count = anytrue([var.enabled_api_and_config_map, var.enabled_config_map]) ? 1 : 0
-  force = true
+  count = var.authentication_mode == "CONFIG_MAP" || var.authentication_mode == "API_AND_CONFIG_MAP" ? 1 : 0
 
   metadata {
     name      = "aws-auth"
@@ -60,10 +59,10 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
   data = local.aws_auth_configmap_data
 
   lifecycle {
-    ignore_changes = [
-      data
-    ]
+    ignore_changes = [data]
   }
+
+  force = true # Ensures the config map is updated forcefully if necessary
 
   depends_on = [
     aws_eks_node_group.default,

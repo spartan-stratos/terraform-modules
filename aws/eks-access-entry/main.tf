@@ -1,10 +1,14 @@
 resource "aws_eks_access_entry" "this" {
   for_each = { for k, v in var.access_entries : k => v }
 
-  cluster_name      = local.cluster_name
+  cluster_name      = var.cluster_name
   kubernetes_groups = try(each.value.kubernetes_groups, null)
   principal_arn     = "arn:aws:iam::${var.aws_account_id}:role/${each.value.principal_name}"
   type              = try(each.value.type, "STANDARD")
+
+  depends_on = [
+    aws_iam_role.this
+  ]
 }
 
 resource "aws_eks_access_policy_association" "this" {
@@ -15,7 +19,7 @@ resource "aws_eks_access_policy_association" "this" {
     type       = try(each.value.access_type, "cluster")
   }
 
-  cluster_name = local.cluster_name
+  cluster_name = var.cluster_name
 
   policy_arn    = each.value.policy_arn
   principal_arn = "arn:aws:iam::${var.aws_account_id}:role/${each.value.principal_name}"

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.66]() (2025-02-12)
+
+### Features
+
+* Updated resources dependency for improved performance
+* Added functionality to skip role creation if the role already exists
+
 ## [0.1.65]() (2025-02-05)
 
 ### Features

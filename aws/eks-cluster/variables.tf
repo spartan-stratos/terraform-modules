@@ -224,20 +224,24 @@ variable "public_access_cidrs" {
   description = "List of CIDR blocks allowed for public access to the Kubernetes API server endpoint."
 }
 
-variable "enabled_config_map" {
-  description = "Enable CONFIG_MAP authentication"
+variable "enable_access_config" {
+  description = "Enable or disable access configuration for the Kubernetes cluster."
   type        = bool
   default     = false
 }
 
-variable "enabled_api" {
-  description = "Enable API authentication"
-  type        = bool
-  default     = false
+variable "authentication_mode" {
+  description = "The authentication mode, allowed values are CONFIG_MAP, API, or API_AND_CONFIG_MAP."
+  type        = string
+  default     = "API"
+  validation {
+    condition     = var.authentication_mode == "CONFIG_MAP" || var.authentication_mode == "API" || var.authentication_mode == "API_AND_CONFIG_MAP"
+    error_message = "Invalid value for authentication_mode. Allowed values are CONFIG_MAP, API, or API_AND_CONFIG_MAP."
+  }
 }
 
-variable "enabled_api_and_config_map" {
-  description = "Enable API_AND_CONFIG_MAP authentication"
+variable "create_fargate_profile_access_entry" {
+  description = "Create access entry for Fargate profile"
   type        = bool
   default     = false
 }
