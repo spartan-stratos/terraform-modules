@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.66]() (2025-02-12)
+
+### Features
+
+* AWS EKS Access Entry: [(./aws/eks-access-entry/)](./aws/eks-access-entry/)
+  * Updated resources dependency for improved performance
+  * Added functionality to skip role creation if the role already exists
+
+* AWS EKS Cluster: [(./aws/eks-cluster/)](./aws/eks-cluster/)
+  * Enable or disable access mode dynamically in the access_config of the EKS cluster resource
+
+* AWS GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
+  * Update Terraform installation to allow version suffix support
+
+* AWS Static Website: [(./aws/static-website/)](./aws/static-website/)
+  * Add response header configuration option for cloud front
+
 ## [0.1.65]() (2025-02-06)
 
 ### Features
