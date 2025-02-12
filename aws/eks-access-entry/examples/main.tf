@@ -1,9 +1,8 @@
 module "eks-access-entry" {
   source = "../"
 
-  environment    = "dev"
-  name           = "example-name"
   aws_account_id = "<account-id>"
+  cluster_name   = "example-cluster"
   access_entries = {
     /*
       Role for cluster administrators with full access to the EKS cluster
