@@ -230,20 +230,12 @@ variable "enable_access_config" {
   default     = false
 }
 
-variable "enabled_config_map" {
-  description = "Enable CONFIG_MAP authentication"
-  type        = bool
-  default     = false
-}
-
-variable "enabled_api" {
-  description = "Enable API authentication"
-  type        = bool
-  default     = true
-}
-
-variable "enabled_api_and_config_map" {
-  description = "Enable API_AND_CONFIG_MAP authentication"
-  type        = bool
-  default     = false
+variable "authentication_mode" {
+  description = "The authentication mode, allowed values are CONFIG_MAP, API, or API_AND_CONFIG_MAP."
+  type        = string
+  default     = "API"
+  validation {
+    condition     = var.authentication_mode == "CONFIG_MAP" || var.authentication_mode == "API" || var.authentication_mode == "API_AND_CONFIG_MAP"
+    error_message = "Invalid value for authentication_mode. Allowed values are CONFIG_MAP, API, or API_AND_CONFIG_MAP."
+  }
 }

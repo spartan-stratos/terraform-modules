@@ -1,11 +1,10 @@
 module "eks" {
   source = "../../"
 
-  region                     = "us-west-2"
-  environment                = "test"
-  cluster_version            = "1.28"
-  name                       = "example"
-  enabled_api_and_config_map = true
+  region          = "us-west-2"
+  environment     = "test"
+  cluster_version = "1.28"
+  name            = "example"
 
   # networking
   security_group_ids = []

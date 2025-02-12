@@ -6,12 +6,7 @@ resource "aws_eks_cluster" "master" {
     for_each = var.enable_access_config ? [1] : []
 
     content {
-      authentication_mode = (
-        var.enabled_config_map ? "CONFIG_MAP" :
-        var.enabled_api ? "API" :
-        var.enabled_api_and_config_map ? "API_AND_CONFIG_MAP" :
-        "API"
-      )
+      authentication_mode = var.authentication_mode
     }
   }
 
