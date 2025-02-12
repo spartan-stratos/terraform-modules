@@ -227,7 +227,7 @@ variable "public_access_cidrs" {
 variable "enable_access_config" {
   description = "Enable or disable access configuration for the Kubernetes cluster."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "enabled_config_map" {
