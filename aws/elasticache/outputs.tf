@@ -17,3 +17,7 @@ output "elasticache_replication_group_port" {
   description = "The port on which the ElastiCache replication group is accessible."
   value       = aws_elasticache_replication_group.this.port
 }
+
+output "host" {
+  value = aws_elasticache_replication_group.this.configuration_endpoint_address
+}
