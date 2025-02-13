@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.67]() (2024-02-13)
+### Features
+* Add output `elasticache_configuration_endpoint_address`.
+
 ## [0.1.24]() (2024-12-26)
 ### Features
 * Add output `elasticache_replication_group_configuration_endpoint_address`.

@@ -72,4 +72,5 @@ No modules.
 | <a name="output_elasticache_replication_group_port"></a> [elasticache\_replication\_group\_port](#output\_elasticache\_replication\_group\_port) | The port on which the ElastiCache replication group is accessible. |
 | <a name="output_elasticache_replication_group_primary_endpoint_address"></a> [elasticache\_replication\_group\_primary\_endpoint\_address](#output\_elasticache\_replication\_group\_primary\_endpoint\_address) | The primary endpoint address of the ElastiCache replication group. |
 | <a name="output_elasticache_replication_group_reader_endpoint_address"></a> [elasticache\_replication\_group\_reader\_endpoint\_address](#output\_elasticache\_replication\_group\_reader\_endpoint\_address) | The reader endpoint address of the ElastiCache replication group. |
+| <a name="output_host"></a> [host](#output\_host) | n/a |
 <!-- END_TF_DOCS -->
