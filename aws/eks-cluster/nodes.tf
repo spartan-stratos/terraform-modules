@@ -14,5 +14,5 @@ module "eks_managed_node_group" {
   instance_types = each.value.instance_types
   capacity_type  = "ON_DEMAND"
 
-  taints = each.value.taint
+  taint = each.value.taint
 }
