@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.66]() (2025-02-12)
+
+### Features
+* Enable or disable access mode dynamically in the access_config of the EKS cluster resource
+
 ## [0.1.65]() (2025-02-05)
 
 ### Features

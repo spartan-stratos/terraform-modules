@@ -1,13 +1,3 @@
-variable "environment" {
-  type        = string
-  description = "The environment name, will be used in components's name."
-}
-
-variable "name" {
-  type        = string
-  description = "The prefix name that will be used in cluster and components's name."
-}
-
 variable "aws_account_id" {
   description = "The AWS account ID to which the IAM SSO group will be assigned."
   type        = string
@@ -43,4 +33,9 @@ variable "permissions_boundary" {
   description = "If provided, all IAM roles will be created with this permissions boundary attached."
   type        = string
   default     = null
+}
+
+variable "cluster_name" {
+  description = "The name of the EKS cluster."
+  type        = string
 }

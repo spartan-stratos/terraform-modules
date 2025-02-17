@@ -2,66 +2,97 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.67]() (2025-02-17)
+
+### Features
+
+* AWS ECS Application: [(./aws/ecs-application/)](./aws/ecs-application/)
+    * Add flag `assign_public_ip`
+
+## [0.1.66]() (2025-02-12)
+
+### Features
+
+* AWS EKS Access Entry: [(./aws/eks-access-entry/)](./aws/eks-access-entry/)
+    * Updated resources dependency for improved performance
+    * Added functionality to skip role creation if the role already exists
+
+* AWS EKS Cluster: [(./aws/eks-cluster/)](./aws/eks-cluster/)
+    * Enable or disable access mode dynamically in the access_config of the EKS cluster resource
+
+* AWS GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
+    * Update Terraform installation to allow version suffix support
+
+* AWS Static Website: [(./aws/static-website/)](./aws/static-website/)
+    * Add response header configuration option for cloud front
+
 ## [0.1.65]() (2025-02-06)
 
 ### Features
+
 * AWS EKS Cluster: [(./aws/eks-cluster/)](./aws/eks-cluster/)
-  * Add EKS access entries and API/config map authentication options
-  
+    * Add EKS access entries and API/config map authentication options
+
 * AWS EKS Access Entry: [(./aws/eks-access-entry/)](./aws/eks-access-entry/)
-  * Init EKS access entries module
+    * Init EKS access entries module
 
 * AWS GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
-  * Updated configurations to utilize the new custom AMI for launch templates.
+    * Updated configurations to utilize the new custom AMI for launch templates.
 
 ## [0.1.64]() (2025-01-24)
 
 ### Features
+
 * AWS Static website: [(./aws/static-website/)](./aws/static-website/)
-  * Allow to create the website with root domain
-  
+    * Allow to create the website with root domain
+
 ## [0.1.63]() (2025-01-24)
 
 ### Features
+
 * AWS ECS Application: [(./aws/ecs-application/)](./aws/ecs-application/)
-  * Refactor and remove Datadog configuration
+    * Refactor and remove Datadog configuration
 
 * AWS ALB: [(./aws/alb/)](./aws/alb/)
-  * Remove unused target group
-  
+    * Remove unused target group
+
 ## [0.1.62]() (2025-01-24)
 
 ### Features
+
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
-  * Make ssh rule in security group optional and disable by default, var: `allow_remote_ssh_access`
+    * Make ssh rule in security group optional and disable by default, var: `allow_remote_ssh_access`
 
 * AWS Cloudwatch/Alarm: [(./aws/cloudwatch/alarm/)](./aws/cloudwatch/alarm/)
-  * Extended CloudWatch alarm configuration to support EC2 AutoScalingGroup
+    * Extended CloudWatch alarm configuration to support EC2 AutoScalingGroup
 
 ### Bug fixes
 
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
-  * Correct instance id and instance arn output
+    * Correct instance id and instance arn output
 
 * AWS ACM: [(./aws/acm/)](./aws/acm/)
-  * Fix `validation_record_fqdns` value in `aws_acm_certificate_validation`.
+    * Fix `validation_record_fqdns` value in `aws_acm_certificate_validation`.
 
 ## [0.1.61]() (2025-01-23)
 
 ### Features
+
 * AWS / GitHub Self-hosted Runner: [(./aws/github-self-hosted-runners/)](./aws/github-self-hosted-runners/)
-  * Add variable `update_default_launch_template_version` to allowed update the default launch template version automatically (default = true)
-  * Rename variable `vpc_zone_identifier` to `subnet_ids`
+    * Add variable `update_default_launch_template_version` to allowed update the default launch template version
+      automatically (default = true)
+    * Rename variable `vpc_zone_identifier` to `subnet_ids`
 
 ## [0.1.60]() (2025-01-22)
 
 ### Features
 
 * Separate `keda` to 2 modules:
-  * Install `Keda` and `IAM Role` [(./aws/eks-helm/keda/)](./aws/eks-helm/keda/)
-  * Attach `assume_role_arns` to `Keda IAM Role Policy` [(./aws/eks-helm/keda/assume-role-policy/)](./aws/eks-helm/keda/assume-role-policy/))
+    * Install `Keda` and `IAM Role` [(./aws/eks-helm/keda/)](./aws/eks-helm/keda/)
+    * Attach `assume_role_arns` to
+      `Keda IAM Role Policy` [(./aws/eks-helm/keda/assume-role-policy/)](./aws/eks-helm/keda/assume-role-policy/))
 * Update `eks-service` [(./aws/eks-service/)](./aws/eks-service/)
-  * Add variable `keda_arn` to set keda irsa role arn.
+    * Add variable `keda_arn` to set keda irsa role arn.
 
 ## [0.1.59]() (2025-01-22)
 
