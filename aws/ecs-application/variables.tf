@@ -159,3 +159,9 @@ variable "additional_container_definitions" {
   type        = list(any)
   default     = []
 }
+
+variable "assign_public_ip" {
+  description = "Enable to assign the public ip to the tasks"
+  type        = bool
+  default     = false
+}
