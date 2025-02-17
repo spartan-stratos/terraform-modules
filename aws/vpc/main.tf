@@ -68,7 +68,8 @@ resource "aws_subnet" "private" {
   availability_zone = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
 
   tags = {
-    Name = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
+    Name                                        = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 

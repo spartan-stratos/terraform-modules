@@ -53,3 +53,9 @@ variable "create_private_database_subnet_group" {
   type        = bool
   default     = false
 }
+
+variable "cluster_name" {
+  description = "Name of associated EKS cluster"
+  type        = string
+  default     = null
+}

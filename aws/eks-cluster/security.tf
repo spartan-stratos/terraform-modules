@@ -23,7 +23,6 @@ resource "aws_security_group" "cluster" {
     cidr_blocks = [var.vpc_cidr]
   }
 
-
   tags = {
     "Name"                                        = "${local.cluster_name}-node"
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"

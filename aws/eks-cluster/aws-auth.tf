@@ -66,7 +66,7 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
   }
 
   depends_on = [
-    aws_eks_node_group.default,
+    module.eks_managed_node_group,
     module.fargate_profile
   ]
 }

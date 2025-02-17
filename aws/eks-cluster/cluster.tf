@@ -15,6 +15,7 @@ resource "aws_eks_cluster" "master" {
   version = var.cluster_version
 
   tags = {
-    "karpenter.sh/discovery" = local.cluster_name
+    "karpenter.sh/discovery"                      = local.cluster_name
+    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
   }
 }
