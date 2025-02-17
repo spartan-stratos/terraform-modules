@@ -87,7 +87,7 @@ module "application" {
 
 <!-- BEGIN_TF_DOCS -->
 
-## Requirements
+# Requirements
 
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
@@ -141,6 +141,7 @@ No modules.
 | <a name="input_alb_dns_name"></a> [alb\_dns\_name](#input\_alb\_dns\_name)                                                             | DNS name of the Application Load Balancer                         | `string`                                                                                 | n/a         |   yes    |
 | <a name="input_alb_security_groups"></a> [alb\_security\_groups](#input\_alb\_security\_groups)                                        | List of security group IDs of the ALB                             | `list(string)`                                                                           | n/a         |   yes    |
 | <a name="input_alb_zone_id"></a> [alb\_zone\_id](#input\_alb\_zone\_id)                                                                | Hosted zone id of the ALB                                         | `string`                                                                                 | n/a         |   yes    |
+| <a name="input_assign_public_ip"></a> [assign\_public\_ip](#input\_assign\_public\_ip)                                                 | Enable to assign the public ip to the tasks                       | `bool`                                                                                   | `false`     |    no    |
 | <a name="input_aws_lb_listener_arn"></a> [aws\_lb\_listener\_arn](#input\_aws\_lb\_listener\_arn)                                      | ARN of the ALB                                                    | `string`                                                                                 | n/a         |   yes    |
 | <a name="input_aws_lb_listener_rule_priority"></a> [aws\_lb\_listener\_rule\_priority](#input\_aws\_lb\_listener\_rule\_priority)      | AWS LB listener rule's priority                                   | `number`                                                                                 | `100`       |    no    |
 | <a name="input_container_cpu"></a> [container\_cpu](#input\_container\_cpu)                                                            | The number of cpu units used by the task                          | `number`                                                                                 | `512`       |    no    |

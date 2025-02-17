@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.64]() (2025-02-17)
+
+### Features
+
+* Add flag `assign_public_ip`
+
 ## [0.1.63]() (2025-01-24)
 
 ### Features
