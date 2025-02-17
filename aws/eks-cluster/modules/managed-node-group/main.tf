@@ -38,7 +38,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   dynamic "taint" {
-    for_each = var.taints != null ? [var.taints] : []
+    for_each = var.taint != null ? [var.taint] : []
 
     content {
       key    = taint.value.key

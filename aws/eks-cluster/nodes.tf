@@ -1,5 +1,5 @@
 module "eks_managed_node_group" {
-  source = "./modules/managed_node_group"
+  source = "./modules/managed-node-group"
 
   for_each = var.node_groups
 
