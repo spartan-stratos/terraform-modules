@@ -136,7 +136,7 @@ variable "efs_filesystem_name" {
 
 variable "node_groups" {
   description = "Key-value mapping of Kubernetes node groups attributes"
-  default     = null
+  default     = {}
   type = map(object({
     node_group_name = string
     disk_size       = number

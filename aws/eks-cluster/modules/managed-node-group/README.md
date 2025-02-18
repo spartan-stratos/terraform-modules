@@ -38,7 +38,7 @@ module "mng" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.2 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.83 |
 
 ## Providers
@@ -104,6 +104,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_mng"></a> [mng](#output\_mng) | n/a |
+| <a name="output_managed_node_group"></a> [managed\_node\_group](#output\_managed\_node\_group) | n/a |
 | <a name="output_node_role_arn"></a> [node\_role\_arn](#output\_node\_role\_arn) | n/a |
 <!-- END_TF_DOCS -->

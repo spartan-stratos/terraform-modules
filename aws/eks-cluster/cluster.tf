@@ -23,7 +23,7 @@ resource "aws_eks_cluster" "master" {
   version = var.cluster_version
 
   tags = merge(
-    var.node_groups != null ? {
+    var.node_groups == null ? {
       "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     } : {},
     var.enabled_karpenter ? {

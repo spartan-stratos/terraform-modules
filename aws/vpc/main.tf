@@ -69,7 +69,7 @@ resource "aws_subnet" "private" {
 
   tags = merge(
     {
-      Name                                        = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
+      Name = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
     },
     var.create_mng ? {
       "kubernetes.io/cluster/${var.cluster_name}" = "shared"
