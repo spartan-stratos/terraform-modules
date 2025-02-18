@@ -59,3 +59,9 @@ variable "cluster_name" {
   type        = string
   default     = null
 }
+
+variable "create_mng" {
+  description = "Whether Managed Node Groups are created in this VPC"
+  type        = bool
+  default     = false
+}

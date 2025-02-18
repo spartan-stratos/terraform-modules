@@ -67,10 +67,14 @@ resource "aws_subnet" "private" {
   cidr_block        = var.create_custom_subnets ? element(var.custom_private_subnets, count.index) : cidrsubnet(local.private_cidr_blocks, 8, count.index)
   availability_zone = "${var.region}${element(var.availability_zone_postfixes, count.index)}"
 
-  tags = {
-    Name                                        = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  }
+  tags = merge(
+    {
+      Name                                        = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
+    },
+    var.create_mng ? {
+      "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    } : {}
+  )
 }
 
 /*

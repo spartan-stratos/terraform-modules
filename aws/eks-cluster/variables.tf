@@ -136,7 +136,7 @@ variable "efs_filesystem_name" {
 
 variable "node_groups" {
   description = "Key-value mapping of Kubernetes node groups attributes"
-  default     = {}
+  default     = null
   type = map(object({
     node_group_name = string
     disk_size       = number
@@ -268,6 +268,12 @@ variable "authentication_mode" {
 
 variable "create_fargate_profile_access_entry" {
   description = "Create access entry for Fargate profile"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_karpenter" {
+  description = "Whether to integrate Karpenter to cluster"
   type        = bool
   default     = false
 }
