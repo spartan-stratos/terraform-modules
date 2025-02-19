@@ -31,5 +31,4 @@ module "eks_helm_jenkins" {
     executor = ["spartan-leader"]
     viewer   = ["spartan-member"]
   }
-  github_credential_id = "github-credentials"
 }

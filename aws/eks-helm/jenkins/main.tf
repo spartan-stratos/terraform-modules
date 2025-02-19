@@ -56,7 +56,7 @@ controller:
                      appID: "$${GITHUB_APP_ID}"
                      description: "GitHub app"
                      privateKey: "$${GITHUB_APP_KEY}"
-                     id: "${var.github_credential_id}"
+                     id: "${var.github_app_credential_id}"
                      scope: GLOBAL
                   - idTokenFile:
                       audience: "sts.amazonaws.com"
