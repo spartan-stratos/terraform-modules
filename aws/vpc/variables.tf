@@ -54,10 +54,10 @@ variable "create_private_database_subnet_group" {
   default     = false
 }
 
-variable "cluster_name" {
-  description = "Name of associated EKS cluster"
-  type        = string
-  default     = null
+variable "cluster_names" {
+  description = "List of EKS cluster names within with VPC"
+  type        = list(string)
+  default     = []
 }
 
 variable "create_mng" {

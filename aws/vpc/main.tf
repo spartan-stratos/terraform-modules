@@ -72,7 +72,7 @@ resource "aws_subnet" "private" {
       Name = "${var.name}-private-subnet-${format("%03d", count.index + 1)}"
     },
     var.create_mng ? {
-      "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+      for cluster in var.cluster_names : "kubernetes.io/cluster/${cluster}" => "shared"
     } : {}
   )
 }
