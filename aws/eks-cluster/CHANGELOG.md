@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.68]() (2025-02-19)
+
+### Features
+* Add Managed Node Group module
+* Update default cluster_version to `1.32`
+* Add tag for Managed Node Group to cluster and security group
+* Add Managed Node Group role ARNs to `aws-auth` configmap
+
+
 ## [0.1.66]() (2025-02-12)
 
 ### Features
