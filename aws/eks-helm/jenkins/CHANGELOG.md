@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.67]() (2025-02-19)
+
+### Changes
+* Create the credential using github_app_credential_id instead of gihub_credential_id
+* Remove unused input `gihub_credential_id`
+
 ## [0.1.59]() (2025-01-20)
 
 ### Features
