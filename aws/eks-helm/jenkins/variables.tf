@@ -19,11 +19,6 @@ variable "github_org_display_name" {
   type        = string
 }
 
-variable "github_credential_id" {
-  description = "GitHub credentials key for jenkins"
-  type        = string
-}
-
 variable "github_app_oauth_client_id" {
   description = "The Client ID of Spartan SSO"
   type        = string
