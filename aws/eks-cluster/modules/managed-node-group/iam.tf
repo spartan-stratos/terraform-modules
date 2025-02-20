@@ -2,14 +2,12 @@ locals {
   iam_role_name          = coalesce(var.iam_role_name, "${var.name}-eks-node-group")
   iam_role_policy_prefix = "arn:${data.aws_partition.current.partition}:iam::aws:policy"
 
-  eks_worker_node_policy                  = "${local.iam_role_policy_prefix}/AmazonEKSWorkerNodePolicy"
-  ec2_container_registry_read_only_policy = "${local.iam_role_policy_prefix}/AmazonEC2ContainerRegistryReadOnly"
-  ipv4_cni_policy = { for k, v in {
-    AmazonEKS_CNI_Policy = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_Policy"
-  } : k => v if var.iam_role_attach_cni_policy && var.cluster_ip_family == "ipv4" }
-  ipv6_cni_policy = { for k, v in {
-    AmazonEKS_CNI_IPv6_Policy = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:policy/AmazonEKS_CNI_IPv6_Policy"
-  } : k => v if var.iam_role_attach_cni_policy && var.cluster_ip_family == "ipv6" }
+  iam_role_policies = {
+    eks_worker_node_policy                  = "${local.iam_role_policy_prefix}/AmazonEKSWorkerNodePolicy"
+    ec2_container_registry_read_only_policy = "${local.iam_role_policy_prefix}/AmazonEC2ContainerRegistryReadOnly"
+    ipv4_cni_policy                         = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_Policy"
+    ipv6_cni_policy                         = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_IPv6_Policy"
+  }
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
@@ -40,10 +38,7 @@ resource "aws_iam_role" "this" {
 # Policies attached ref https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_node_group
 resource "aws_iam_role_policy_attachment" "this" {
   for_each = { for k, v in merge(
-    local.eks_worker_node_policy,
-    local.ec2_container_registry_read_only_policy,
-    local.ipv4_cni_policy,
-    local.ipv6_cni_policy,
+    local.iam_role_policies,
     var.iam_role_additional_policies
   ) : k => v }
 
