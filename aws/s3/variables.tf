@@ -109,6 +109,20 @@ variable "acl" {
   default     = "private"
 }
 
+variable "read_write_actions" {
+  description = "Read write policy actions"
+  type        = list(string)
+  default = [
+    "s3:DeleteObject",
+    "s3:GetObject",
+    "s3:GetObjectAcl",
+    "s3:ListBucket",
+    "s3:ObjectOwnerOverrideToBucketOwner",
+    "s3:PutObject",
+    "s3:PutObjectAcl"
+  ]
+}
+
 # avoid recreating policies and their dependent resources during migration
 variable "read_write_policy_description" {
   description = "Description for read write policy"
