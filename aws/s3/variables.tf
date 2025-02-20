@@ -109,6 +109,12 @@ variable "acl" {
   default     = "private"
 }
 
+variable "addtional_actions" {
+  description = "Additional actions for read_write policy"
+  type        = list(string)
+  default     = []
+}
+
 # avoid recreating policies and their dependent resources during migration
 variable "read_write_policy_description" {
   description = "Description for read write policy"

@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "read_write_policy" {
   count = var.enabled_read_write_policy ? 1 : 0
   statement {
     effect = "Allow"
-    actions = [
+    actions = flatten(concat([
       "s3:DeleteObject",
       "s3:GetObject",
       "s3:GetObjectAcl",
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "read_write_policy" {
       "s3:ObjectOwnerOverrideToBucketOwner",
       "s3:PutObject",
       "s3:PutObjectAcl"
-    ]
+    ], var.addtional_actions))
     resources = [
       local.bucket.arn,
       "${local.bucket.arn}/*"

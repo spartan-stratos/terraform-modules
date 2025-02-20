@@ -72,6 +72,7 @@ module "s3" {
 | <a name="input_access_log_target_bucket_id"></a> [access\_log\_target\_bucket\_id](#input\_access\_log\_target\_bucket\_id) | The bucket ID to store the access logs | `string` | `null` | no |
 | <a name="input_access_log_target_prefix"></a> [access\_log\_target\_prefix](#input\_access\_log\_target\_prefix) | The target prefix for the access logs | `string` | `null` | no |
 | <a name="input_acl"></a> [acl](#input\_acl) | Canned ACL to apply to the bucket. Support private and public-read. | `string` | `"private"` | no |
+| <a name="input_additional_actions"></a> [additional\_actions](#input\_additional\_actions) | Additional actions for read\_write policy | `list(string)` | `[]` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `true` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `true` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The bucket name to be created. | `string` | `null` | no |

@@ -1,6 +1,10 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.68]() (2025-02-20)
+
+### Features
+* Add `additional_actions` which allow s3 policy can be added permissions base on requirement of projects 
 
 ## [0.1.57]() (2025-01-15)
 
