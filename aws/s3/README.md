@@ -36,7 +36,7 @@ module "s3" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.87.0 |
 
 ## Modules
 
@@ -72,7 +72,6 @@ module "s3" {
 | <a name="input_access_log_target_bucket_id"></a> [access\_log\_target\_bucket\_id](#input\_access\_log\_target\_bucket\_id) | The bucket ID to store the access logs | `string` | `null` | no |
 | <a name="input_access_log_target_prefix"></a> [access\_log\_target\_prefix](#input\_access\_log\_target\_prefix) | The target prefix for the access logs | `string` | `null` | no |
 | <a name="input_acl"></a> [acl](#input\_acl) | Canned ACL to apply to the bucket. Support private and public-read. | `string` | `"private"` | no |
-| <a name="input_additional_actions"></a> [additional\_actions](#input\_additional\_actions) | Additional actions for read\_write policy | `list(string)` | `[]` | no |
 | <a name="input_block_public_acls"></a> [block\_public\_acls](#input\_block\_public\_acls) | Whether Amazon S3 should block public ACLs for this bucket. | `bool` | `true` | no |
 | <a name="input_block_public_policy"></a> [block\_public\_policy](#input\_block\_public\_policy) | Whether Amazon S3 should block public bucket policies for this bucket. | `bool` | `true` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | The bucket name to be created. | `string` | `null` | no |
@@ -91,6 +90,7 @@ module "s3" {
 | <a name="input_object_ownership"></a> [object\_ownership](#input\_object\_ownership) | Object ownership. Valid values: BucketOwnerPreferred, ObjectWriter or BucketOwnerEnforced | `string` | `null` | no |
 | <a name="input_public_policy_description"></a> [public\_policy\_description](#input\_public\_policy\_description) | Description for public policy | `string` | `"Policy that allows writing to the s3 public assets bucket"` | no |
 | <a name="input_public_policy_name_prefix"></a> [public\_policy\_name\_prefix](#input\_public\_policy\_name\_prefix) | The name prefix for the public policy | `string` | `"S3PublicAssetsWrite"` | no |
+| <a name="input_read_write_actions"></a> [read\_write\_actions](#input\_read\_write\_actions) | Read write policy actions | `list(string)` | <pre>[<br/>  "s3:DeleteObject",<br/>  "s3:GetObject",<br/>  "s3:GetObjectAcl",<br/>  "s3:ListBucket",<br/>  "s3:ObjectOwnerOverrideToBucketOwner",<br/>  "s3:PutObject",<br/>  "s3:PutObjectAcl"<br/>]</pre> | no |
 | <a name="input_read_write_policy_description"></a> [read\_write\_policy\_description](#input\_read\_write\_policy\_description) | Description for read write policy | `string` | `"Policy that allows writing to the S3 bucket"` | no |
 | <a name="input_read_write_policy_name_prefix"></a> [read\_write\_policy\_name\_prefix](#input\_read\_write\_policy\_name\_prefix) | The name prefix for the read write policy | `string` | `"S3ReadWrite"` | no |
 | <a name="input_readonly_policy_description"></a> [readonly\_policy\_description](#input\_readonly\_policy\_description) | Description for readonly policy | `string` | `"Policy that allows reading from the s3 assets bucket"` | no |
