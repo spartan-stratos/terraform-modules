@@ -10,12 +10,6 @@ variable "tags" {
   default     = {}
 }
 
-variable "platform" {
-  description = "[DEPRECATED - use `ami_type` instead. Will be removed in `v21.0`] Identifies the OS platform as `bottlerocket`, `linux` (AL2), `al2023`, or `windows`"
-  type        = string
-  default     = "linux"
-}
-
 variable "cluster_name" {
   description = "Name of associated EKS cluster"
   type        = string
@@ -31,31 +25,21 @@ variable "subnet_ids" {
 variable "min_size" {
   description = "Minimum number of instances/nodes"
   type        = number
-  default     = 0
 }
 
 variable "max_size" {
   description = "Maximum number of instances/nodes"
   type        = number
-  default     = 3
 }
 
 variable "desired_size" {
   description = "Desired number of instances/nodes"
   type        = number
-  default     = 1
 }
 
 variable "name" {
   description = "Name of the EKS managed node group"
   type        = string
-  default     = ""
-}
-
-variable "use_name_prefix" {
-  description = "Determines whether to use `name` as is or create a unique name beginning with the `name` as the prefix"
-  type        = bool
-  default     = true
 }
 
 variable "capacity_type" {
@@ -96,8 +80,12 @@ variable "remote_access" {
 
 variable "taint" {
   description = "The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group"
-  type        = any
-  default     = {}
+  type = object({
+    key    = string
+    value  = string
+    effect = string
+  })
+  default = null
 }
 
 variable "update_config" {

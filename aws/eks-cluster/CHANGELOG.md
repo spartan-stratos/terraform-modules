@@ -2,35 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.68]() (2025-02-19)
+## [0.1.68]() (2025-02-20)
 
 ### Features
+
 * Add Managed Node Group module
 * Update default cluster_version to `1.32`
 * Add tag for Managed Node Group to cluster and security group
 * Add Managed Node Group role ARNs to `aws-auth` configmap
 
-
 ## [0.1.66]() (2025-02-12)
 
 ### Features
+
 * Enable or disable access mode dynamically in the access_config of the EKS cluster resource
 
 ## [0.1.65]() (2025-02-05)
 
 ### Features
+
 * Add EKS access entries and API/config map authentication options
 * Remove deprecated access_config block from EKS cluster
 
 ## [0.1.59]() (2025-01-21)
 
 ### Features
-* Add variables `enabled_endpoint_private_access`, `enabled_endpoint_public_access`, `addons_coredns_version` to restrict private access or public access for the Kubernetes API server endpoint
+
+* Add variables `enabled_endpoint_private_access`, `enabled_endpoint_public_access`, `addons_coredns_version` to
+  restrict private access or public access for the Kubernetes API server endpoint
 
 ## [0.1.55]() (2025-01-14)
 
 ### Features
-* Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the version of addons.
+
+* Add variables `addons_vpc_cni_version`, `addons_kube_proxy_version`, `addons_coredns_version` to specify the version
+  of addons.
 
 ## [0.1.35]() (2025-01-03)
 

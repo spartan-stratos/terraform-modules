@@ -60,7 +60,7 @@ variable "cluster_names" {
   default     = []
 }
 
-variable "create_mng" {
+variable "created_managed_node_group" {
   description = "Whether Managed Node Groups are created in this VPC"
   type        = bool
   default     = false

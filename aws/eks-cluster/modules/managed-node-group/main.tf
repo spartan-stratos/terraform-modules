@@ -14,8 +14,7 @@ resource "aws_eks_node_group" "this" {
   }
 
   # Optional
-  node_group_name        = var.use_name_prefix ? null : var.name
-  node_group_name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  node_group_name = var.name
 
   # https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-custom-ami
   ami_type        = null
