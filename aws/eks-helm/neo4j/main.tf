@@ -5,6 +5,8 @@ resource "random_password" "neo4j_password" {
 }
 
 locals {
+  neo4j_config = var.custom_neo4j_config != null ? var.custom_neo4j_config : file("${path.module}/neo4j-config.conf")
+
   manifest = <<-YAML
 resources:
   requests:
@@ -13,6 +15,45 @@ resources:
   limits:
     cpu: ${var.neo4j_cpu}
     memory: ${var.neo4j_memory}
+customReadinessProbe:
+  failureThreshold: 20
+  httpGet:
+    path: /
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+customLivenessProbe:
+  failureThreshold: 20
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  tcpSocket:
+    port: bolt
+  timeoutSeconds: 10
+initContainers:
+- command:
+  - sh
+  - -c
+  - |
+    apk add --no-cache wget && \
+    %{for url in var.neo4j_plugins~}
+wget -O ${var.neo4j_plugins_dir}/${basename(url)} ${url}
+    %{endfor}
+  image: alpine
+  imagePullPolicy: Always
+  name: init-plugin
+  resources: {}
+  terminationMessagePath: /dev/termination-log
+  terminationMessagePolicy: File
+  volumeMounts:
+  - mountPath: ${var.neo4j_plugins_dir}
+    name: empty-dir
+    subPath: app-plugins-dir
+configuration: |-
+${indent(2, local.neo4j_config)}
 ingress:
   enabled: true
   annotations:

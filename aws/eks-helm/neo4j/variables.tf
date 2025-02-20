@@ -97,3 +97,24 @@ variable "neo4j_memory" {
   type        = string
   default     = "3.5Gi"
 }
+
+variable "neo4j_plugins" {
+  type        = list(string)
+  description = "A list of URLs pointing to the Neo4J plugins to be installed."
+  default = [
+    "https://github.com/neo4j/graph-data-science/releases/download/2.13.2/neo4j-graph-data-science-2.13.2.jar",
+    "https://github.com/neo4j/apoc/releases/download/5.26.0/apoc-5.26.0-core.jar"
+  ]
+}
+
+variable "neo4j_plugins_dir" {
+  type        = string
+  description = "The directory where Neo4J plugins will be stored."
+  default     = "/opt/bitnami/neo4j/plugins"
+}
+
+variable "custom_neo4j_config" {
+  type        = string
+  description = "Custom configuration settings for Neo4J."
+  default     = null
+}
