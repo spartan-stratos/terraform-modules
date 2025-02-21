@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS eks-helm Neo4j: [(./aws/eks-helm/neo4j/)](./aws/eks-helm/neo4j)
- * Add Neo4j plugin support and custom configuration options
+    * Add Neo4j plugin support and custom configuration options
 
 * AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Add Managed Node Group module [(./aws/eks-cluster/modules/managed-node-group)](./aws/eks-cluster/modules/managed-node-group)
