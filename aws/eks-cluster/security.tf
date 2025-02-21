@@ -23,10 +23,15 @@ resource "aws_security_group" "cluster" {
     cidr_blocks = [var.vpc_cidr]
   }
 
-
-  tags = {
-    "Name"                                        = "${local.cluster_name}-node"
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "karpenter.sh/discovery"                      = "default-eks-${var.environment}"
-  }
+  tags = merge(
+    {
+      "Name" = "${local.cluster_name}-node"
+    },
+    var.node_groups == {} ? {
+      "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    } : {},
+    var.enabled_karpenter ? {
+      "karpenter.sh/discovery" = local.cluster_name
+    } : {}
+  )
 }

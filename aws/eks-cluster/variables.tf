@@ -6,7 +6,7 @@ variable "region" {
 
 variable "cluster_version" {
   description = "The Kubernetes version for creating the cluster."
-  default     = "1.31"
+  default     = "1.32"
   type        = string
 }
 
@@ -137,7 +137,33 @@ variable "efs_filesystem_name" {
 variable "node_groups" {
   description = "Key-value mapping of Kubernetes node groups attributes"
   default     = {}
-  type        = any
+  type = map(object({
+    node_group_name = string
+    disk_size       = number
+    instance_types  = list(string)
+    desired_size    = number
+    max_size        = number
+    min_size        = number
+    taint = optional(map(object({
+      key    = string
+      value  = string
+      effect = string
+    })))
+  }))
+}
+
+variable "update_config" {
+  description = "Configuration block of settings for max unavailable resources during node group updates"
+  type        = map(string)
+  default = {
+    max_unavailable_percentage = 33
+  }
+}
+
+variable "node_repair_config" {
+  description = "The node auto repair configuration for the node group"
+  type        = bool
+  default     = true
 }
 
 variable "administrator_role_arn" {
@@ -242,6 +268,12 @@ variable "authentication_mode" {
 
 variable "create_fargate_profile_access_entry" {
   description = "Create access entry for Fargate profile"
+  type        = bool
+  default     = false
+}
+
+variable "enabled_karpenter" {
+  description = "Whether to integrate Karpenter to cluster"
   type        = bool
   default     = false
 }

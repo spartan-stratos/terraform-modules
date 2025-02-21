@@ -23,7 +23,7 @@ achieve decreasing cost and centralized all the traffic in private subnets under
 
 ```hcl
 module "vpc" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/vpc?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/vpc?ref=v0.1.0"
 
   name                        = "example"
   cidr_block                  = "10.0.1.0/16"
@@ -85,8 +85,10 @@ No modules.
 |--------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|----------------|---------|:--------:|
 | <a name="input_availability_zone_postfixes"></a> [availability\_zone\_postfixes](#input\_availability\_zone\_postfixes)                                | List of availability zones                           | `list(string)` | n/a     |   yes    |
 | <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block)                                                                                     | The CIDR block for the VPC.                          | `string`       | n/a     |   yes    |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                                                                               | Name of associated EKS cluster                       | `string`       | `null`  |    no    |
 | <a name="input_create_custom_subnets"></a> [create\_custom\_subnets](#input\_create\_custom\_subnets)                                                  | Whether to create custom subnets.                    | `bool`         | `false` |    no    |
 | <a name="input_create_flow_log"></a> [create\_flow\_log](#input\_create\_flow\_log)                                                                    | Whether to create VPC flow logs.                     | `bool`         | `false` |    no    |
+| <a name="input_create_mng"></a> [create\_mng](#input\_create\_mng)                                                                                     | Whether Managed Node Groups are created in this VPC  | `bool`         | `false` |    no    |
 | <a name="input_create_private_database_subnet_group"></a> [create\_private\_database\_subnet\_group](#input\_create\_private\_database\_subnet\_group) | Whether to create private database subnet group      | `bool`         | `false` |    no    |
 | <a name="input_custom_private_subnets"></a> [custom\_private\_subnets](#input\_custom\_private\_subnets)                                               | List of custom private subnets.                      | `list(string)` | `[]`    |    no    |
 | <a name="input_custom_public_subnets"></a> [custom\_public\_subnets](#input\_custom\_public\_subnets)                                                  | List of custom public subnets.                       | `list(string)` | `[]`    |    no    |

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.68]() (2025-02-19)
+
+### Features
+
+* Add tag for Managed Node Groups to private subnet.
+
 ## [0.1.29]() (2024-12-30)
 
 ### Features

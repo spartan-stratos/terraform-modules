@@ -53,3 +53,15 @@ variable "create_private_database_subnet_group" {
   type        = bool
   default     = false
 }
+
+variable "cluster_names" {
+  description = "List of EKS cluster names within with VPC"
+  type        = list(string)
+  default     = []
+}
+
+variable "created_managed_node_group" {
+  description = "Whether Managed Node Groups are created in this VPC"
+  type        = bool
+  default     = false
+}
