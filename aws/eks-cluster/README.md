@@ -16,7 +16,7 @@ This module will create the components below
 
 ```hcl
 module "eks" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.68"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-cluster?ref=v0.1.69"
 
   region          = "us-west-2"
   environment     = "test"
