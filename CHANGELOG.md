@@ -1,6 +1,23 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.1.69]() (2025-02-21)
+
+### Features
+
+* AWS eks-helm Neo4j: [(./aws/eks-helm/neo4j/)](./aws/eks-helm/neo4j)
+ * Add Neo4j plugin support and custom configuration options
+
+* AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Add Managed Node Group module [(./aws/eks-cluster/modules/managed-node-group)](./aws/eks-cluster/modules/managed-node-group)
+    * Update default cluster_version to `1.32`
+    * Add tag for Managed Node Group to cluster and security group
+    * Add Managed Node Group role ARNs to `aws-auth` configmap
+
+* AWS vpc: [(./aws/vpc)](./aws/vpc)
+    * Add tag for Managed Node Groups to private subnet.
+
 ## [0.1.68]() (2025-02-21)
 
 ### Features
@@ -9,10 +26,10 @@ All notable changes to this project will be documented in this file.
     * Add `read_write_actions` which allow s3 policy can be added permissions base on requirement of projects
 
 ### Changes
+
 * AWS EKS: Helm Jenkins [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
     * Create the credential using github_app_credential_id instead of gihub_credential_id
     * Remove unused input `gihub_credential_id`
-
 
 ## [0.1.67]() (2025-02-17)
 
