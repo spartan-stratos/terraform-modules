@@ -1,6 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.68]() (2025-02-21)
+
+### Features
+
+* AWS S3: [(./aws/s3/)](./aws/s3/)
+    * Add `read_write_actions` which allow s3 policy can be added permissions base on requirement of projects
+
+### Changes
+* AWS EKS: Helm Jenkins [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+    * Create the credential using github_app_credential_id instead of gihub_credential_id
+    * Remove unused input `gihub_credential_id`
+
 
 ## [0.1.67]() (2025-02-17)
 
