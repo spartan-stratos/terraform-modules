@@ -23,7 +23,7 @@ achieve decreasing cost and centralized all the traffic in private subnets under
 
 ```hcl
 module "vpc" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/vpc?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/vpc?ref=v0.1.69"
 
   name                        = "example"
   cidr_block                  = "10.0.1.0/16"
