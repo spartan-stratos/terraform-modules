@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.67]() (2025-02-20)
+
+### Features
+
+* Add Neo4j plugin support and custom configuration options
+
 ## [0.1.49]() (2025-01-10)
 
 ### Features

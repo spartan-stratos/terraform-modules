@@ -97,3 +97,21 @@ variable "neo4j_memory" {
   type        = string
   default     = "3.5Gi"
 }
+
+variable "neo4j_plugins" {
+  type        = list(string)
+  description = "A list of URLs pointing to the Neo4J plugins to be installed."
+  default     = []
+}
+
+variable "neo4j_plugins_dir" {
+  type        = string
+  description = "The directory where Neo4J plugins will be stored."
+  default     = "/opt/bitnami/neo4j/plugins"
+}
+
+variable "custom_neo4j_config" {
+  type        = string
+  description = "Custom configuration settings for Neo4J."
+  default     = null
+}
