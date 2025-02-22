@@ -69,8 +69,6 @@ service:
 persistence:
   storageClass: ${var.efs_storage_class_name}
   existingClaim: ${kubernetes_persistent_volume_claim.neo4j_home.metadata.0.name}
-  accessModes:
-    - ReadWriteMany
 YAML
 }
 

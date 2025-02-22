@@ -115,3 +115,7 @@ variable "custom_neo4j_config" {
   description = "Custom configuration settings for Neo4J."
   default     = null
 }
+
+variable "volume_name" {
+  default = "data-neo4j"
+}

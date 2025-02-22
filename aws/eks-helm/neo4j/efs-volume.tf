@@ -1,5 +1,5 @@
 locals {
-  volume_name = "data-neo4j-0"
+  volume_name = "${var.volume_name}-0"
 }
 
 resource "aws_efs_access_point" "neo4j_home" {
@@ -36,7 +36,7 @@ resource "kubernetes_persistent_volume" "neo4j_home" {
       storage = var.disk_size
     }
 
-    access_modes       = ["ReadWriteMany"]
+    access_modes       = ["ReadWriteOnce"]
     storage_class_name = var.efs_storage_class_name
 
     persistent_volume_source {
@@ -54,7 +54,7 @@ resource "kubernetes_persistent_volume_claim" "neo4j_home" {
     namespace = var.namespace
   }
   spec {
-    access_modes       = ["ReadWriteMany"]
+    access_modes       = ["ReadWriteOnce"]
     storage_class_name = var.efs_storage_class_name
     resources {
       requests = {
