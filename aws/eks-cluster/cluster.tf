@@ -2,12 +2,8 @@ resource "aws_eks_cluster" "master" {
   name     = local.cluster_name
   role_arn = aws_iam_role.master.arn
 
-  dynamic "access_config" {
-    for_each = var.enable_access_config ? [1] : []
-
-    content {
-      authentication_mode = var.authentication_mode
-    }
+  access_config {
+    authentication_mode = var.authentication_mode
   }
 
   vpc_config {
