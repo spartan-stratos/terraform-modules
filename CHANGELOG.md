@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.70]() (2024-02-27)
+
+### Bug fixes
+
+* AWS oidc sub module provider: [(./aws/oidc/provider)](./aws/oidc/provider)
+    * Fix `aws_iam_openid_connect_provider` resource creation using `length` instead of `try` to resolve error
+      that `data source is evaluated only at apply time`.
+
 ## [0.1.69]() (2025-02-21)
 
 ### Features
@@ -10,7 +18,8 @@ All notable changes to this project will be documented in this file.
     * Add Neo4j plugin support and custom configuration options
 
 * AWS eks-cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
-    * Add Managed Node Group module [(./aws/eks-cluster/modules/managed-node-group)](./aws/eks-cluster/modules/managed-node-group)
+    * Add Managed Node Group
+      module [(./aws/eks-cluster/modules/managed-node-group)](./aws/eks-cluster/modules/managed-node-group)
     * Update default cluster_version to `1.32`
     * Add tag for Managed Node Group to cluster and security group
     * Add Managed Node Group role ARNs to `aws-auth` configmap
