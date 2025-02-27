@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.70]() (2024-02-27)
+
+### Bug fixes
+
+* Fix `aws_iam_openid_connect_provider` resource creation using `length` instead of `try` to resolve error that `data source is evaluated only at apply time`.
+
 ## [0.1.40]() (2024-01-08)
 
 ### Bug fixes

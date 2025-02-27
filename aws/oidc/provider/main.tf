@@ -22,7 +22,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_
  */
 resource "aws_iam_openid_connect_provider" "this" {
   # If the provider is existed, don't create a new one.
-  count = (try(data.aws_iam_openid_connect_provider.this, null) == null || var.create_provider) ? 1 : 0
+  count = (length(data.aws_iam_openid_connect_provider.this) == 0 || var.create_provider) ? 1 : 0
 
   url             = var.url
   client_id_list  = var.client_id_list
