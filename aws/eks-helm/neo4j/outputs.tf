@@ -5,6 +5,6 @@ output "neo4j_username" {
 
 output "neo4j_password" {
   description = "The password for accessing the Neo4j database"
-  sensitive   = true
+  sensitive   = false
   value       = local.neo4j_password
 }
