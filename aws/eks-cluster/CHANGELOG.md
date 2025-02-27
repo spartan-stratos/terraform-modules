@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.70]() (2025-02-23)
+
+### Features
+
+* Remove the unnecessary variable `enable_access_config`
+* Change the default value of `authentication_mode` to `API_AND_CONFIG_MAP` to support the transition of old clusters using CONFIG_MAP to API
+
 ## [0.1.69]() (2025-02-21)
 
 ### Features
