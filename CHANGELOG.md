@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.71]() (2024-03-03)
+
+### Bug fixes
+
+* AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
+  * Fix EKS service account namespace reference
+
 ## [0.1.70]() (2024-02-27)
 
 ### Bug fixes
