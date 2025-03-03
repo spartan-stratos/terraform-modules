@@ -63,6 +63,10 @@ resource "helm_release" "this" {
     name  = "clusterAgent.token"
     value = random_password.cluster_agent_token.result
   }
+  set_sensitive {
+    name  = "cluster_agent.auth_token"
+    value = random_password.cluster_agent_token.result
+  }
 
   values = [local.manifest]
   lifecycle {
