@@ -5,7 +5,7 @@ of  [Kubernetes and AWS resources](#resources).
 
 ```hcl
 module "keda" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-service?ref=v0.1.60"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-service?ref=v0.1.71"
 
   cluster_name = "my-eks-cluster"
   eks_oidc_provider = {
