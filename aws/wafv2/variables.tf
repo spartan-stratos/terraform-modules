@@ -110,6 +110,7 @@ variable "web_acl_associations_arn" {
 }
 
 variable "enabled_wafv2_web_acl_association" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "Specifies whether to enable the association of the WAFv2 Web ACL with a resource."
 }
