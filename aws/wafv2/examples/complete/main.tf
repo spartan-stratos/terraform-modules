@@ -21,10 +21,8 @@ module "wafv2_cloudfront" {
 module "wafv2_alb" {
   source = "../.."
 
-  name                              = "alb-name"
-  scope                             = "REGIONAL"
-  enabled_wafv2_web_acl_association = true
-  web_acl_associations_arn          = "alb-arn"
+  name  = "alb-name"
+  scope = "REGIONAL"
   managed_rules = [
     {
       name            = "AWSManagedRulesCommonRuleSet",
@@ -34,10 +32,6 @@ module "wafv2_alb" {
       rule_action_override = [
         {
           name          = "SizeRestrictions_BODY"
-          action_to_use = "allow"
-        },
-        {
-          name          = "SizeRestrictions_URIPATH"
           action_to_use = "allow"
         }
       ]
