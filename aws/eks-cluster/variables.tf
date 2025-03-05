@@ -144,11 +144,11 @@ variable "node_groups" {
     desired_size    = number
     max_size        = number
     min_size        = number
-    taint = optional(map(object({
+    taints = list(object({
       key    = string
       value  = string
       effect = string
-    })))
+    }))
   }))
 }
 

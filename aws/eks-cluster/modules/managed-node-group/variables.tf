@@ -78,13 +78,13 @@ variable "remote_access" {
   default     = {}
 }
 
-variable "taint" {
+variable "taints" {
   description = "The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group"
-  type = object({
+  type = list(object({
     key    = string
     value  = string
     effect = string
-  })
+  }))
   default = null
 }
 
