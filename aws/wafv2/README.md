@@ -16,7 +16,7 @@ module "wafv2_cloudfront" {
     aws = aws.global
   }
 
-  source = "../.."
+  source = "github.com/spartan-stratos/terraform-modules//aws/wafv2?ref=v0.1.72"
 
   name  = "cloudfront-name"
   scope = "CLOUDFRONT"
