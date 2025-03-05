@@ -127,3 +127,8 @@ variable "content_type_options" {
   }
 }
 
+variable "wafv2_arn" {
+  type        = string
+  description = "Set the WAFv2 to enable Cloudfront and WAFv2 association"
+  default     = null
+}
