@@ -5,7 +5,7 @@ resource "random_password" "neo4j_password" {
 }
 
 locals {
-  neo4j_config = var.custom_neo4j_config != null ? var.custom_neo4j_config : file("${path.module}/neo4j-config.conf")
+  neo4j_config = var.custom_neo4j_config != null ? var.custom_neo4j_config : templatefile("${path.module}/scripts/neo4j-config.conf", { DEFAULT_ADVERTISED_ADDRESS = local.default_fqdn, NEO4J_PROCEDURES = var.neo4j_procedures })
 
   manifest = <<-YAML
 resources:

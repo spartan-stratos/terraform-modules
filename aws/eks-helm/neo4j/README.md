@@ -79,6 +79,7 @@ No modules.
 | <a name="input_neo4j_password"></a> [neo4j\_password](#input\_neo4j\_password)                             | The password for the Neo4J database.                                                                                                                 | `string`       | `null`                         |    no    |
 | <a name="input_neo4j_plugins"></a> [neo4j\_plugins](#input\_neo4j\_plugins)                                | A list of URLs pointing to the Neo4J plugins to be installed.                                                                                        | `list(string)` | `[]`                           |    no    |
 | <a name="input_neo4j_plugins_dir"></a> [neo4j\_plugins\_dir](#input\_neo4j\_plugins\_dir)                  | The directory where Neo4J plugins will be stored.                                                                                                    | `string`       | `"/opt/bitnami/neo4j/plugins"` |    no    |
+| <a name="input_neo4j_procedures"></a> [neo4j\_procedures](#input\_neo4j\_procedures)                       | A comma-separated list of Neo4j procedures and functions to allow.                                                                                   | `string`       | `"gds.*,apoc.*"`               |    no    |
 
 ## Outputs
 
