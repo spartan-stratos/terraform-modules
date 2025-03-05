@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.72]() (2024-03-05)
+
+### Features
+
+* AWS WAFv2: [(./aws/wafv2)](./aws/wafv2)
+  * Introduced a new module for managing AWS WAFv2 configurations.
+  * Add wafv2 arn variable to allow the user to specify the WAFv2 ARN.
+
 ## [0.1.71]() (2024-03-03)
 
 ### Bug fixes
