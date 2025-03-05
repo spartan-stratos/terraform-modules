@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.72]() (2025-03-05)
+
+### Features
+
+* Add wafv2 arn for clound front
+
 ## [0.1.66]() (2025-02-11)
 
 ### Features

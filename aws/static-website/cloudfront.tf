@@ -17,4 +17,5 @@ module "cloudfront" {
   content_security_policy         = var.content_security_policy
   strict_transport_security       = var.strict_transport_security
   content_type_options            = var.content_type_options
+  wafv2_arn                       = var.wafv2_arn
 }

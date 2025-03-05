@@ -136,6 +136,8 @@ resource "aws_cloudfront_distribution" "this" {
       restriction_type = "none"
     }
   }
+
+  web_acl_id = var.wafv2_arn
 }
 
 /*
