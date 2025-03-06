@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.75]() (2024-03-06)
+
+### Bug fixes
+
+* AWS EKS Cluster: [(./aws/eks-helm)](./aws/eks-helm)
+  * add the wafv2 arn acl config for load balancer
+
 ## [0.1.74]() (2024-03-06)
 
 ### Bug fixes
