@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.74]() (2024-03-06)
+
+### Bug fixes
+
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+  * Correct taints type.
+
 ## [0.1.73]() (2024-03-06)
 
 ### Features
