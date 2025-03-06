@@ -25,6 +25,7 @@ resource "kubernetes_ingress_v1" "external_alb" {
       "alb.ingress.kubernetes.io/target-type"              = "ip"
       "alb.ingress.kubernetes.io/listen-ports"             = local.listen_port_http_https
       "alb.ingress.kubernetes.io/actions.ssl-redirect"     = local.ssl_redirect_action
+      "alb.ingress.kubernetes.io/wafv2-acl-arn"            = var.wafv2_arn != null ? var.wafv2_arn : ""
     }
   }
   spec {

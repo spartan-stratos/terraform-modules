@@ -93,3 +93,9 @@ variable "internal_group_name" {
   default     = "internal"
   description = "Group name of internal aws load balancer"
 }
+
+variable "wafv2_arn" {
+  type        = string
+  description = "Set the WAFv2 to enable ALB and WAFv2 association"
+  default     = null
+}
