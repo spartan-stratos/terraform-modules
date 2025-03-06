@@ -17,6 +17,8 @@ module "eks_service" {
     secrets = {
       "SECRET" = "super-secret"
     }
+    create_service_account = false
+    service_account_name   = "default"
   }
   route53_zone_id = "my-route53-zone-id"
   region          = "us-west-2"

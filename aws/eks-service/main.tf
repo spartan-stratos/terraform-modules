@@ -1,7 +1,3 @@
-locals {
-  service_account_name = "default"
-}
-
 data "aws_lb_hosted_zone_id" "this" {
   region = var.region
 }
@@ -31,7 +27,7 @@ data "aws_iam_policy_document" "this" {
       variable = "${var.eks_oidc_provider.url}:sub"
 
       values = [
-        "system:serviceaccount:${var.service.namespace}:${local.service_account_name}"
+        "system:serviceaccount:${var.service.namespace}:${var.service.service_account_name}"
       ]
     }
 
@@ -116,12 +112,20 @@ resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = var.service.additional_iam_policy_arns[count.index]
 }
 
+resource "kubernetes_service_account_v1" "this" {
+  count = var.service.create_service_account ? 1 : 0
+  metadata {
+    name      = var.service.service_account_name
+    namespace = var.service.namespace
+  }
+}
+
 resource "kubernetes_annotations" "default" {
-  depends_on  = [kubernetes_namespace.this]
+  depends_on  = [kubernetes_namespace.this, kubernetes_service_account_v1.this]
   api_version = "v1"
   kind        = "ServiceAccount"
   metadata {
-    name      = local.service_account_name
+    name      = var.service.service_account_name
     namespace = var.service.namespace
   }
   annotations = {

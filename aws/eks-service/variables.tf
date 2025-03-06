@@ -12,6 +12,8 @@ variable "service" {
     hostnames                  = list(string)
     namespace                  = string
     secrets                    = optional(map(any), {})
+    create_service_account     = optional(bool, false)
+    service_account_name       = optional(string, "default")
   })
 }
 
