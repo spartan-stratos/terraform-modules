@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.75]() (2025-03-06)
+
+# Features
+
+* Add the wafv2 arn acl config for load balancer.
+
 ## [0.1.53]() (2025-01-13)
 
 # Features
