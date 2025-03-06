@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.73]() (2024-03-06)
+
+### Features
+
+* AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
+  * Add the flag to customize the service account for each service.
+  
 ## [0.1.72]() (2024-03-05)
 
 ### Features
