@@ -1,3 +1,8 @@
+module "geo_rules" {
+  source = "../geo-rules"
+  environment = "dev" # local.environment
+}
+
 module "wafv2_cloudfront" {
   providers = {
     aws = aws.global
@@ -16,6 +21,8 @@ module "wafv2_cloudfront" {
       rule_action_override = []
     }
   ]
+
+  geo_rules = module.geo_rules.geo_rules
 }
 
 module "wafv2_alb" {
@@ -37,4 +44,6 @@ module "wafv2_alb" {
       ]
     }
   ]
+
+  geo_rules = module.geo_rules.geo_rules
 }

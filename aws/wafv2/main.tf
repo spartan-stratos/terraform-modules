@@ -5,15 +5,6 @@ resource "aws_wafv2_web_acl" "this" {
   scope = var.scope
 
   default_action {
-    dynamic "allow" {
-      for_each = var.default_action == "allow" ? [1] : []
-      content {}
-    }
-
-    dynamic "block" {
-      for_each = var.default_action == "block" ? [1] : []
-      content {}
-    }
   }
 
   visibility_config {
@@ -291,6 +282,81 @@ resource "aws_wafv2_web_acl" "this" {
       statement {
         rule_group_reference_statement {
           arn = rule.value.arn
+        }
+      }
+
+      visibility_config {
+        cloudwatch_metrics_enabled = true
+        metric_name                = rule.value.name
+        sampled_requests_enabled   = true
+      }
+    }
+  }
+
+  dynamic "rule" {
+    for_each = var.geo_rules
+    content {
+      name     = rule.value.name
+      priority = rule.value.priority
+
+      action {
+        dynamic "count" {
+          for_each = rule.value.action == "count" ? [1] : []
+          content {}
+        }
+        dynamic "block" {
+          for_each = rule.value.action == "block" ? [1] : []
+          content {}
+        }
+      }
+
+      statement {
+        # Geo match for country-based labeling
+        dynamic "geo_match_statement" {
+          for_each = rule.value.type == "geo_match" && length(rule.value.country_codes) > 0 ? [1] : []
+          content {
+            country_codes = rule.value.country_codes
+          }
+        }
+
+        # Not statement for blocking based on absence of labels
+        dynamic "not_statement" {
+          for_each = rule.value.type == "not_labels" && length(rule.value.label_keys) > 0 ? [1] : []
+          content {
+            statement {
+              dynamic "or_statement" {
+                for_each = length(rule.value.label_keys) > 1 ? [1] : []
+                content {
+                  dynamic "statement" {
+                    for_each = rule.value.label_keys
+                    content {
+                      label_match_statement {
+                        scope = "LABEL"
+                        key   = statement.value
+                      }
+                    }
+                  }
+                }
+              }
+              # Single label case (no OR needed)
+              dynamic "label_match_statement" {
+                for_each = length(rule.value.label_keys) == 1 ? [rule.value.label_keys[0]] : []
+                content {
+                  scope = "LABEL"
+                  key   = label_match_statement.value
+                }
+              }
+            }
+          }
+        }
+
+        # Direct label match for blocking specific states
+        dynamic "label_match_statement" {
+          for_each = rule.value.type == "label_match" && length(rule.value.label_keys) > 0 ? [rule.value.label_keys[0]] : []
+          content {
+            scope = "LABEL"
+            key   = label_match_statement.value
+          }
         }
       }
 
