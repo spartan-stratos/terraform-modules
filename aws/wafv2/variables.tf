@@ -114,3 +114,16 @@ variable "enabled_wafv2_web_acl_association" {
   default     = false
   description = "Specifies whether to enable the association of the WAFv2 Web ACL with a resource."
 }
+
+variable "geo_rules" {
+  type = list(object({
+    name     = string
+    priority = number
+    action   = string  # "count" or "block"
+    type     = string  # "label_us_ca", "block_non_us_ca", or "block_state"
+    country_codes = optional(list(string), [])  # For geo_match (e.g., ["US", "CA"])
+    label_keys    = optional(list(string), [])  # For not_labels or label_match (e.g., ["awswaf:clientip:geo:region:US-AZ"])
+  }))
+  description = "List of WAFv2 geo-based rules."
+  default     = []
+}
