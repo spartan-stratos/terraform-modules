@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.72]() (2025-03-06)
+## [0.1.74]() (2025-03-06)
 
 ### Fixes
 * Correct taints type
