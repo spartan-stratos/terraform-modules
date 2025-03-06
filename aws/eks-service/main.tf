@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "this" {
       variable = "${var.eks_oidc_provider.url}:sub"
 
       values = [
-        "system:serviceaccount:${var.service.namespace}:${var.service_account_name}"
+        "system:serviceaccount:${var.service.namespace}:${var.service.service_account_name}"
       ]
     }
 
