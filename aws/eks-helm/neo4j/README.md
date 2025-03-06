@@ -9,7 +9,7 @@ for persistent storage and various Kubernetes and Helm configurations.
 
 ```hcl
 module "neo4j" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/neo4j?ref=v0.1.69"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/neo4j?ref=v0.1.75"
 
   domain = "example.com"
   efs_id = "example-id"
@@ -30,16 +30,20 @@ module "neo4j" {
 
 ## Requirements
 
-No requirements.
+| Name                                                                      | Version   |
+|---------------------------------------------------------------------------|-----------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8  |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.75.0 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm)                | >=2.16.1  |
 
 ## Providers
 
-| Name                                                                   | Version |
-|------------------------------------------------------------------------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws)                      | n/a     |
-| <a name="provider_helm"></a> [helm](#provider\_helm)                   | n/a     |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a     |
-| <a name="provider_random"></a> [random](#provider\_random)             | n/a     |
+| Name                                                                   | Version   |
+|------------------------------------------------------------------------|-----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws)                      | >= 5.75.0 |
+| <a name="provider_helm"></a> [helm](#provider\_helm)                   | >=2.16.1  |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a       |
+| <a name="provider_random"></a> [random](#provider\_random)             | n/a       |
 
 ## Modules
 
@@ -79,6 +83,7 @@ No modules.
 | <a name="input_neo4j_password"></a> [neo4j\_password](#input\_neo4j\_password)                             | The password for the Neo4J database.                                                                                                                 | `string`       | `null`                         |    no    |
 | <a name="input_neo4j_plugins"></a> [neo4j\_plugins](#input\_neo4j\_plugins)                                | A list of URLs pointing to the Neo4J plugins to be installed.                                                                                        | `list(string)` | `[]`                           |    no    |
 | <a name="input_neo4j_plugins_dir"></a> [neo4j\_plugins\_dir](#input\_neo4j\_plugins\_dir)                  | The directory where Neo4J plugins will be stored.                                                                                                    | `string`       | `"/opt/bitnami/neo4j/plugins"` |    no    |
+| <a name="input_neo4j_procedures"></a> [neo4j\_procedures](#input\_neo4j\_procedures)                       | A comma-separated list of Neo4j procedures and functions to allow.                                                                                   | `string`       | `"gds.*,apoc.*"`               |    no    |
 
 ## Outputs
 

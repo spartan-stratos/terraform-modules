@@ -2,8 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.52]() (2025-01-12)
+## [0.1.72]() (2025-03-05)
 
 ### Features
 
-* Set MWAA task log level to INFO by default.
+* Init module with all the code

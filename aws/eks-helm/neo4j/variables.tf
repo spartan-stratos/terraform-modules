@@ -115,3 +115,9 @@ variable "custom_neo4j_config" {
   description = "Custom configuration settings for Neo4J."
   default     = null
 }
+
+variable "neo4j_procedures" {
+  type        = string
+  default     = "gds.*,apoc.*"
+  description = "A comma-separated list of Neo4j procedures and functions to allow."
+}
