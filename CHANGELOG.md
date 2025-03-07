@@ -1,6 +1,9 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.76]() (2025-03-07)
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Add `service_accounts` variables to handle custom service accounts
 
 ## [0.1.75]() (2024-03-07)
 
