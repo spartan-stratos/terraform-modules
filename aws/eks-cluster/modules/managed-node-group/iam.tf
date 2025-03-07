@@ -6,7 +6,6 @@ locals {
     eks_worker_node_policy                  = "${local.iam_role_policy_prefix}/AmazonEKSWorkerNodePolicy"
     ec2_container_registry_read_only_policy = "${local.iam_role_policy_prefix}/AmazonEC2ContainerRegistryReadOnly"
     ipv4_cni_policy                         = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_Policy"
-    ipv6_cni_policy                         = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_IPv6_Policy"
   }
 }
 
