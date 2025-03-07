@@ -82,9 +82,9 @@ module "eks" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.83 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.33.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.90.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.36.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.6 |
 
 ## Modules
 
@@ -154,8 +154,9 @@ module "eks" {
 | <a name="input_create_fargate_profile"></a> [create\_fargate\_profile](#input\_create\_fargate\_profile) | Specify whether creating the Fargate profile for running pods. | `bool` | `false` | no |
 | <a name="input_create_fargate_profile_access_entry"></a> [create\_fargate\_profile\_access\_entry](#input\_create\_fargate\_profile\_access\_entry) | Create access entry for Fargate profile | `bool` | `false` | no |
 | <a name="input_custom_namespaces"></a> [custom\_namespaces](#input\_custom\_namespaces) | Custom namespaces to be created during initialization | `list(string)` | `[]` | no |
+| <a name="input_custom_service_accounts"></a> [custom\_service\_accounts](#input\_custom\_service\_accounts) | Map of service account names for binding with Datadog.<br/>Each key represents a namespace, and the value is a list of service account names.<br/>  {<br/>    namespace = ["service-account1", "service-account2] <br/>  } | `map(list(string))` | `{}` | no |
 | <a name="input_datadog_agent_cluster_role_name"></a> [datadog\_agent\_cluster\_role\_name](#input\_datadog\_agent\_cluster\_role\_name) | Name of the ClusterRole to create in order to configure Datadog Agents | `string` | `"datadog-agent"` | no |
-| <a name="input_default_service_accounts"></a> [default\_service\_accounts](#input\_default\_service\_accounts) | Default service account name for binding with Datadog | `list(string)` | <pre>[<br/>  "default"<br/>]</pre> | no |
+| <a name="input_default_service_account"></a> [default\_service\_account](#input\_default\_service\_account) | Default service account name for binding with Datadog | `string` | `"default"` | no |
 | <a name="input_efs_backup_policy_status"></a> [efs\_backup\_policy\_status](#input\_efs\_backup\_policy\_status) | Enable/disable backup for EFS Filesystem.  Value should be ENABLE/DISABLED.  Defaults to DISABLED | `string` | `"DISABLED"` | no |
 | <a name="input_efs_filesystem_name"></a> [efs\_filesystem\_name](#input\_efs\_filesystem\_name) | To specify the name of efs filesystem in case overwrite the default one | `string` | `null` | no |
 | <a name="input_efs_lifecycle_policy"></a> [efs\_lifecycle\_policy](#input\_efs\_lifecycle\_policy) | Lifecycle Policy for the EFS Filesystem | <pre>list(object({<br/>    transition_to_ia                    = string<br/>    transition_to_primary_storage_class = string<br/>  }))</pre> | `[]` | no |
