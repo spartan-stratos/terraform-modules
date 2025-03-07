@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.75]() (2024-03-07)
+
+### Features
+
+* AWS RDS: [(./aws/rds)](./aws/rds)
+  * Rename module to `rds`
+  * Rewrite the code to support multiple RDS engines
+
+### Bug fixes
+
+* AWS EKS Helm: [(./aws/eks-helm)](./aws/eks-helm)
+  * add the wafv2 arn acl config for load balancer
+
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+  * Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
+
 ## [0.1.74]() (2024-03-06)
 
 ### Bug fixes
