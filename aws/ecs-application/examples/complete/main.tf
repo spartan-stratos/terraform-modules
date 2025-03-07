@@ -59,4 +59,6 @@ module "this" {
       ]
     }
   ]
+
+  persistent_volume = null
 }

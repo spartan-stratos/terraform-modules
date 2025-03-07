@@ -18,19 +18,19 @@ This module will create the components below:
 
 ```hcl
 module "application" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.67"
+  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.77"
 
   name                          = "example-service"
   environment                   = "dev"
   region                        = "us-west-2"
-  subnet_ids = [] # the subnet objects should be passed
-  additional_iam_policy_arns = []
+  subnet_ids                    = [] # the subnet objects should be passed
+  additional_iam_policy_arns    = []
   container_port                = 8080
   container_cpu                 = 512
   container_memory              = 2048
   alb_dns_name                  = "example.us-west-2.elb.amazonaws.com"
-  alb_security_groups = ["sg-0ea3ae12345678"]
-  alb_zone_id = "Z1H1FL5HABSF5" # us-west-2 hosted zone for ALB
+  alb_security_groups           = ["sg-0ea3ae12345678"]
+  alb_zone_id                   = "Z1H1FL5HABSF5" # us-west-2 hosted zone for ALB
   aws_lb_listener_arn           = "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
   aws_lb_listener_rule_priority = 100
   container_environment = [
@@ -45,23 +45,23 @@ module "application" {
       valueFrom = "arn:aws:ssm:us-west-2:1234567899:parameter/DB_PASSWORD"
     }
   ]
-  container_image       = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:latest"
-  dns_name              = "example"
-  ecs_cluster_id        = "example-cluster-id"
-  ecs_cluster_name      = "example-cluster-name"
+  container_image           = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:latest"
+  dns_name                  = "example"
+  ecs_cluster_id            = "example-cluster-id"
+  ecs_cluster_name          = "example-cluster-name"
   ecs_execution_policy_arns = []
-  route53_zone_id       = "example"
-  vpc_id                = "vpc-0131eae12345678"
-  service_desired_count = 2
-  service_max_capacity  = 2
+  route53_zone_id           = "example"
+  vpc_id                    = "vpc-0131eae12345678"
+  service_desired_count     = 2
+  service_max_capacity      = 2
 
   additional_container_definitions = [
     {
-      name      = "api-migration"
-      image     = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:migration-latest"
-      essential = false
-      cpu       = 10
-      memory    = 256
+      name        = "api-migration"
+      image       = "1234567899.dkr.ecr.us-west-2.amazonaws.com/example:migration-latest"
+      essential   = false
+      cpu         = 10
+      memory      = 256
       mountPoints = []
       volumesFrom = []
       environment = [
@@ -78,16 +78,14 @@ module "application" {
       ]
     }
   ]
+
+  persistent_volume = null
 }
 ```
 
-## Examples
-
-- [Example](./examples/complete/)
-
 <!-- BEGIN_TF_DOCS -->
 
-# Requirements
+## Requirements
 
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
@@ -102,7 +100,9 @@ module "application" {
 
 ## Modules
 
-No modules.
+| Name                                          | Source | Version |
+|-----------------------------------------------|--------|---------|
+| <a name="module_efs"></a> [efs](#module\_efs) | ../efs | n/a     |
 
 ## Resources
 
@@ -134,38 +134,40 @@ No modules.
 
 ## Inputs
 
-| Name                                                                                                                                   | Description                                                       | Type                                                                                     | Default     | Required |
-|----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------|-------------|:--------:|
-| <a name="input_additional_container_definitions"></a> [additional\_container\_definitions](#input\_additional\_container\_definitions) | Custom container definition                                       | `list(any)`                                                                              | `[]`        |    no    |
-| <a name="input_additional_iam_policy_arns"></a> [additional\_iam\_policy\_arns](#input\_additional\_iam\_policy\_arns)                 | Additional policies for ECS task role                             | `list(string)`                                                                           | `[]`        |    no    |
-| <a name="input_alb_dns_name"></a> [alb\_dns\_name](#input\_alb\_dns\_name)                                                             | DNS name of the Application Load Balancer                         | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_alb_security_groups"></a> [alb\_security\_groups](#input\_alb\_security\_groups)                                        | List of security group IDs of the ALB                             | `list(string)`                                                                           | n/a         |   yes    |
-| <a name="input_alb_zone_id"></a> [alb\_zone\_id](#input\_alb\_zone\_id)                                                                | Hosted zone id of the ALB                                         | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_assign_public_ip"></a> [assign\_public\_ip](#input\_assign\_public\_ip)                                                 | Enable to assign the public ip to the tasks                       | `bool`                                                                                   | `false`     |    no    |
-| <a name="input_aws_lb_listener_arn"></a> [aws\_lb\_listener\_arn](#input\_aws\_lb\_listener\_arn)                                      | ARN of the ALB                                                    | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_aws_lb_listener_rule_priority"></a> [aws\_lb\_listener\_rule\_priority](#input\_aws\_lb\_listener\_rule\_priority)      | AWS LB listener rule's priority                                   | `number`                                                                                 | `100`       |    no    |
-| <a name="input_container_cpu"></a> [container\_cpu](#input\_container\_cpu)                                                            | The number of cpu units used by the task                          | `number`                                                                                 | `512`       |    no    |
-| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment)                                    | The container environment variables                               | `list(any)`                                                                              | n/a         |   yes    |
-| <a name="input_container_image"></a> [container\_image](#input\_container\_image)                                                      | Docker image to be launched                                       | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_container_memory"></a> [container\_memory](#input\_container\_memory)                                                   | The amount (in MiB) of memory used by the task                    | `number`                                                                                 | `2048`      |    no    |
-| <a name="input_container_port"></a> [container\_port](#input\_container\_port)                                                         | Port of container to be exposed                                   | `number`                                                                                 | n/a         |   yes    |
-| <a name="input_container_secrets"></a> [container\_secrets](#input\_container\_secrets)                                                | The container secret environment variables                        | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]`        |    no    |
-| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                                           | DNS name for the ECS application                                  | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_ecs_cluster_id"></a> [ecs\_cluster\_id](#input\_ecs\_cluster\_id)                                                       | ID of the ECS cluster for this ECS application                    | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name)                                                 | Name of the ECS cluster for this ECS application                  | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_ecs_execution_policy_arns"></a> [ecs\_execution\_policy\_arns](#input\_ecs\_execution\_policy\_arns)                    | Permission to make AWS API calls                                  | `list(string)`                                                                           | n/a         |   yes    |
-| <a name="input_environment"></a> [environment](#input\_environment)                                                                    | The environment name                                              | `string`                                                                                 | `"dev"`     |    no    |
-| <a name="input_force_new_deployment"></a> [force\_new\_deployment](#input\_force\_new\_deployment)                                     | Enable to force a new task deployment of the service              | `bool`                                                                                   | `true`      |    no    |
-| <a name="input_health_check_enabled"></a> [health\_check\_enabled](#input\_health\_check\_enabled)                                     | Specify whether enabling health check for this ECS service or not | `bool`                                                                                   | `true`      |    no    |
-| <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path)                                              | Default path for health check requests                            | `string`                                                                                 | `"/health"` |    no    |
-| <a name="input_name"></a> [name](#input\_name)                                                                                         | The name ECS application                                          | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_region"></a> [region](#input\_region)                                                                                   | The AWS region in which resources are created                     | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                                                    | R53 zone ID                                                       | `string`                                                                                 | n/a         |   yes    |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids)                                           | List of security groups to associate with the task or service     | `list(string)`                                                                           | `[]`        |    no    |
-| <a name="input_service_desired_count"></a> [service\_desired\_count](#input\_service\_desired\_count)                                  | Number of services running in parallel                            | `number`                                                                                 | `2`         |    no    |
-| <a name="input_service_max_capacity"></a> [service\_max\_capacity](#input\_service\_max\_capacity)                                     | Maximum of services running in parallel                           | `number`                                                                                 | `2`         |    no    |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                                                     | List of subnets to associate with the task or service             | `list(string)`                                                                           | `[]`        |    no    |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id)                                                                                 | VPC ID                                                            | `string`                                                                                 | n/a         |   yes    |
+| Name                                                                                                                                   | Description                                                       | Type                                                                                                                            | Default     | Required |
+|----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------|:--------:|
+| <a name="input_additional_container_definitions"></a> [additional\_container\_definitions](#input\_additional\_container\_definitions) | Custom container definition                                       | `list(any)`                                                                                                                     | `[]`        |    no    |
+| <a name="input_additional_iam_policy_arns"></a> [additional\_iam\_policy\_arns](#input\_additional\_iam\_policy\_arns)                 | Additional policies for ECS task role                             | `list(string)`                                                                                                                  | `[]`        |    no    |
+| <a name="input_alb_dns_name"></a> [alb\_dns\_name](#input\_alb\_dns\_name)                                                             | DNS name of the Application Load Balancer                         | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_alb_security_groups"></a> [alb\_security\_groups](#input\_alb\_security\_groups)                                        | List of security group IDs of the ALB                             | `list(string)`                                                                                                                  | n/a         |   yes    |
+| <a name="input_alb_zone_id"></a> [alb\_zone\_id](#input\_alb\_zone\_id)                                                                | Hosted zone id of the ALB                                         | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_assign_public_ip"></a> [assign\_public\_ip](#input\_assign\_public\_ip)                                                 | Enable to assign the public ip to the tasks                       | `bool`                                                                                                                          | `false`     |    no    |
+| <a name="input_aws_lb_listener_arn"></a> [aws\_lb\_listener\_arn](#input\_aws\_lb\_listener\_arn)                                      | ARN of the ALB                                                    | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_aws_lb_listener_rule_priority"></a> [aws\_lb\_listener\_rule\_priority](#input\_aws\_lb\_listener\_rule\_priority)      | AWS LB listener rule's priority                                   | `number`                                                                                                                        | `100`       |    no    |
+| <a name="input_container_cpu"></a> [container\_cpu](#input\_container\_cpu)                                                            | The number of cpu units used by the task                          | `number`                                                                                                                        | `512`       |    no    |
+| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment)                                    | The container environment variables                               | `list(any)`                                                                                                                     | n/a         |   yes    |
+| <a name="input_container_image"></a> [container\_image](#input\_container\_image)                                                      | Docker image to be launched                                       | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_container_memory"></a> [container\_memory](#input\_container\_memory)                                                   | The amount (in MiB) of memory used by the task                    | `number`                                                                                                                        | `2048`      |    no    |
+| <a name="input_container_port"></a> [container\_port](#input\_container\_port)                                                         | Port of container to be exposed                                   | `number`                                                                                                                        | n/a         |   yes    |
+| <a name="input_container_secrets"></a> [container\_secrets](#input\_container\_secrets)                                                | The container secret environment variables                        | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre>                                        | `[]`        |    no    |
+| <a name="input_dns_name"></a> [dns\_name](#input\_dns\_name)                                                                           | DNS name for the ECS application                                  | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_ecs_cluster_id"></a> [ecs\_cluster\_id](#input\_ecs\_cluster\_id)                                                       | ID of the ECS cluster for this ECS application                    | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name)                                                 | Name of the ECS cluster for this ECS application                  | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_ecs_execution_policy_arns"></a> [ecs\_execution\_policy\_arns](#input\_ecs\_execution\_policy\_arns)                    | Permission to make AWS API calls                                  | `list(string)`                                                                                                                  | n/a         |   yes    |
+| <a name="input_environment"></a> [environment](#input\_environment)                                                                    | The environment name                                              | `string`                                                                                                                        | `"dev"`     |    no    |
+| <a name="input_force_new_deployment"></a> [force\_new\_deployment](#input\_force\_new\_deployment)                                     | Enable to force a new task deployment of the service              | `bool`                                                                                                                          | `true`      |    no    |
+| <a name="input_health_check_enabled"></a> [health\_check\_enabled](#input\_health\_check\_enabled)                                     | Specify whether enabling health check for this ECS service or not | `bool`                                                                                                                          | `true`      |    no    |
+| <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path)                                              | Default path for health check requests                            | `string`                                                                                                                        | `"/health"` |    no    |
+| <a name="input_name"></a> [name](#input\_name)                                                                                         | The name ECS application                                          | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_persistent_volume"></a> [persistent\_volume](#input\_persistent\_volume)                                                | Directory path for the EFS volume                                 | <pre>object({<br/>    path = string,<br/>    gid  = optional(number, 1000)<br/>    uid  = optional(number, 1000)<br/>  })</pre> | `null`      |    no    |
+| <a name="input_region"></a> [region](#input\_region)                                                                                   | The AWS region in which resources are created                     | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id)                                                    | R53 zone ID                                                       | `string`                                                                                                                        | n/a         |   yes    |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids)                                           | List of security groups to associate with the task or service     | `list(string)`                                                                                                                  | `[]`        |    no    |
+| <a name="input_service_desired_count"></a> [service\_desired\_count](#input\_service\_desired\_count)                                  | Number of services running in parallel                            | `number`                                                                                                                        | `2`         |    no    |
+| <a name="input_service_max_capacity"></a> [service\_max\_capacity](#input\_service\_max\_capacity)                                     | Maximum of services running in parallel                           | `number`                                                                                                                        | `2`         |    no    |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                                                     | List of subnets to associate with the task or service             | `list(string)`                                                                                                                  | `[]`        |    no    |
+| <a name="input_user"></a> [user](#input\_user)                                                                                         | User to run the container                                         | `string`                                                                                                                        | `null`      |    no    |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id)                                                                                 | VPC ID                                                            | `string`                                                                                                                        | n/a         |   yes    |
 
 ## Outputs
 
