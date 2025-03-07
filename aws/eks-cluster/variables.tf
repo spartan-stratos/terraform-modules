@@ -172,10 +172,10 @@ variable "administrator_role_arn" {
   description = "AWS Administrator role arn for mapping with K8s RBAC"
 }
 
-variable "default_service_account" {
-  type        = string
+variable "default_service_accounts" {
+  type        = list(string)
   description = "Default service account name for binding with Datadog"
-  default     = "default"
+  default     = ["default"]
 }
 
 variable "enabled_datadog_agent" {

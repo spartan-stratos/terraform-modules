@@ -9,10 +9,10 @@ variable "fargate_profiles" {
   default     = {}
 }
 
-variable "default_service_account" {
-  type        = string
+variable "default_service_accounts" {
+  type        = list(string)
   description = "Default service account name for binding with Datadog"
-  default     = "default"
+  default     = ["default"]
 }
 
 variable "custom_namespaces" {
