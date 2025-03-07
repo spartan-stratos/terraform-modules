@@ -178,6 +178,18 @@ variable "default_service_account" {
   default     = "default"
 }
 
+variable "custom_service_accounts" {
+  type        = map(list(string))
+  description = <<EOF
+Map of service account names for binding with Datadog.
+Each key represents a namespace, and the value is a list of service account names.
+  {
+    namespace = ["service-account1", "service-account2] 
+  }
+EOF
+  default     = {}
+}
+
 variable "enabled_datadog_agent" {
   type        = bool
   description = "Enable datadog integration RBAC creation"

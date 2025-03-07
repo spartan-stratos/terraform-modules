@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.75]() (2025-03-07)
+* Add `service_accounts` variables to handle custom service account which will be a map with structure
+```
+{
+    namespace = ["service-account1", "service-account2] 
+}
+```
 
 ## [0.1.75]() (2025-03-07)
 
