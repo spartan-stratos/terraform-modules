@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.75]() (2024-03-06)
+## [0.1.75]() (2024-03-07)
+
+### Features
+
+* AWS RDS: [(./aws/rds)](./aws/rds)
+  * Rename module to `rds`
+  * Rewrite the code to support multiple RDS engines
 
 ### Bug fixes
 
