@@ -1,5 +1,4 @@
 locals {
-
   log_configuration = {
     logDriver = "awslogs"
     options = {
@@ -13,12 +12,19 @@ locals {
 
   container_definitions = concat([
     {
-      name        = "${var.name}-container"
-      image       = var.container_image
-      essential   = true
-      cpu         = 0
-      memory      = var.container_memory
-      mountPoints = []
+      name      = "${var.name}-container"
+      image     = var.container_image
+      essential = true
+      user      = var.user
+      cpu       = 0
+      memory    = var.container_memory
+      mountPoints = var.persistent_volume != null ? [
+        {
+          sourceVolume  = var.name
+          containerPath = var.persistent_volume.path
+          readOnly      = false
+        }
+      ] : []
       volumesFrom = []
       environment = var.container_environment
       secrets     = var.container_secrets

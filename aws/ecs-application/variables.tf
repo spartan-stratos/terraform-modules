@@ -165,3 +165,19 @@ variable "assign_public_ip" {
   type        = bool
   default     = false
 }
+
+variable "persistent_volume" {
+  description = "Directory path for the EFS volume"
+  type = object({
+    path = string,
+    gid  = optional(number, 1000)
+    uid  = optional(number, 1000)
+  })
+  default = null
+}
+
+variable "user" {
+  description = "User to run the container"
+  type        = string
+  default     = null
+}
