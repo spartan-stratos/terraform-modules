@@ -1,6 +1,8 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.75]() (2025-03-07)
+* Change `default_service_account` to `default_service_accounts` as a list(string) import many service accounts
 
 ## [0.1.74]() (2025-03-06)
 

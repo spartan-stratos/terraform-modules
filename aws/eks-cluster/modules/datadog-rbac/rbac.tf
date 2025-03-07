@@ -31,13 +31,13 @@ resource "kubernetes_cluster_role_binding_v1" "datadog_agent" {
     kind      = "ClusterRole"
     name      = var.datadog_agent_cluster_role_name
   }
-  
+
   dynamic "subject" {
     for_each = var.default_service_accounts
-    
+
     content {
-      kind = "ServiceAccount"
-      name = subject.value
+      kind      = "ServiceAccount"
+      name      = subject.value
       namespace = each.value
     }
   }
