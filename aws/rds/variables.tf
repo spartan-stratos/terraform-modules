@@ -4,12 +4,6 @@ variable "db_name" {
   type        = string
 }
 
-variable "db_identifier" {
-  description = "The identifier name of database instance. If null, the db_name will be used instead."
-  type        = string
-  default     = null
-}
-
 variable "db_username" {
   description = "The master username for the database."
   type        = string
@@ -71,19 +65,6 @@ variable "multi_az" {
   description = "Indicates whether the database instance should be deployed across multiple availability zones."
   type        = bool
   default     = false
-}
-
-variable "publicly_accessible" {
-  description = "Allow external machine connect to rds."
-  type        = bool
-  default     = false
-}
-
-# Custom parameter group
-variable "custom_parameter_group_name" {
-  description = "Custom parameter group name, used when `var.overwrite_parameter_group_name` is `true` and `var.supported_engine_version` size is 1."
-  type        = string
-  default     = null
 }
 
 # Security
@@ -164,19 +145,12 @@ variable "replica_count" {
 
 variable "supported_engine_version" {
   description = "A list of supported engine versions for the Parameter Groups, supporting Blue-Green deployment."
-  type        = list(number)
-  default     = [14, 15, 16]
-}
-
-# Security groups
-variable "vpc_security_group_ids" {
-  description = "The list of existing vpc security group ids to associate with database instance."
   type        = list(string)
-  default     = null
+  default     = []
 }
 
-variable "snapshot_identifier" {
-  description = "Specifies whether or not to create this database from a snapshot."
-  type        = string
-  default     = null
+variable "publicly_accessible" {
+  description = "Indicates whether the database can be publicly available."
+  type        = bool
+  default     = false
 }
