@@ -14,17 +14,13 @@ resource "aws_db_subnet_group" "this" {
 }
 
 resource "aws_security_group" "this" {
-  count = var.vpc_security_group_ids == null ? 1 : 0
-
   name        = "Allow ${local.identifier} RDS"
   description = "Allow RDS inbound traffic and outbound traffic inside the VPC"
   vpc_id      = var.vpc_id
 }
 
 resource "aws_vpc_security_group_ingress_rule" "this" {
-  count = var.vpc_security_group_ids == null ? 1 : 0
-
-  security_group_id = aws_security_group.this[0].id
+  security_group_id = aws_security_group.this.id
   cidr_ipv4         = data.aws_vpc.this.cidr_block
   from_port         = var.port
   ip_protocol       = "tcp"
@@ -32,9 +28,7 @@ resource "aws_vpc_security_group_ingress_rule" "this" {
 }
 
 resource "aws_vpc_security_group_egress_rule" "this" {
-  count = var.vpc_security_group_ids == null ? 1 : 0
-
-  security_group_id = aws_security_group.this[0].id
+  security_group_id = aws_security_group.this.id
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
@@ -54,8 +48,9 @@ module "main_db_instance" {
   username                     = var.db_username
   password                     = random_password.this.result
   db_name                      = var.db_name
+  port                         = var.port
   db_subnet_group_name         = aws_db_subnet_group.this.name
-  vpc_security_group_ids       = local.vpc_security_group_ids
+  vpc_security_group_ids       = [aws_security_group.this.id]
   allow_major_version_upgrade  = var.allow_major_version_upgrade
   auto_minor_version_upgrade   = var.auto_minor_version_upgrade
   apply_immediately            = var.apply_immediately
@@ -64,8 +59,6 @@ module "main_db_instance" {
   parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
   publicly_accessible          = var.publicly_accessible
   final_snapshot_identifier    = local.db_final_snapshot_identifier
-  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
-  snapshot_identifier          = var.snapshot_identifier
 }
 
 module "replica_db_instance" {
@@ -81,14 +74,14 @@ module "replica_db_instance" {
   storage_encrypted            = var.storage_encrypted
   engine                       = var.engine
   engine_version               = var.engine_version
-  vpc_security_group_ids       = local.vpc_security_group_ids
+  port                         = var.port
+  vpc_security_group_ids       = [aws_security_group.this.id]
   allow_major_version_upgrade  = var.allow_major_version_upgrade
   auto_minor_version_upgrade   = var.auto_minor_version_upgrade
   apply_immediately            = var.apply_immediately
   monitoring_interval          = var.monitoring_interval
   performance_insights_enabled = var.performance_insights_enabled
   parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
-  publicly_accessible          = false
+  publicly_accessible          = var.publicly_accessible
   replicate_source_db          = module.main_db_instance.db_identifier
-  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
 }

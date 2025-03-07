@@ -103,12 +103,6 @@ variable "final_snapshot_identifier" {
   default     = null
 }
 
-variable "copy_tags_to_snapshot" {
-  description = "Indicates whether all instance tags should be copied to snapshots."
-  type        = bool
-  default     = true
-}
-
 # Security
 variable "publicly_accessible" {
   description = "Boolean indicating if the DB instance is publicly accessible."
@@ -157,12 +151,6 @@ variable "parameter_group_name" {
 
 variable "replicate_source_db" {
   description = "The ARN of the source DB instance if this Amazon RDS DB instance is a read replica."
-  type        = string
-  default     = null
-}
-
-variable "snapshot_identifier" {
-  description = "Specifies whether or not to create this database from a snapshot"
   type        = string
   default     = null
 }

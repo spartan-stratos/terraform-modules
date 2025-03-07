@@ -199,7 +199,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS Postgres [(./aws/postgres/)](./aws/postgres/)
+* AWS Postgres [(./aws/postgres/)](aws/rds/)
     * Add optional variable `snapshot_identifier` to specify whether or not to create database instance from a snapshot.
 
 * AWS S3 [(./aws/s3/)](./aws/s3/)
@@ -553,12 +553,12 @@ All notable changes to this project will be documented in this file.
 * Datadog/AWS Integration: Init module. [(./datadog/aws-integration)](./datadog/aws-integration)
 * Datadog/GCP Integration: Init module. [(./datadog/gcp-integration)](./datadog/gcp-integration)
 * AWS Postgres: Add `var.publicly_accessible` to allow external machine connect to rds if
-  `true` [(./aws/postgres)](./aws/postgres)
+  `true` [(./aws/postgres)](./aws/rds)
 
 ### Fixes
 
 * AWS Postgres: Correct conditions to create security group `aws_security_group.this` when variable
-  `vpc_security_group_ids` is null [(./aws/postgres)](./aws/postgres)
+  `vpc_security_group_ids` is null [(./aws/postgres)](./aws/rds)
 
 ## [0.1.21]() (2024-12-24)
 
@@ -638,7 +638,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS Postgre: Add `var.db_identifier` and update `identifier` naming logic from modules `main_db_instance` and
-  `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/postgres)
+  `replica_db_instance`. Add `var.copy_tags_to_snapshot`. [(./aws/postgres)](./aws/rds)
 * AWS VPC: Add variables: `create_custom_subnets`, `custom_public_subnets`, `custom_private_subnets` and update subnet
   creation logics. Correct `aws_security_group.allow_all_within_vpc` ingress rule `cidr_blocks`. Remove `environment`
   from resource tags.[(./aws/vpc)](./aws/vpc)
