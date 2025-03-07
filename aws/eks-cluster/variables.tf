@@ -172,10 +172,22 @@ variable "administrator_role_arn" {
   description = "AWS Administrator role arn for mapping with K8s RBAC"
 }
 
-variable "default_service_accounts" {
-  type        = list(string)
+variable "default_service_account" {
+  type        = string
   description = "Default service account name for binding with Datadog"
-  default     = ["default"]
+  default     = "default"
+}
+
+variable "custom_service_accounts" {
+  type        = map(list(string))
+  description = <<EOF
+Map of service account names for binding with Datadog.
+Each key represents a namespace, and the value is a list of service account names.
+  {
+    namespace = ["service-account1", "service-account2] 
+  }
+EOF
+  default     = {}
 }
 
 variable "enabled_datadog_agent" {

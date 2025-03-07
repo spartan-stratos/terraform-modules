@@ -1,5 +1,14 @@
 locals {
-  namespaces = merge({ for namespace in var.custom_namespaces : namespace => namespace }, { default = "default", "kube-system" = "kube-system" })
+  service_accounts = merge(
+    {
+      default     = distinct(concat(["default"], [var.default_service_account])),
+      kube-system = "kube-system"
+    },
+    var.custom_service_accounts,
+    {
+      for namespace in var.custom_namespaces : namespace => namespace
+    }
+  )
 }
 
 resource "kubernetes_cluster_role" "datadog_agent" {
@@ -20,7 +29,7 @@ resource "kubernetes_cluster_role" "datadog_agent" {
 }
 
 resource "kubernetes_cluster_role_binding_v1" "datadog_agent" {
-  for_each = local.namespaces
+  for_each = local.service_accounts
 
   metadata {
     name = "${var.datadog_agent_cluster_role_name}-${each.key}"
@@ -33,12 +42,11 @@ resource "kubernetes_cluster_role_binding_v1" "datadog_agent" {
   }
 
   dynamic "subject" {
-    for_each = var.default_service_accounts
-
+    for_each = each.value
     content {
       kind      = "ServiceAccount"
       name      = subject.value
-      namespace = each.value
+      namespace = each.key
     }
   }
 
