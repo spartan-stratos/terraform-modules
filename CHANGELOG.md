@@ -1,7 +1,15 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.77]() (2025-03-07)
+
+### Fixes
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Fix map is mapping to a non-list, which failed when create clusterrolebinding
+
 ## [0.1.76]() (2025-03-07)
+
+### Features
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Add `service_accounts` variables to handle custom service accounts
 
