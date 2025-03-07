@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.75]() (2025-03-07)
+
+### Fixes
+* Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
+
 ## [0.1.74]() (2025-03-06)
 
 ### Fixes
