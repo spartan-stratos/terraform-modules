@@ -5,9 +5,6 @@ locals {
       kube-system = ["kube-system"]
     },
     var.custom_service_accounts,
-    {
-      for namespace in var.custom_namespaces : namespace => [namespace]
-    }
   )
 }
 
