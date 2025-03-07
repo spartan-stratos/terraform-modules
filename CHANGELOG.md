@@ -12,8 +12,11 @@ All notable changes to this project will be documented in this file.
 
 ### Bug fixes
 
-* AWS EKS Cluster: [(./aws/eks-helm)](./aws/eks-helm)
+* AWS EKS Helm: [(./aws/eks-helm)](./aws/eks-helm)
   * add the wafv2 arn acl config for load balancer
+
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+  * Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
 
 ## [0.1.74]() (2024-03-06)
 
