@@ -22,7 +22,7 @@ module "instance" {
   iam_database_authentication_enabled = false
   replica_count                       = 0
   vpc_id                              = "vpc-123456789"
-  subnet_ids = []
+  subnet_ids                          = []
   storage_type                        = "gp3"
 }
 ```

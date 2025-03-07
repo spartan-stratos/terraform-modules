@@ -9,5 +9,5 @@ module "postgresql" {
   replica_count                       = 0
   vpc_id                              = "vpc-123456789"
   subnet_ids                          = []
-  storage_type                        = "gp3"
+  storage_type                        = "gp2"
 }
