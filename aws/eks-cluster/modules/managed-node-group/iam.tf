@@ -89,6 +89,7 @@ data "aws_iam_policy_document" "role" {
 }
 
 resource "aws_iam_role_policy" "this" {
+  count       = length(var.iam_role_policy_statements) > 0 ? 1 : 0
   name        = var.iam_role_use_name_prefix ? null : local.iam_role_name
   name_prefix = var.iam_role_use_name_prefix ? "${local.iam_role_name}-" : null
   policy      = data.aws_iam_policy_document.role.json
