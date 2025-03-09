@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.77]() (2025-03-07)
+## [0.1.78]() (2025-03-10)
 
 ### Bug fixes
 * Managed nodes: only add iam role policy when there is at least 1 statemenet
