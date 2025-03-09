@@ -63,12 +63,6 @@ resource "aws_eks_node_group" "this" {
     }
   }
 
-  # lifecycle {
-  #   ignore_changes = [
-  #     scaling_config[0].desired_size,
-  #   ]
-  # }
-
   tags = merge(
     { "kubernetes.io/cluster/${var.cluster_name}" = "owned" },
     var.tags,
