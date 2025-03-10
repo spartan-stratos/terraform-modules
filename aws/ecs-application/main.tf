@@ -68,6 +68,24 @@ resource "aws_ecs_task_definition" "this" {
   task_role_arn         = aws_iam_role.task_role.arn
   container_definitions = jsonencode(local.container_definitions)
 
+  dynamic "volume" {
+    for_each = var.persistent_volume != null ? [var.name] : []
+    content {
+      name = volume.value
+      efs_volume_configuration {
+        file_system_id = module.efs[0].file_system_id
+
+        transit_encryption      = "ENABLED"
+        transit_encryption_port = 2999
+
+        authorization_config {
+          access_point_id = module.efs[0].access_points[volume.value].id
+          iam             = "ENABLED"
+        }
+      }
+    }
+  }
+
   tags = {
     Name        = "${var.name}-task"
     Environment = var.environment
