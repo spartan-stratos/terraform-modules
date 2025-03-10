@@ -1,8 +1,3 @@
-resource "random_password" "this" {
-  length  = 24
-  special = false
-}
-
 data "aws_vpc" "this" {
   id = var.vpc_id
 }
@@ -46,7 +41,7 @@ module "main_db_instance" {
   engine                       = var.engine
   engine_version               = var.engine_version
   username                     = var.db_username
-  password                     = random_password.this.result
+  password                     = local.db_password
   db_name                      = var.db_name
   port                         = var.port
   db_subnet_group_name         = aws_db_subnet_group.this.name

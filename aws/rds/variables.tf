@@ -154,3 +154,16 @@ variable "publicly_accessible" {
   type        = bool
   default     = false
 }
+
+# Secret Manager for Database password
+variable "use_secret_manager" {
+  description = "Whether to use AWS Secret Manager storing Database password."
+  type        = bool
+  default     = false
+}
+
+variable "overwrite_secret_manager_db_password_name" {
+  description = "Whether to overwrite secret name created in AWS Secret Manager."
+  type        = string
+  default     = null
+}

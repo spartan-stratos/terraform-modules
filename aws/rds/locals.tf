@@ -13,4 +13,7 @@ locals {
   db_subnet_group_name         = "${var.db_name}-subnet"
   default_backup_retention     = var.backup_retention_day
   db_final_snapshot_identifier = "${local.identifier}-${formatdate("HH-mmaa", timestamp())}"
+
+  db_password_name = var.overwrite_secret_manager_db_password_name != null ? var.overwrite_secret_manager_db_password_name : "POSTGRESQL_PASSWORD"
+  db_password      = var.use_secret_manager ? aws_secretsmanager_secret_version.this[0].secret_string : random_password.this[0].result
 }
