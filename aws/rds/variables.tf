@@ -67,6 +67,12 @@ variable "multi_az" {
   default     = false
 }
 
+variable "db_subnet_group_name" {
+  description = "The subnet group name for instance."
+  type        = string
+  default     = null
+}
+
 # Security
 variable "storage_encrypted" {
   description = "Whether the DB instance is encrypted."
