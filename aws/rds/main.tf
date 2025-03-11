@@ -54,6 +54,7 @@ module "main_db_instance" {
   parameter_group_name         = aws_db_parameter_group.parameter_group[local.engine_version_major].id
   publicly_accessible          = var.publicly_accessible
   final_snapshot_identifier    = local.db_final_snapshot_identifier
+  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
 }
 
 module "replica_db_instance" {

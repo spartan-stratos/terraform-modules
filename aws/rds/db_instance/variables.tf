@@ -103,6 +103,12 @@ variable "final_snapshot_identifier" {
   default     = null
 }
 
+variable "copy_tags_to_snapshot" {
+  description = "Tags existing on instance are copied to snapshot."
+  type        = bool
+  default     = true
+}
+
 # Security
 variable "publicly_accessible" {
   description = "Boolean indicating if the DB instance is publicly accessible."

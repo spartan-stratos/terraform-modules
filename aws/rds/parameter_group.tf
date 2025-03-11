@@ -24,7 +24,6 @@ locals {
   }
 }
 
-
 resource "aws_db_parameter_group" "parameter_group" {
   for_each = {
     for _, version in distinct(concat(var.supported_engine_version, [local.engine_version_major])) : version => version
