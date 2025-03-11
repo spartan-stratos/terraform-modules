@@ -33,7 +33,7 @@ resource "aws_db_parameter_group" "parameter_group" {
   family = "${var.engine}${each.key}"
 
   dynamic "parameter" {
-    for_each = var.engine == "postgres" ? local.postgres_parameters : {}
+    for_each = var.engine == "postgres" ? merge(local.postgres_parameters, var.additional_postgres_parameters) : {}
     content {
       name         = parameter.key
       value        = parameter.value.value

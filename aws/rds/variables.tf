@@ -155,6 +155,15 @@ variable "supported_engine_version" {
   default     = []
 }
 
+variable "additional_postgres_parameters" {
+  description = "Additional postgres parameters to add to parameter groups."
+  type = map(object({
+    value        = any
+    apply_method = string
+  }))
+  default = null
+}
+
 variable "publicly_accessible" {
   description = "Indicates whether the database can be publicly available."
   type        = bool
