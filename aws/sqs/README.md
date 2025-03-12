@@ -13,7 +13,7 @@ This module will create the following components:
 
 ```hcl
 module "sqs" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/sqs?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/sqs?ref=v0.1.80"
 
   name              = "example-queue"
   max_receive_count = 1
