@@ -18,5 +18,9 @@ output "db_username" {
 }
 
 output "db_password" {
-  value = random_password.this.result
+  value = try(random_password.this[0].result, null)
+}
+
+output "db_password_secret_arn" {
+  value = try(aws_secretsmanager_secret_version.this[0].arn, null)
 }

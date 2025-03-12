@@ -67,6 +67,12 @@ variable "multi_az" {
   default     = false
 }
 
+variable "db_subnet_group_name" {
+  description = "The subnet group name for instance."
+  type        = string
+  default     = null
+}
+
 # Security
 variable "storage_encrypted" {
   description = "Whether the DB instance is encrypted."
@@ -149,8 +155,36 @@ variable "supported_engine_version" {
   default     = []
 }
 
+variable "additional_postgres_parameters" {
+  description = "Additional postgres parameters to add to parameter groups."
+  type = map(object({
+    value        = any
+    apply_method = string
+  }))
+  default = null
+}
+
 variable "publicly_accessible" {
   description = "Indicates whether the database can be publicly available."
   type        = bool
   default     = false
+}
+
+# Database password
+variable "use_secret_manager" {
+  description = "Whether to use AWS Secret Manager storing Database password."
+  type        = bool
+  default     = false
+}
+
+variable "secret_manager_db_password_name" {
+  description = "Secret name created in AWS Secret Manager."
+  type        = string
+  default     = "POSTGRESQL_PASSWORD"
+}
+
+variable "password_length" {
+  description = "Database password length."
+  type        = number
+  default     = 24
 }

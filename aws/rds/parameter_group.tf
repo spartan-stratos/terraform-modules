@@ -24,7 +24,6 @@ locals {
   }
 }
 
-
 resource "aws_db_parameter_group" "parameter_group" {
   for_each = {
     for _, version in distinct(concat(var.supported_engine_version, [local.engine_version_major])) : version => version
@@ -34,7 +33,7 @@ resource "aws_db_parameter_group" "parameter_group" {
   family = "${var.engine}${each.key}"
 
   dynamic "parameter" {
-    for_each = var.engine == "postgres" ? local.postgres_parameters : {}
+    for_each = var.engine == "postgres" ? merge(local.postgres_parameters, var.additional_postgres_parameters) : {}
     content {
       name         = parameter.key
       value        = parameter.value.value
