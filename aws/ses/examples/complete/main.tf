@@ -13,6 +13,7 @@ module "ses" {
 module "ses_route53" {
   source = "../../"
 
+  environment  = "dev"
   email_domain = "example1.com"
 
   emails = ["abc@example1.com", "xyz@example1.com"]
@@ -24,4 +25,10 @@ module "ses_route53" {
   verify_domain = true
   record_ttl    = 600
   record_type   = "TXT"
+
+  enabled_outgoing_email_logs           = false
+  datadog_api_key                       = null
+  datadog_site                          = null
+  enabled_datadog_dashboard             = true
+  datadog_dashboard_default_environment = "dev"
 }
