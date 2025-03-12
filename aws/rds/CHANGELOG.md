@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add variable `use_secret_manager` to create Secret Manager for database password management.
+* Add variable `use_secret_manager` and `secret_manager_db_password_name` to create Secret Manager for database password
+  management.
+* Add variable `password_length` to custom database password length.
 * Add variable `db_subnet_group_name` for migration purpose.
 * Add variable `additional_postgres_parameters` for additional parameters on PostgreSQL instance.
 

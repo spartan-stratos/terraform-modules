@@ -170,15 +170,21 @@ variable "publicly_accessible" {
   default     = false
 }
 
-# Secret Manager for Database password
+# Database password
 variable "use_secret_manager" {
   description = "Whether to use AWS Secret Manager storing Database password."
   type        = bool
   default     = false
 }
 
-variable "overwrite_secret_manager_db_password_name" {
-  description = "Whether to overwrite secret name created in AWS Secret Manager."
+variable "secret_manager_db_password_name" {
+  description = "Secret name created in AWS Secret Manager."
   type        = string
-  default     = null
+  default     = "POSTGRESQL_PASSWORD"
+}
+
+variable "password_length" {
+  description = "Database password length."
+  value       = number
+  default     = 24
 }
