@@ -63,3 +63,21 @@ resource "aws_eks_addon" "coredns_fargate" {
 
   depends_on = [aws_eks_cluster.master, module.fargate_profile]
 }
+
+data "aws_eks_addon_version" "efs_csi_driver_latest" {
+  count              = var.addons_efs_csi_driver_version == null ? 1 : 0
+  addon_name         = "aws-efs-csi-driver"
+  kubernetes_version = aws_eks_cluster.master.version
+}
+
+resource "aws_eks_addon" "efs_csi_driver" {
+  count = var.k8s_core_dns_compute_type == "ec2" ? 1 : 0
+
+  addon_name                  = "aws-efs-csi-driver"
+  addon_version               = var.addons_coredns_version != null ? var.addons_coredns_version : data.aws_eks_addon_version.efs_csi_driver_latest[0].version
+  cluster_name                = local.cluster_name
+  resolve_conflicts_on_update = "OVERWRITE"
+  resolve_conflicts_on_create = "OVERWRITE"
+
+  depends_on = [aws_eks_cluster.master, module.fargate_profile]
+}

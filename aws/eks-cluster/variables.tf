@@ -244,6 +244,12 @@ variable "addons_coredns_version" {
   default     = null
 }
 
+variable "addons_efs_csi_driver_version" {
+  type        = string
+  description = "The version of the EFS CSI Driver addon, latest by default"
+  default     = null
+}
+
 variable "enabled_endpoint_private_access" {
   type        = bool
   default     = true
