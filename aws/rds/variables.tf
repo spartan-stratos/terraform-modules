@@ -185,6 +185,6 @@ variable "secret_manager_db_password_name" {
 
 variable "password_length" {
   description = "Database password length."
-  value       = number
+  type        = number
   default     = 24
 }
