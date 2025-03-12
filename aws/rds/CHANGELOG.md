@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.79]() (2025-03-11)
+## [0.1.79]() (2025-03-12)
 
 ### Features
 
@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 * Add variable `db_subnet_group_name` for migration purpose.
 * Add variable `additional_postgres_parameters` for additional parameters on PostgreSQL instance.
 
-### Fix
+### Bug fixes
 
 * Correct `copy_tags_to_snapshot` input to submodule `db_instance`.
 

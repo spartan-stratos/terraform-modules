@@ -18,12 +18,12 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.75]() (2025-03-07)
 
-### Fixes
+### Bug fixes
 * Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
 
 ## [0.1.74]() (2025-03-06)
 
-### Fixes
+### Bug fixes
 * Correct taints type
 
 ## [0.1.69]() (2025-02-21)
