@@ -20,34 +20,23 @@ This data source provides structure to manage image retention within the reposit
 It includes two rules: one to retain the last 50 images and another to remove untagged images older than one day.
 */
 data "aws_ecr_lifecycle_policy_document" "this" {
-  rule {
-    priority    = 90
-    description = "keep last 50 images"
+  dynamic "rule" {
+    for_each = var.ecr_rules
 
-    action {
-      type = "expire"
-    }
+    content {
+      priority = rule.value.priority
+      description = rule.value.description
 
-    selection {
-      tag_status   = "any"
-      count_type   = "imageCountMoreThan"
-      count_number = 50
-    }
-  }
+      action {
+        type = rule.value.action_type
+      }
 
-  rule {
-    priority    = 10
-    description = "remove untagged images"
-
-    action {
-      type = "expire"
-    }
-
-    selection {
-      tag_status   = "untagged"
-      count_type   = "sinceImagePushed"
-      count_number = 1
-      count_unit   = "days"
+      selection {
+        tag_status   = rule.value.tag_status
+        count_type   = rule.value.count_type
+        count_number = rule.value.count_number
+        count_unit   = rule.value.count_unit
+      }
     }
   }
 }

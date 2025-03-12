@@ -36,3 +36,41 @@ variable "scan_frequency" {
     error_message = "Invalid scan frequency. Must be 'CONTINUOUS_SCAN', 'SCAN_ON_PUSH', or 'MANUAL'"
   }
 }
+
+variable "ecr_rules" {
+  type = map(object({
+    priority = number
+    description = optional(string)
+    action_type = string
+    selection = object({
+      tag_status = string
+      count_type = string
+      count_number = number
+      count_unit = optional(string, null)
+    })
+  }))
+  default = {
+    keep_image = {
+      priority = 90
+      description = "keep last 50 images"
+      action_type = "expire"
+      selection = {
+        tag_status = "any"
+        count_type = "imageCountMoreThan"
+        count_number = 50
+        count_unit = ""
+      }
+    }
+    remove_untagged_image = {
+      priority = 10
+      description = "remove untagged images"
+      action_type = "expire"
+      selection = {
+        tag_status = "untagged"
+        count_type = "sinceImagePushed"
+        count_number = 1
+        count_unit = "days"
+      }
+    }
+  }
+}
