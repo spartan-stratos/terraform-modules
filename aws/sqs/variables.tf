@@ -69,6 +69,14 @@ variable "principal_roles" {
   default     = null
 }
 
+variable "content_based_deduplication" {
+  description = "Max receive message count"
+  type        = bool
+  default     = false
+}
+
+# migration
+
 variable "read_policy_name" {
   description = "The name of the custom read policy"
   type        = string

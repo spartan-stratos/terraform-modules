@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.80]() (2025-03-12)
+
+### Features
+
+* Add attribute `content_based_deduplication` to `aws_sqs_queue.queue`.
+
 ## [0.1.45]() (2025-01-09)
 
 ### Features
