@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.1.80]() (2024-01-07)
+
+### Fix Bugs
+
+* Remove `elasticache_cache_errors` for elasticache monitor, which was not neccessary
+
 
 ## [0.1.38]() (2024-01-07)
 
@@ -16,7 +22,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.32]() (2024-12-31)
 
-### Bug fixes
+### Fixes
 
 * Add a default value for Terraform try functions
 
