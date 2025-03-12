@@ -79,21 +79,5 @@ locals {
       renotify_occurrences        = 3
       require_full_window         = false
     }
-
-    elasticache_cache_errors = {
-      priority_level = 3
-      title_tags     = "[High Cache Errors] [ElastiCache]"
-      title          = "Elasticache Cache Error is high"
-
-      query_template = "sum($${timeframe}):sum:aws.elasticache.cache_misses{environment:${var.environment}}.as_count() > $${threshold_critical}"
-      query_args = {
-        timeframe = "last_5m"
-      }
-
-      threshold_critical          = 15
-      threshold_critical_recovery = 0
-      renotify_interval           = 50
-      renotify_occurrences        = 3
-    }
   }
 }
