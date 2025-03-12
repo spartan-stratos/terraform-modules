@@ -12,8 +12,8 @@ module "datadog_dashboard" {
     {
       name             = "env"
       prefix           = "env"
-      available_values = ["dev", "prod"]
-      default          = "prod"
+      available_values = var.datadog_dashboard_environments
+      default          = var.datadog_dashboard_default_environment
     }
   ]
 

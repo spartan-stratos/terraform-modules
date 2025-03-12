@@ -36,3 +36,15 @@ variable "enabled_datadog_dashboard" {
   type        = bool
   default     = false
 }
+
+variable "datadog_dashboard_environments" {
+  description = "The environments to enable the Datadog dashboard for."
+  type        = list(string)
+  default     = ["dev", "prod"]
+}
+
+variable "datadog_dashboard_default_environment" {
+  description = "The default environments to enable the Datadog dashboard for."
+  type        = string
+  default     = "prod"
+}
