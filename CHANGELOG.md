@@ -2,26 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.79]() (2025-03-12)
+
+### Features
+
+* AWS RDS: [(./aws/rds)](./aws/rds)
+    * Add variable `use_secret_manager` and `secret_manager_db_password_name` to create Secret Manager for database
+      password management.
+    * Add variable `password_length` to custom database password length.
+    * Add variable `db_subnet_group_name` for migration purpose.
+    * Add variable `additional_postgres_parameters` for additional parameters on PostgreSQL instance.
+
+### Bug fixes
+
+* AWS RDS: [(./aws/rds)](./aws/rds)
+    * Correct `copy_tags_to_snapshot` input to submodule `db_instance`.
+
 ## [0.1.78]() (2025-03-10)
 
 ### Features
+
 * AWS ECS Application: [(./aws/ecs-application)](./aws/ecs-application)
     * Add `persistent_volume` and integrate with EFS service
 
 ### Bug fixes
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Managed nodes: only add iam role policy when there is at least 1 statemenet
     * Managed nodes: don't ignore desired_size
 
 ## [0.1.77]() (2025-03-07)
 
-### Fixes
+### Bug fixes
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Fix map is mapping to a non-list, which failed when create clusterrolebinding
 
 ## [0.1.76]() (2025-03-07)
 
 ### Features
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Add `service_accounts` variables to handle custom service accounts
 
@@ -30,45 +50,45 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS RDS: [(./aws/rds)](./aws/rds)
-  * Rename module to `rds`
-  * Rewrite the code to support multiple RDS engines
+    * Rename module to `rds`
+    * Rewrite the code to support multiple RDS engines
 
 ### Bug fixes
 
 * AWS EKS Helm: [(./aws/eks-helm)](./aws/eks-helm)
-  * add the wafv2 arn acl config for load balancer
+    * add the wafv2 arn acl config for load balancer
 
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
-  * Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
+    * Remove AmazonEKS_CNI_IPv6_Policy policy and policy attachments
 
 ## [0.1.74]() (2024-03-06)
 
 ### Bug fixes
 
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
-  * Correct taints type.
+    * Correct taints type.
 
 ## [0.1.73]() (2024-03-06)
 
 ### Features
 
 * AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
-  * Add the flag to customize the service account for each service.
-  
+    * Add the flag to customize the service account for each service.
+
 ## [0.1.72]() (2024-03-05)
 
 ### Features
 
 * AWS WAFv2: [(./aws/wafv2)](./aws/wafv2)
-  * Introduced a new module for managing AWS WAFv2 configurations.
-  * Add wafv2 arn variable to allow the user to specify the WAFv2 ARN.
+    * Introduced a new module for managing AWS WAFv2 configurations.
+    * Add wafv2 arn variable to allow the user to specify the WAFv2 ARN.
 
 ## [0.1.71]() (2024-03-03)
 
 ### Bug fixes
 
 * AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
-  * Fix EKS service account namespace reference
+    * Fix EKS service account namespace reference
 
 ## [0.1.70]() (2024-02-27)
 
@@ -471,7 +491,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.32]() (2024-12-31)
 
-### Fixes
+### Bug fixes
 
 * Datadog / AWS-Monitors: [(./datadog/aws-monitors)](./datadog/aws-monitors)
     * Add a default value for Terraform try functions
@@ -487,7 +507,7 @@ All notable changes to this project will be documented in this file.
 * Datadog / AWS-Monitors: [(./datadog/aws-monitors)](./datadog/aws-monitors)
     * Init module with all the code
 
-### Fixes
+### Bug fixes
 
 * AWS OpenVPN: [(./aws/openvpn/)](./aws/openvpn/)
     * Add missing a new line in the init script template
@@ -594,7 +614,7 @@ All notable changes to this project will be documented in this file.
 * AWS Postgres: Add `var.publicly_accessible` to allow external machine connect to rds if
   `true` [(./aws/postgres)](./aws/rds)
 
-### Fixes
+### Bug fixes
 
 * AWS Postgres: Correct conditions to create security group `aws_security_group.this` when variable
   `vpc_security_group_ids` is null [(./aws/postgres)](./aws/rds)
