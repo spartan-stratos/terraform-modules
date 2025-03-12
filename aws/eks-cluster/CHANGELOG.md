@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Introduce support for EFS CSI driver addons in EKS Managed Node Groups
+* Add support for the EFS CSI driver in EKS Managed Node Groups
 
 ## [0.1.78]() (2025-03-10)
 
