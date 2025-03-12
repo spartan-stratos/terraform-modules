@@ -47,9 +47,10 @@ resource "aws_sqs_queue" "queue" {
   message_retention_seconds  = var.retention_seconds
   receive_wait_time_seconds  = var.wait_seconds
 
-  fifo_queue            = var.fifo_enabled
-  deduplication_scope   = var.fifo_deduplication_scope
-  fifo_throughput_limit = var.fifo_throughput_limit
+  fifo_queue                  = var.fifo_enabled
+  deduplication_scope         = var.fifo_deduplication_scope
+  fifo_throughput_limit       = var.fifo_throughput_limit
+  content_based_deduplication = var.content_based_deduplication
 }
 
 /*
