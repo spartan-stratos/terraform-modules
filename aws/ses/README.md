@@ -13,7 +13,7 @@ This module will create the following components:
 
 ```hcl
 module "ses" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/ses?ref=v0.1.80"
+  source = "github.com/spartan-stratos/terraform-modules//aws/ses?ref=v0.1.81"
 
   environment  = "dev"
   email_domain = "example1.com"

@@ -8,7 +8,7 @@ Terraform module which creates Datadog Dashboard.
 
 ```hcl
 module "dashboard" {
-  source = "github.com/spartan-stratos/terraform-modules//datadog/dashboard?ref=v0.1.80"
+  source = "github.com/spartan-stratos/terraform-modules//datadog/dashboard?ref=v0.1.81"
 
   layout_type = "ordered"
   title       = "Example Dashboard"
