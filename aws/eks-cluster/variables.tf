@@ -44,9 +44,9 @@ variable "private_subnet_ids" {
   description = "The private subnet IDs in the associated VPC"
 }
 
-variable "k8s_core_dns_compute_type" {
+variable "compute_type" {
   type        = string
-  description = "The compute type for the core DNS"
+  description = "The type of compute resources to be used, e.g., 'ec2' or 'fargate'."
   default     = "ec2"
 }
 
@@ -241,6 +241,12 @@ variable "addons_kube_proxy_version" {
 variable "addons_coredns_version" {
   type        = string
   description = "The version of the CoreDNS addon, latest by default"
+  default     = null
+}
+
+variable "addons_efs_csi_driver_version" {
+  type        = string
+  description = "The version of the EFS CSI Driver addon, latest by default"
   default     = null
 }
 

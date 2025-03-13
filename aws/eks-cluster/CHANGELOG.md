@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.81]() (2025-03-12)
+
+### Features
+
+* Add support for the EFS CSI driver in EKS Managed Node Groups
+
 ## [0.1.78]() (2025-03-10)
 
 ### Bug fixes
