@@ -36,11 +36,10 @@ module "eks" {
     delete = "20m"
   }
 
-  custom_namespaces         = ["jenkins", "datadog", "service-bot"]
-  k8s_core_dns_compute_type = "fargate"
+  custom_namespaces = ["jenkins", "datadog", "service-bot"]
+  compute_type      = "fargate"
 
   # custom RBAC
   administrator_role_arn = null
   aws_auth_users         = []
 }
-

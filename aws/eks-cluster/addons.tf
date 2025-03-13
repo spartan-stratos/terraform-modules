@@ -37,7 +37,7 @@ data "aws_eks_addon_version" "coredns_latest" {
 }
 
 resource "aws_eks_addon" "coredns_ec2" {
-  count = var.k8s_core_dns_compute_type == "ec2" ? 1 : 0
+  count = var.compute_type == "ec2" ? 1 : 0
 
   addon_name                  = "coredns"
   addon_version               = var.addons_coredns_version != null ? var.addons_coredns_version : data.aws_eks_addon_version.coredns_latest[0].version
@@ -49,7 +49,7 @@ resource "aws_eks_addon" "coredns_ec2" {
 }
 
 resource "aws_eks_addon" "coredns_fargate" {
-  count = var.k8s_core_dns_compute_type == "fargate" ? 1 : 0
+  count = var.compute_type == "fargate" ? 1 : 0
 
   addon_name                  = "coredns"
   addon_version               = var.addons_coredns_version != null ? var.addons_coredns_version : data.aws_eks_addon_version.coredns_latest[0].version
@@ -71,10 +71,10 @@ data "aws_eks_addon_version" "efs_csi_driver_latest" {
 }
 
 resource "aws_eks_addon" "efs_csi_driver" {
-  count = var.k8s_core_dns_compute_type == "ec2" ? 1 : 0
+  count = var.compute_type == "ec2" ? 1 : 0
 
   addon_name                  = "aws-efs-csi-driver"
-  addon_version               = var.addons_coredns_version != null ? var.addons_coredns_version : data.aws_eks_addon_version.efs_csi_driver_latest[0].version
+  addon_version               = var.addons_efs_csi_driver_version != null ? var.addons_efs_csi_driver_version : data.aws_eks_addon_version.efs_csi_driver_latest[0].version
   cluster_name                = local.cluster_name
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
