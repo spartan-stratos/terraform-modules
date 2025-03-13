@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.80]() (2025-03-13)
+
+### Features
+
+* AWS SQS: [(./aws/sqs)](./aws/sqs)
+    * Add attribute `content_based_deduplication` to `aws_sqs_queue.queue`.
+
+### Fix Bugs
+
+* AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
+    * Remove `elasticache_cache_errors` for elasticache monitor, which was not neccessary
+
 ## [0.1.79]() (2025-03-12)
 
 ### Features
