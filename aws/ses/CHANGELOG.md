@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.81]() (2025-03-13)
+
+### Features
+
+* Add the Lambda function to log the SES Outgoing Emails to the Datadog
+
 ## [0.1.53]() (2025-01-13)
 
 ### Features

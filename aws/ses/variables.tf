@@ -1,3 +1,9 @@
+variable "environment" {
+  description = "Environment name to be used on the resource group name construction."
+  type        = string
+  default     = null
+}
+
 variable "email_domain" {
   description = "The domain name for which SES will be configured (e.g., 'example.com')."
   type        = string
@@ -62,4 +68,47 @@ variable "enabled_ses_identity_policy" {
   description = "Whether to enable the SES identity policy."
   type        = bool
   default     = true
+}
+
+variable "enabled_outgoing_email_logs" {
+  description = "Whether to enable the SES outgoing email logs."
+  type        = bool
+  default     = false
+}
+
+variable "enabled_outgoing_email_logs_cloudwatch" {
+  description = "Whether to enable the SES outgoing email logs on CloudWatch."
+  type        = bool
+  default     = false
+}
+
+variable "datadog_api_key" {
+  description = "The datadog api key"
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "datadog_site" {
+  description = "The datadog site"
+  type        = string
+  default     = "datadoghq.com"
+}
+
+variable "enabled_datadog_dashboard" {
+  description = "Whether to enable the Datadog dashboard."
+  type        = bool
+  default     = false
+}
+
+variable "datadog_dashboard_environments" {
+  description = "The environments to enable the Datadog dashboard for."
+  type        = list(string)
+  default     = ["dev", "prod"]
+}
+
+variable "datadog_dashboard_default_environment" {
+  description = "The default environments to enable the Datadog dashboard for."
+  type        = string
+  default     = "prod"
 }
