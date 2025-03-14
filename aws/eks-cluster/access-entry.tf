@@ -3,18 +3,7 @@ resource "aws_eks_access_entry" "node_role" {
 
   cluster_name  = aws_eks_cluster.master.name
   principal_arn = aws_iam_role.node.arn
-}
-
-resource "aws_eks_access_policy_association" "node_role" {
-  count = var.authentication_mode == "API" || var.authentication_mode == "API_AND_CONFIG_MAP" ? 1 : 0
-
-  cluster_name  = aws_eks_cluster.master.name
-  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-  principal_arn = aws_iam_role.node.arn
-
-  access_scope {
-    type = "cluster"
-  }
+  type          = "FARGATE_LINUX"
 }
 
 resource "aws_eks_access_entry" "auth_role" {

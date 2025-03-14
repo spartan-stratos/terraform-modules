@@ -120,7 +120,7 @@ resource "kubernetes_service_account_v1" "this" {
   }
 }
 
-resource "kubernetes_annotations" "default" {
+resource "kubernetes_annotations" "this" {
   depends_on  = [kubernetes_namespace.this, kubernetes_service_account_v1.this]
   api_version = "v1"
   kind        = "ServiceAccount"

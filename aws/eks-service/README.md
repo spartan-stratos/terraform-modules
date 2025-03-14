@@ -24,7 +24,7 @@ module "keda" {
       "SECRET" = "super-secret"
     }
     create_service_account = false
-    service_account_name = "default"
+    service_account_name   = "default"
   }
   route53_zone_id = "my-route53-zone-id"
   region          = "us-west-2"
@@ -64,7 +64,7 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                     | resource    |
 | [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource    |
 | [aws_route53_record.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record)                         | resource    |
-| [kubernetes_annotations.default](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations)              | resource    |
+| [kubernetes_annotations.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations)                 | resource    |
 | [kubernetes_config_map.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/config_map)                   | resource    |
 | [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)                     | resource    |
 | [kubernetes_secret.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret)                           | resource    |
