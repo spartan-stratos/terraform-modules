@@ -4,7 +4,7 @@ These records verify that SendGrid can send emails on behalf of your domain.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record
  */
 resource "aws_route53_record" "cname" {
-  for_each = sendgrid_domain_authentication.this.dns
+  for_each = { for idx, record in sendgrid_domain_authentication.this.dns : idx => record }
 
   zone_id = var.dns_zone_id
 
@@ -35,7 +35,7 @@ Link branding allows SendGrid to use your domain for tracking links in emails in
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record
  */
 resource "aws_route53_record" "link_branding_records" {
-  for_each = sendgrid_link_branding.this.dns
+  for_each = { for idx, record in sendgrid_link_branding.this.dns : idx => record }
 
   zone_id = var.dns_zone_id
 
