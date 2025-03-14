@@ -8,10 +8,10 @@ resource "aws_route53_record" "cname" {
 
   zone_id = var.dns_zone_id
 
-  name    = each.host
-  records = each.data
+  name    = each.value.host
+  records = each.value.data
   ttl     = 3600
-  type    = upper(each.type)
+  type    = upper(each.value.type)
 }
 
 /**
@@ -39,8 +39,8 @@ resource "aws_route53_record" "link_branding_records" {
 
   zone_id = var.dns_zone_id
 
-  name    = each.host
-  records = [each.data]
+  name    = each.value.host
+  records = [each.value.data]
   ttl     = 3600
-  type    = upper(each.type)
+  type    = upper(each.value.type)
 }
