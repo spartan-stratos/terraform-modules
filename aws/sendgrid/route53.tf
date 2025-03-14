@@ -9,7 +9,7 @@ resource "aws_route53_record" "cname" {
   zone_id = var.dns_zone_id
 
   name    = each.value.host
-  records = each.value.data
+  records = [each.value.data]
   ttl     = 3600
   type    = upper(each.value.type)
 }
