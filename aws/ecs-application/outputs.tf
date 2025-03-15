@@ -22,3 +22,8 @@ output "additional_container_definitions" {
   description = "The additional container definitions of ECS application"
   value       = var.additional_container_definitions
 }
+
+output "task_role_arn" {
+  description = "The task role arn"
+  value       = aws_iam_role.task_role.arn
+}
