@@ -7,7 +7,6 @@ resource "aws_security_group" "this" {
   name        = "${var.name}-sg"
   description = "Allow inbound HTTP traffic to service from ALB only"
 
-
   ingress {
     description     = "Allow from ALB only"
     from_port       = var.container_port
@@ -15,7 +14,6 @@ resource "aws_security_group" "this" {
     protocol        = "tcp"
     security_groups = var.alb_security_groups
   }
-
 
   egress {
     from_port   = 0
