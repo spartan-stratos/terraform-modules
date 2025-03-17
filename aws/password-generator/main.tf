@@ -4,7 +4,7 @@ The `password_length` is set to 32 characters and excludes punctuation for compa
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_random_password
 */
 data "aws_secretsmanager_random_password" "random_password" {
-  password_length     = 32
+  password_length     = var.password_length
   exclude_punctuation = true
 }
 

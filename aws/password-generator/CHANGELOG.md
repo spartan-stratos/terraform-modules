@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.82]() (2025-03-17)
+
+### Features
+
+* Add variable `password_length`.
+
 ## [0.1.4]() (2024-12-05)
 
 ### Features
