@@ -33,10 +33,14 @@ resource "aws_ecs_service" "this" {
     assign_public_ip = var.assign_public_ip
   }
 
-  load_balancer {
-    container_name   = "${var.name}-container"
-    container_port   = var.container_port
-    target_group_arn = try(aws_lb_target_group.this[0].arn, null)
+  dynamic "load_balancer" {
+    for_each = var.is_worker ? [0] : [1]
+
+    content {
+      container_name   = "${var.name}-container"
+      container_port   = var.container_port
+      target_group_arn = try(aws_lb_target_group.this[0].arn, null)
+    }
   }
 
   # desired_count is ignored as it can change due to autoscaling policy
