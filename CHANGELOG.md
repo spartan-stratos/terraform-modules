@@ -2,18 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0]() (2025-03-17)
+
+### Features
+
+* AWS Password Generator: [(./aws/password-generator)](./aws/password-generator)
+    * Add variable `password_length`.
+
+* AWS Secret Manager: [(./aws/secret-manager)](./aws/secret-manager)
+    * Init module.
+
+* AWS SendGrid: [(./aws/sendgrid)](./aws/sendgrid)
+    * Init module.
+
 ## [0.1.81]() (2025-03-13)
 
 ### Features
 
 * Datadog Dashboard: [(./datadog/dashboard)](./datadog/dashboard)
-  * Init Datadog Dashboard module
+    * Init Datadog Dashboard module
 
 * AWS SES: [(./aws/ses)](./aws/ses)
-  * Add the Lambda function to log the SES Outgoing Emails to the Datadog
+    * Add the Lambda function to log the SES Outgoing Emails to the Datadog
 
 * AWS EKS Cluster [(./aws/eks-cluster)](./aws/eks-cluster)
-  * Add support for the EFS CSI driver in EKS Managed Node Groups
+    * Add support for the EFS CSI driver in EKS Managed Node Groups
 
 ## [0.1.80]() (2025-03-13)
 
