@@ -94,12 +94,12 @@ locals {
           }
         ]
       } : local.log_configuration
-      dependsOn = var.enabled_datadog_sidecar ? [
+      dependsOn = concat(var.container_depends_on, var.enabled_datadog_sidecar ? [
         {
-          containerName : "log_router"
-          condition : "START"
+        containerName : "log_router"
+        condition : "START"
         }
-      ] : []
+      ] : [])
     },
   ]
 

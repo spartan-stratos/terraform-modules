@@ -186,6 +186,14 @@ variable "awslogs_stream_prefix" {
   default     = "ecs"
 }
 
+variable "container_depends_on" {
+  type = list(object({
+    containerName = string
+    condition     = string
+  }))
+  default = []
+}
+
 # alb & r53
 variable "alb_dns_name" {
   description = "DNS name of the Application Load Balancer"
