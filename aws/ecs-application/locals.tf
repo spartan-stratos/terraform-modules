@@ -1,5 +1,27 @@
+variable "container_command" {
+  description = "Container command."
+  type = list(string)
+  default = []
+}
+variable "container_entryPoint" {
+  description = "Container entrypoint"
+  type = list(string)
+  default = []
+}
+variable "log_configuration" {
+  description = "Overwrite container log configuration."
+  type = object({
+    logDriver = optional(string)
+    options = optional(map(string))
+    secretOptions = optional(list(object({
+      name      = string
+      valueFrom = string
+    })))
+  })
+  default = null
+}
 locals {
-  log_configuration = {
+  log_configuration = var.log_configuration != null ? var.log_configuration : {
     logDriver = "awslogs"
     options = {
       "awslogs-group"         = aws_cloudwatch_log_group.this.name
@@ -8,7 +30,7 @@ locals {
     }
   }
 
-  additional_container_with_log_definitions = [for definition in var.additional_container_definitions : merge(definition, { logConfiguration = local.log_configuration })]
+  additional_container_with_log_definitions = [for definition in var.additional_container_definitions : merge({ logConfiguration = local.log_configuration }, definition)]
 
   container_definitions = concat([
     {
@@ -35,6 +57,8 @@ locals {
           hostPort      = var.container_port
         }
       ]
+      command     = var.container_command
+      entryPoint  = var.container_entryPoint
       logConfiguration = local.log_configuration
   }], local.additional_container_with_log_definitions)
 }
