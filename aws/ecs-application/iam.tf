@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "secrets" {
 
 resource "aws_iam_policy" "secrets" {
   name        = "${var.name}-task-policy-secrets"
-  description = "Policy that allows access to the ssm we created"
+  description = var.task_policy_secrets_description
   policy      = data.aws_iam_policy_document.secrets.json
 }
 
@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "ssm" {
 
 resource "aws_iam_policy" "ssm" {
   name        = "${var.name}-task-policy-ssm"
-  description = "Policy that allows access to the ssm we created"
+  description = var.task_policy_ssm_description
   policy      = data.aws_iam_policy_document.ssm.json
 }
 

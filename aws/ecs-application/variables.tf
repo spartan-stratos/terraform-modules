@@ -200,3 +200,15 @@ variable "overwrite_task_role_name" {
   type        = string
   default     = null
 }
+
+variable "task_policy_secrets_description" {
+  description = "The description of IAM policy for task secrets."
+  type = string
+  default = "Policy that allows access to the ssm we created"
+}
+
+variable "task_policy_ssm_description" {
+  description = "The description of IAM policy for task ssm."
+  type = string
+  default = "Policy that allows access to the ssm we created"
+}
