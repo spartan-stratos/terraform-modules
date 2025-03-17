@@ -182,6 +182,12 @@ variable "user" {
   default     = null
 }
 
+variable "is_worker" {
+  description = "Whether if this application is a worker."
+  type        = bool
+  default     = false
+}
+
 # migration
 variable "overwrite_task_execution_role_name" {
   description = "Overwrite ECS task execution role name."

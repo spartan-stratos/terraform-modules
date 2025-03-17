@@ -36,7 +36,7 @@ resource "aws_ecs_service" "this" {
   load_balancer {
     container_name   = "${var.name}-container"
     container_port   = var.container_port
-    target_group_arn = aws_lb_target_group.this.arn
+    target_group_arn = try(aws_lb_target_group.this[0].arn, null)
   }
 
   # desired_count is ignored as it can change due to autoscaling policy
