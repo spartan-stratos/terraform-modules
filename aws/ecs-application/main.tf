@@ -37,7 +37,7 @@ resource "aws_ecs_service" "this" {
   force_new_deployment               = var.force_new_deployment
 
   network_configuration {
-    security_groups  = concat([aws_security_group.this.id], var.security_group_ids)
+    security_groups  = concat([try(aws_security_group.this[0].id, null)], var.security_group_ids)
     subnets          = var.subnet_ids
     assign_public_ip = var.assign_public_ip
   }
