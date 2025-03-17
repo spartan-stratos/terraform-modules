@@ -181,3 +181,16 @@ variable "user" {
   type        = string
   default     = null
 }
+
+# migration
+variable "overwrite_task_execution_role_name" {
+  description = "Overwrite ECS task execution role name."
+  type        = string
+  default     = null
+}
+
+variable "overwrite_task_role_name" {
+  description = "Overwrite ECS task role name."
+  type        = string
+  default     = null
+}
