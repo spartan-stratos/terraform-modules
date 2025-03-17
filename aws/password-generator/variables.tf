@@ -1,3 +1,9 @@
+variable "password_length" {
+  description = "The length of password to generate."
+  type        = number
+  default     = 32
+}
+
 variable "secret_name" {
   description = "The name of the secret"
   type        = string
