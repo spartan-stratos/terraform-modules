@@ -8,14 +8,32 @@ variable "cloudwatch_log_group_name" {
   type = string
   default = null
 }
+
 locals {
-  cloudwatch_log_group_name = var.cloudwatch_log_group_name != null ? "/ecs/${var.cloudwatch_log_group_name}" : "/ecs/${var.name}-task"
+  cloudwatch_log_group_name = var.cloudwatch_log_group_name != null ? var.cloudwatch_log_group_name : "${var.name}-task"
 }
+
 resource "aws_cloudwatch_log_group" "this" {
-  name = local.cloudwatch_log_group_name
+  name = "/ecs/${local.cloudwatch_log_group_name}"
 
   tags = {
     Name        = local.cloudwatch_log_group_name
+    Environment = var.environment
+  }
+}
+
+variable "cloudwatch_log_group_migration_name" {
+  description = "Overwrite existing aws_cloudwatch_log_group migration name."
+  type = string
+  default = null
+}
+resource "aws_cloudwatch_log_group" "migration" {
+  count = var.cloudwatch_log_group_migration_name != null ? 1 : 0
+
+  name = "/ecs/${var.cloudwatch_log_group_migration_name}"
+
+  tags = {
+    Name        = var.cloudwatch_log_group_migration_name
     Environment = var.environment
   }
 }
@@ -37,13 +55,13 @@ resource "aws_ecs_service" "this" {
   force_new_deployment               = var.force_new_deployment
 
   network_configuration {
-    security_groups  = concat([try(aws_security_group.this[0].id, null)], var.security_group_ids)
+    security_groups  = compact(concat([try(aws_security_group.this[0].id, null)], var.security_group_ids))
     subnets          = var.subnet_ids
     assign_public_ip = var.assign_public_ip
   }
 
   dynamic "load_balancer" {
-    for_each = var.is_worker ? [0] : [1]
+    for_each = var.is_worker ? [] : [1]
 
     content {
       container_name   = "${var.name}-container"
