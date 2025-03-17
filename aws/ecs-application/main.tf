@@ -77,8 +77,8 @@ resource "aws_ecs_task_definition" "this" {
    * 8192 (8 vCPU) - Between 16 GB and 60 GB in 4 GB increments
    * 16384 (16vCPU) - Between 32 GB and 120 GB in 8 GB increments
    */
-  cpu                   = var.container_cpu
-  memory                = var.container_memory
+  cpu                   = var.task_cpu
+  memory                = var.task_memory
   execution_role_arn    = aws_iam_role.task_execution_role.arn
   task_role_arn         = aws_iam_role.task_role.arn
   container_definitions = jsonencode(local.container_definitions)

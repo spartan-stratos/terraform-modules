@@ -33,6 +33,16 @@ variable "name" {
   type        = string
 }
 
+variable "task_memory" {
+  description = "Task memory."
+  type = number
+}
+
+variable "task_cpu" {
+  description = "Task cpu."
+  type = number
+}
+
 variable "container_port" {
   description = "Port of container to be exposed"
   type        = number
@@ -249,7 +259,6 @@ variable "task_policy_ssm_description" {
 }
 
 # datadog
-
 variable "enabled_datadog_sidecar" {
   description = "Whether to use Datadog sidecar for monitoring and logging."
   type        = bool
