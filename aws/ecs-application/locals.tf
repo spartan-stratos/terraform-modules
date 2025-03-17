@@ -58,13 +58,14 @@ locals {
       volumesFrom = []
       environment = var.container_environment
       secrets     = var.container_secrets
-      portMappings = [
-        {
+      portMappings = concat(
+        [{
           protocol      = "tcp"
           containerPort = var.container_port
           hostPort      = var.container_port
-        }
-      ]
+        }],
+        var.additional_port_mappings
+      )
       dockerLabels = var.enabled_datadog_sidecar ? {
         "com.datadoghq.ad.check_names" : "[\"${var.name}\"]",
         "com.datadoghq.ad.init_configs" : "[{}]"

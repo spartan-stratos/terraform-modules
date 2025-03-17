@@ -136,6 +136,10 @@ variable "additional_container_definitions" {
   default     = []
 }
 
+variable "additional_port_mappings" {
+  default = []
+}
+
 variable "assign_public_ip" {
   description = "Enable to assign the public ip to the tasks"
   type        = bool
