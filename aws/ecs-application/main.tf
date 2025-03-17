@@ -2,17 +2,6 @@
 aws_cloudwatch_log_group provides a CloudWatch Log Group resource for awslogs driver.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
 */
-
-variable "cloudwatch_log_group_name" {
-  description = "Overwrite existing aws_cloudwatch_log_group name."
-  type = string
-  default = null
-}
-
-locals {
-  cloudwatch_log_group_name = var.cloudwatch_log_group_name != null ? var.cloudwatch_log_group_name : "${var.name}-task"
-}
-
 resource "aws_cloudwatch_log_group" "this" {
   name = "/ecs/${local.cloudwatch_log_group_name}"
 
@@ -22,11 +11,6 @@ resource "aws_cloudwatch_log_group" "this" {
   }
 }
 
-variable "cloudwatch_log_group_migration_name" {
-  description = "Overwrite existing aws_cloudwatch_log_group migration name."
-  type = string
-  default = null
-}
 resource "aws_cloudwatch_log_group" "migration" {
   count = var.cloudwatch_log_group_migration_name != null ? 1 : 0
 

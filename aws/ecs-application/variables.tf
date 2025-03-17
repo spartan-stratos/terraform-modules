@@ -1,5 +1,6 @@
-variable "name" {
-  description = "The name ECS application"
+# general
+variable "vpc_id" {
+  description = "VPC ID"
   type        = string
 }
 
@@ -24,6 +25,12 @@ variable "security_group_ids" {
   description = "List of security groups to associate with the task or service"
   type        = list(string)
   default     = []
+}
+
+# ecs
+variable "name" {
+  description = "The name ECS application"
+  type        = string
 }
 
 variable "container_port" {
@@ -89,47 +96,6 @@ variable "ecs_cluster_name" {
   type        = string
 }
 
-variable "alb_dns_name" {
-  description = "DNS name of the Application Load Balancer"
-  type        = string
-}
-
-variable "alb_security_groups" {
-  description = "List of security group IDs of the ALB"
-  type        = list(string)
-}
-
-variable "aws_lb_listener_arn" {
-  description = "ARN of the ALB"
-  type        = string
-}
-
-variable "aws_lb_listener_rule_priority" {
-  description = "AWS LB listener rule's priority"
-  type        = number
-  default     = 100
-}
-
-variable "alb_zone_id" {
-  description = "Hosted zone id of the ALB"
-  type        = string
-}
-
-variable "dns_name" {
-  description = "DNS name for the ECS application"
-  type        = string
-}
-
-variable "route53_zone_id" {
-  description = "R53 zone ID"
-  type        = string
-}
-
-variable "vpc_id" {
-  description = "VPC ID"
-  type        = string
-}
-
 variable "health_check_enabled" {
   description = "Specify whether enabling health check for this ECS service or not"
   type        = bool
@@ -188,7 +154,76 @@ variable "is_worker" {
   default     = false
 }
 
-# migration
+variable "container_command" {
+  description = "Container command."
+  type        = list(string)
+  default     = []
+}
+
+variable "container_entryPoint" {
+  description = "Container entrypoint"
+  type        = list(string)
+  default     = []
+}
+
+variable "awslogs_stream_prefix" {
+  description = "AWS logs stream prefix."
+  type        = string
+  default     = "ecs"
+}
+
+# alb & r53
+variable "alb_dns_name" {
+  description = "DNS name of the Application Load Balancer"
+  type        = string
+}
+
+variable "alb_security_groups" {
+  description = "List of security group IDs of the ALB"
+  type        = list(string)
+}
+
+variable "aws_lb_listener_arn" {
+  description = "ARN of the ALB"
+  type        = string
+}
+
+variable "aws_lb_listener_rule_priority" {
+  description = "AWS LB listener rule's priority"
+  type        = number
+  default     = 100
+}
+
+variable "alb_zone_id" {
+  description = "Hosted zone id of the ALB"
+  type        = string
+}
+
+variable "dns_name" {
+  description = "DNS name for the ECS application"
+  type        = string
+}
+
+variable "route53_zone_id" {
+  description = "R53 zone ID"
+  type        = string
+}
+
+# cloudwatch
+variable "cloudwatch_log_group_name" {
+  description = "Overwrite existing aws_cloudwatch_log_group name."
+  type        = string
+  default     = null
+}
+
+## flyway log
+variable "cloudwatch_log_group_migration_name" {
+  description = "Overwrite existing aws_cloudwatch_log_group migration name."
+  type        = string
+  default     = null
+}
+
+# iam
 variable "overwrite_task_execution_role_name" {
   description = "Overwrite ECS task execution role name."
   type        = string
@@ -203,12 +238,42 @@ variable "overwrite_task_role_name" {
 
 variable "task_policy_secrets_description" {
   description = "The description of IAM policy for task secrets."
-  type = string
-  default = "Policy that allows access to the ssm we created"
+  type        = string
+  default     = "Policy that allows access to the ssm we created"
 }
 
 variable "task_policy_ssm_description" {
   description = "The description of IAM policy for task ssm."
-  type = string
-  default = "Policy that allows access to the ssm we created"
+  type        = string
+  default     = "Policy that allows access to the ssm we created"
+}
+
+# datadog
+
+variable "enabled_datadog_sidecar" {
+  description = "Whether to use Datadog sidecar for monitoring and logging."
+  type        = bool
+  default     = false
+}
+
+variable "dd_site" {
+  type    = string
+  default = null
+}
+
+variable "dd_api_key_arn" {
+  type    = string
+  default = null
+}
+
+variable "dd_agent_image" {
+  description = "Datadog agent image."
+  type        = string
+  default     = "public.ecr.aws/datadog/agent:latest"
+}
+
+variable "dd_port" {
+  description = "Datadog agent port."
+  type        = number
+  default     = 8126
 }
