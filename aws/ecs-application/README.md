@@ -152,7 +152,7 @@ module "application" {
 | <a name="input_container_cpu"></a> [container\_cpu](#input\_container\_cpu) | The number of cpu units used by the task | `number` | `512` | no |
 | <a name="input_container_depends_on"></a> [container\_depends\_on](#input\_container\_depends\_on) | n/a | <pre>list(object({<br/>    containerName = string<br/>    condition     = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_container_entryPoint"></a> [container\_entryPoint](#input\_container\_entryPoint) | Container entrypoint | `list(string)` | `[]` | no |
-| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment) | The container environment variables | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment) | The container environment variables | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_container_image"></a> [container\_image](#input\_container\_image) | Docker image to be launched | `string` | n/a | yes |
 | <a name="input_container_memory"></a> [container\_memory](#input\_container\_memory) | The amount (in MiB) of memory used by the task | `number` | `2048` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Port of container to be exposed | `number` | n/a | yes |
