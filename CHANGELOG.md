@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2]() (2025-03-18)
+
+### Features
+
+* AWS ECS: [(./aws/ecs-cluster)](./aws/ecs-cluster)
+    * Add ECS Service Connect using `enabled_service_connect`.
+
+* AWS ECS application: [(./aws/ecs-application)](./aws/ecs-application)
+    * Add ECS Service Connect using `enabled_service_connect` and `service_connect_configuration`.
+
 ## [0.2.1]() (2025-03-18)
 
 ### Features
