@@ -27,8 +27,3 @@ output "task_role_arn" {
   description = "The task role arn"
   value       = aws_iam_role.task_role.arn
 }
-
-output "dd_container_definitions" {
-  description = "The Datadog container definitions."
-  value       = local.dd_container_definitions
-}

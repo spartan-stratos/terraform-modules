@@ -96,15 +96,15 @@ locals {
       } : local.log_configuration
       dependsOn = concat(var.container_depends_on, var.enabled_datadog_sidecar ? [
         {
-        containerName : "log_router"
-        condition : "START"
+          containerName : "log_router"
+          condition : "START"
         }
       ] : [])
     },
   ]
 
-  dd_container_definitions = [
-    // using fluent-bit to send logs directly to datadog
+  // using fluent-bit to send logs directly to datadog
+  log_router_definition = var.enabled_datadog_sidecar ? [
     {
       name         = "log_router"
       image        = "public.ecr.aws/aws-observability/aws-for-fluent-bit:stable"
@@ -123,8 +123,11 @@ locals {
           "enable-ecs-log-metadata" : "true"
         }
       }
-    },
-    // datadog sidecar
+    }
+  ] : []
+
+  // datadog sidecar
+  dd_container_definition = var.enabled_datadog_sidecar ? [
     {
       name        = "datadog"
       image       = var.dd_agent_image
@@ -190,11 +193,12 @@ locals {
         secretOptions = []
       }
     }
-  ]
+  ] : []
 
   container_definitions = concat(
     local.service_container_definition,
-    var.enabled_datadog_sidecar ? local.dd_container_definitions : [],
+    local.dd_container_definition,
+    local.log_router_definition,
     local.additional_container_with_log_definitions,
   )
 }

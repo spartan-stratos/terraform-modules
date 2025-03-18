@@ -18,19 +18,19 @@ This module will create the components below:
 
 ```hcl
 module "application" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.1.78"
+  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-application?ref=v0.2.1"
 
   name                          = "example-service"
   environment                   = "dev"
   region                        = "us-west-2"
-  subnet_ids                    = [] # the subnet objects should be passed
-  additional_iam_policy_arns    = []
+  subnet_ids = [] # the subnet objects should be passed
+  additional_iam_policy_arns = []
   container_port                = 8080
   container_cpu                 = 512
   container_memory              = 2048
   alb_dns_name                  = "example.us-west-2.elb.amazonaws.com"
-  alb_security_groups           = ["sg-0ea3ae12345678"]
-  alb_zone_id                   = "Z1H1FL5HABSF5" # us-west-2 hosted zone for ALB
+  alb_security_groups = ["sg-0ea3ae12345678"]
+  alb_zone_id = "Z1H1FL5HABSF5" # us-west-2 hosted zone for ALB
   aws_lb_listener_arn           = "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188"
   aws_lb_listener_rule_priority = 100
   container_environment = [
@@ -196,7 +196,6 @@ module "application" {
 | <a name="output_alb_target_group_arn"></a> [alb\_target\_group\_arn](#output\_alb\_target\_group\_arn) | The ALB ARN of ECS application |
 | <a name="output_application_domain_name"></a> [application\_domain\_name](#output\_application\_domain\_name) | The domain name of ECS application |
 | <a name="output_container_definitions"></a> [container\_definitions](#output\_container\_definitions) | The container definitions of ECS application |
-| <a name="output_dd_container_definitions"></a> [dd\_container\_definitions](#output\_dd\_container\_definitions) | The Datadog container definitions. |
 | <a name="output_ecs_service_name"></a> [ecs\_service\_name](#output\_ecs\_service\_name) | The ECS service name |
 | <a name="output_task_role_arn"></a> [task\_role\_arn](#output\_task\_role\_arn) | The task role arn |
 <!-- END_TF_DOCS -->
