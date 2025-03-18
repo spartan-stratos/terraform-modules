@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
     * `enabled_datadog_sidecar`, `dd_site`, `dd_api_key_arn`, `dd_agent_image`, `dd_port`: supports datadog sidecar
       definitions.
     * `use_alb`: whether to use ALB.
+    * `enabled_port_mapping`: whether to use TCP port mapping to service container.
 
 ## [0.1.78]() (2025-03-10)
 

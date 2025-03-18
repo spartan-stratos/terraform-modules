@@ -138,7 +138,7 @@ module "application" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_container_definitions"></a> [additional\_container\_definitions](#input\_additional\_container\_definitions) | Custom container definition | `list(any)` | `[]` | no |
 | <a name="input_additional_iam_policy_arns"></a> [additional\_iam\_policy\_arns](#input\_additional\_iam\_policy\_arns) | Additional policies for ECS task role | `list(string)` | `[]` | no |
-| <a name="input_additional_port_mappings"></a> [additional\_port\_mappings](#input\_additional\_port\_mappings) | n/a | `list` | `[]` | no |
+| <a name="input_additional_port_mappings"></a> [additional\_port\_mappings](#input\_additional\_port\_mappings) | Additional port mappings to service container. | <pre>list(object({<br/>    protocol      = string<br/>    containerPort = number<br/>    hostPort      = number<br/>  }))</pre> | `[]` | no |
 | <a name="input_alb_dns_name"></a> [alb\_dns\_name](#input\_alb\_dns\_name) | DNS name of the Application Load Balancer | `string` | n/a | yes |
 | <a name="input_alb_security_groups"></a> [alb\_security\_groups](#input\_alb\_security\_groups) | List of security group IDs of the ALB | `list(string)` | n/a | yes |
 | <a name="input_alb_zone_id"></a> [alb\_zone\_id](#input\_alb\_zone\_id) | Hosted zone id of the ALB | `string` | n/a | yes |
@@ -152,7 +152,7 @@ module "application" {
 | <a name="input_container_cpu"></a> [container\_cpu](#input\_container\_cpu) | The number of cpu units used by the task | `number` | `512` | no |
 | <a name="input_container_depends_on"></a> [container\_depends\_on](#input\_container\_depends\_on) | n/a | <pre>list(object({<br/>    containerName = string<br/>    condition     = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_container_entryPoint"></a> [container\_entryPoint](#input\_container\_entryPoint) | Container entrypoint | `list(string)` | `[]` | no |
-| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment) | The container environment variables | `list(any)` | n/a | yes |
+| <a name="input_container_environment"></a> [container\_environment](#input\_container\_environment) | The container environment variables | <pre>list(object({<br/>    name      = string<br/>    valueFrom = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_container_image"></a> [container\_image](#input\_container\_image) | Docker image to be launched | `string` | n/a | yes |
 | <a name="input_container_memory"></a> [container\_memory](#input\_container\_memory) | The amount (in MiB) of memory used by the task | `number` | `2048` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Port of container to be exposed | `number` | n/a | yes |
@@ -166,11 +166,11 @@ module "application" {
 | <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | Name of the ECS cluster for this ECS application | `string` | n/a | yes |
 | <a name="input_ecs_execution_policy_arns"></a> [ecs\_execution\_policy\_arns](#input\_ecs\_execution\_policy\_arns) | Permission to make AWS API calls | `list(string)` | n/a | yes |
 | <a name="input_enabled_datadog_sidecar"></a> [enabled\_datadog\_sidecar](#input\_enabled\_datadog\_sidecar) | Whether to use Datadog sidecar for monitoring and logging. | `bool` | `false` | no |
+| <a name="input_enabled_port_mapping"></a> [enabled\_port\_mapping](#input\_enabled\_port\_mapping) | Whether to use TCP port mapping to service container. | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment name | `string` | `"dev"` | no |
 | <a name="input_force_new_deployment"></a> [force\_new\_deployment](#input\_force\_new\_deployment) | Enable to force a new task deployment of the service | `bool` | `true` | no |
 | <a name="input_health_check_enabled"></a> [health\_check\_enabled](#input\_health\_check\_enabled) | Specify whether enabling health check for this ECS service or not | `bool` | `true` | no |
 | <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | Default path for health check requests | `string` | `"/health"` | no |
-| <a name="input_is_worker"></a> [is\_worker](#input\_is\_worker) | Whether if this application is a worker. | `bool` | `false` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name ECS application | `string` | n/a | yes |
 | <a name="input_overwrite_task_execution_role_name"></a> [overwrite\_task\_execution\_role\_name](#input\_overwrite\_task\_execution\_role\_name) | Overwrite ECS task execution role name. | `string` | `null` | no |
 | <a name="input_overwrite_task_role_name"></a> [overwrite\_task\_role\_name](#input\_overwrite\_task\_role\_name) | Overwrite ECS task role name. | `string` | `null` | no |
@@ -185,6 +185,7 @@ module "application" {
 | <a name="input_task_memory"></a> [task\_memory](#input\_task\_memory) | Task memory. | `number` | n/a | yes |
 | <a name="input_task_policy_secrets_description"></a> [task\_policy\_secrets\_description](#input\_task\_policy\_secrets\_description) | The description of IAM policy for task secrets. | `string` | `"Policy that allows access to the ssm we created"` | no |
 | <a name="input_task_policy_ssm_description"></a> [task\_policy\_ssm\_description](#input\_task\_policy\_ssm\_description) | The description of IAM policy for task ssm. | `string` | `"Policy that allows access to the ssm we created"` | no |
+| <a name="input_use_alb"></a> [use\_alb](#input\_use\_alb) | Whether to use alb for this ecs task. | `bool` | `true` | no |
 | <a name="input_user"></a> [user](#input\_user) | User to run the container | `string` | `null` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID | `string` | n/a | yes |
 

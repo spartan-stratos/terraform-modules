@@ -76,7 +76,11 @@ variable "container_secrets" {
 
 variable "container_environment" {
   description = "The container environment variables"
-  type        = list(any)
+  type = list(object({
+    name      = string
+    valueFrom = string
+  }))
+  default = []
 }
 
 variable "service_desired_count" {
@@ -137,7 +141,19 @@ variable "additional_container_definitions" {
 }
 
 variable "additional_port_mappings" {
+  description = "Additional port mappings to service container."
+  type = list(object({
+    protocol      = string
+    containerPort = number
+    hostPort      = number
+  }))
   default = []
+}
+
+variable "enabled_port_mapping" {
+  description = "Whether to use TCP port mapping to service container."
+  type        = bool
+  default     = true
 }
 
 variable "assign_public_ip" {

@@ -59,11 +59,11 @@ locals {
       environment = var.container_environment
       secrets     = var.container_secrets
       portMappings = concat(
-        [{
+        var.enabled_port_mapping ? [{
           protocol      = "tcp"
           containerPort = var.container_port
           hostPort      = var.container_port
-        }],
+        }] : [],
         var.additional_port_mappings
       )
       dockerLabels = var.enabled_datadog_sidecar ? {
