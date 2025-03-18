@@ -77,8 +77,8 @@ variable "container_secrets" {
 variable "container_environment" {
   description = "The container environment variables"
   type = list(object({
-    name      = string
-    valueFrom = string
+    name  = string
+    value = string
   }))
   default = []
 }
