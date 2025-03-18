@@ -45,7 +45,7 @@ resource "aws_ecs_service" "this" {
   }
 
   dynamic "load_balancer" {
-    for_each = var.is_worker ? [] : [1]
+    for_each = var.use_alb ? [1] : []
 
     content {
       container_name   = "${var.name}-container"

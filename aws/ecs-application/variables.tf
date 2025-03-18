@@ -35,12 +35,12 @@ variable "name" {
 
 variable "task_memory" {
   description = "Task memory."
-  type = number
+  type        = number
 }
 
 variable "task_cpu" {
   description = "Task cpu."
-  type = number
+  type        = number
 }
 
 variable "container_port" {
@@ -162,10 +162,10 @@ variable "user" {
   default     = null
 }
 
-variable "is_worker" {
-  description = "Whether if this application is a worker."
+variable "use_alb" {
+  description = "Whether to use alb for this ecs task."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "container_command" {

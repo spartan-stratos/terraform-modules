@@ -3,7 +3,7 @@ aws_security_group provides a security group resource for ECS service.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group.html
 */
 resource "aws_security_group" "this" {
-  count = var.is_worker ? 0 : 1
+  count = var.use_alb ? 1 : 0
 
   vpc_id      = var.vpc_id
   name        = "${var.name}-sg"

@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "this" {
-  count = var.is_worker ? 0 : 1
+  count = var.use_alb ? 1 : 0
 
   name        = "${var.name}-tg"
   port        = var.container_port
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "this" {
 }
 
 resource "aws_lb_listener_rule" "this" {
-  count = var.is_worker ? 0 : 1
+  count = var.use_alb ? 1 : 0
 
   listener_arn = var.aws_lb_listener_arn
   priority     = var.aws_lb_listener_rule_priority
