@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5]() (2025-03-18)
+
+### Features
+
+* AWS ECS application: [(./aws/ecs-application)](./aws/ecs-application)
+    * Allow all connection within VPC to container port if `enabled_service_connect` set to `true`.
+
 ## [0.2.4]() (2025-03-18)
 
 ### Bug Fixes

@@ -22,6 +22,18 @@ resource "aws_security_group" "this" {
   }
 
   dynamic "ingress" {
+    for_each = var.enabled_service_connect ? [1] : []
+
+    content {
+      description = "Allow within the VPC"
+      from_port   = var.container_port
+      to_port     = var.container_port
+      protocol    = "tcp"
+      cidr_blocks = [data.aws_vpc.this.cidr_block]
+    }
+  }
+
+  dynamic "ingress" {
     for_each = var.additional_port_mappings
 
     content {
