@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "ecs_tasks_assume_role" {
 }
 
 resource "aws_iam_role" "task_execution_role" {
-  name               = "${var.name}-ecs-task-execution-role"
+  name               = var.overwrite_task_execution_role_name != null ? var.overwrite_task_execution_role_name : "${var.name}-ecs-task-execution-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "secrets" {
 
 resource "aws_iam_policy" "secrets" {
   name        = "${var.name}-task-policy-secrets"
-  description = "Policy that allows access to the ssm we created"
+  description = var.task_policy_secrets_description
   policy      = data.aws_iam_policy_document.secrets.json
 }
 
@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "ssm" {
 
 resource "aws_iam_policy" "ssm" {
   name        = "${var.name}-task-policy-ssm"
-  description = "Policy that allows access to the ssm we created"
+  description = var.task_policy_ssm_description
   policy      = data.aws_iam_policy_document.ssm.json
 }
 
@@ -81,7 +81,7 @@ data "aws_iam_policy_document" "task_role_assume_role_policy" {
 }
 
 resource "aws_iam_role" "task_role" {
-  name               = "${var.name}-ecs-task-role"
+  name               = var.overwrite_task_role_name != null ? var.overwrite_task_role_name : "${var.name}-ecs-task-role"
   assume_role_policy = data.aws_iam_policy_document.task_role_assume_role_policy.json
 }
 

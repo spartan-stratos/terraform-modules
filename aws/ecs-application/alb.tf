@@ -1,4 +1,6 @@
 resource "aws_lb_target_group" "this" {
+  count = var.use_alb ? 1 : 0
+
   name        = "${var.name}-tg"
   port        = var.container_port
   protocol    = "HTTP"
@@ -23,17 +25,19 @@ resource "aws_lb_target_group" "this" {
 }
 
 resource "aws_lb_listener_rule" "this" {
+  count = var.use_alb ? 1 : 0
+
   listener_arn = var.aws_lb_listener_arn
   priority     = var.aws_lb_listener_rule_priority
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.this.arn
+    target_group_arn = aws_lb_target_group.this[0].arn
   }
 
   condition {
     host_header {
-      values = [aws_route53_record.this.fqdn]
+      values = [aws_route53_record.this[0].fqdn]
     }
   }
 }

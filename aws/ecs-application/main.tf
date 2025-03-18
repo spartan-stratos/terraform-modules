@@ -3,10 +3,21 @@ aws_cloudwatch_log_group provides a CloudWatch Log Group resource for awslogs dr
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
 */
 resource "aws_cloudwatch_log_group" "this" {
-  name = "/ecs/${var.name}-task"
+  name = "/ecs/${local.cloudwatch_log_group_name}"
 
   tags = {
-    Name        = "${var.name}-task"
+    Name        = local.cloudwatch_log_group_name
+    Environment = var.environment
+  }
+}
+
+resource "aws_cloudwatch_log_group" "migration" {
+  count = var.cloudwatch_log_group_migration_name != null ? 1 : 0
+
+  name = "/ecs/${var.cloudwatch_log_group_migration_name}"
+
+  tags = {
+    Name        = var.cloudwatch_log_group_migration_name
     Environment = var.environment
   }
 }
@@ -28,15 +39,19 @@ resource "aws_ecs_service" "this" {
   force_new_deployment               = var.force_new_deployment
 
   network_configuration {
-    security_groups  = concat([aws_security_group.this.id], var.security_group_ids)
+    security_groups  = compact(concat([try(aws_security_group.this[0].id, null)], var.security_group_ids))
     subnets          = var.subnet_ids
     assign_public_ip = var.assign_public_ip
   }
 
-  load_balancer {
-    container_name   = "${var.name}-container"
-    container_port   = var.container_port
-    target_group_arn = aws_lb_target_group.this.arn
+  dynamic "load_balancer" {
+    for_each = var.use_alb ? [1] : []
+
+    content {
+      container_name   = "${var.name}-container"
+      container_port   = var.container_port
+      target_group_arn = try(aws_lb_target_group.this[0].arn, null)
+    }
   }
 
   # desired_count is ignored as it can change due to autoscaling policy
@@ -62,8 +77,8 @@ resource "aws_ecs_task_definition" "this" {
    * 8192 (8 vCPU) - Between 16 GB and 60 GB in 4 GB increments
    * 16384 (16vCPU) - Between 32 GB and 120 GB in 8 GB increments
    */
-  cpu                   = var.container_cpu
-  memory                = var.container_memory
+  cpu                   = var.task_cpu
+  memory                = var.task_memory
   execution_role_arn    = aws_iam_role.task_execution_role.arn
   task_role_arn         = aws_iam_role.task_role.arn
   container_definitions = jsonencode(local.container_definitions)

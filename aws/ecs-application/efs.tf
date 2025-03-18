@@ -21,6 +21,6 @@ module "efs" {
       }
     }
   }
-  allowed_security_group_ids = [aws_security_group.this.id]
+  allowed_security_group_ids = compact([try(aws_security_group.this[0].id, null)])
   vpc_id                     = var.vpc_id
 }
