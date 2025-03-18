@@ -1,3 +1,7 @@
+data "aws_vpc" "this" {
+  id = var.vpc_id
+}
+
 /*
 aws_security_group provides a security group resource for ECS service.
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group.html
@@ -15,6 +19,17 @@ resource "aws_security_group" "this" {
     to_port         = var.container_port
     protocol        = "tcp"
     security_groups = var.alb_security_groups
+  }
+
+  dynamic "ingress" {
+    for_each = var.additional_port_mappings
+
+    content {
+      from_port   = ingress.value.hostPort
+      to_port     = ingress.value.hostPort
+      protocol    = "tcp"
+      cidr_blocks = [data.aws_vpc.this.cidr_block]
+    }
   }
 
   egress {

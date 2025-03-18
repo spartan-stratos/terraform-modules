@@ -314,3 +314,30 @@ variable "dd_port" {
   type        = number
   default     = 8126
 }
+
+# service connect
+variable "enabled_service_connect" {
+  description = "Whether to create service connect namespace for service internal discovery."
+  type        = bool
+  default     = false
+}
+
+variable "service_connect_configuration" {
+  description = "Service connect configuration within namespace."
+  type = object({
+    namespace = string
+    service = optional(object({
+      discovery_name = string
+      port_name      = string
+      client_alias = object({
+        dns_name = string
+        port     = number
+      })
+    }), null)
+  })
+  default = {
+    enabled   = false
+    namespace = null
+    service   = null
+  }
+}

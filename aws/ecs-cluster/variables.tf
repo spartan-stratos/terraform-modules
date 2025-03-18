@@ -8,3 +8,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enabled_service_connect" {
+  description = "Whether to create service connect namespace for service internal discovery."
+  type        = bool
+  default     = false
+}

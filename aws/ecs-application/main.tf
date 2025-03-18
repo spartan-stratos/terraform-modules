@@ -54,6 +54,25 @@ resource "aws_ecs_service" "this" {
     }
   }
 
+  service_connect_configuration {
+    enabled   = var.enabled_service_connect
+    namespace = var.service_connect_configuration.namespace
+
+    dynamic "service" {
+      for_each = var.service_connect_configuration.service != null ? [1] : []
+
+      content {
+        discovery_name = var.service_connect_configuration.service.discovery_name
+        port_name      = var.service_connect_configuration.service.port_name
+
+        client_alias {
+          dns_name = var.service_connect_configuration.service.client_alias.dns_name
+          port     = var.service_connect_configuration.service.client_alias.port
+        }
+      }
+    }
+  }
+
   # desired_count is ignored as it can change due to autoscaling policy
   lifecycle {
     ignore_changes = [desired_count]
