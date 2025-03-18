@@ -146,6 +146,7 @@ variable "additional_port_mappings" {
     protocol      = string
     containerPort = number
     hostPort      = number
+    name          = optional(string, null)
   }))
   default = []
 }
