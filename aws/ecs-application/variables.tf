@@ -336,7 +336,6 @@ variable "service_connect_configuration" {
     }), null)
   })
   default = {
-    enabled   = false
     namespace = null
     service   = null
   }
