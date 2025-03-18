@@ -316,6 +316,12 @@ variable "dd_port" {
 }
 
 # service connect
+variable "port_mapping_name" {
+  description = "Container port mapping name for service connect."
+  type        = string
+  default     = "main"
+}
+
 variable "enabled_service_connect" {
   description = "Whether to create service connect namespace for service internal discovery."
   type        = bool
