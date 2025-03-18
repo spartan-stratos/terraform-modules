@@ -194,7 +194,7 @@ locals {
 
   container_definitions = concat(
     local.service_container_definition,
-    local.dd_container_definitions,
+    var.enabled_datadog_sidecar ? local.dd_container_definitions : [],
     local.additional_container_with_log_definitions,
   )
 }
