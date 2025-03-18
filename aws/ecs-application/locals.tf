@@ -63,6 +63,7 @@ locals {
           protocol      = "tcp"
           containerPort = var.container_port
           hostPort      = var.container_port
+          name          = var.port_mapping_name
         }] : [],
         var.additional_port_mappings
       )
