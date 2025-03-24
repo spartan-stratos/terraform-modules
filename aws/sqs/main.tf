@@ -59,6 +59,7 @@ to access the main SQS queue. This can restrict access to specific AWS principal
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
 */
 data "aws_iam_policy_document" "this" {
+  version = "2012-10-17"
   statement {
     effect = "Allow"
 
