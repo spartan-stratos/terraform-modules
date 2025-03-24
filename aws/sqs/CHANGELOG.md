@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.3]() (2025-03-24)
+
+### Features
+
+* Set IAM policy document version
+
 ## [0.1.80]() (2025-03-13)
 
 ### Features
