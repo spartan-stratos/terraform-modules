@@ -28,9 +28,9 @@ variable "ingress" {
     enabled       = bool
     ingress_class = optional(string, "")
     controller    = optional(string, "generic")
-    annotations = optional(map(string), {})
-    path = optional(string, "/")
-    pathType = optional(string, "Prefix")
+    annotations   = optional(map(string), {})
+    path          = optional(string, "/")
+    pathType      = optional(string, "Prefix")
   })
   default = {
     enabled = false
@@ -120,5 +120,5 @@ variable "slack_token" {
 
 variable "domain_name" {
   description = "Domain name for ArgoCD"
-  type = string
+  type        = string
 }
