@@ -1,3 +1,45 @@
+# EKS-Helm ArgoCD
+
+Terraform module which install an ArgoCD to EKS cluster and configure the necessary role and permissions.
+
+## Usage
+
+### Install ArgoCD 
+
+```hcl
+module "argocd" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/argocd?ref=v0.2.6"
+
+  domain_name = "example.com"
+
+  enabled_alb_ingress         = true
+  enabled_aws_management_role = true
+
+  applications = {
+    "service-platform-dev" = {
+      name                     = "service-platform"
+      environment              = "dev"
+      project_name             = "test-eks-dev" #same with cluster name
+      destination_cluster_name = "test-eks-dev"
+      namespace                = "service-platform"
+      repo_url                 = "github.com/...."
+    }
+  }
+
+  github_app = {
+    id          = 123456
+    private_key = "key"
+  }
+  oidc_github_orgs          = toset([for org in local.argocd_projects : org.github_organization])
+  oidc_github_client_id     = 111111
+  oidc_github_client_secret = "secret"
+}
+```
+
+## Examples
+
+- [Example](./examples/)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -18,7 +60,7 @@
 
 ## Modules
 
-No modules. 
+No modules.
 
 ## Resources
 
@@ -27,6 +69,7 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_manifest.app](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_secret.github_app](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [aws_iam_policy_document.allow_assume_remote_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -35,16 +78,17 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_applications"></a> [applications](#input\_applications) | Maps of application configuration which will point to, each application will represent for a service on a envinronment | <pre>map(object({<br/>    name                     = string<br/>    environment              = string<br/>    project_name             = string<br/>    destination_cluster_name = string<br/>    namespace                = string<br/>    repo_url                 = string<br/>  }))</pre> | `{}` | no |
 | <a name="input_aws_management_role"></a> [aws\_management\_role](#input\_aws\_management\_role) | AWS management role configuration, only required if enabled\_aws\_management\_role is true | <pre>object({<br/>    eks_oidc_provider_arn = string<br/>    role_name             = string<br/>  })</pre> | `null` | no |
 | <a name="input_chart_url"></a> [chart\_url](#input\_chart\_url) | URL of the Argo CD Helm chart | `string` | `"https://argoproj.github.io/argo-helm"` | no |
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of the Argo CD Helm chart | `string` | `"7.8.14"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name for ArgoCD | `string` | n/a | yes |
 | <a name="input_enabled_alb_ingress"></a> [enabled\_alb\_ingress](#input\_enabled\_alb\_ingress) | To enable alb ingress and use aws load balancer controller to manage | `bool` | `true` | no |
 | <a name="input_enabled_aws_management_role"></a> [enabled\_aws\_management\_role](#input\_enabled\_aws\_management\_role) | Enable the AWS management role for cross cluster management | `bool` | `false` | no |
-| <a name="input_external_clusters"></a> [external\_clusters](#input\_external\_clusters) | List of maps of external cluster that want to connect | <pre>map(object({<br/>    assumeRole       = string<br/>    server           = string<br/>    labels           = optional(map(any), {})<br/>    annotations      = optional(map(any), {})<br/>    namespace        = optional(string, "")<br/>    clusterResources = optional(bool, false)<br/>    config           = map(any)<br/>  }))</pre> | `{}` | no |
+| <a name="input_external_clusters"></a> [external\_clusters](#input\_external\_clusters) | Maps of external cluster that want to connect | <pre>map(object({<br/>    assumeRole       = string<br/>    server           = string<br/>    labels           = optional(map(any), {})<br/>    annotations      = optional(map(any), {})<br/>    namespace        = optional(string, "")<br/>    clusterResources = optional(bool, false)<br/>    config           = map(any)<br/>  }))</pre> | `{}` | no |
 | <a name="input_github_app"></a> [github\_app](#input\_github\_app) | GitHub App configuration to use for Argo CD | <pre>object({<br/>    id          = number<br/>    private_key = string<br/>  })</pre> | n/a | yes |
 | <a name="input_handle_tls"></a> [handle\_tls](#input\_handle\_tls) | If ArgoCD should handle TLS itself | `bool` | `false` | no |
-| <a name="input_ingress"></a> [ingress](#input\_ingress) | Ingress configuration for Argo CD | <pre>object({<br/>    enabled       = bool<br/>    ingress_class = optional(string, "")<br/>    controller    = optional(string, "generic")<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_ingress"></a> [ingress](#input\_ingress) | Ingress configuration for Argo CD | <pre>object({<br/>    enabled       = bool<br/>    ingress_class = optional(string, "")<br/>    controller    = optional(string, "generic")<br/>    annotations   = optional(map(string), {})<br/>    path          = optional(string, "/")<br/>    pathType      = optional(string, "Prefix")<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace to install Argo CD | `string` | `"argocd"` | no |
 | <a name="input_oidc_github_client_id"></a> [oidc\_github\_client\_id](#input\_oidc\_github\_client\_id) | GitHub App Client ID for OIDC | `string` | n/a | yes |
 | <a name="input_oidc_github_client_secret"></a> [oidc\_github\_client\_secret](#input\_oidc\_github\_client\_secret) | GitHub App Client Secret for OIDC | `string` | n/a | yes |
@@ -55,5 +99,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_aws_iam_role_arn"></a> [aws\_iam\_role\_arn](#output\_aws\_iam\_role\_arn) | n/a |
 <!-- END_TF_DOCS -->

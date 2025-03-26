@@ -98,7 +98,7 @@ variable "rbac_policies" {
 }
 
 variable "external_clusters" {
-  description = "List of maps of external cluster that want to connect"
+  description = "Maps of external cluster that want to connect"
   type = map(object({
     assumeRole       = string
     server           = string
@@ -107,6 +107,19 @@ variable "external_clusters" {
     namespace        = optional(string, "")
     clusterResources = optional(bool, false)
     config           = map(any)
+  }))
+  default = {}
+}
+
+variable "applications" {
+  description = "Maps of application configuration which will point to, each application will represent for a service on a envinronment"
+  type = map(object({
+    name                     = string
+    environment              = string
+    project_name             = string
+    destination_cluster_name = string
+    namespace                = string
+    repo_url                 = string
   }))
   default = {}
 }

@@ -14,13 +14,36 @@ module "argocd" {
   source = "../"
 
   domain_name = "example.com"
-  
-  ingress = {
-    enabled       = true
-    ingress_class = "alb"
-  }
 
-  handle_tls = false
+  enabled_alb_ingress         = true
+  enabled_aws_management_role = true
+
+  applications = {
+    "service-platform-dev" = {
+      name                     = "service-platform"
+      environment              = "dev"
+      project_name             = "test-eks-dev" #same with cluster name
+      destination_cluster_name = "test-eks-dev"
+      namespace                = "service-platform"
+      repo_url                 = "github.com/spartan-stratos/gitops-repo"
+    },
+    "web-platform-dev" = {
+      name                     = "web-platform"
+      environment              = "dev"
+      project_name             = "test-eks-dev" #same with cluster name
+      destination_cluster_name = "test-eks-dev"
+      namespace                = "web-platform"
+      repo_url                 = "github.com/spartan-stratos/gitops-repo"
+    },
+    "serivce-platform-prod" = {
+      name                     = "service-platform"
+      environment              = "prod"
+      project_name             = "test-eks-prod" #same with cluster name
+      destination_cluster_name = "test-eks-prod"
+      namespace                = "service-platform"
+      repo_url                 = "github.com/spartan-stratos/gitops-repo"
+    }
+  }
 
   github_app = {
     id          = 123456
