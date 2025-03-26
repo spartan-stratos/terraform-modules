@@ -28,6 +28,9 @@ variable "ingress" {
     enabled       = bool
     ingress_class = optional(string, "")
     controller    = optional(string, "generic")
+    annotations = optional(map(string), {})
+    path = optional(string, "/")
+    pathType = optional(string, "Prefix")
   })
   default = {
     enabled = false
