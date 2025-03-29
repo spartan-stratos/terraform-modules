@@ -5,6 +5,6 @@ module "example" {
   namespace          = "kube-system"
   helm_chart_version = "3.12.2"
 
-  node_selector       = {}
-  tolerations         = []
+  node_selector = {}
+  tolerations   = []
 }

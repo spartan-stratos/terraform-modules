@@ -11,6 +11,6 @@ module "eks_helm_datadog" {
     name  = "DD_APM_ENABLED"
     value = "true"
   }]
-  node_selector       = {}
-  tolerations         = []
+  node_selector = {}
+  tolerations   = []
 }

@@ -9,6 +9,6 @@ module "neo4j" {
     "https://github.com/neo4j/apoc/releases/download/5.26.0/apoc-5.26.0-core.jar"
   ]
 
-  node_selector       = {}
-  tolerations         = []
+  node_selector = {}
+  tolerations   = []
 }
