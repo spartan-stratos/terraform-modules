@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]() (2025-03-30)
+
+### Features
+
+* Add the managed node labels
+
 ## [0.1.81]() (2025-03-12)
 
 ### Features

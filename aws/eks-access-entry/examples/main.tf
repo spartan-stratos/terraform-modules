@@ -1,7 +1,7 @@
 module "eks-access-entry" {
   source = "../"
 
-  cluster_name   = "example-cluster"
+  cluster_name = "example-cluster"
   access_entries = [
     /*
       Role for cluster administrators with full access to the EKS cluster

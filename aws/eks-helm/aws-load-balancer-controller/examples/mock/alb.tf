@@ -20,5 +20,7 @@ module "aws_eks_lb" {
   vpc_id              = "vpc-xxx"
   enable_internal_alb = true
   region              = "us-west-2"
+  node_selector       = {}
+  tolerations         = []
 }
 

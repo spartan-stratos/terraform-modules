@@ -13,7 +13,7 @@ This module will create the components:
 
 ```hcl
 module "ecs_cluster" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-cluster?ref=v0.2.2"
+  source = "github.com/spartan-stratos/terraform-modules//aws/ecs-cluster?ref=v0.3.0"
 
   cluster_name = "example"
   tags = {

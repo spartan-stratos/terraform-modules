@@ -3,12 +3,6 @@ variable "cluster_name" {
   description = "EKS Cluster name"
 }
 
-variable "load_balancer_type" {
-  type        = string
-  description = "Namespace of ingress controller"
-  default     = "alb"
-}
-
 variable "aws_load_balancer_controller_name" {
   type        = string
   description = "Name of AWS load balancer controller name"
@@ -18,19 +12,13 @@ variable "aws_load_balancer_controller_name" {
 variable "aws_load_balancer_controller_chart_version" {
   type        = string
   description = "Helm chart version of AWS load balancer controller"
-  default     = "1.9.2"
+  default     = "1.12.0"
 }
 
 variable "namespace" {
   type        = string
   description = "Namespace of the aws load balancer"
   default     = "kube-system"
-}
-
-variable "ingress_controller_service_name" {
-  type        = string
-  description = "Service name of nginx ingress controller"
-  default     = "ingress-nginx-controller"
 }
 
 variable "vpc_id" {
@@ -98,4 +86,16 @@ variable "wafv2_arn" {
   type        = string
   description = "Set the WAFv2 to enable ALB and WAFv2 association"
   default     = null
+}
+
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
 }

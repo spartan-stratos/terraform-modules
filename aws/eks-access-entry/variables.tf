@@ -7,7 +7,7 @@ variable "custom_namespaces" {
 variable "access_entries" {
   description = "List of access entries for EKS access entries and policies"
   type = list(object({
-    principal_arn    = string
+    principal_arn     = string
     kubernetes_groups = optional(list(string))
     type              = optional(string)
     policy_arn        = optional(string)
