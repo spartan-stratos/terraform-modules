@@ -9,3 +9,10 @@ module "keda" {
   node_selector       = {}
   tolerations         = []
 }
+
+module "keda-assume-role-policy" {
+  source = "../../assume-role-policy"
+
+  keda_operator_role_id = module.keda.keda_operator_role_id
+  assume_role_arns = []
+}

@@ -18,6 +18,12 @@ module "keda" {
   tolerations = []
 }
 
+module "keda-assume-role-policy" {
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/keda/assume-role-policy?ref=v0.3.0"
+
+  keda_operator_role_id = module.keda.keda_operator_role_id
+  assume_role_arns = []
+}
 ```
 
 ## Examples
