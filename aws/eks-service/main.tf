@@ -117,18 +117,8 @@ resource "kubernetes_service_account_v1" "this" {
   metadata {
     name      = var.service.service_account_name
     namespace = var.service.namespace
-  }
-}
-
-resource "kubernetes_annotations" "default" {
-  depends_on  = [kubernetes_namespace.this, kubernetes_service_account_v1.this]
-  api_version = "v1"
-  kind        = "ServiceAccount"
-  metadata {
-    name      = var.service.service_account_name
-    namespace = var.service.namespace
-  }
-  annotations = {
-    "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
+    }
   }
 }

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.6]() (2025-03-29)
+
+### Bug fixes
+
+* Fix EKS service account annotations
+
 ## [0.1.71]() (2025-03-03)
 
 ### Bug fixes
