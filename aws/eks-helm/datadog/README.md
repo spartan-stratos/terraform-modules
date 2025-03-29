@@ -8,7 +8,7 @@ This module helps install and configure Datadog agents for EKS cluster via Helm 
 
 ```hcl
 module "eks_helm_datadog" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/datadog?ref=v0.1.59"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/datadog?ref=v0.3.0"
 
   cluster_name    = "my-eks-cluster"
   namespace       = "datadog"
@@ -22,6 +22,8 @@ module "eks_helm_datadog" {
       value = "true"
     }
   ]
+  node_selector = {}
+  tolerations = []
 }
 
 ```
@@ -32,7 +34,7 @@ module "eks_helm_datadog" {
 
 <!-- BEGIN_TF_DOCS -->
 
-# Requirements
+## Requirements
 
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
@@ -78,7 +80,9 @@ No modules.
 | <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name)                                                        | The Helm release of the services.                | `string`                                                                         | `"datadog"` |    no    |
 | <a name="input_http_check_urls"></a> [http\_check\_urls](#input\_http\_check\_urls)                                                              | The list of urls for http check                  | `list(string)`                                                                   | `[]`        |    no    |
 | <a name="input_namespace"></a> [namespace](#input\_namespace)                                                                                    | The Namespace of the services.                   | `string`                                                                         | `"datadog"` |    no    |
+| <a name="input_node_selector"></a> [node\_selector](#input\_node\_selector)                                                                      | Node selector for the ingress controller         | `map(string)`                                                                    | `{}`        |    no    |
 | <a name="input_timeout"></a> [timeout](#input\_timeout)                                                                                          | Default timeout of datadog                       | `number`                                                                         | `1200`      |    no    |
+| <a name="input_tolerations"></a> [tolerations](#input\_tolerations)                                                                              | Tolerations for the ingress controller           | `list(map(string))`                                                              | `[]`        |    no    |
 
 ## Outputs
 
