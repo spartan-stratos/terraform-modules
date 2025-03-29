@@ -1,18 +1,14 @@
 resource "aws_eks_access_entry" "this" {
-  for_each = { for k, v in var.access_entries : k => v }
+  for_each = { for i, entry in var.access_entries : entry.principal_arn => entry }
 
   cluster_name      = var.cluster_name
   kubernetes_groups = try(each.value.kubernetes_groups, null)
-  principal_arn     = "arn:aws:iam::${var.aws_account_id}:role/${each.value.principal_name}"
+  principal_arn     = each.value.principal_arn
   type              = try(each.value.type, "STANDARD")
-
-  depends_on = [
-    aws_iam_role.this
-  ]
 }
 
 resource "aws_eks_access_policy_association" "this" {
-  for_each = { for k, v in var.access_entries : k => v if v.policy_arn != null }
+  for_each = { for i, entry in var.access_entries : entry.principal_arn => entry if entry.policy_arn != null }
 
   access_scope {
     namespaces = try(each.value.namespaces, [])
@@ -22,9 +18,9 @@ resource "aws_eks_access_policy_association" "this" {
   cluster_name = var.cluster_name
 
   policy_arn    = each.value.policy_arn
-  principal_arn = "arn:aws:iam::${var.aws_account_id}:role/${each.value.principal_name}"
+  principal_arn = each.value.principal_arn
 
   depends_on = [
-    aws_eks_access_entry.this,
+    aws_eks_access_entry.this
   ]
 }

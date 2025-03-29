@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]() (2025-03-30)
+
+### Features
+
+* Updated using the directly roles instead of assume-roles
+
 ## [0.1.66]() (2025-02-12)
 
 ### Features
