@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.6]() (2025-03-29)
+
+### Features
+
+* AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
+  * Add inline k8s service account annotations
+
 ## [0.2.5]() (2025-03-18)
 
 ### Features
