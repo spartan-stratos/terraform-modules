@@ -113,6 +113,8 @@ resource "aws_iam_role_policy_attachment" "this" {
 }
 
 resource "kubernetes_service_account_v1" "this" {
+  depends_on = [kubernetes_namespace.this]
+
   count = var.service.create_service_account ? 1 : 0
   metadata {
     name      = var.service.service_account_name
@@ -120,5 +122,20 @@ resource "kubernetes_service_account_v1" "this" {
     annotations = {
       "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
     }
+  }
+}
+
+resource "kubernetes_annotations" "default" {
+  depends_on = [kubernetes_namespace.this]
+
+  count       = var.service.create_service_account ? 0 : 1
+  api_version = "v1"
+  kind        = "ServiceAccount"
+  metadata {
+    name      = var.service.service_account_name
+    namespace = var.service.namespace
+  }
+  annotations = {
+    "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
   }
 }
