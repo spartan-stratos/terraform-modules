@@ -92,6 +92,46 @@ resource "helm_release" "neo4j" {
     value = local.neo4j_password
   }
 
+  dynamic "set" {
+    for_each = var.node_selector
+    content {
+      name  = "nodeSelector.${set.key}"
+      value = set.value
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "podSpec.tolerations[${set.key}].key"
+      value = lookup(set.value, "key", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "podSpec.tolerations[${set.key}].operator"
+      value = lookup(set.value, "operator", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "podSpec.tolerations[${set.key}].value"
+      value = lookup(set.value, "value", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "podSpec.tolerations[${set.key}].effect"
+      value = lookup(set.value, "effect", "")
+    }
+  }
+
   values = [local.manifest]
 
   depends_on = [kubernetes_persistent_volume.neo4j_home]

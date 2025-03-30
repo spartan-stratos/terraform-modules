@@ -71,3 +71,15 @@ variable "admission_webhook_server_memory" {
   type        = string
   default     = "64Mi"
 }
+
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
+}

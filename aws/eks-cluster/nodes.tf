@@ -15,4 +15,5 @@ module "eks_managed_node_group" {
   capacity_type  = "ON_DEMAND"
 
   taints = each.value.taints
+  labels = each.value.labels
 }

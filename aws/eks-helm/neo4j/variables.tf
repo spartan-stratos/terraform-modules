@@ -121,3 +121,15 @@ variable "neo4j_procedures" {
   default     = "gds.*,apoc.*"
   description = "A comma-separated list of Neo4j procedures and functions to allow."
 }
+
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
+}

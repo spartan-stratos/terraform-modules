@@ -34,6 +34,7 @@ module "eks" {
       desired_size    = "1"
       min_size        = "1"
       max_size        = "5"
+      labels          = {}
       taints          = []
     }
   }

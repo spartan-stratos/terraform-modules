@@ -14,3 +14,15 @@ variable "helm_chart_version" {
   type        = string
   description = "The chart version of ingress controller"
 }
+
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
+}

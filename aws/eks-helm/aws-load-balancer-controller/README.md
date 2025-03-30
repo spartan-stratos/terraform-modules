@@ -8,16 +8,18 @@ Terraform module which install an ALB Controller to EKS cluster and configure th
 
 ```hcl
 module "aws_eks_lb" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/aws-load-balancer-controller?ref=v0.1.52"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/aws-load-balancer-controller?ref=v0.3.0"
 
-  cluster_name        = "my-eks-cluster"
-  oidc_provider       = "eks-oidc-example"
+  cluster_name        = local.eks_cluster.cluster_name
+  oidc_provider       = local.eks_cluster.oidc_provider
   certificate_arn = ["arn:aws:acm:Region:123456789012:certificate/certificate_ID"]
   private_subnet = ["subnet-abcd", "subnet-cdef"]
   public_subnet = ["subnet-01234", "subnet-23456"]
   vpc_id              = "vpc-xxx"
   enable_internal_alb = true
   region              = "us-west-2"
+  node_selector = {}
+  tolerations = []
 }
 ```
 
@@ -63,27 +65,28 @@ No modules.
 | [aws_iam_policy_document.aws_load_balancer_controller_assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region)                                                                   | data source |
 
-## Inputs
+## Inputs¬
 
 | Name                                                                                                                                                                       | Description                                                            | Type                                                                   | Default                                 | Required |
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|:--------:|
-| <a name="input_aws_load_balancer_controller_chart_version"></a> [aws\_load\_balancer\_controller\_chart\_version](#input\_aws\_load\_balancer\_controller\_chart\_version) | Helm chart version of AWS load balancer controller                     | `string`                                                               | `"1.9.2"`                               |    no    |
+| <a name="input_aws_load_balancer_controller_chart_version"></a> [aws\_load\_balancer\_controller\_chart\_version](#input\_aws\_load\_balancer\_controller\_chart\_version) | Helm chart version of AWS load balancer controller                     | `string`                                                               | `"1.12.0"`                              |    no    |
 | <a name="input_aws_load_balancer_controller_name"></a> [aws\_load\_balancer\_controller\_name](#input\_aws\_load\_balancer\_controller\_name)                              | Name of AWS load balancer controller name                              | `string`                                                               | `"aws-load-balancer-controller"`        |    no    |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn)                                                                                          | Certificate arn for aws load balancer controller                       | `list(string)`                                                         | n/a                                     |   yes    |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                                                                                                   | EKS Cluster name                                                       | `string`                                                               | n/a                                     |   yes    |
 | <a name="input_enable_internal_alb"></a> [enable\_internal\_alb](#input\_enable\_internal\_alb)                                                                            | Enable internal aws load balancer                                      | `bool`                                                                 | `false`                                 |    no    |
 | <a name="input_external_group_name"></a> [external\_group\_name](#input\_external\_group\_name)                                                                            | Group name of external aws load balancer                               | `string`                                                               | `"external"`                            |    no    |
 | <a name="input_idle_timeout"></a> [idle\_timeout](#input\_idle\_timeout)                                                                                                   | The idle timeout of load balancer.                                     | `string`                                                               | `"60"`                                  |    no    |
-| <a name="input_ingress_controller_service_name"></a> [ingress\_controller\_service\_name](#input\_ingress\_controller\_service\_name)                                      | Service name of nginx ingress controller                               | `string`                                                               | `"ingress-nginx-controller"`            |    no    |
 | <a name="input_internal_group_name"></a> [internal\_group\_name](#input\_internal\_group\_name)                                                                            | Group name of internal aws load balancer                               | `string`                                                               | `"internal"`                            |    no    |
-| <a name="input_load_balancer_type"></a> [load\_balancer\_type](#input\_load\_balancer\_type)                                                                               | Namespace of ingress controller                                        | `string`                                                               | `"alb"`                                 |    no    |
 | <a name="input_namespace"></a> [namespace](#input\_namespace)                                                                                                              | Namespace of the aws load balancer                                     | `string`                                                               | `"kube-system"`                         |    no    |
+| <a name="input_node_selector"></a> [node\_selector](#input\_node\_selector)                                                                                                | Node selector for the ingress controller                               | `map(string)`                                                          | `{}`                                    |    no    |
 | <a name="input_oidc_provider"></a> [oidc\_provider](#input\_oidc\_provider)                                                                                                | The OIDC provider which are realted to the cluster.                    | <pre>object({<br/>    arn = string<br/>    url = string<br/>  })</pre> | n/a                                     |   yes    |
 | <a name="input_private_subnet"></a> [private\_subnet](#input\_private\_subnet)                                                                                             | List private subnet of cluster for creating aws internal load balancer | `list(string)`                                                         | n/a                                     |   yes    |
 | <a name="input_public_subnet"></a> [public\_subnet](#input\_public\_subnet)                                                                                                | List public subnet of cluster for creating aws external load balancer  | `list(string)`                                                         | n/a                                     |   yes    |
 | <a name="input_region"></a> [region](#input\_region)                                                                                                                       | Region where the resources will be created.                            | `string`                                                               | `null`                                  |    no    |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy)                                                                                                         | SSL policy for AWS Load Balancer                                       | `string`                                                               | `"ELBSecurityPolicy-TLS13-1-2-2021-06"` |    no    |
+| <a name="input_tolerations"></a> [tolerations](#input\_tolerations)                                                                                                        | Tolerations for the ingress controller                                 | `list(map(string))`                                                    | `[]`                                    |    no    |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id)                                                                                                                     | ID of the VPC that the resources reside in.                            | `string`                                                               | n/a                                     |   yes    |
+| <a name="input_wafv2_arn"></a> [wafv2\_arn](#input\_wafv2\_arn)                                                                                                            | Set the WAFv2 to enable ALB and WAFv2 association                      | `string`                                                               | `null`                                  |    no    |
 
 ## Outputs
 

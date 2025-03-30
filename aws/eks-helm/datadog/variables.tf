@@ -48,7 +48,7 @@ variable "cluster_name" {
 
 variable "chart_version" {
   type        = string
-  default     = "3.88.2"
+  default     = "3.110.4"
   description = "The version of the datadog chart"
 }
 
@@ -95,4 +95,16 @@ variable "enabled_cluster_check" {
   description = "Toggle to enable or disable the cluster check."
   type        = bool
   default     = true
+}
+
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
 }

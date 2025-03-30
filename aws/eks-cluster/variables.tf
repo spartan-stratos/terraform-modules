@@ -144,6 +144,7 @@ variable "node_groups" {
     desired_size    = number
     max_size        = number
     min_size        = number
+    labels          = map(string)
     taints = list(object({
       key    = string
       value  = string

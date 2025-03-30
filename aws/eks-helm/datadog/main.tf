@@ -64,6 +64,86 @@ resource "helm_release" "this" {
     value = random_password.cluster_agent_token.result
   }
 
+  dynamic "set" {
+    for_each = var.node_selector
+    content {
+      name  = "agent.nodeSelector.${set.key}"
+      value = set.value
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.node_selector
+    content {
+      name  = "clusterAgent.nodeSelector.${set.key}"
+      value = set.value
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "agent.tolerations[${set.key}].key"
+      value = lookup(set.value, "key", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "agent.tolerations[${set.key}].operator"
+      value = lookup(set.value, "operator", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "agent.tolerations[${set.key}].value"
+      value = lookup(set.value, "value", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "agent.tolerations[${set.key}].effect"
+      value = lookup(set.value, "effect", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "clusterAgent.tolerations[${set.key}].key"
+      value = lookup(set.value, "key", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "clusterAgent.tolerations[${set.key}].operator"
+      value = lookup(set.value, "operator", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "clusterAgent.tolerations[${set.key}].value"
+      value = lookup(set.value, "value", "")
+    }
+  }
+
+  dynamic "set" {
+    for_each = var.tolerations
+    content {
+      name  = "clusterAgent.tolerations[${set.key}].effect"
+      value = lookup(set.value, "effect", "")
+    }
+  }
+
   values = [local.manifest]
   lifecycle {
     ignore_changes = [
