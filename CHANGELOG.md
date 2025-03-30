@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]() (2025-03-30)
+
+### Features
+
+* AWS EKS Access Entry: [(./aws/eks-access-entry)](./aws/eks-access-entry)
+  * Use the inline EKS Access Entry
+ 
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+  * Add the labels for managed_nodes
+
+* AWS EKS Helm Keda [(./aws/eks-helm/keda)](./aws/eks-helm/keda)
+  * Add the labels and tolerations
+
+* AWS EKS Helm Datadog [(./aws/eks-helm/datadog)](./aws/eks-helm/datadog)
+  * Add the labels and tolerations
+ 
+* AWS EKS Helm Metrics Server [(./aws/eks-helm/metrics-server)](./aws/eks-helm/metrics-server)
+  * Add the labels and tolerations
+
+* AWS EKS Helm Neo4j [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
+  * Add the labels and tolerations
+  
 ## [0.2.6]() (2025-03-29)
 
 ### Features
