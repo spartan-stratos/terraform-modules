@@ -1,6 +1,13 @@
 locals {
   argocd_projects = {
-    spartan_stratos = {
+    spartan-eks-dev = {
+      project_name               = "project"
+      github_organization        = "spartan-stratos"
+      description                = "Demo Argo CD project"
+      github_repositories        = ["argocd"]
+      argocd_app_installation_id = 123456
+    }
+    spartan-eks-prod = {
       project_name               = "project"
       github_organization        = "spartan-stratos"
       description                = "Demo Argo CD project"
@@ -45,10 +52,23 @@ module "argocd" {
     }
   }
 
+  slack_channel = "pipeline-dev"
+  slack_token   = "xobx-1234"
+
   github_app = {
     id          = 123456
     private_key = "key"
   }
+
+  # Project Team Roles Permission
+  argocd_projects = local.argocd_projects
+
+  project_group_roles = {
+    "spartan-iaas-p1"  = ["applications, *, *, allow"],
+    "spartan-dev-p1"   = ["applications, write, spartan-eks-dev/*, allow"],
+    "spartan-admin-p1" = ["applications, *, *, allow"]
+  }
+
   oidc_github_orgs          = toset([for org in local.argocd_projects : org.github_organization])
   oidc_github_client_id     = 111111
   oidc_github_client_secret = "secret"

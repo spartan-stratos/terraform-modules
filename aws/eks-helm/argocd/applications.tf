@@ -22,23 +22,9 @@ resource "kubernetes_manifest" "app" {
         namespace = each.value.namespace
       }
 
-      syncPolicy = {
-        automated = {
-          prune    = true
-          selfHeal = true
-        }
-
-        syncOptions = [
-          "CreateNamespace=true",
-          "Retry=true",
-        ]
-
-        retry = {
-          limit = 5
-        }
-      }
+      syncPolicy = var.sync_policy
     }
   }
 
-  depends_on = [helm_release.this]
+  depends_on = [module.argocd_projects]
 }

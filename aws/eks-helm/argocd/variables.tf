@@ -16,10 +16,10 @@ variable "chart_url" {
   default     = "https://argoproj.github.io/argo-helm"
 }
 
-variable "enabled_alb_ingress" {
+variable "enabled_custom_ingress" {
   description = "To enable alb ingress and use aws load balancer controller to manage"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "ingress" {
@@ -124,6 +124,11 @@ variable "applications" {
   default = {}
 }
 
+# Slack
+variable "slack_channel" {
+
+}
+
 variable "slack_token" {
   description = "The token to authenticate to slack, which will help application push notification to slack"
   type        = string
@@ -134,4 +139,64 @@ variable "slack_token" {
 variable "domain_name" {
   description = "Domain name for ArgoCD"
   type        = string
+}
+
+# Repo Connection
+
+variable "argocd_projects" {
+  description = "A map defining ArgoCD projects with their configurations."
+  type = map(object({
+    project_name               = string       # The name of the ArgoCD project, used to uniquely identify it.
+    description                = string       # A brief description of the project, providing context or purpose.
+    github_organization        = string       # The GitHub organization name associated with the project.
+    github_repositories        = list(string) # A list of GitHub repository names managed by the project.
+    argocd_app_installation_id = number       # The unique numeric ID for the ArgoCD application installation.
+  }))
+}
+variable "project_group_roles" {
+  description = "The project groups roles will have the following format: 'applications, {roles}, {target-project}, allow'. Example: \"spartan-iaas-p0001\" =  \"applications, *, *, allow\""
+  type        = map(list(string))
+  default = {
+    "argo-admin" = [
+      "applications, *, *, allow",
+    ]
+
+    "argo-member" = [
+      "applications, get, *, allow",
+    ]
+  }
+}
+
+# Sync policy
+variable "sync_policy" {
+  description = "value"
+  type = object({
+    automated = object({
+      prune    = bool
+      selfHeal = bool
+    })
+
+    syncOptions = list(string)
+
+    retry = object({
+      limit = number
+    })
+  })
+  default = {
+    automated = {
+      prune    = true
+      selfHeal = true
+    }
+
+    syncOptions = [
+      "CreateNamespace=true",
+      "Retry=true",
+    ]
+
+    retry = {
+      limit = 5
+    }
+  }
+
+
 }

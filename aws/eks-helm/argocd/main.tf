@@ -17,7 +17,15 @@ locals {
       domain = "argocd.${var.domain_name}"
     }
     server = {
-      ingress = var.enabled_alb_ingress ? {
+      ingress = var.enabled_custom_ingress ? {
+        enabled          = var.ingress.enabled
+        hostname         = "argocd.${var.domain_name}"
+        ingressClassName = var.ingress.ingress_class
+        controller       = var.ingress.controller
+        annotations      = var.ingress.annotations
+        path             = var.ingress.path
+        pathType         = var.ingress.pathType
+        } : {
         enabled          = "true"
         hostname         = "argocd.${var.domain_name}"
         ingressClassName = "alb"
@@ -32,14 +40,6 @@ locals {
         }
         path     = "/*"
         pathType = "ImplementationSpecific"
-        } : {
-        enabled          = var.ingress.enabled
-        hostname         = "argocd.${var.domain_name}"
-        ingressClassName = var.ingress.ingress_class
-        controller       = var.ingress.controller
-        annotations      = var.ingress.annotations
-        path             = var.ingress.path
-        pathType         = var.ingress.pathType
       }
     }
     dex = {
