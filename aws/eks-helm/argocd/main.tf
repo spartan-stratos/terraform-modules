@@ -107,7 +107,7 @@ resource "kubernetes_secret" "github_app" {
 
   data = {
     type                = "git"
-    url                 = "https://github.com/${var.oidc_github_organization}"
+    url                 = "https://github.com/${var.github_app.organization}"
     githubAppID         = var.github_app.id
     githubAppPrivateKey = var.github_app.private_key
   }
