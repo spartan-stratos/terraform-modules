@@ -9,6 +9,10 @@ resource "kubernetes_namespace_v1" "gateway_api" {
   metadata {
     name = var.namespace
   }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
 
 /**

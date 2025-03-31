@@ -63,6 +63,10 @@ resource "kubernetes_namespace_v1" "this" {
   metadata {
     name = var.service.namespace
   }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
 
 resource "kubernetes_config_map" "this" {

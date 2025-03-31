@@ -7,6 +7,10 @@ resource "kubernetes_namespace_v1" "this" {
   metadata {
     name = var.namespace
   }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
 
 /**

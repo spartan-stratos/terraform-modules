@@ -21,4 +21,8 @@ resource "kubernetes_namespace_v1" "fargate" {
   metadata {
     name = each.value
   }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
 }
