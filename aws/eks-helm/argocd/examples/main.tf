@@ -69,7 +69,7 @@ module "argocd" {
     "spartan-admin-p1" = ["applications, *, *, allow"]
   }
 
-  oidc_github_orgs          = toset([for org in local.argocd_projects : org.github_organization])
+  oidc_github_organization  = "spartan-stratos"
   oidc_github_client_id     = 111111
   oidc_github_client_secret = "secret"
 }

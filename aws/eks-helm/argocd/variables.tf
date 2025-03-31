@@ -86,9 +86,9 @@ variable "oidc_github_client_secret" {
   sensitive   = true
 }
 
-variable "oidc_github_orgs" {
+variable "oidc_github_organization" {
   description = "GitHub organization to restrict access to"
-  type        = set(string)
+  type        = string
 }
 
 variable "rbac_policies" {
