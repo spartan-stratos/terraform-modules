@@ -22,7 +22,6 @@ module "argocd" {
 
   domain_name = "example.com"
 
-  enabled_alb_ingress         = true
   enabled_aws_management_role = true
 
   applications = {
