@@ -1,4 +1,4 @@
-variable "namespace" {
+variable "argocd_namespace" {
   description = "Namespace to install Argo CD"
   type        = string
   default     = "argocd"

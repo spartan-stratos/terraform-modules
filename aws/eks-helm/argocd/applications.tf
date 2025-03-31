@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "app" {
     kind       = "Application"
 
     metadata = {
-      namespace = var.namespace
+      namespace = var.argocd_namespace
       name      = each.value.project_name
     }
 

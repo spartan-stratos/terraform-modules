@@ -20,9 +20,9 @@ data "aws_iam_policy_document" "assume_role_policy" {
       test     = "StringEquals"
       variable = "${var.aws_management_role.eks_oidc_provider_arn}:sub"
       values = [
-        "system:serviceaccount:${var.namespace}:argocd-application-controller",
-        "system:serviceaccount:${var.namespace}:argocd-applicationset-controller",
-        "system:serviceaccount:${var.namespace}:argocd-server",
+        "system:serviceaccount:${var.argocd_namespace}:argocd-application-controller",
+        "system:serviceaccount:${var.argocd_namespace}:argocd-applicationset-controller",
+        "system:serviceaccount:${var.argocd_namespace}:argocd-server",
       ]
     }
 

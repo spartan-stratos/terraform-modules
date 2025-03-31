@@ -85,7 +85,7 @@ EOT
 
 resource "helm_release" "this" {
   name        = "argocd"
-  namespace   = var.namespace
+  namespace   = var.argocd_namespace
   repository  = var.chart_url
   chart       = "argo-cd"
   version     = var.chart_version
@@ -97,7 +97,7 @@ resource "helm_release" "this" {
 
 resource "kubernetes_secret" "github_app" {
   metadata {
-    namespace = var.namespace
+    namespace = var.argocd_namespace
     name      = "argocd-github-app"
 
     labels = {
