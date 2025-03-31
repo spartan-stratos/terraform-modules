@@ -46,7 +46,7 @@ No modules.
 | Name                                                                                                                                   | Type        |
 |----------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | [kubernetes_manifest.external_gateway](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest)    | resource    |
-| [kubernetes_namespace.gateway_api](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)       | resource    |
+| [kubernetes_namespace_v1.gateway_api](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)       | resource    |
 | [time_sleep.this](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep)                                  | resource    |
 | [kubernetes_resource.external_gateway](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/resource) | data source |
 

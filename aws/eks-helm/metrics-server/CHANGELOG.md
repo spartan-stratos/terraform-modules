@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1]() (2025-03-31)
+
+### Features
+
+* Set create_namespaces is always true
+
 ## [0.1.59]() (2025-01-20)
 
 ### Features

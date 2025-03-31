@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "fluent_bit_eks_fargate_policy" {
   }
 }
 
-resource "kubernetes_namespace" "aws_observability" {
+resource "kubernetes_namespace_v1 " "aws_observability" {
   metadata {
     name = "aws-observability"
     labels = {
@@ -31,7 +31,7 @@ resource "kubernetes_config_map" "aws_logging" {
     "output.conf" = local.fluent_bit_config_outut
   }
 
-  depends_on = [kubernetes_namespace.aws_observability]
+  depends_on = [kubernetes_namespace_v1.aws_observability]
 }
 
 resource "aws_iam_policy" "fluent_bit_eks_fargate" {

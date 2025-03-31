@@ -126,7 +126,7 @@ module "eks" {
 | [aws_iam_role_policy_attachment.node_policy_attachments](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource    |
 | [aws_security_group.cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)                                           | resource    |
 | [kubernetes_config_map_v1_data.aws_auth](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/config_map_v1_data)                    | resource    |
-| [kubernetes_namespace.fargate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)                                       | resource    |
+| [kubernetes_namespace_v1.fargate](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)                                       | resource    |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity)                                      | data source |
 | [aws_eks_addon_version.coredns_latest](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_addon_version)                           | data source |
 | [aws_eks_addon_version.efs_csi_driver_latest](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_addon_version)                    | data source |

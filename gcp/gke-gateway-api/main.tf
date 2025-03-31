@@ -1,9 +1,9 @@
 /**
-`kubernetes_namespace` creates namespace within K8S cluster.
+`kubernetes_namespace_v1` creates namespace within K8S cluster.
 This block is used to create a namespace for gateway.
 https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace
  */
-resource "kubernetes_namespace" "gateway_api" {
+resource "kubernetes_namespace_v1" "gateway_api" {
   count = var.create_namespace ? 1 : 0
 
   metadata {
@@ -44,7 +44,7 @@ resource "kubernetes_manifest" "external_gateway" {
   }
 
   depends_on = [
-    kubernetes_namespace.gateway_api
+    kubernetes_namespace_v1.gateway_api
   ]
 }
 

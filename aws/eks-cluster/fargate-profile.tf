@@ -15,7 +15,7 @@ module "fargate_profile" {
   }
 }
 
-resource "kubernetes_namespace" "fargate" {
+resource "kubernetes_namespace_v1" "fargate" {
   for_each = local.namespaces
 
   metadata {

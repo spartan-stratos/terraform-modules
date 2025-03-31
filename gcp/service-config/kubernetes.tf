@@ -1,7 +1,7 @@
 /**
 https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace
  */
-resource "kubernetes_namespace" "this" {
+resource "kubernetes_namespace_v1" "this" {
   count = var.create_namespace ? 1 : 0
 
   metadata {
@@ -20,7 +20,7 @@ resource "kubernetes_config_map" "applications_config_map" {
     namespace = var.namespace
   }
 
-  depends_on = [kubernetes_namespace.this]
+  depends_on = [kubernetes_namespace_v1.this]
 }
 
 /**
@@ -35,5 +35,5 @@ resource "kubernetes_secret" "applications_secret" {
     namespace = var.namespace
   }
 
-  depends_on = [kubernetes_namespace.this]
+  depends_on = [kubernetes_namespace_v1.this]
 }

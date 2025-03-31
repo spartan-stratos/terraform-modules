@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1]() (2025-03-31)
+
+### Features
+
+* Migrate to use `kubernetes_namespace_v1`
+
 ## [0.1.4]() (2024-12-05)
 
 ### Features

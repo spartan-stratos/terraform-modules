@@ -3,6 +3,7 @@ variable "namespace" {
   type        = string
   default     = "kube-system"
 }
+
 variable "helm_release_name" {
   description = "The Helm release of the services."
   type        = string

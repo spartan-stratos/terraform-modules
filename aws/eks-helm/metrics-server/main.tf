@@ -1,11 +1,12 @@
 ##### Metrics Server  ###############################
 resource "helm_release" "metrics_server" {
-  name       = var.helm_release_name
-  repository = "https://kubernetes-sigs.github.io/metrics-server/"
-  chart      = "metrics-server"
-  version    = var.helm_chart_version
-  namespace  = var.namespace
-  keyring    = ""
+  name             = var.helm_release_name
+  repository       = "https://kubernetes-sigs.github.io/metrics-server/"
+  chart            = "metrics-server"
+  version          = var.helm_chart_version
+  namespace        = var.namespace
+  create_namespace = true
+  keyring          = ""
 
   # If true, allow unauthenticated access to /metrics.
   set {
