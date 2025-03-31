@@ -70,18 +70,21 @@ variable "github_app" {
   default = null
 }
 
-variable "project_group_roles" {
-  description = "Roles for the project, only required if custom_project_group_roles is true"
-  type        = map(list(string))
-  default = {
-    "argo-admin" = [
-      "applications, *, *, allow",
-      "applicationsets, *, *, allow",
-    ]
+variable "group_roles" {
+  description = <<EOT
+The project group roles define permissions in the format: 'applications, {roles}, {target-project}, allow'.
+- 'applications' specifies the scope (e.g., 'applications' or a specific app).
+- '{roles}' can be specific roles (e.g., 'admin', 'viewer') or '*' for all roles.
+- '{target-project}' specifies the target project (e.g., 'spartan-iaas-p0001') or '*' for all projects.
+- 'allow' indicates the permission type (currently only 'allow' is supported).
 
-    "argo-member" = [
-      "applications, get, *, allow",
-      "applicationsets, get, *, allow",
+Example:
+  "spartan-P00001-iaas" = ["applications, *, *, allow",]
+  "spartan-P00001-member"  = [
+      "applications, *, spartan-eks-dev/*, allow"
+      "applications, get, *, allow"
     ]
-  }
+EOT
+  type        = map(list(string))
+  default     = {}
 }

@@ -9,5 +9,6 @@ module "argocd_projects" {
   github_repositories      = each.value.github_repositories
   argo_app_installation_id = each.value.argocd_app_installation_id
 
+group_roles = var.group_roles
   depends_on = [helm_release.this]
 }

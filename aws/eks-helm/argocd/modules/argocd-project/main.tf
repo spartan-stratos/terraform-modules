@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "this" {
       sourceRepos  = var.restrict_source_repos
       destinations = var.restrict_destinations
       roles = [
-        for group, roles in var.project_group_roles : {
+        for group, roles in var.group_roles : {
           name     = group
           groups   = ["${var.github_organization}:${group}"]
           policies = [for role in roles : "p, proj:${var.project_name}:${group}, ${role}"]

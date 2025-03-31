@@ -17,7 +17,7 @@ locals {
       domain = "argocd.${var.domain_name}"
     }
     server = {
-      ingress = var.enabled_custom_ingress ? {
+      ingress = {
         enabled          = var.ingress.enabled
         hostname         = "argocd.${var.domain_name}"
         ingressClassName = var.ingress.ingress_class
@@ -25,21 +25,6 @@ locals {
         annotations      = var.ingress.annotations
         path             = var.ingress.path
         pathType         = var.ingress.pathType
-        } : {
-        enabled          = "true"
-        hostname         = "argocd.${var.domain_name}"
-        ingressClassName = "alb"
-        controller       = "aws"
-        annotations = {
-          "alb.ingress.kubernetes.io/group.name"       = "external",
-          "kubernetes.io/ingress.class"                = "alb"
-          "alb.ingress.kubernetes.io/target-type"      = "ip"
-          "alb.ingress.kubernetes.io/healthcheck-path" = "/api/health/"
-          "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
-          "alb.ingress.kubernetes.io/listen-ports"     = "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
-        }
-        path     = "/*"
-        pathType = "ImplementationSpecific"
       }
     }
     dex = {

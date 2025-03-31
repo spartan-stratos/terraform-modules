@@ -26,14 +26,26 @@ variable "ingress" {
   description = "Ingress configuration for Argo CD"
   type = object({
     enabled       = bool
-    ingress_class = optional(string, "")
-    controller    = optional(string, "generic")
+    ingress_class = optional(string, "alb")
+    controller    = optional(string, "aws")
     annotations   = optional(map(string), {})
-    path          = optional(string, "/")
-    pathType      = optional(string, "Prefix")
+    path          = optional(string, "/*")
+    pathType      = optional(string, "ImplementationSpecific")
   })
   default = {
-    enabled = false
+    enabled       = true
+    ingress_class = "alb"
+    controller    = "aws"
+    annotations = {
+      "alb.ingress.kubernetes.io/group.name"       = "external",
+      "kubernetes.io/ingress.class"                = "alb"
+      "alb.ingress.kubernetes.io/target-type"      = "ip"
+      "alb.ingress.kubernetes.io/healthcheck-path" = "/health/"
+      "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
+      "alb.ingress.kubernetes.io/listen-ports"     = "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+    }
+    path     = "/*"
+    pathType = "ImplementationSpecific"
   }
 }
 
@@ -144,7 +156,6 @@ variable "domain_name" {
 }
 
 # Repo Connection
-
 variable "argocd_projects" {
   description = "A map defining ArgoCD projects with their configurations."
   type = map(object({
@@ -155,18 +166,24 @@ variable "argocd_projects" {
     argocd_app_installation_id = number       # The unique numeric ID for the ArgoCD application installation.
   }))
 }
-variable "project_group_roles" {
-  description = "The project groups roles will have the following format: 'applications, {roles}, {target-project}, allow'. Example: \"spartan-iaas-p0001\" =  \"applications, *, *, allow\""
-  type        = map(list(string))
-  default = {
-    "argo-admin" = [
-      "applications, *, *, allow",
-    ]
 
-    "argo-member" = [
-      "applications, get, *, allow",
+variable "group_roles" {
+  description = <<EOT
+The project group roles define permissions in the format: 'applications, {roles}, {target-project}, allow'.
+- 'applications' specifies the scope (e.g., 'applications' or a specific app).
+- '{roles}' can be specific roles (e.g., 'admin', 'viewer') or '*' for all roles.
+- '{target-project}' specifies the target project (e.g., 'spartan-iaas-p0001') or '*' for all projects.
+- 'allow' indicates the permission type (currently only 'allow' is supported).
+
+Example:
+  "spartan-P00001-iaas" = ["applications, *, *, allow",]
+  "spartan-P00001-member"  = [
+      "applications, *, spartan-eks-dev/*, allow"
+      "applications, get, *, allow"
     ]
-  }
+EOT
+  type        = map(list(string))
+  default     = {}
 }
 
 # Sync policy
