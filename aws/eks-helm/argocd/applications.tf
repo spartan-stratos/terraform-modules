@@ -17,11 +17,6 @@ resource "kubernetes_manifest" "app" {
         path    = "${each.value.environment}/${each.value.name}"
       }
 
-      destination = {
-        server    = each.value.destination_cluster
-        namespace = each.value.namespace
-      }
-
       syncPolicy = var.sync_policy
     }
   }
