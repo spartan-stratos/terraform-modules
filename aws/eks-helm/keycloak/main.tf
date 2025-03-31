@@ -23,7 +23,7 @@ resources:
     cpu: ${var.keycloak_cpu}
     memory: ${var.keycloak_memory}
 ingress:
-  enabled: true
+  enabled: ${var.create_ingress}
   ingressClassName: ${var.ingress_class_name}
   annotations:
     alb.ingress.kubernetes.io/group.name: ${var.ingress_group_name}
@@ -83,21 +83,6 @@ resource "helm_release" "keycloak" {
   set {
     name  = "global.defaultStorageClass"
     value = var.storage_class_name
-  }
-
-  dynamic "set" {
-    for_each = var.create_ingress == true ? {
-      "ingress.enabled"          = true
-      "ingress.ingressClassName" = var.ingress_class_name
-      "ingress.hostname"         = var.ingress_hostname
-      } : {
-      "ingress.enabled" = false
-    }
-
-    content {
-      name  = set.key
-      value = set.value
-    }
   }
 
   dynamic "set" {
