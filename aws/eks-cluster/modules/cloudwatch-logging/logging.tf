@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "fluent_bit_eks_fargate_policy" {
   }
 }
 
-resource "kubernetes_namespace_v1 " "aws_observability" {
+resource "kubernetes_namespace_v1" "aws_observability" {
   metadata {
     name = "aws-observability"
     labels = {

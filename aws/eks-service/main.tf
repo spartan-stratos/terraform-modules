@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "this" {
   }
 }
 
-resource "kubernetes_namespace_v1 " "this" {
+resource "kubernetes_namespace_v1" "this" {
   count = try(data.kubernetes_namespace_v1.existing.metadata.0.name) != var.service.namespace || var.create_kubernetes_namespace ? 1 : 0
 
   metadata {
