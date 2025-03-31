@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0]() (2025-03-31)
+
+### Features
+* AWS EKS Helm Keycloak [(./aws/eks-helm/keycloak)](./aws/eks-helm/keycloak)
+
 ## [0.3.0]() (2025-03-30)
 
 ### Features
