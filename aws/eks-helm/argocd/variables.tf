@@ -81,10 +81,11 @@ variable "aws_management_role" {
 variable "github_app" {
   description = "GitHub App configuration to use for Argo CD"
   type = object({
-    name         = string
-    id           = number
-    private_key  = string
-    organization = string
+    name            = string
+    app_id          = number
+    installation_id = number
+    private_key     = string
+    organization    = string
   })
   sensitive = true
 }
@@ -159,11 +160,9 @@ variable "domain_name" {
 variable "argocd_projects" {
   description = "A map defining ArgoCD projects with their configurations."
   type = map(object({
-    project_name               = string       # The name of the ArgoCD project, used to uniquely identify it.
-    description                = string       # A brief description of the project, providing context or purpose.
-    github_organization        = string       # The GitHub organization name associated with the project.
-    github_repositories        = list(string) # A list of GitHub repository names managed by the project.
-    argocd_app_installation_id = number       # The unique numeric ID for the ArgoCD application installation.
+    project_name        = string       # The name of the ArgoCD project, used to uniquely identify it.
+    description         = string       # A brief description of the project, providing context or purpose.
+    github_repositories = list(string) # A list of GitHub repository names managed by the project.
   }))
 }
 

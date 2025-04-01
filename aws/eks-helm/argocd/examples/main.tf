@@ -1,18 +1,14 @@
 locals {
   argocd_projects = {
     spartan-eks-dev = {
-      project_name               = "project"
-      github_organization        = "spartan-stratos"
-      description                = "Demo Argo CD project"
-      github_repositories        = ["argocd"]
-      argocd_app_installation_id = 123456
+      project_name        = "spartan-eks-dev"
+      description         = "Demo Argo CD Dev project"
+      github_repositories = ["argocd", "service-platform"]
     }
     spartan-eks-prod = {
-      project_name               = "project"
-      github_organization        = "spartan-stratos"
-      description                = "Demo Argo CD project"
-      github_repositories        = ["argocd"]
-      argocd_app_installation_id = 123456
+      project_name        = "spartan-eks-prod"
+      description         = "Demo Argo CD Prod project"
+      github_repositories = ["argocd", "service-platform"]
     }
   }
 }
@@ -55,14 +51,15 @@ module "argocd" {
   slack_token   = "xobx-1234"
 
   github_app = {
-    id          = 123456
-    private_key = "key"
+    app_id          = 123456
+    installation_id = 654321
+    private_key     = "key"
   }
 
   # Project Team Roles Permission
   argocd_projects = local.argocd_projects
 
-  project_group_roles = {
+  group_roles = {
     "spartan-iaas-p1"  = ["applications, *, *, allow"],
     "spartan-dev-p1"   = ["applications, write, spartan-eks-dev/*, allow"],
     "spartan-admin-p1" = ["applications, *, *, allow"]

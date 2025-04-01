@@ -35,11 +35,6 @@ variable "restrict_destinations" {
   ]
 }
 
-variable "github_organization" {
-  description = "GitHub organization"
-  type        = string
-}
-
 variable "github_repositories" {
   description = "GitHub repositories"
   type        = set(string)
@@ -51,23 +46,16 @@ variable "enabled_custom_github_app" {
   default     = false
 }
 
-variable "argo_app_installation_id" {
-  description = "Installation ID of the Argo CD GitHub App"
-  type        = number
-  default     = null
-}
-
 variable "github_app" {
-  description = "GitHub App configuration to use for Argo CD, only required if enabled_custom_github_app is true"
+  description = "GitHub App configuration to use for Argo CD"
   type = object({
-    id              = number
+    name            = string
+    app_id          = number
     installation_id = number
     private_key     = string
+    organization    = string
   })
   sensitive = true
-
-  # Only required if enabled_custom_github_app is true
-  default = null
 }
 
 variable "group_roles" {
