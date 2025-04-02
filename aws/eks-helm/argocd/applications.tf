@@ -21,5 +21,5 @@ resource "kubernetes_manifest" "app" {
     }
   }
 
-  depends_on = [module.argocd_projects]
+  depends_on = [helm_release.this]
 }
