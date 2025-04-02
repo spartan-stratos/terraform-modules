@@ -139,11 +139,6 @@ variable "applications" {
   default = {}
 }
 
-# Slack
-variable "slack_channel" {
-
-}
-
 variable "slack_token" {
   description = "The token to authenticate to slack, which will help application push notification to slack"
   type        = string

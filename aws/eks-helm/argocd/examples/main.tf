@@ -47,7 +47,6 @@ module "argocd" {
     }
   }
 
-  slack_channel = "pipeline-dev"
   slack_token   = "xobx-1234"
 
   github_app = {
