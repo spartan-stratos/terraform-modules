@@ -44,7 +44,7 @@ module "argocd_projects" {
   description  = each.value.description
 
   github_app = {
-    name            = "argocd-${module.config_github.organization}-dev"
+    name            = "argocd-spartan-dev"
     app_id          = 123456
     installation_id = 6543221
     private_key     = "secret"
@@ -63,7 +63,7 @@ module "argocd_projects" {
 }
 
 module "argocd_applications" {
-  source = "../modules/application"
+  source = "../modules/argocd-application"
   applications = {
     "service-platform-dev" = {
       name                     = "service-platform"
