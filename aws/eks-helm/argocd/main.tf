@@ -75,7 +75,8 @@ resource "helm_release" "this" {
   chart       = "argo-cd"
   version     = var.chart_version
   max_history = 3
-
+  wait = true
+  timeout = 600
   create_namespace = true
   values           = [yamlencode((local.release_values))]
 }
