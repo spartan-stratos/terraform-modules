@@ -1,39 +1,9 @@
-variable "project_name" {
-  description = "Name of the Argo CD project"
-  type        = string
-}
-
 variable "argocd_namespace" {
   description = "Namespace of Argo CD"
   type        = string
   default     = "argocd"
 }
 
-variable "description" {
-  description = "Description of the Argo CD project"
-  type        = string
-}
-
-variable "restrict_source_repos" {
-  description = "Applicable source repositories"
-  type        = list(string)
-  default     = ["*"]
-}
-
-variable "restrict_destinations" {
-  description = "Applicable destinations"
-  type = list(object({
-    server    = string
-    namespace = string
-  }))
-
-  default = [
-    {
-      server    = "*"
-      namespace = "*"
-    }
-  ]
-}
 
 variable "github_repositories" {
   description = "GitHub repositories"
@@ -75,4 +45,22 @@ Example:
 EOT
   type        = map(list(string))
   default     = {}
+}
+
+
+variable "projects" {
+  type = map(object({
+    project_name = string
+    description  = string
+    destinations = list(object({
+      name      = optional(string, null)
+      server    = optional(string, null)
+      namespace = string
+    }))
+  }))
+}
+
+variable "repo_name" {
+  description = "ArgoCD Centralized Repository"
+  type        = string
 }

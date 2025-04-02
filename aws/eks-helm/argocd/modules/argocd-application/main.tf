@@ -13,10 +13,13 @@ resource "kubernetes_manifest" "app" {
       project = each.value.project_name
 
       source = {
-        repoURL = each.value.repo_url
-        path    = "${each.value.environment}/${each.value.name}"
+        repoURL        = each.value.repo_url
+        path           = "${each.value.environment}"
+        targetRevision = var.target_revision
+        directory = {
+          recurse = true
+        }
       }
-
       syncPolicy = var.sync_policy
     }
   }

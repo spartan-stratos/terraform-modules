@@ -48,3 +48,9 @@ variable "sync_policy" {
     }
   }
 }
+
+variable "target_revision" {
+  description = "Target Revision for deployment"
+  type        = string
+  default     = "HEAD"
+}
