@@ -20,6 +20,4 @@ resource "kubernetes_manifest" "app" {
       syncPolicy = var.sync_policy
     }
   }
-
-  depends_on = [helm_release.this]
 }
