@@ -36,7 +36,7 @@ module "argocd" {
 }
 
 module "argocd_projects" {
-  source = "../modules/argocd-project"
+  source   = "../modules/argocd-project"
   for_each = local.argocd_projects
 
 
@@ -44,11 +44,11 @@ module "argocd_projects" {
   description  = each.value.description
 
   github_app = {
-    name            = "argocd-${module.config_github.organization}-${local.environment}"
-    app_id          = module.config_github.app_id
-    installation_id = module.config_github.installation_id
-    private_key     = module.config_github.pem_file
-    organization    = module.config_github.organization
+    name            = "argocd-${module.config_github.organization}-dev"
+    app_id          = 123456
+    installation_id = 6543221
+    private_key     = "secret"
+    organization    = "spartan"
   }
 
 
