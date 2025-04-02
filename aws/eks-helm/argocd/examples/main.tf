@@ -63,7 +63,7 @@ module "argocd_projects" {
 }
 
 module "argocd_applications" {
-  source = "../modules/applications"
+  source = "../modules/application"
   applications = {
     "service-platform-dev" = {
       name                     = "service-platform"
