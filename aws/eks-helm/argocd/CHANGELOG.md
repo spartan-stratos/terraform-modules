@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Update provider version
-
+* Split CRDs into sub-modules include `Projects` and `Applications`
 
 ## [0.3.2]() (2025-04-01)
 

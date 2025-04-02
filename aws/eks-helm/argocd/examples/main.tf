@@ -20,6 +20,50 @@ module "argocd" {
 
   enabled_aws_management_role = true
 
+
+  slack_token = "xobx-1234"
+
+  github_app = {
+    name            = "argocd"
+    app_id          = 123456
+    installation_id = 654321
+    private_key     = "key"
+    organization    = "spartan-stratos"
+  }
+  oidc_github_organization  = "spartan-stratos"
+  oidc_github_client_id     = 111111
+  oidc_github_client_secret = "secret"
+}
+
+module "argocd_projects" {
+  source = "../modules/argocd-project"
+  for_each = local.argocd_projects
+
+
+  project_name = each.value.project_name
+  description  = each.value.description
+
+  github_app = {
+    name            = "argocd-${module.config_github.organization}-${local.environment}"
+    app_id          = module.config_github.app_id
+    installation_id = module.config_github.installation_id
+    private_key     = module.config_github.pem_file
+    organization    = module.config_github.organization
+  }
+
+
+  github_repositories = each.value.github_repositories
+
+  group_roles = {
+    "spartan-p00041-iaas"   = ["applications, *, *, allow"],
+    "spartan-p00041-member" = ["applications, write, spartan-eks-dev/*, allow"],
+    "spartan-p00041-admin"  = ["applications, *, *, allow"]
+  }
+  depends_on = [module.argocd]
+}
+
+module "argocd_applications" {
+  source = "../modules/applications"
   applications = {
     "service-platform-dev" = {
       name                     = "service-platform"
@@ -47,26 +91,7 @@ module "argocd" {
     }
   }
 
-  slack_token   = "xobx-1234"
 
-  github_app = {
-    name            = "argocd"
-    app_id          = 123456
-    installation_id = 654321
-    private_key     = "key"
-    organization    = "spartan-stratos"
-  }
-
-  # Project Team Roles Permission
-  argocd_projects = local.argocd_projects
-
-  group_roles = {
-    "spartan-iaas-p1"  = ["applications, *, *, allow"],
-    "spartan-dev-p1"   = ["applications, write, spartan-eks-dev/*, allow"],
-    "spartan-admin-p1" = ["applications, *, *, allow"]
-  }
-
-  oidc_github_organization  = "spartan-stratos"
-  oidc_github_client_id     = 111111
-  oidc_github_client_secret = "secret"
+  depends_on = [module.argocd_projects]
 }
+

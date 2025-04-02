@@ -69,14 +69,14 @@ EOT
 }
 
 resource "helm_release" "this" {
-  name        = "argocd"
-  namespace   = var.argocd_namespace
-  repository  = var.chart_url
-  chart       = "argo-cd"
-  version     = var.chart_version
-  max_history = 3
-  wait = true
-  timeout = 600
+  name             = "argocd"
+  namespace        = var.argocd_namespace
+  repository       = var.chart_url
+  chart            = "argo-cd"
+  version          = var.chart_version
+  max_history      = 3
+  wait             = true
+  timeout          = 300
   create_namespace = true
   values           = [yamlencode((local.release_values))]
 }
