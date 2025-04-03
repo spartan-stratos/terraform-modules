@@ -13,7 +13,7 @@ This module will create the following components:
 
 ```hcl
 module "elasticache" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.1.54"
+  source = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.3.4"
 
   cluster_name                           = "example"
   environment                            = "dev"
@@ -62,6 +62,7 @@ No modules.
 | Name                                                                                                                                                             | Description                                                                                                                                                                        | Type           | Default                       | Required |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|-------------------------------|:--------:|
 | <a name="input_apply_immediately"></a> [apply\_immediately](#input\_apply\_immediately)                                                                          | Apply changes to the cluster right away or waiting to the next maintenance window, default is true                                                                                 | `bool`         | `true`                        |    no    |
+| <a name="input_at_rest_encryption_enabled"></a> [at\_rest\_encryption\_enabled](#input\_at\_rest\_encryption\_enabled)                                           | Whether to enable encryption at rest.                                                                                                                                              | `bool`         | `false`                       |    no    |
 | <a name="input_automatic_failover_enabled"></a> [automatic\_failover\_enabled](#input\_automatic\_failover\_enabled)                                             | Automatically promote read-replica to become primary when the primary instance down, default is false                                                                              | `bool`         | `false`                       |    no    |
 | <a name="input_cache_node_count"></a> [cache\_node\_count](#input\_cache\_node\_count)                                                                           | The number of cache node                                                                                                                                                           | `number`       | n/a                           |   yes    |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                                                                                         | The name of this cluster                                                                                                                                                           | `string`       | n/a                           |   yes    |
