@@ -64,3 +64,9 @@ variable "transit_encryption_enabled" {
   type        = bool
   default     = false
 }
+
+variable "at_rest_encryption_enabled" {
+  description = "Whether to enable encryption at rest."
+  type = bool
+  default = false
+}
