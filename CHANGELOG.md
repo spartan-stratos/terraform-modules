@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.3.3]() (2025-04-01)
+## [0.3.3]() (2025-04-03)
 
 ### Features
 * AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
