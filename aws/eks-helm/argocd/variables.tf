@@ -81,7 +81,7 @@ variable "aws_management_role" {
 variable "github_app" {
   description = "GitHub App configuration to use for Argo CD"
   type = object({
-    name            = string
+    secret_name     = string
     app_id          = number
     installation_id = number
     private_key     = string

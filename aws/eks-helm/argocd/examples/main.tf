@@ -52,7 +52,7 @@ module "argocd" {
   slack_token = "xobx-1234"
 
   github_app = {
-    name            = "argocd"
+    secret_name     = "argocd"
     app_id          = 123456
     installation_id = 654321
     private_key     = "key"
