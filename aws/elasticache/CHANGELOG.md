@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.4]() (2025-04-03)
+
+### Features
+
+* Add `transit_encryption_mode` to `aws_elasticache_replication_group`.
+
 ## [0.1.54]() (2025-01-13)
 
 ### Bug Fixes
