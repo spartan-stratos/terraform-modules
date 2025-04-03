@@ -4,28 +4,16 @@ variable "argocd_namespace" {
   default     = "argocd"
 }
 
+variable "path" {
+  description = "path"
+  type        = string
+  default     = "dev"
+}
 
-variable "github_repositories" {
-  description = "GitHub repositories"
+
+variable "github_organization" {
+  description = "GitHub Organization"
   type        = set(string)
-}
-
-variable "enabled_custom_github_app" {
-  description = "Enable custom GitHub App configuration"
-  type        = bool
-  default     = false
-}
-
-variable "github_app" {
-  description = "GitHub App configuration to use for Argo CD"
-  type = object({
-    name            = string
-    app_id          = number
-    installation_id = number
-    private_key     = string
-    organization    = string
-  })
-  sensitive = true
 }
 
 variable "group_roles" {
@@ -47,20 +35,66 @@ EOT
   default     = {}
 }
 
-
-variable "projects" {
-  type = map(object({
-    project_name = string
-    description  = string
-    destinations = list(object({
-      name      = optional(string, null)
-      server    = optional(string, null)
-      namespace = string
-    }))
-  }))
+variable "cluster_name" {
+  description = "EKS Cluster Name"
+  type        = string
 }
 
-variable "repo_name" {
+variable "project_name" {
+  type = string
+}
+
+variable "repo_url" {
   description = "ArgoCD Centralized Repository"
   type        = string
+}
+
+# Sync policy
+variable "sync_policy" {
+  description = "value"
+  type = object({
+    automated = object({
+      prune    = bool
+      selfHeal = bool
+    })
+
+    syncOptions = list(string)
+
+    retry = object({
+      limit = number
+    })
+  })
+  default = {
+    automated = {
+      prune    = true
+      selfHeal = true
+    }
+
+    syncOptions = [
+      "CreateNamespace=true",
+      "Retry=true",
+    ]
+
+    retry = {
+      limit = 5
+    }
+  }
+}
+
+variable "target_revision" {
+  description = "Target Revision for deployment"
+  type        = string
+  default     = "HEAD"
+}
+
+variable "description" {
+  type = string
+}
+
+variable "destinations" {
+  type = list(object({
+    name      = optional(string, null)
+    server    = optional(string, null)
+    namespace = string
+  }))
 }

@@ -1,57 +1,43 @@
 locals {
-  argocd_projects = {
-    atlas = {
-      projects = {
-        stratos-eks-dev = {
-          project_name = "stratos-eks-dev"
-          description  = "Demo ArgoCD Dev Project"
-          destinations = [{
-            name      = "stratos-eks-dev"
-            namespace = "*"
-          }]
-        }
-        stratos-eks-prod = {
-          project_name = "stratos-eks-prod"
-          description  = "Demo ArgoCD Prod Project"
-          destinations = [{
-            name      = "stratos-eks-prod"
-            namespace = "*"
-          }]
-        }
-      }
-      repo_name = "argocd-atlas"
-      groups = {
-        "spartan-p00041-iaas"   = ["applications, *, *, allow"],
-        "spartan-p00041-member" = ["applications, write, stratos-eks-dev/*, allow"],
-        "spartan-p00041-admin"  = ["applications, *, *, allow"]
-      }
+  atlas_dev = {
+    # Application definition
+    repo_url        = "github.com/spartan/argocd-atlas"
+    path            = "dev"
+    target_revision = "HEAD"
+    # Project
+    cluster_name        = "stratos-eks-dev"
+    project_name        = "stratos-eks-dev"
+    github_organization = "spartan"
+    groups = {
+      "spartan-p00041-iaas"   = ["applications, *, *, allow"],
+      "spartan-p00041-member" = ["applications, write, stratos-eks-dev/*, allow"],
+      "spartan-p00041-admin"  = ["applications, *, *, allow"]
     }
-    approvia = {
-      projects = {
-        atlas-eks-dev = {
-          project_name = "approvia-eks-dev"
-          description  = "Demo ArgoCD Dev Project"
-          destinations = [{
-            name      = "approvia-eks-dev"
-            namespace = "*"
-          }]
-        }
-        approvia-eks-prod = {
-          project_name = "approvia-eks-prod"
-          description  = "Demo ArgoCD Prod Project"
-          destinations = [{
-            name      = "approvia-eks-prod"
-            namespace = "*"
-          }]
-        }
-      }
-      repo_name = "argocd-approvia"
-      groups = {
-        "spartan-p00042-iaas"   = ["applications, *, *, allow"],
-        "spartan-p00042-member" = ["applications, write, approvia-eks-dev/*, allow"],
-        "spartan-p00042-admin"  = ["applications, *, *, allow"]
-      }
+    destinations = [{
+      name      = "stratos-eks-dev"
+      namespace = ["*"]
+    }]
+    description = "ArgoCD Atlas Project"
+  }
+  atlas_prod = {
+    # Application definition
+    repo_url        = "github.com/spartan/argocd-atlas"
+    path            = "prod"
+    target_revision = "HEAD"
+    # Project
+    cluster_name        = "stratos-eks-prod"
+    project_name        = "stratos-eks-prod"
+    github_organization = "spartan"
+    groups = {
+      "spartan-p00041-iaas"   = ["applications, *, *, allow"],
+      "spartan-p00041-member" = ["applications, write, stratos-eks-dev/*, allow"],
+      "spartan-p00041-admin"  = ["applications, *, *, allow"]
     }
+    destinations = [{
+      name      = "stratos-eks-dev"
+      namespace = ["*"]
+    }]
+    description = "ArgoCD Atlas Project"
   }
 }
 
@@ -78,55 +64,21 @@ module "argocd" {
 }
 
 module "argocd_projects" {
-  source = "../modules/argocd-project"
+  source   = "../modules/argocd-project"
+  for_each = merge(local.atlas_dev, local.atlas_prod)
 
-  github_app = {
-    name            = "argocd-spartan-dev"
-    app_id          = 123456
-    installation_id = 6543221
-    private_key     = "secret"
-    organization    = "spartan"
-  }
+  github_organization = each.value.github_organization
 
-  repo_name = local.argocd_projects.atlas.repo_name
-  projects  = local.argocd_projects.atlas.projects
+  # Project
+  project_name = each.value.project_name
+  cluster_name = each.value.cluster_name
+  destinations = each.value.destinations
+  description  = each.value.description
 
-  github_repositories = each.value.github_repositories
+  # Application
+  repo_url        = each.value.repo_url
+  path            = each.value.path
+  target_revision = each.value.target_revision
 
-  group_roles = local.argocd_projects.atlas.groups
-  depends_on  = [module.argocd]
+  depends_on = [module.argocd]
 }
-
-module "argocd_applications" {
-  source = "../modules/argocd-application"
-  applications = {
-    "service-platform-dev" = {
-      name                     = "service-platform"
-      environment              = "dev"
-      project_name             = "spartan-eks-dev" #same with cluster name
-      destination_cluster_name = "spartan-eks-dev"
-      namespace                = "service-platform"
-      repo_url                 = "github.com/spartan-stratos/infra-argocd"
-    },
-    "web-platform-dev" = {
-      name                     = "web-platform"
-      environment              = "dev"
-      project_name             = "spartan-eks-dev" #same with cluster name
-      destination_cluster_name = "spartan-eks-dev"
-      namespace                = "web-platform"
-      repo_url                 = "github.com/spartan-stratos/infra-argocd"
-    },
-    "serivce-platform-prod" = {
-      name                     = "service-platform"
-      environment              = "prod"
-      project_name             = "spartan-eks-prod" #same with cluster name
-      destination_cluster_name = "spartan-eks-prod"
-      namespace                = "service-platform"
-      repo_url                 = "github.com/spartan-stratos/infra-argocd"
-    }
-  }
-
-
-  depends_on = [module.argocd_projects]
-}
-
