@@ -84,7 +84,7 @@ resource "helm_release" "this" {
 resource "kubernetes_secret" "github_app" {
   metadata {
     namespace = var.argocd_namespace
-    name      = var.github_app.name
+    name      = var.github_app.secret_name
 
     labels = {
       "argocd.argoproj.io/secret-type" = "repo-creds"
