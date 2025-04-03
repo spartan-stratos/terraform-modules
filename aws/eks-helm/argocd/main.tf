@@ -69,13 +69,14 @@ EOT
 }
 
 resource "helm_release" "this" {
-  name        = "argocd"
-  namespace   = var.argocd_namespace
-  repository  = var.chart_url
-  chart       = "argo-cd"
-  version     = var.chart_version
-  max_history = 3
-
+  name             = "argocd"
+  namespace        = var.argocd_namespace
+  repository       = var.chart_url
+  chart            = "argo-cd"
+  version          = var.chart_version
+  max_history      = 3
+  wait             = true
+  timeout          = 300
   create_namespace = true
   values           = [yamlencode((local.release_values))]
 }
@@ -83,7 +84,7 @@ resource "helm_release" "this" {
 resource "kubernetes_secret" "github_app" {
   metadata {
     namespace = var.argocd_namespace
-    name      = var.github_app.name
+    name      = var.github_app.secret_name
 
     labels = {
       "argocd.argoproj.io/secret-type" = "repo-creds"

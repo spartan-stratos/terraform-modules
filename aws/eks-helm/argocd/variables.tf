@@ -81,7 +81,7 @@ variable "aws_management_role" {
 variable "github_app" {
   description = "GitHub App configuration to use for Argo CD"
   type = object({
-    name            = string
+    secret_name     = string
     app_id          = number
     installation_id = number
     private_key     = string
@@ -126,24 +126,6 @@ variable "external_clusters" {
   default = {}
 }
 
-variable "applications" {
-  description = "Maps of application configuration which will point to, each application will represent for a service on a envinronment"
-  type = map(object({
-    name                     = string
-    environment              = string
-    project_name             = string
-    destination_cluster_name = string
-    namespace                = string
-    repo_url                 = string
-  }))
-  default = {}
-}
-
-# Slack
-variable "slack_channel" {
-
-}
-
 variable "slack_token" {
   description = "The token to authenticate to slack, which will help application push notification to slack"
   type        = string
@@ -154,67 +136,4 @@ variable "slack_token" {
 variable "domain_name" {
   description = "Domain name for ArgoCD"
   type        = string
-}
-
-# Repo Connection
-variable "argocd_projects" {
-  description = "A map defining ArgoCD projects with their configurations."
-  type = map(object({
-    project_name        = string       # The name of the ArgoCD project, used to uniquely identify it.
-    description         = string       # A brief description of the project, providing context or purpose.
-    github_repositories = list(string) # A list of GitHub repository names managed by the project.
-  }))
-}
-
-variable "group_roles" {
-  description = <<EOT
-The project group roles define permissions in the format: 'applications, {roles}, {target-project}, allow'.
-- 'applications' specifies the scope (e.g., 'applications' or a specific app).
-- '{roles}' can be specific roles (e.g., 'admin', 'viewer') or '*' for all roles.
-- '{target-project}' specifies the target project (e.g., 'spartan-iaas-p0001') or '*' for all projects.
-- 'allow' indicates the permission type (currently only 'allow' is supported).
-
-Example:
-  "spartan-P00001-iaas" = ["applications, *, *, allow",]
-  "spartan-P00001-member"  = [
-      "applications, *, spartan-eks-dev/*, allow"
-      "applications, get, *, allow"
-    ]
-EOT
-  type        = map(list(string))
-  default     = {}
-}
-
-# Sync policy
-variable "sync_policy" {
-  description = "value"
-  type = object({
-    automated = object({
-      prune    = bool
-      selfHeal = bool
-    })
-
-    syncOptions = list(string)
-
-    retry = object({
-      limit = number
-    })
-  })
-  default = {
-    automated = {
-      prune    = true
-      selfHeal = true
-    }
-
-    syncOptions = [
-      "CreateNamespace=true",
-      "Retry=true",
-    ]
-
-    retry = {
-      limit = 5
-    }
-  }
-
-
 }

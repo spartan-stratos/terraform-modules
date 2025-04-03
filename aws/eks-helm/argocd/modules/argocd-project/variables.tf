@@ -1,61 +1,19 @@
-variable "project_name" {
-  description = "Name of the Argo CD project"
-  type        = string
-}
-
 variable "argocd_namespace" {
   description = "Namespace of Argo CD"
   type        = string
   default     = "argocd"
 }
 
-variable "description" {
-  description = "Description of the Argo CD project"
+variable "path" {
+  description = "path"
   type        = string
+  default     = "dev"
 }
 
-variable "restrict_source_repos" {
-  description = "Applicable source repositories"
-  type        = list(string)
-  default     = ["*"]
-}
 
-variable "restrict_destinations" {
-  description = "Applicable destinations"
-  type = list(object({
-    server    = string
-    namespace = string
-  }))
-
-  default = [
-    {
-      server    = "*"
-      namespace = "*"
-    }
-  ]
-}
-
-variable "github_repositories" {
-  description = "GitHub repositories"
+variable "github_organization" {
+  description = "GitHub Organization"
   type        = set(string)
-}
-
-variable "enabled_custom_github_app" {
-  description = "Enable custom GitHub App configuration"
-  type        = bool
-  default     = false
-}
-
-variable "github_app" {
-  description = "GitHub App configuration to use for Argo CD"
-  type = object({
-    name            = string
-    app_id          = number
-    installation_id = number
-    private_key     = string
-    organization    = string
-  })
-  sensitive = true
 }
 
 variable "group_roles" {
@@ -75,4 +33,68 @@ Example:
 EOT
   type        = map(list(string))
   default     = {}
+}
+
+variable "cluster_name" {
+  description = "EKS Cluster Name"
+  type        = string
+}
+
+variable "project_name" {
+  type = string
+}
+
+variable "repo_url" {
+  description = "ArgoCD Centralized Repository"
+  type        = string
+}
+
+# Sync policy
+variable "sync_policy" {
+  description = "value"
+  type = object({
+    automated = object({
+      prune    = bool
+      selfHeal = bool
+    })
+
+    syncOptions = list(string)
+
+    retry = object({
+      limit = number
+    })
+  })
+  default = {
+    automated = {
+      prune    = true
+      selfHeal = true
+    }
+
+    syncOptions = [
+      "CreateNamespace=true",
+      "Retry=true",
+    ]
+
+    retry = {
+      limit = 5
+    }
+  }
+}
+
+variable "target_revision" {
+  description = "Target Revision for deployment"
+  type        = string
+  default     = "HEAD"
+}
+
+variable "description" {
+  type = string
+}
+
+variable "destinations" {
+  type = list(object({
+    name      = optional(string, null)
+    server    = optional(string, null)
+    namespace = string
+  }))
 }
