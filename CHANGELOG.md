@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.6]() (2025-04-04)
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Add tolerants which will schedule argocd to managed node
+
 ## [0.3.5]() (2025-04-04)
 
 ### Fix Bugs
