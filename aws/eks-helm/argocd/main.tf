@@ -15,6 +15,9 @@ locals {
   release_values = {
     global = {
       domain = "argocd.${var.domain_name}"
+      nodeSelector = var.node_selector
+      tolerations = var.tolerations
+
     }
     server = {
       ingress = {
@@ -65,7 +68,6 @@ EOT
 
     }
   }
-
 }
 
 resource "helm_release" "this" {
@@ -77,47 +79,6 @@ resource "helm_release" "this" {
   max_history      = 3
   create_namespace = true
   values           = [yamlencode((local.release_values))]
-
-  dynamic "set" {
-    for_each = var.node_selector
-    content {
-      name  = "global.nodeSelector.${set.key}"
-      value = set.value
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.tolerations
-    content {
-      name  = "global.tolerations[${set.key}].key"
-      value = lookup(set.value, "key", "")
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.tolerations
-    content {
-      name  = "global.tolerations[${set.key}].operator"
-      value = lookup(set.value, "operator", "")
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.tolerations
-    content {
-      name  = "global.tolerations[${set.key}].value"
-      value = lookup(set.value, "value", "")
-    }
-  }
-
-  dynamic "set" {
-    for_each = var.tolerations
-    content {
-      name  = "global.tolerations[${set.key}].effect"
-      value = lookup(set.value, "effect", "")
-    }
-  }
-
 }
 
 resource "kubernetes_secret" "github_app" {
