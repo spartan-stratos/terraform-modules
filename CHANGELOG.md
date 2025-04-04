@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.3.5]() (2025-04-04)
+## [0.3.6]() (2025-04-04)
 
 ### Fix Bugs
 
