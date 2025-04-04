@@ -137,3 +137,16 @@ variable "domain_name" {
   description = "Domain name for ArgoCD"
   type        = string
 }
+
+# Managed Node
+variable "node_selector" {
+  type        = map(string)
+  description = "Node selector for the ingress controller"
+  default     = {}
+}
+
+variable "tolerations" {
+  type        = list(map(string))
+  description = "Tolerations for the ingress controller"
+  default     = []
+}
