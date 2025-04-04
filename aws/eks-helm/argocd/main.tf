@@ -7,17 +7,17 @@ locals {
       config = {
         clientID     = var.oidc_github_client_id
         clientSecret = var.oidc_github_client_secret
-        orgs         = [{
-          name = var.oidc_github_organization}]
+        orgs = [{
+        name = var.oidc_github_organization }]
       }
     }]
   }
 
   release_values = {
     global = {
-      domain = "argocd.${var.domain_name}"
+      domain       = "argocd.${var.domain_name}"
       nodeSelector = var.node_selector
-      tolerations = var.tolerations
+      tolerations  = var.tolerations
     }
 
     server = {
