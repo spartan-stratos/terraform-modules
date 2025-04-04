@@ -1,6 +1,16 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.5]() (2025-04-04)
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Remove those attributes when creating helm argocd
+    ```hcl
+    wait             = true
+    timeout          = 300
+    ```
 
 ## [0.3.4]() (2025-04-03)
 
