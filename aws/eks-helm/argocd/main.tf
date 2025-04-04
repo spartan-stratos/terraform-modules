@@ -14,9 +14,9 @@ locals {
 
   release_values = {
     global = {
-      domain = "argocd.${var.domain_name}"
+      domain       = "argocd.${var.domain_name}"
       nodeSelector = var.node_selector
-      tolerations = var.tolerations
+      tolerations  = var.tolerations
 
     }
     server = {
