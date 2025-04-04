@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.7]() (2025-03-30)
+
+# Features
+
+* Update policies and add require permission to those
 
 ## [0.3.0]() (2025-03-30)
 

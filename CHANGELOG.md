@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.7]() (2025-04-04)
+
+### Fix Bugs
+* AWS EKS Helm AWS Load Balancer Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
+    * Update policies and add require permission to those
+
 ## [0.3.6]() (2025-04-04)
 
 ### Fix Bugs
