@@ -103,7 +103,7 @@ resource "helm_release" "this" {
   }
 
   dynamic "set" {
-    for_each = var.tolerations  
+    for_each = var.tolerations
     content {
       name  = "global.tolerations[${set.key}].value"
       value = lookup(set.value, "value", "")
