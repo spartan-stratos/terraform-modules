@@ -21,6 +21,6 @@ module "cloudfront-s3" {
   }]
 
   # S3 config properties
-  s3_bucket_id = "<bucket id>"
+  s3_bucket_id       = "<bucket id>"
   s3_redirect_domain = "<S3 bucket domain to direct>"
 }
