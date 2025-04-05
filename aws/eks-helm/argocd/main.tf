@@ -7,8 +7,7 @@ locals {
       config = {
         clientID     = var.oidc_github_client_id
         clientSecret = var.oidc_github_client_secret
-        orgs = [{
-        name = var.oidc_github_organization }]
+        orgs         = [{ name = var.oidc_github_organization }]
       }
     }]
   }
