@@ -7,7 +7,7 @@ locals {
       config = {
         clientID     = var.oidc_github_client_id
         clientSecret = var.oidc_github_client_secret
-        orgs         = [var.oidc_github_organization]
+        orgs         = [{ name = var.oidc_github_organization }]
       }
     }]
   }
@@ -17,8 +17,8 @@ locals {
       domain       = "argocd.${var.domain_name}"
       nodeSelector = var.node_selector
       tolerations  = var.tolerations
-
     }
+
     server = {
       ingress = {
         enabled          = var.ingress.enabled
