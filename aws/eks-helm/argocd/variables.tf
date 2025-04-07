@@ -154,6 +154,6 @@ variable "tolerations" {
 # Dex Config
 variable "issuer_url" {
   description = "The issuer URL should be where Dex talks to the OIDC provider"
-  type = string
-  default = "http://argocd-dex-server:5556"
+  type        = string
+  default     = "http://argocd-dex-server:5556"
 }
