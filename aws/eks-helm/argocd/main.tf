@@ -10,6 +10,7 @@ locals {
         orgs         = [{ name = var.oidc_github_organization }]
       }
     }]
+    issuer = var.issuer_url
   }
 
   release_values = {
