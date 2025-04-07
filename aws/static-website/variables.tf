@@ -193,3 +193,9 @@ variable "wafv2_arn" {
   description = "Set the WAFv2 to enable Cloudfront and WAFv2 association"
   default     = null
 }
+
+variable "s3_redirect_domain" {
+  description = "If set, configures the S3 bucket as a static website redirect to this domain."
+  type        = string
+  default     = null
+}
