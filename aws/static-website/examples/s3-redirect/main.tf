@@ -10,10 +10,10 @@ module "static_website" {
 
   # Route53 Config propeties
   dns_name        = "<dns name>"
-  domain_name      = "<domain name>"
-  route53_zone_id   = "<Route 53 zone id>"
+  domain_name     = "<domain name>"
+  route53_zone_id = "<Route 53 zone id>"
 
-  global_tls_certificate_arn      = "<ACM arn for alias in CloudFront>"
+  global_tls_certificate_arn = "<ACM arn for alias in CloudFront>"
 
   ordered_cache_behaviors = [{
     path_pattern           = "/index.html"
