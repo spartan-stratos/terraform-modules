@@ -13,7 +13,7 @@ This module will create the following components:
 
 ```hcl
 module "elasticache" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.1.54"
+  source = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.3.8"
 
   cluster_name                           = "example"
   environment                            = "dev"
