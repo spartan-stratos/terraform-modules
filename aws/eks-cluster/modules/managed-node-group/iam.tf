@@ -6,6 +6,8 @@ locals {
     eks_worker_node_policy                  = "${local.iam_role_policy_prefix}/AmazonEKSWorkerNodePolicy"
     ec2_container_registry_read_only_policy = "${local.iam_role_policy_prefix}/AmazonEC2ContainerRegistryReadOnly"
     ipv4_cni_policy                         = "${local.iam_role_policy_prefix}/AmazonEKS_CNI_Policy"
+    ebs_csi_policy                          = "${local.iam_role_policy_prefix}/service-role/AmazonEBSCSIDriverPolicy"
+    efs_csi_policy                          = "${local.iam_role_policy_prefix}/service-role/AmazonEFSCSIDriverPolicy"
   }
 }
 
@@ -88,8 +90,10 @@ data "aws_iam_policy_document" "role" {
   }
 }
 
+
 resource "aws_iam_role_policy" "this" {
-  count       = length(var.iam_role_policy_statements) > 0 ? 1 : 0
+  count = length(var.iam_role_policy_statements) > 0 ? 1 : 0
+
   name        = var.iam_role_use_name_prefix ? null : local.iam_role_name
   name_prefix = var.iam_role_use_name_prefix ? "${local.iam_role_name}-" : null
   policy      = data.aws_iam_policy_document.role.json

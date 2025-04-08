@@ -43,4 +43,34 @@ module "eks" {
   # custom RBAC
   administrator_role_arn = null
   aws_auth_users         = []
+
+  coredns = {
+    replica_count = 1
+    node_selector = {
+      "service-type" = "backbone"
+    }
+    tolerations = [
+      {
+        key      = "service-type"
+        value    = "backbone"
+        effect   = "NoSchedule"
+        operator = "Equal"
+      }
+    ]
+  }
+
+  efs_csi = {
+    replica_count = 1
+    node_selector = {
+      "service-type" = "backbone"
+    }
+    tolerations = [
+      {
+        key      = "service-type"
+        value    = "backbone"
+        effect   = "NoSchedule"
+        operator = "Equal"
+      }
+    ]
+  }
 }

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.9]() (2025-04-08)
+
+### Features
+
+* Add the CoreDNS and EFS_CSI replica_count, node_selector and tolerations
+* Add the policy AmazonEFSCSIDriverPolicy to NodeGroup instance role
+* Add the custom instance role for NodeGroup
+
 ## [0.3.0]() (2025-03-30)
 
 ### Features

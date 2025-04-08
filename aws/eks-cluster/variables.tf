@@ -296,3 +296,41 @@ variable "enabled_karpenter" {
   type        = bool
   default     = false
 }
+
+variable "coredns" {
+  description = "Configuration for CoreDNS add-on"
+  type = object({
+    replica_count = optional(number, 1)
+    node_selector = optional(map(string), null)
+    tolerations = optional(list(object({
+      key      = string
+      operator = string
+      value    = optional(string)
+      effect   = optional(string)
+    })), [])
+  })
+  default = {
+    replica_count = 1
+    node_selector = null
+    tolerations   = []
+  }
+}
+
+variable "efs_csi" {
+  description = "Configuration for EFS CSI add-on"
+  type = object({
+    replica_count = optional(number, 1)
+    node_selector = optional(map(string), null)
+    tolerations = optional(list(object({
+      key      = string
+      operator = string
+      value    = optional(string)
+      effect   = optional(string)
+    })), [])
+  })
+  default = {
+    replica_count = 1
+    node_selector = null
+    tolerations   = []
+  }
+}

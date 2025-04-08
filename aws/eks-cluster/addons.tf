@@ -45,7 +45,13 @@ resource "aws_eks_addon" "coredns_ec2" {
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
-  depends_on = [aws_eks_cluster.master]
+  configuration_values = jsonencode({
+    replicaCount = var.coredns.replica_count
+    nodeSelector = var.coredns.node_selector
+    tolerations  = var.coredns.tolerations
+  })
+
+  depends_on = [aws_eks_cluster.master, module.eks_managed_node_group]
 }
 
 resource "aws_eks_addon" "coredns_fargate" {
@@ -70,6 +76,35 @@ data "aws_eks_addon_version" "efs_csi_driver_latest" {
   kubernetes_version = aws_eks_cluster.master.version
 }
 
+resource "aws_iam_role" "efs_csi_driver_role" {
+  count = var.compute_type == "ec2" ? 1 : 0
+  name  = "${var.name}-efs-csi-driver-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(aws_eks_cluster.master.identity[0].oidc[0].issuer, "https://", "")}"
+        }
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Condition = {
+          StringEquals = {
+            "${replace(aws_eks_cluster.master.identity[0].oidc[0].issuer, "https://", "")}:sub" : "system:serviceaccount:kube-system:efs-csi-controller-sa"
+          }
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "efs_csi_driver_policy_attachment" {
+  count      = var.compute_type == "ec2" ? 1 : 0
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
+  role       = aws_iam_role.efs_csi_driver_role[0].name
+}
+
 resource "aws_eks_addon" "efs_csi_driver" {
   count = var.compute_type == "ec2" ? 1 : 0
 
@@ -79,5 +114,14 @@ resource "aws_eks_addon" "efs_csi_driver" {
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
-  depends_on = [aws_eks_cluster.master, module.fargate_profile]
+  service_account_role_arn = aws_iam_role.efs_csi_driver_role[0].arn
+
+  configuration_values = jsonencode({
+    controller = {
+      replicaCount = var.efs_csi.replica_count
+      nodeSelector = var.efs_csi.node_selector
+      tolerations  = var.efs_csi.tolerations
+    }
+  })
+  depends_on = [aws_eks_cluster.master, module.eks_managed_node_group]
 }
