@@ -1,19 +1,19 @@
 locals {
-node_selectors = flatten([
-  for key, value in var.node_selector : {
-    key   = key
-    value = value
-  }
-])
+  node_selectors = flatten([
+    for key, value in var.node_selector : {
+      key   = key
+      value = value
+    }
+  ])
 
-ingress_annotations = flatten([
-  for key, value in var.ingress.annotations : {
-    key   = key
-    value = value
-  }
-])
-    # ----- MANIFEST YAML FILE ------
-    
+  ingress_annotations = flatten([
+    for key, value in var.ingress.annotations : {
+      key   = key
+      value = value
+    }
+  ])
+  # ----- MANIFEST YAML FILE ------
+
   manifest = <<YAML
 global:
   domain: "argocd.${var.domain_name}"
