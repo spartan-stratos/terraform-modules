@@ -7,11 +7,11 @@ locals {
   ])
 
   tolerations = flatten([
-    for key, value in var.tolerations : {
-      key      = value.key
-      operator = value.operator
-      value    = value.value
-      effect   = value.effect
+    for item in var.tolerations : {
+      key      = item.key
+      operator = item.operator
+      value    = item.value
+      effect   = item.effect
     }
   ])
 
