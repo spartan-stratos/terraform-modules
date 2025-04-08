@@ -6,15 +6,6 @@ locals {
     }
   ])
 
-  tolerations = flatten([
-    for item in var.tolerations : {
-      key      = item.key
-      operator = item.operator
-      value    = item.value
-      effect   = item.effect
-    }
-  ])
-
   ingress_annotations = flatten([
     for key, value in var.ingress.annotations : {
       key   = key
@@ -34,7 +25,7 @@ global:
   %{endif}
   %{if length(var.tolerations) > 0}
   tolerations:
-    %{for toleration in local.tolerations}
+    %{for toleration in var.tolerations}
     - key      = ${toleration.key}
       operator = ${toleration.operator}
       value    = ${toleration.value}
