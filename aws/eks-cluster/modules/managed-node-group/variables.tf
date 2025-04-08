@@ -104,12 +104,6 @@ variable "node_repair_config" {
   default = null
 }
 
-variable "iam_role_arn" {
-  description = "Existing IAM role ARN for the node group. Required if `create_iam_role` is set to `false`"
-  type        = string
-  default     = null
-}
-
 variable "iam_role_name" {
   description = "Name to use on IAM role created"
   type        = string
