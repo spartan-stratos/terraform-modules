@@ -46,6 +46,8 @@ resource "aws_elasticache_replication_group" "this" {
   snapshot_window            = var.snapshot_window
   automatic_failover_enabled = var.automatic_failover_enabled
 
+  at_rest_encryption_enabled = var.at_rest_encryption_enabled
+
   # The following blocks specified only if (var.transit_encryption_enabled == true)
   transit_encryption_enabled = var.transit_encryption_enabled
   transit_encryption_mode    = var.transit_encryption_mode # make sure you update this when enabled transit encryption

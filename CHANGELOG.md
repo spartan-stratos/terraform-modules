@@ -1,10 +1,56 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.7]() (2025-04-04)
+
+### Fix Bugs
+* AWS EKS Helm AWS Load Balancer Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
+    * Update policies and add require permission to those
+
+## [0.3.6]() (2025-04-04)
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Add tolerants which will schedule argocd to managed node
+
+## [0.3.5]() (2025-04-04)
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Remove those attributes when creating helm argocd
+    ```hcl
+    wait             = true
+    timeout          = 300
+    ```
+
+## [0.3.4]() (2025-04-03)
+
+### Features
+
+* AWS Elasticache [(./aws/elasticache)](./aws/elasticache)
+    * Add `at_rest_encryption_enabled`.
+
+## [0.3.3]() (2025-04-03)
+
+### Features
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Update provider version
+    * Split CRDs include `Projects` and `Applications` to a single sub-module, which will handle creating Projects and
+      Applications.
+
+## [0.3.2]() (2025-04-01)
+
+### Features
+
+* AWS EKS Helm ArgoCD [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
 
 ## [0.3.1]() (2025-03-31)
 
 ### Features
+
 * AWS EKS Helm Keycloak [(./aws/eks-helm/keycloak)](./aws/eks-helm/keycloak)
 
 ## [0.3.0]() (2025-03-30)
@@ -12,29 +58,29 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * AWS EKS Access Entry: [(./aws/eks-access-entry)](./aws/eks-access-entry)
-  * Use the inline EKS Access Entry
- 
+    * Use the inline EKS Access Entry
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
-  * Add the labels for managed_nodes
+    * Add the labels for managed_nodes
 
 * AWS EKS Helm Keda [(./aws/eks-helm/keda)](./aws/eks-helm/keda)
-  * Add the labels and tolerations
+    * Add the labels and tolerations
 
 * AWS EKS Helm Datadog [(./aws/eks-helm/datadog)](./aws/eks-helm/datadog)
-  * Add the labels and tolerations
- 
+    * Add the labels and tolerations
+
 * AWS EKS Helm Metrics Server [(./aws/eks-helm/metrics-server)](./aws/eks-helm/metrics-server)
-  * Add the labels and tolerations
+    * Add the labels and tolerations
 
 * AWS EKS Helm Neo4j [(./aws/eks-helm/neo4j)](./aws/eks-helm/neo4j)
-  * Add the labels and tolerations
-  
+    * Add the labels and tolerations
+
 ## [0.2.6]() (2025-03-29)
 
 ### Features
 
 * AWS EKS Service: [(./aws/eks-service)](./aws/eks-service)
-  * Add inline k8s service account annotations
+    * Add inline k8s service account annotations
 
 ## [0.2.5]() (2025-03-18)
 

@@ -4,6 +4,8 @@ Enables signing behavior for security and ensures that the connection protocol i
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_control
 */
 resource "aws_cloudfront_origin_access_control" "this" {
+  count = var.s3_redirect_domain == null ? 1 : 0
+
   name                              = var.s3_bucket_id
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
@@ -48,10 +50,28 @@ This configuration includes SSL, origin access control, cache behavior, and cust
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
 */
 resource "aws_cloudfront_distribution" "this" {
-  origin {
-    domain_name              = data.aws_s3_bucket.this.bucket_regional_domain_name
-    origin_access_control_id = aws_cloudfront_origin_access_control.this.id
-    origin_id                = local.s3_origin_id
+  dynamic "origin" {
+    for_each = var.s3_redirect_domain != null ? [1] : []
+    content {
+      domain_name = aws_s3_bucket_website_configuration.main[0].website_endpoint
+      origin_id   = local.s3_origin_id
+
+      custom_origin_config {
+        http_port              = 80
+        https_port             = 443
+        origin_protocol_policy = "http-only"
+        origin_ssl_protocols   = ["TLSv1.2"]
+      }
+    }
+  }
+
+  dynamic "origin" {
+    for_each = var.s3_redirect_domain == null ? [1] : []
+    content {
+      domain_name              = data.aws_s3_bucket.this.bucket_regional_domain_name
+      origin_access_control_id = aws_cloudfront_origin_access_control.this[0].id
+      origin_id                = local.s3_origin_id
+    }
   }
 
   aliases = var.distribution_aliases != null ? var.distribution_aliases : [local.dns_name]

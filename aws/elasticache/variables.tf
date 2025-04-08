@@ -65,6 +65,12 @@ variable "transit_encryption_enabled" {
   default     = false
 }
 
+variable "at_rest_encryption_enabled" {
+  description = "Whether to enable encryption at rest."
+  type        = bool
+  default     = false
+}
+
 variable "transit_encryption_mode" {
   description = "A setting that enables clients to migrate to in-transit encryption with no downtime. Valid values are preferred and required. When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply"
   type        = string
