@@ -140,13 +140,20 @@ variable "domain_name" {
 
 # Managed Node
 variable "node_selector" {
-  type        = map(string)
   description = "Node selector for the ingress controller"
+  type        = map(string)
   default     = {}
 }
 
 variable "tolerations" {
-  type        = list(map(string))
   description = "Tolerations for the ingress controller"
+  type        = list(map(string))
   default     = []
+}
+
+# Dex Config
+variable "issuer_url" {
+  description = "The issuer URL should be where Dex talks to the OIDC provider"
+  type        = string
+  default     = "http://argocd-dex-server:5556"
 }
