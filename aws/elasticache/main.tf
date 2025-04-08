@@ -50,6 +50,7 @@ resource "aws_elasticache_replication_group" "this" {
 
   # The following blocks specified only if (var.transit_encryption_enabled == true)
   transit_encryption_enabled = var.transit_encryption_enabled
+  transit_encryption_mode    = var.transit_encryption_mode # make sure you update this when enabled transit encryption
   auth_token                 = var.transit_encryption_enabled ? random_string.this[0].result : null
   auth_token_update_strategy = "ROTATE"
 }

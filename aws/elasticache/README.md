@@ -13,7 +13,7 @@ This module will create the following components:
 
 ```hcl
 module "elasticache" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.3.4"
+  source = "github.com/spartan-stratos/terraform-modules//aws/elasticache?ref=v0.3.8"
 
   cluster_name                           = "example"
   environment                            = "dev"
@@ -74,6 +74,7 @@ No modules.
 | <a name="input_snapshot_window"></a> [snapshot\_window](#input\_snapshot\_window)                                                                                | The time to do the backup, default 01:00-02:00                                                                                                                                     | `string`       | `"01:00-02:00"`               |    no    |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                                                                               | The subnet ids of this cluster                                                                                                                                                     | `list(string)` | n/a                           |   yes    |
 | <a name="input_transit_encryption_enabled"></a> [transit\_encryption\_enabled](#input\_transit\_encryption\_enabled)                                             | Specifies whether to enable in-transit encryption for the ElastiCache replication group. When set to true, it ensures that data between nodes and clients is encrypted in transit. | `bool`         | `false`                       |    no    |
+| <a name="input_transit_encryption_mode"></a> [transit\_encryption\_mode](#input\_transit\_encryption\_mode) | A setting that enables clients to migrate to in-transit encryption with no downtime. Valid values are preferred and required. When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply | `string` | `null` | no |
 
 ## Outputs
 
