@@ -7,9 +7,9 @@ locals {
   ])
 
   tolerations = flatten([
-    for key, value in var.var.tolerations : {
-        key = key
-        value = value
+    for key, value in var.tolerations : {
+      key   = key
+      value = value
     }
   ])
 
@@ -32,7 +32,7 @@ global:
   %{endif}
   %{if length(var.tolerations) > 0}
   tolerations:
-    %{for toleration in var.tolerations}
+    %{for toleration in local.tolerations}
     - ${toleration.key}: ${toleration.value}
     %{endfor}
   %{endif}
