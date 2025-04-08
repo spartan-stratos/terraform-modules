@@ -80,5 +80,5 @@ variable "transit_encryption_mode" {
 variable "replicas_per_node_group" {
   description = "Number of replica nodes in each node group. Changing this number will trigger a resizing operation before other settings modifications. Valid values are 0 to 5."
   type        = number
-  default     = 1
+  default     = 0
 }
