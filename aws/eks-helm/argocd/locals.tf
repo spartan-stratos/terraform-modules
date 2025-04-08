@@ -26,10 +26,10 @@ global:
   %{if length(var.tolerations) > 0}
   tolerations:
     %{for toleration in var.tolerations}
-    - key      = ${toleration.key}
-      operator = ${toleration.operator}
-      value    = ${toleration.value}
-      effect   = ${toleration.effect}
+    - key: ${toleration.key}
+      operator: ${toleration.operator}
+      value: ${toleration.value}
+      effect: ${toleration.effect}
     %{endfor}
   %{endif}
 server:
