@@ -8,7 +8,7 @@ Terraform module which creates OpenSearch resources on AWS.
 
 ```hcl
 module "opensearch" {
-  source  = "github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.1.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.3.8"
 
   domain             = "opensearch"
   instance_size      = "t3.small.search"
@@ -55,18 +55,19 @@ No modules.
 
 ## Inputs
 
-| Name                                                                                         | Description                                                                        | Type           | Default             | Required |
-|----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------------|---------------------|:--------:|
-| <a name="input_create_linked_role"></a> [create\_linked\_role](#input\_create\_linked\_role) | Create a service linked role for Amazon OpenSearch Service to access VPC resources | `bool`         | `false`             |    no    |
-| <a name="input_domain"></a> [domain](#input\_domain)                                         | The domain for creating open search                                                | `string`       | n/a                 |   yes    |
-| <a name="input_ebs_enabled"></a> [ebs\_enabled](#input\_ebs\_enabled)                        | Enable EBS                                                                         | `bool`         | `false`             |    no    |
-| <a name="input_ebs_storage_size"></a> [ebs\_storage\_size](#input\_ebs\_storage\_size)       | Enable EBS                                                                         | `number`       | `10`                |    no    |
-| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version)               | The engine version of open search                                                  | `string`       | `"OpenSearch_2.13"` |    no    |
-| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count)               | The number of instance                                                             | `number`       | `1`                 |    no    |
-| <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size)                  | The size of instance                                                               | `string`       | `"t2.micro.search"` |    no    |
-| <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles)            | List of priciple roles                                                             | `list(string)` | `null`              |    no    |
-| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security group IDs that will be used in additional to the default ones.            | `list(string)` | n/a                 |   yes    |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                           | The subnet ids of clusters                                                         | `list(string)` | n/a                 |   yes    |
+| Name                                                                                                          | Description                                                                        | Type           | Default             | Required |
+|---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------------|---------------------|:--------:|
+| <a name="input_create_linked_role"></a> [create\_linked\_role](#input\_create\_linked\_role)                  | Create a service linked role for Amazon OpenSearch Service to access VPC resources | `bool`         | `false`             |    no    |
+| <a name="input_domain"></a> [domain](#input\_domain)                                                          | The domain for creating open search                                                | `string`       | n/a                 |   yes    |
+| <a name="input_ebs_enabled"></a> [ebs\_enabled](#input\_ebs\_enabled)                                         | Enable EBS                                                                         | `bool`         | `false`             |    no    |
+| <a name="input_ebs_storage_size"></a> [ebs\_storage\_size](#input\_ebs\_storage\_size)                        | Enable EBS                                                                         | `number`       | `10`                |    no    |
+| <a name="input_encrypt_at_rest_enabled"></a> [encrypt\_at\_rest\_enabled](#input\_encrypt\_at\_rest\_enabled) | Whether to enable encryption of data at rest.                                      | `bool`         | `false`             |    no    |
+| <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version)                                | The engine version of open search                                                  | `string`       | `"OpenSearch_2.13"` |    no    |
+| <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count)                                | The number of instance                                                             | `number`       | `1`                 |    no    |
+| <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size)                                   | The size of instance                                                               | `string`       | `"t2.micro.search"` |    no    |
+| <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles)                             | List of priciple roles                                                             | `list(string)` | `null`              |    no    |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids)                  | Security group IDs that will be used in additional to the default ones.            | `list(string)` | n/a                 |   yes    |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                            | The subnet ids of clusters                                                         | `list(string)` | n/a                 |   yes    |
 
 ## Outputs
 

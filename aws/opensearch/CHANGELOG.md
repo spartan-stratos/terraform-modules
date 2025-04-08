@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.8]() (2025-04-08)
+
+### Features
+
+* Add `encrypt_at_rest_enabled` to enable encryption of data at rest.
+
 ## [0.1.48]() (2025-01-09)
 
 ### Features
