@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.9]() (2025-04-09)
+
+### Feature
+
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Add some configuration to enable EFS CSI on ManagedNodeGroup
+        * nodeSelector
+        * tolerations
+        * AWS IRSA
+      
 ## [0.3.8]() (2025-04-08)
 
 ### Features
