@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.8]() (2025-04-07)
+
+### Features
+
+* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain 
+
 ## [0.1.72]() (2025-03-05)
 
 ### Features
