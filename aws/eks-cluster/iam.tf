@@ -166,6 +166,7 @@ locals {
     "arn:aws:iam::aws:policy/AutoScalingFullAccess",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
+    "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy",
     aws_iam_policy.custom_worker.arn
   ]
 }

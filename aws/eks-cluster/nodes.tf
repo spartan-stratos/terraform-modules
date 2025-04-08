@@ -16,4 +16,6 @@ module "eks_managed_node_group" {
 
   taints = each.value.taints
   labels = each.value.labels
+
+  iam_role_arn = aws_iam_role.node.arn
 }

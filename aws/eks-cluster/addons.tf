@@ -45,6 +45,12 @@ resource "aws_eks_addon" "coredns_ec2" {
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
+  configuration_values = jsonencode({
+    replicaCount = var.coredns.replica_count
+    nodeSelector = var.coredns.node_selector
+    tolerations  = var.coredns.tolerations
+  })
+
   depends_on = [aws_eks_cluster.master]
 }
 
@@ -79,5 +85,12 @@ resource "aws_eks_addon" "efs_csi_driver" {
   resolve_conflicts_on_update = "OVERWRITE"
   resolve_conflicts_on_create = "OVERWRITE"
 
-  depends_on = [aws_eks_cluster.master, module.fargate_profile]
+  configuration_values = jsonencode({
+    controller = {
+      replicaCount = var.efs_csi.replica_count
+      nodeSelector = var.efs_csi.node_selector
+      tolerations  = var.efs_csi.tolerations
+    }
+  })
+  depends_on = [aws_eks_cluster.master]
 }

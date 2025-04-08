@@ -4,7 +4,7 @@ data "aws_caller_identity" "current" {}
 resource "aws_eks_node_group" "this" {
   # Required
   cluster_name  = var.cluster_name
-  node_role_arn = aws_iam_role.this.arn
+  node_role_arn = var.iam_role_arn != null ? var.iam_role_arn : aws_iam_role.this.arn
   subnet_ids    = var.subnet_ids
 
   scaling_config {
