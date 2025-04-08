@@ -1,10 +1,30 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.3.8]() (2025-04-08)
+
+### Features
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Update Ingress and OIDC Connection
+    * Add `issuer_url` for dex config
+
+* AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
+    * Add `transit_encryption_mode` to `aws_elasticache_replication_group`.
+
+* AWS Static Website: [(./aws/static-website)](./aws/static-website)
+    * Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain
+
+* AWS OpenSearch: [(./aws/opensearch)](./aws/opensearch)
+    * Add `encrypt_at_rest_enabled` to enable encryption of data at rest.
+
 ## [0.3.7]() (2025-04-04)
 
 ### Fix Bugs
-* AWS EKS Helm AWS Load Balancer Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
+
+* AWS EKS Helm AWS Load Balancer
+  Controller: [(./aws/eks-helm/aws-load-balancer-controller)](./aws/eks-helm/aws-load-balancer-controller)
     * Update policies and add require permission to those
 
 ## [0.3.6]() (2025-04-04)
