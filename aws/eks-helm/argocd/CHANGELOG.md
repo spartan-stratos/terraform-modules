@@ -3,15 +3,15 @@
 All notable changes to this project will be documented in this file.
 ## [0.3.9]() (2025-04-08)
 
-### Features
+### Fix Bugs
 
-* Convert to `yaml` file
 * Fix issues relating to yaml format in `tolerations`
 
 ## [0.3.8]() (2025-04-04)
 
 ### Features
 
+* Convert to `yaml` file
 * Update Ingress and OIDC Connection
 * Add `issuer_url` for dex config
 
