@@ -18,6 +18,9 @@ resource "aws_opensearch_domain" "this" {
     ebs_enabled = var.ebs_enabled
     volume_size = var.ebs_storage_size
   }
+  encrypt_at_rest {
+    enabled = var.encrypt_at_rest_enabled
+  }
   access_policies = data.aws_iam_policy_document.this.json
 }
 

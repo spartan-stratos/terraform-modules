@@ -54,3 +54,9 @@ variable "create_linked_role" {
   type        = bool
   default     = false
 }
+
+variable "encrypt_at_rest_enabled" {
+  description = "Whether to enable encryption of data at rest."
+  type        = bool
+  default     = false
+}
