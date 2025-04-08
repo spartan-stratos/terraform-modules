@@ -12,8 +12,8 @@ locals {
       value = value
     }
   ])
-  # ----- MANIFEST YAML FILE ------
 
+  # ----- MANIFEST YAML FILE ------
   manifest = <<YAML
 global:
   domain: "argocd.${var.domain_name}"
