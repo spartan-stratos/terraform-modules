@@ -16,7 +16,7 @@ variable "parameter_group_name" {
 }
 
 variable "multi_az_enabled" {
-  description = "Flag to enable multi az feature, default is true"
+  description = "Flag to enable multi az feature, default is false"
   type        = bool
   default     = false
 }
@@ -75,4 +75,10 @@ variable "transit_encryption_mode" {
   description = "A setting that enables clients to migrate to in-transit encryption with no downtime. Valid values are preferred and required. When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply"
   type        = string
   default     = null
+}
+
+variable "replicas_per_node_group" {
+  description = "Number of replica nodes in each node group. Changing this number will trigger a resizing operation before other settings modifications. Valid values are 0 to 5."
+  type        = number
+  default     = 1
 }

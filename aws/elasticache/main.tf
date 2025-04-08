@@ -27,11 +27,12 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elas
 resource "aws_elasticache_replication_group" "this" {
   depends_on = [aws_elasticache_subnet_group.this]
 
-  replication_group_id = var.cluster_name
-  description          = "${var.cluster_name} redis cluster"
-  multi_az_enabled     = var.multi_az_enabled
-  node_type            = var.node_type
-  num_node_groups      = var.cache_node_count
+  replication_group_id    = var.cluster_name
+  description             = "${var.cluster_name} redis cluster"
+  multi_az_enabled        = var.multi_az_enabled
+  node_type               = var.node_type
+  num_node_groups         = var.cache_node_count
+  replicas_per_node_group = var.replicas_per_node_group
 
   parameter_group_name = var.parameter_group_name
   engine               = "redis"
