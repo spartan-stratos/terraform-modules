@@ -106,7 +106,16 @@ variable "tolerations" {
 }
 
 variable "external_default_service" {
-  description = "Default service for the AWS Load Balancer Controller"
+  description = "Default external service for the AWS Load Balancer Controller"
+  type = object({
+    name = string
+    port = number
+  })
+  default = null
+}
+
+variable "internal_default_service" {
+  description = "Default internal service for the AWS Load Balancer Controller"
   type = object({
     name = string
     port = number

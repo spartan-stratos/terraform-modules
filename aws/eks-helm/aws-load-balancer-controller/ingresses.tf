@@ -89,10 +89,22 @@ resource "kubernetes_ingress_v1" "internal_alb" {
         path {
           path = "/*"
           backend {
-            service {
-              name = "ssl-redirect"
-              port {
-                name = "use-annotation"
+            dynamic "service" {
+              for_each = var.internal_default_service != null ? [var.internal_default_service] : []
+              content {
+                name = lookup(service.value, "name", null)
+                port {
+                  number = lookup(service.value, "port", null)
+                }
+              }
+            }
+            dynamic "service" {
+              for_each = var.internal_default_service == null ? ["ssl-redirect"] : []
+              content {
+                name = "ssl-redirect"
+                port {
+                  name = "use-annotation"
+                }
               }
             }
           }
