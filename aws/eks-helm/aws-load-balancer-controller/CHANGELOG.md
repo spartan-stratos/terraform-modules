@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.3.11]() (2025-04-09)
+
+# Features
+
+* Add the external default service to handle the custom ingress controller
+
 ## [0.3.7]() (2025-03-30)
 
 # Features

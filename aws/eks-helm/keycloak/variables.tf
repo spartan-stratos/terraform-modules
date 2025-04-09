@@ -85,6 +85,7 @@ variable "ingress_group_name" {
   description = "Ingress group name"
   default     = "external"
 }
+
 variable "ingress_hostname" {
   type        = string
   description = "Hostname for the ingress"
@@ -92,14 +93,18 @@ variable "ingress_hostname" {
 }
 
 variable "node_selector" {
-  type        = map(string)
   description = "Node selector for the keycloak"
+  type        = map(string)
   default     = {}
 }
 
 variable "tolerations" {
-  type        = list(map(string))
   description = "Tolerations for the keycloak"
-  default     = []
+  type = list(object({
+    key      = string
+    operator = string
+    value    = optional(string)
+    effect   = optional(string)
+  }))
+  default = []
 }
-

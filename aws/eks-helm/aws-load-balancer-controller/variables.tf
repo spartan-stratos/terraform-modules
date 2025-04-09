@@ -89,13 +89,36 @@ variable "wafv2_arn" {
 }
 
 variable "node_selector" {
+  description = "Node selector for the AWS Load Balancer Controller"
   type        = map(string)
-  description = "Node selector for the ingress controller"
   default     = {}
 }
 
 variable "tolerations" {
-  type        = list(map(string))
-  description = "Tolerations for the ingress controller"
-  default     = []
+  description = "Tolerations for the AWS Load Balancer Controller"
+  type = list(object({
+    key      = string
+    operator = string
+    value    = optional(string)
+    effect   = optional(string)
+  }))
+  default = []
+}
+
+variable "external_default_service" {
+  description = "Default external service for the AWS Load Balancer Controller"
+  type = object({
+    name = string
+    port = number
+  })
+  default = null
+}
+
+variable "internal_default_service" {
+  description = "Default internal service for the AWS Load Balancer Controller"
+  type = object({
+    name = string
+    port = number
+  })
+  default = null
 }
