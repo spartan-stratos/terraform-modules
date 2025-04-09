@@ -15,7 +15,6 @@ resource "kubernetes_ingress_v1" "external_alb" {
     namespace = var.namespace
     annotations = {
       "kubernetes.io/ingress.class" = "alb"
-
       "alb.ingress.kubernetes.io/group.name"               = var.external_group_name
       "alb.ingress.kubernetes.io/certificate-arn"          = join(",", var.certificate_arn)
       "alb.ingress.kubernetes.io/load-balancer-attributes" = "idle_timeout.timeout_seconds=${var.idle_timeout}"
@@ -34,10 +33,22 @@ resource "kubernetes_ingress_v1" "external_alb" {
         path {
           path = "/*"
           backend {
-            service {
-              name = "ssl-redirect"
-              port {
-                name = "use-annotation"
+            dynamic "service" {
+              for_each = var.external_default_service != null ? [var.external_default_service] : []
+              content {
+                name = lookup(service.value, "name", null)
+                port {
+                  number = lookup(service.value, "port", null)
+                }
+              }
+            }
+            dynamic "service" {
+              for_each = var.external_default_service == null ? ["ssl-redirect"] : []
+              content {
+                name = "ssl-redirect"
+                port {
+                  name = "use-annotation"
+                }
               }
             }
           }
@@ -45,6 +56,7 @@ resource "kubernetes_ingress_v1" "external_alb" {
       }
     }
   }
+
 }
 
 resource "kubernetes_ingress_v1" "internal_alb" {

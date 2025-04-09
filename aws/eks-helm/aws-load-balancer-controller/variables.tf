@@ -104,3 +104,12 @@ variable "tolerations" {
   }))
   default     = []
 }
+
+variable "external_default_service" {
+  description = "Default service for the ingress controller"
+  type        = object({
+    name      = string
+    port      = number
+  })
+  default     = null
+}
