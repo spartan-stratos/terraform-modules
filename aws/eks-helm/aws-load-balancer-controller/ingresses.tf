@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "external_alb" {
     name      = "external-alb"
     namespace = var.namespace
     annotations = {
-      "kubernetes.io/ingress.class" = "alb"
+      "kubernetes.io/ingress.class"                        = "alb"
       "alb.ingress.kubernetes.io/group.name"               = var.external_group_name
       "alb.ingress.kubernetes.io/certificate-arn"          = join(",", var.certificate_arn)
       "alb.ingress.kubernetes.io/load-balancer-attributes" = "idle_timeout.timeout_seconds=${var.idle_timeout}"

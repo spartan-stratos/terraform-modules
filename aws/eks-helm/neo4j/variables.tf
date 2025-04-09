@@ -124,12 +124,12 @@ variable "neo4j_procedures" {
 
 variable "node_selector" {
   type        = map(string)
-  description = "Node selector for the ingress controller"
+  description = "Node selector for neo4j"
   default     = {}
 }
 
 variable "tolerations" {
   type        = list(map(string))
-  description = "Tolerations for the ingress controller"
+  description = "Tolerations for neo4j"
   default     = []
 }

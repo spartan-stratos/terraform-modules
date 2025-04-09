@@ -153,7 +153,7 @@ variable "tolerations" {
     value    = optional(string)
     effect   = optional(string)
   }))
-  default     = []
+  default = []
 }
 
 # Dex Config

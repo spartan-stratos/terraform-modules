@@ -12,17 +12,17 @@ variable "helm_release_name" {
 variable "helm_chart_version" {
   default     = "3.12.2"
   type        = string
-  description = "The chart version of ingress controller"
+  description = "The chart version of metrics server"
 }
 
 variable "node_selector" {
   type        = map(string)
-  description = "Node selector for the ingress controller"
+  description = "Node selector for the metrics server"
   default     = {}
 }
 
 variable "tolerations" {
   type        = list(map(string))
-  description = "Tolerations for the ingress controller"
+  description = "Tolerations for the metrics server"
   default     = []
 }
