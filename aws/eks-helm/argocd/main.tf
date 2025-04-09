@@ -20,9 +20,27 @@ resource "kubernetes_secret" "github_app" {
   }
 
   data = {
-    type                = "git"
-    url                 = "https://github.com/${var.github_app.organization}"
-    githubAppID         = var.github_app.app_id
-    githubAppPrivateKey = var.github_app.private_key
+    type                    = "git"
+    url                     = "https://github.com/${var.github_app.organization}"
+    githubAppID             = var.github_app.app_id
+    githubAppInstallationID = var.github_app.installation_id
+    githubAppPrivateKey     = var.github_app.private_key
+  }
+}
+
+resource "kubernetes_secret" "repository" {
+  for_each = toset(var.repositories)
+  metadata {
+    namespace = var.argocd_namespace
+    name      = "argocd-${replace(each.value, "/", "-")}"
+
+    labels = {
+      "argocd.argoproj.io/secret-type" = "repository"
+    }
+  }
+
+  data = {
+    type = "git"
+    url  = "https://github.com/${each.value}"
   }
 }

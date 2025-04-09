@@ -16,6 +16,12 @@ variable "chart_url" {
   default     = "https://argoproj.github.io/argo-helm"
 }
 
+variable "repositories" {
+  description = "To connect to repository by using Credentials Template, which is currently using Github App"
+  type        = list(string)
+  default     = []
+}
+
 variable "enabled_custom_ingress" {
   description = "To enable alb ingress and use aws load balancer controller to manage"
   type        = bool

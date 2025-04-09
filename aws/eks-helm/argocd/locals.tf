@@ -73,6 +73,7 @@ configs:
     ${key}:
       assumeRole: ${cluster.assumeRole}
       server: ${cluster.server}
+      annotations: {}
       labels: {}
       clusterResources: ${cluster.clusterResources}
       config:
