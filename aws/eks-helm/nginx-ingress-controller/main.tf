@@ -48,7 +48,7 @@ resource "helm_release" "this" {
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
   version          = var.helm_chart_version
-  create_namespace = true
+  create_namespace = var.create_namespace
   timeout          = 600
   values           = [local.manifest]
   lifecycle {
@@ -63,5 +63,40 @@ data "kubernetes_service" "this" {
   metadata {
     name      = "${var.helm_release_name}-controller"
     namespace = var.namespace
+  }
+}
+
+resource "kubernetes_ingress_v1" "nginx_ingress" {
+  metadata {
+    name      = var.helm_release_name
+    namespace = var.namespace
+
+    annotations = {
+      "alb.ingress.kubernetes.io/group.name"       = var.ingress_group_name
+      "kubernetes.io/ingress.class"                = var.ingress_class_name
+      "alb.ingress.kubernetes.io/target-type"      = "ip"
+      "alb.ingress.kubernetes.io/healthcheck-path" = "/healthz"
+      "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
+      "alb.ingress.kubernetes.io/listen-ports"     = "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+    }
+  }
+
+  spec {
+    rule {
+      http {
+        path {
+          path      = "/*"
+          path_type = "Prefix" # Required in v1 ingress
+          backend {
+            service {
+              name = data.kubernetes_service.this.metadata[0].name
+              port {
+                number = 80
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

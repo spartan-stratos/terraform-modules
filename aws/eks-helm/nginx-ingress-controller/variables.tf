@@ -56,3 +56,21 @@ variable "enabled_admission_webhooks" {
   description = "Enable admission webhooks"
   default     = false
 }
+
+variable "ingress_group_name" {
+  description = "The ingress group name of Neo4j ingress"
+  type        = string
+  default     = "external"
+}
+
+variable "ingress_class_name" {
+  description = "The ingress class name of Neo4j ingress"
+  type        = string
+  default     = "alb"
+}
+
+variable "create_namespace" {
+  type        = bool
+  default     = true
+  description = "Determines whether a new namespace should be created. Set to 'true' to create the namespace; otherwise, set to 'false' to use an existing namespace."
+}

@@ -6,7 +6,10 @@ module "example" {
   nginx_cpu    = "100m"
   nginx_memory = "90Mi"
 
-  replicas     = 1
-  minReplicas  = 1
-  maxReplicas  = 3
+  replicas    = 1
+  minReplicas = 1
+  maxReplicas = 3
+
+  ingress_group_name = "external"
+  ingress_class_name = "alb"
 }
