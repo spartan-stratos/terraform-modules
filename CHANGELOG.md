@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.11]() (2025-04-09)
+
+### Features
+
+* Add `nginx-ingress-controller` module
+  
 ## [0.3.10]() (2025-04-09)
 
 ### Bug Fixes
@@ -10,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.3.9]() (2025-04-09)
 
-### Feature
+### Features
 
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Add some configuration to enable EFS CSI on ManagedNodeGroup
