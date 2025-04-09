@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.10]() (2025-04-09)
+
+### Bug Fixes
+
+* Add `replicas_per_node_group` to support multi-az.
+
 ## [0.3.9]() (2025-04-09)
 
 ### Feature
@@ -11,7 +17,7 @@ All notable changes to this project will be documented in this file.
         * nodeSelector
         * tolerations
         * AWS IRSA
-      
+
 ## [0.3.8]() (2025-04-08)
 
 ### Features
