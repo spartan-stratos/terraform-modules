@@ -93,14 +93,18 @@ variable "ingress_hostname" {
 }
 
 variable "node_selector" {
+  description = "Node selector for the ingress controller"
   type        = map(string)
-  description = "Node selector for the keycloak"
   default     = {}
 }
 
 variable "tolerations" {
-  type        = list(map(string))
-  description = "Tolerations for the keycloak"
+  description = "Tolerations for the ingress controller"
+  type = list(object({
+    key      = string
+    operator = string
+    value    = optional(string)
+    effect   = optional(string)
+  }))
   default     = []
 }
-

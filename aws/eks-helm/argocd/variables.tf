@@ -147,7 +147,12 @@ variable "node_selector" {
 
 variable "tolerations" {
   description = "Tolerations for the ingress controller"
-  type        = list(map(string))
+  type = list(object({
+    key      = string
+    operator = string
+    value    = optional(string)
+    effect   = optional(string)
+  }))
   default     = []
 }
 
