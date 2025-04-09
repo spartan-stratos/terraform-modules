@@ -108,8 +108,8 @@ resource "aws_cloudtrail" "this" {
 
   lifecycle {
     ignore_changes = [
-      # By default CloudTrail will create a default advanced event selector
-      # if not specified. This will cause a error when running terraform apply with refresh: terraform will try to delete the default advanced event selector
+      # By default AWS will create a default advanced event selector if not specified.
+      # This will cause a error when running terraform apply with refresh: terraform will try to delete the default advanced event selector
       advanced_event_selector,
     ]
   }
