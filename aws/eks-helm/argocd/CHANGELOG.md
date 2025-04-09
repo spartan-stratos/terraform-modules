@@ -3,9 +3,15 @@
 All notable changes to this project will be documented in this file.
 ## [0.3.9]() (2025-04-08)
 
+### Features
+
+* Add annotations for adding new roles
+
 ### Fix Bugs
 
 * Fix issues relating to yaml format in `tolerations`
+* Change `oidc_role_arn` to `oidc_url`
+* Fix indent for cluster connections
 
 ## [0.3.8]() (2025-04-04)
 

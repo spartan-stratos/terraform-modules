@@ -69,7 +69,11 @@ No modules.
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [helm_release.this](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [kubernetes_annotations.argocd_application_controller](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations) | resource |
+| [kubernetes_annotations.argocd_applicationset_controller](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations) | resource |
+| [kubernetes_annotations.argocd_server](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/annotations) | resource |
 | [kubernetes_secret.github_app](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.allow_assume_remote_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.assume_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
@@ -78,7 +82,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_argocd_namespace"></a> [argocd\_namespace](#input\_argocd\_namespace) | Namespace to install Argo CD | `string` | `"argocd"` | no |
-| <a name="input_aws_management_role"></a> [aws\_management\_role](#input\_aws\_management\_role) | AWS management role configuration, only required if enabled\_aws\_management\_role is true | <pre>object({<br/>    eks_oidc_provider_arn = string<br/>    role_name             = string<br/>  })</pre> | `null` | no |
+| <a name="input_aws_management_role"></a> [aws\_management\_role](#input\_aws\_management\_role) | AWS management role configuration, only required if enabled\_aws\_management\_role is true | <pre>object({<br/>    eks_oidc_provider_arn = string<br/>    role_name             = string<br/>    eks_oidc_provider_url = string<br/>  })</pre> | `null` | no |
 | <a name="input_chart_url"></a> [chart\_url](#input\_chart\_url) | URL of the Argo CD Helm chart | `string` | `"https://argoproj.github.io/argo-helm"` | no |
 | <a name="input_chart_version"></a> [chart\_version](#input\_chart\_version) | Version of the Argo CD Helm chart | `string` | `"7.8.14"` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain name for ArgoCD | `string` | n/a | yes |
@@ -96,7 +100,7 @@ No modules.
 | <a name="input_rbac_policies"></a> [rbac\_policies](#input\_rbac\_policies) | List of RBAC policies to apply | `list(string)` | `[]` | no |
 | <a name="input_server_side_diff"></a> [server\_side\_diff](#input\_server\_side\_diff) | Enable server side diff | `bool` | `true` | no |
 | <a name="input_slack_token"></a> [slack\_token](#input\_slack\_token) | The token to authenticate to slack, which will help application push notification to slack | `string` | `""` | no |
-| <a name="input_tolerations"></a> [tolerations](#input\_tolerations) | Tolerations for the ingress controller | `list(map(string))` | `[]` | no |
+| <a name="input_tolerations"></a> [tolerations](#input\_tolerations) | Tolerations for the ingress controller | <pre>list(object({<br/>    key      = string<br/>    operator = string<br/>    value    = optional(string)<br/>    effect   = optional(string)<br/>  }))</pre> | `[]` | no |
 
 ## Outputs
 

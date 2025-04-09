@@ -69,7 +69,20 @@ configs:
       ${join("\n", var.rbac_policies)}
   %{if length(var.external_clusters) > 0}
   clusterCredentials:
-    ${yamlencode(var.external_clusters)}
+    %{for key, cluster in var.external_clusters}
+    ${key}:
+      assumeRole: ${cluster.assumeRole}
+      server: ${cluster.server}
+      labels: {}
+      clusterResources: ${cluster.clusterResources}
+      config:
+        awsAuthConfig:
+          clusterName: ${cluster.config.awsAuthConfig.clusterName}
+          roleARN: ${cluster.config.awsAuthConfig.roleARN}
+        tlsClientConfig:
+          insecure: ${cluster.config.tlsClientConfig.insecure}
+          caData: ${cluster.config.tlsClientConfig.caData}
+    %{endfor}
   %{endif}
 notifications:
   enabled: true

@@ -72,6 +72,7 @@ variable "aws_management_role" {
   type = object({
     eks_oidc_provider_arn = string
     role_name             = string
+    eks_oidc_provider_url = string
   })
 
   # Only required if enabled_aws_management_role is true
