@@ -56,7 +56,6 @@ resource "kubernetes_ingress_v1" "external_alb" {
       }
     }
   }
-
 }
 
 resource "kubernetes_ingress_v1" "internal_alb" {
@@ -73,7 +72,6 @@ resource "kubernetes_ingress_v1" "internal_alb" {
     namespace = var.namespace
     annotations = {
       "kubernetes.io/ingress.class" = "alb"
-
       "alb.ingress.kubernetes.io/group.name"               = var.internal_group_name
       "alb.ingress.kubernetes.io/certificate-arn"          = join(",", var.certificate_arn)
       "alb.ingress.kubernetes.io/load-balancer-attributes" = "idle_timeout.timeout_seconds=${var.idle_timeout}"
