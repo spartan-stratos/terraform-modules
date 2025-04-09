@@ -85,6 +85,7 @@ variable "ingress_group_name" {
   description = "Ingress group name"
   default     = "external"
 }
+
 variable "ingress_hostname" {
   type        = string
   description = "Hostname for the ingress"
