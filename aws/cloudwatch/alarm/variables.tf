@@ -49,6 +49,7 @@ variable "alarms" {
     auto_scaling_group  = optional(string)
     currency            = optional(string)
     linked_account      = optional(string)
+    identifier          = optional(string)
   }))
 }
 
