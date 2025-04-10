@@ -1,23 +1,38 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.3.14]() (2025-04-11)
+
+### Features
+
+* Restrict HTTP access to S3 bucket via `enabled_s3_http_access`.
+
 ## [0.1.68]() (2025-02-20)
 
 ### Features
+
 * Add `read_write_actions` which allow s3 policy can be added permissions base on requirement of projects
 
 ## [0.1.57]() (2025-01-15)
 
 ### Bug fixes
+
 * Correct access-log-policy resource (use bucket arn instead of id)
 
 ## [0.1.56]() (2025-01-14)
+
 ### Features
-* Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other services/buckets.
+
+* Add a submodule `access-log-policy` to configure bucket policy to allow AWS services to write access logs from other
+  services/buckets.
 
 ## [0.1.55]() (2025-01-14)
+
 ### Features
-* Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the bucket.
+
+* Add variable `enabled_access_logging` and `access_log_target_bucket_id` to optionally configure access logging for the
+  bucket.
 
 ## [0.1.36]() (2024-01-06)
 
