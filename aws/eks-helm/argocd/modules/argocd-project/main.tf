@@ -28,7 +28,7 @@ locals {
     [for role, groups in var.predefined_group_rules : {
       for group_name in toset(groups) :
       group_name => local.predefined_rules[role]
-    }]
+    }]...
   )
 
   group_roles = merge(
