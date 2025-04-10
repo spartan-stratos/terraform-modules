@@ -19,10 +19,10 @@ variable "description" {
   default     = null
 }
 
-variable "enabled_service_account" {
+variable "disabled_service_account" {
   description = "Whether the service account is disabled or not."
   type        = string
-  default     = true
+  default     = false
 }
 
 variable "permissions" {
