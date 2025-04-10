@@ -46,10 +46,10 @@ resource "kubernetes_manifest" "app" {
       }
 
       destination = {
-        name = var.cluster_name
+        name      = var.cluster_name
         namespace = "*"
       }
-      
+
       syncPolicy = var.sync_policy
     }
   }
