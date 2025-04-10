@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.12]() (2025-04-11)
+
+### Features
+
+* Add predefined group rules for projects.
+
 ## [0.3.12]() (2025-04-10)
 
 ### Features

@@ -1,3 +1,43 @@
+locals {
+  predefined_rules = {
+    admin = [
+      "applications, *",
+      "applicationsets, *",
+      "repositories, *",
+      "exec, *",
+      "clusters, *",
+      "logs, *",
+    ],
+    member = [
+      "applications, *",
+      "applicationsets, *",
+      "repositories, get",
+      "clusters, get",
+      "logs, get",
+    ],
+    viewer = [
+      "applications, get",
+      "applicationsets, get",
+      "repositories, get",
+      "clusters, get",
+      "logs, get",
+    ]
+  }
+
+  predefined_group = merge(
+    [for role, groups in var.predefined_group_rules : {
+      for group_name in toset(groups) :
+      group_name => local.predefined_rules[role]
+    }]
+  )
+
+  group_roles = merge(
+    local.predefined_group,
+    var.custom_group_roles
+  )
+}
+
+
 resource "kubernetes_manifest" "this" {
   manifest = {
     apiVersion = "argoproj.io/v1alpha1"
@@ -13,10 +53,10 @@ resource "kubernetes_manifest" "this" {
       sourceRepos  = ["*"]
       destinations = var.destinations
       roles = [
-        for group, roles in var.group_roles : {
+        for group, roles in local.group_roles : {
           name     = group
           groups   = ["${var.github_organization}:${group}"]
-          policies = [for role in roles : "p, proj:${var.project_name}:${group}, ${role}"]
+          policies = [for role in roles : "p, proj:${var.project_name}:${group}, ${role}, ${var.project_name}/*, allow"]
         }
       ]
     }
