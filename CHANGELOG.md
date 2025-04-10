@@ -1,13 +1,22 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.3.13]() (2025-04-10)
+
+### Features
+
+* Add RDS namespace `identifier`.
+
 ## [0.3.12]() (2025-04-10)
 
 ### Features
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Add annotations for adding new roles
 
 ### Fix Bugs
+
 * AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
     * Fix Github Repository Connection
     * Fix projects permission
@@ -18,7 +27,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Add `nginx-ingress-controller` module
-  
+
 ## [0.3.10]() (2025-04-09)
 
 ### Bug Fixes
