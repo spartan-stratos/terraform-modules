@@ -1,6 +1,17 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.12]() (2025-04-10)
+
+### Features
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Add annotations for adding new roles
+
+### Fix Bugs
+* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+    * Fix Github Repository Connection
+    * Fix projects permission
+    * Update OIDC arn to OIDC url for cluster connection
 
 ## [0.3.11]() (2025-04-09)
 

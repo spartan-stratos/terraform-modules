@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.3.12]() (2025-04-08)
+## [0.3.12]() (2025-04-10)
 
 ### Features
 
