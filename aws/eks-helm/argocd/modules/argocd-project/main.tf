@@ -55,7 +55,6 @@ resource "kubernetes_manifest" "this" {
         var.destinations, 
         [{
           name = "in-cluster"
-          server = "https://kubernetes.default.svc"
           namespace = var.argocd_namespace
         }]
       )
@@ -94,7 +93,6 @@ resource "kubernetes_manifest" "app" {
 
       destination = {
           name = "in-cluster"
-          server = "https://kubernetes.default.svc"
           namespace = var.argocd_namespace
         }
 
