@@ -21,7 +21,7 @@ resource "aws_s3_bucket_versioning" "this" {
 
 data "aws_iam_policy_document" "this" {
   dynamic "statement" {
-    for_each = var.enabled_s3_http_access ? [1] : []
+    for_each = var.disabled_s3_http_access ? [1] : []
 
     content {
       actions = [

@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Restrict HTTP access to S3 bucket via `enabled_s3_http_access`.
+* Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
 
 ## [0.1.68]() (2025-02-20)
 

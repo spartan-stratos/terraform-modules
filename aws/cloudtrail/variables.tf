@@ -119,7 +119,7 @@ variable "versioning_status" {
   default     = "Disabled"
 }
 
-variable "enabled_s3_http_access" {
+variable "disabled_s3_http_access" {
   description = "Whether to restrict HTTP access to S3 bucket."
   type        = bool
   default     = true
