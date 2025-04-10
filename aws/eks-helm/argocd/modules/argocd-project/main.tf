@@ -51,7 +51,14 @@ resource "kubernetes_manifest" "this" {
     spec = {
       description  = var.description
       sourceRepos  = ["*"]
-      destinations = var.destinations
+      destinations = concat(
+        var.destinations, 
+        [{
+          name = "in-cluster"
+          server = "https://kubernetes.default.svc"
+          namespace = var.argocd_namespace
+        }]
+      )
       roles = [
         for group, roles in local.group_roles : {
           name     = group
@@ -87,7 +94,7 @@ resource "kubernetes_manifest" "app" {
 
       destination = {
         name      = var.cluster_name
-        namespace = "*"
+        namespace = var.argocd_namespace
       }
 
       syncPolicy = var.sync_policy
