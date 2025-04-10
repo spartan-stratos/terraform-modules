@@ -44,6 +44,12 @@ resource "kubernetes_manifest" "app" {
           recurse = true
         }
       }
+
+      destination = {
+        name      = var.cluster_name
+        namespace = "*"
+      }
+
       syncPolicy = var.sync_policy
     }
   }

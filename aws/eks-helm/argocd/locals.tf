@@ -6,23 +6,14 @@ locals {
     }
   ])
 
-  tolerations = flatten([
-    for key, value in var.tolerations : {
-      key      = value.key
-      operator = value.operator
-      value    = value.value
-      effect   = value.effect
-    }
-  ])
-
   ingress_annotations = flatten([
     for key, value in var.ingress.annotations : {
       key   = key
       value = value
     }
   ])
-  # ----- MANIFEST YAML FILE ------
 
+  # ----- MANIFEST YAML FILE ------
   manifest = <<YAML
 global:
   domain: "argocd.${var.domain_name}"
@@ -34,11 +25,11 @@ global:
   %{endif}
   %{if length(var.tolerations) > 0}
   tolerations:
-    %{for toleration in local.tolerations}
-    - key      = ${toleration.key}
-      operator = ${toleration.operator}
-      value    = ${toleration.value}
-      effect   = ${toleration.effect}
+    %{for toleration in var.tolerations}
+    - key: ${toleration.key}
+      operator: ${toleration.operator}
+      value: ${toleration.value}
+      effect: ${toleration.effect}
     %{endfor}
   %{endif}
 server:
@@ -78,7 +69,21 @@ configs:
       ${join("\n", var.rbac_policies)}
   %{if length(var.external_clusters) > 0}
   clusterCredentials:
-    ${yamlencode(var.external_clusters)}
+    %{for key, cluster in var.external_clusters}
+    ${key}:
+      assumeRole: ${cluster.assumeRole}
+      server: ${cluster.server}
+      annotations: {}
+      labels: {}
+      clusterResources: ${cluster.clusterResources}
+      config:
+        awsAuthConfig:
+          clusterName: ${cluster.config.awsAuthConfig.clusterName}
+          roleARN: ${cluster.config.awsAuthConfig.roleARN}
+        tlsClientConfig:
+          insecure: ${cluster.config.tlsClientConfig.insecure}
+          caData: ${cluster.config.tlsClientConfig.caData}
+    %{endfor}
   %{endif}
 notifications:
   enabled: true

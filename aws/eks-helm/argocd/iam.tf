@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${var.aws_management_role.eks_oidc_provider_arn}:sub"
+      variable = "${var.aws_management_role.eks_oidc_provider_url}:sub"
       values = [
         "system:serviceaccount:${var.argocd_namespace}:argocd-application-controller",
         "system:serviceaccount:${var.argocd_namespace}:argocd-applicationset-controller",
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${var.aws_management_role.eks_oidc_provider_arn}:aud"
+      variable = "${var.aws_management_role.eks_oidc_provider_url}:aud"
       values = [
         "sts.amazonaws.com",
       ]

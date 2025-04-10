@@ -13,7 +13,7 @@ variable "path" {
 
 variable "github_organization" {
   description = "GitHub Organization"
-  type        = set(string)
+  type        = string
 }
 
 variable "group_roles" {
@@ -53,32 +53,18 @@ variable "repo_url" {
 variable "sync_policy" {
   description = "value"
   type = object({
-    automated = object({
-      prune    = bool
-      selfHeal = bool
-    })
+    automated = optional(object({
+      prune    = optional(bool)
+      selfHeal = optional(bool)
+    }))
 
-    syncOptions = list(string)
+    syncOptions = optional(list(string))
 
-    retry = object({
-      limit = number
-    })
+    retry = optional(object({
+      limit = optional(number)
+    }))
   })
-  default = {
-    automated = {
-      prune    = true
-      selfHeal = true
-    }
-
-    syncOptions = [
-      "CreateNamespace=true",
-      "Retry=true",
-    ]
-
-    retry = {
-      limit = 5
-    }
-  }
+  default = {}
 }
 
 variable "target_revision" {
