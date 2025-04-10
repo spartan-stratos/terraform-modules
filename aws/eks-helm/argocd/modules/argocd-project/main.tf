@@ -93,9 +93,10 @@ resource "kubernetes_manifest" "app" {
       }
 
       destination = {
-        name      = var.cluster_name
-        namespace = var.argocd_namespace
-      }
+          name = "in-cluster"
+          server = "https://kubernetes.default.svc"
+          namespace = var.argocd_namespace
+        }
 
       syncPolicy = var.sync_policy
     }
