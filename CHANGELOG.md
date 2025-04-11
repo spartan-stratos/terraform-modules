@@ -1,6 +1,27 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.15]() (2025-04-11)
+
+### Features
+* AWS KMS: [(./aws/kms)](./aws/kms)
+    * Add statements to KMS policy via `additional_statements`.
+
+* AWS Cloudtrail: [(./aws/cloudtrail)](./aws/cloudtrail)
+    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
+
+* AWS s3: [(./aws/s3)](./aws/s3)
+    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Add predefined group rules for projects.
+    * Update destinations for projects and root applications
+    * Update condition for adding in-cluster and rename it
+
+ 
+### Bug Fixes
+* AWS Helm Nginx Ingress Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
+   * Update replicas variable name
 
 ## [0.3.14]() (2025-04-11)
  
@@ -18,12 +39,12 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
     * Add annotations for adding new roles
 
 ### Fix Bugs
 
-* AWS EKS Cluster: [(./aws/eks-cluster)](./aws/eks-cluster)
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
     * Fix Github Repository Connection
     * Fix projects permission
     * Update OIDC arn to OIDC url for cluster connection
