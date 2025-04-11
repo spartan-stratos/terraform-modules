@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.14]() (2025-04-11)
+ 
+### Bug Fixes
+* AWS Helm Nginx Ingress Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
+   * Update replicas variable name
+   
 ## [0.3.13]() (2025-04-10)
 
 ### Features
