@@ -13,8 +13,8 @@ controller:
   replicaCount: ${var.replicas}
   autoscaling:
     enabled: true
-    minReplicas: ${var.minReplicas}
-    maxReplicas: ${var.maxReplicas}
+    minReplicas: ${var.min_replicas}
+    maxReplicas: ${var.max_replicas}
     targetCPUUtilizationPercentage: 75
     targetMemoryUtilizationPercentage: 75
   image:

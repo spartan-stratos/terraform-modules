@@ -16,13 +16,13 @@ variable "replicas" {
   default     = 1
 }
 
-variable "minReplicas" {
+variable "min_replicas" {
   description = "Min numer of pods."
   type        = number
   default     = 1
 }
 
-variable "maxReplicas" {
+variable "max_replicas" {
   description = "Max number of pods."
   type        = number
   default     = 3

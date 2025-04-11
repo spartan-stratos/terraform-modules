@@ -6,7 +6,7 @@ module "example" {
   nginx_cpu    = "100m"
   nginx_memory = "90Mi"
 
-  replicas    = 1
-  minReplicas = 1
-  maxReplicas = 3
+  replicas     = 1
+  min_replicas = 1
+  max_replicas = 3
 }

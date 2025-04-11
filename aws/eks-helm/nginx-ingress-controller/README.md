@@ -15,9 +15,9 @@ module "eks_helm_nginx_ingress_controller" {
   nginx_cpu    = "100m"
   nginx_memory = "90Mi"
 
-  replicas    = 1
-  minReplicas = 1
-  maxReplicas = 3
+  replicas     = 1
+  min_replicas = 1
+  max_replicas = 3
 }
 ```
 
@@ -61,8 +61,8 @@ No modules.
 | <a name="input_enabled_admission_webhooks"></a> [enabled\_admission\_webhooks](#input\_enabled\_admission\_webhooks) | Enable admission webhooks                                                                                                                            | `bool`              | `false`           |    no    |
 | <a name="input_helm_chart_version"></a> [helm\_chart\_version](#input\_helm\_chart\_version)                         | The chart version of ingress controller                                                                                                              | `string`            | `"4.12.1"`        |    no    |
 | <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name)                            | The Helm release of the services.                                                                                                                    | `string`            | `"ingress-nginx"` |    no    |
-| <a name="input_maxReplicas"></a> [maxReplicas](#input\_maxReplicas)                                                  | Max number of pods.                                                                                                                                  | `number`            | `3`               |    no    |
-| <a name="input_minReplicas"></a> [minReplicas](#input\_minReplicas)                                                  | Min numer of pods.                                                                                                                                   | `number`            | `1`               |    no    |
+| <a name="input_max_replicas"></a> [max_replicas](#input\_max_replicas)                                               | Max number of pods.                                                                                                                                  | `number`            | `3`               |    no    |
+| <a name="input_min_replicas"></a> [min_replicas](#input\_min_rplicas)                                                | Min numer of pods.                                                                                                                                   | `number`            | `1`               |    no    |
 | <a name="input_namespace"></a> [namespace](#input\_namespace)                                                        | The Namespace of the services.                                                                                                                       | `string`            | `"kube-system"`   |    no    |
 | <a name="input_network_cidr"></a> [network\_cidr](#input\_network\_cidr)                                             | Internal network CIDR for forwarding real IPs through Nginx                                                                                          | `string`            | n/a               |   yes    |
 | <a name="input_nginx_cpu"></a> [nginx\_cpu](#input\_nginx\_cpu)                                                      | The nginx cpu                                                                                                                                        | `string`            | `"100m"`          |    no    |
