@@ -67,6 +67,11 @@ resource "kubernetes_manifest" "this" {
       ]
     }
   }
+
+  lifecycle {
+    ignore_changes = [server]
+  }
+
 }
 
 resource "kubernetes_manifest" "app" {
