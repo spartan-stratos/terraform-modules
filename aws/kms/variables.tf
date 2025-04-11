@@ -57,3 +57,20 @@ variable "principal_roles" {
   type        = list(string)
   default     = null
 }
+
+variable "additional_statements" {
+  description = "List of additional statements for KMS policy."
+  type = list(object({
+    effect      = string
+    type        = string
+    identifiers = list(string)
+    actions     = list(string)
+    resources   = list(string)
+    condition = object({
+      test     = string
+      variable = string
+      values   = list(string)
+    })
+  }))
+  default = null
+}

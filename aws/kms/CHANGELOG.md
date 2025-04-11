@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.15]() (2025-04-11)
+
+### Features
+
+* Add statements to KMS policy via `additional_statements`.
+
 ## [0.1.17]() (2024-12-23)
 
 ### Fix bugs
