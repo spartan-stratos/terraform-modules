@@ -69,9 +69,10 @@ resource "kubernetes_manifest" "this" {
   }
 
   lifecycle {
-    ignore_changes = [server]
+    ignore_changes = [
+      manifest.spec.destinations.server
+    ]
   }
-
 }
 
 resource "kubernetes_manifest" "app" {
