@@ -73,6 +73,7 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/i
 */
 data "aws_iam_policy_document" "this" {
   count = var.enabled_public_policy ? 1 : 0
+
   statement {
     sid       = "PublicReadGetObject"
     effect    = "Allow"
@@ -82,6 +83,33 @@ data "aws_iam_policy_document" "this" {
     principals {
       type        = "AWS"
       identifiers = ["*"]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.disabled_s3_http_access ? [1] : []
+    content {
+      actions = [
+        "s3:*",
+      ]
+
+      condition {
+        test     = "Bool"
+        variable = "aws:SecureTransport"
+        values   = ["false"]
+      }
+
+      effect = "Deny"
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      resources = [
+        local.bucket.arn,
+        "${local.bucket.arn}/*",
+      ]
     }
   }
 }

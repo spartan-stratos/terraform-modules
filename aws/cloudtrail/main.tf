@@ -20,6 +20,34 @@ resource "aws_s3_bucket_versioning" "this" {
 }
 
 data "aws_iam_policy_document" "this" {
+  dynamic "statement" {
+    for_each = var.disabled_s3_http_access ? [1] : []
+
+    content {
+      actions = [
+        "s3:*",
+      ]
+
+      condition {
+        test     = "Bool"
+        variable = "aws:SecureTransport"
+        values   = ["false"]
+      }
+
+      effect = "Deny"
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      resources = [
+        aws_s3_bucket.this.arn,
+        "${aws_s3_bucket.this.arn}/*",
+      ]
+    }
+  }
+
   statement {
     sid    = "AWSCloudTrailAclCheck"
     effect = "Allow"
