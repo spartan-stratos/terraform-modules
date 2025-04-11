@@ -49,12 +49,12 @@ resource "kubernetes_manifest" "this" {
     }
 
     spec = {
-      description  = var.description
-      sourceRepos  = ["*"]
+      description = var.description
+      sourceRepos = ["*"]
       destinations = concat(
-        var.destinations, 
+        var.destinations,
         [{
-          name = "in-cluster"
+          name      = "in-cluster"
           namespace = var.argocd_namespace
         }]
       )
@@ -98,9 +98,9 @@ resource "kubernetes_manifest" "app" {
       }
 
       destination = {
-          name = "in-cluster"
-          namespace = var.argocd_namespace
-        }
+        name      = "in-cluster"
+        namespace = var.argocd_namespace
+      }
 
       syncPolicy = var.sync_policy
     }
