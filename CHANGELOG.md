@@ -7,12 +7,6 @@ All notable changes to this project will be documented in this file.
 * AWS KMS: [(./aws/kms)](./aws/kms)
     * Add statements to KMS policy via `additional_statements`.
 
-* AWS Cloudtrail: [(./aws/cloudtrail)](./aws/cloudtrail)
-    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
-
-* AWS s3: [(./aws/s3)](./aws/s3)
-    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
-
 * AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
     * Add predefined group rules for projects.
     * Update destinations for projects and root applications
@@ -24,7 +18,15 @@ All notable changes to this project will be documented in this file.
    * Update replicas variable name
 
 ## [0.3.14]() (2025-04-11)
- 
+
+### Features
+
+* AWS Cloudtrail: [(./aws/cloudtrail)](./aws/cloudtrail)
+    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
+
+* AWS s3: [(./aws/s3)](./aws/s3)
+    * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
+
 ### Bug Fixes
 * AWS Helm Nginx Ingress Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
    * Update replicas variable name
