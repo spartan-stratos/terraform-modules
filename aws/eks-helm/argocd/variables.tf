@@ -122,7 +122,7 @@ variable "rbac_policies" {
 variable "external_clusters" {
   description = "Maps of external cluster that want to connect"
   type = map(object({
-    assumeRole       = string
+    assumeRole       = optional(string, "")
     server           = string
     labels           = optional(map(any), {})
     annotations      = optional(map(any), {})

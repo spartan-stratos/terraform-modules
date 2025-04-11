@@ -1,6 +1,14 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.3.15]() (2025-04-11)
+
+### Features
+
+* Add predefined group rules for projects.
+* Update destinations for projects and root applications
+* Update condition for adding in-cluster and rename it
+
 ## [0.3.12]() (2025-04-10)
 
 ### Features
