@@ -10,29 +10,35 @@ variable "path" {
   default     = "dev"
 }
 
-
 variable "github_organization" {
   description = "GitHub Organization"
   type        = string
 }
 
-variable "group_roles" {
+variable "custom_group_roles" {
   description = <<EOT
-The project group roles define permissions in the format: 'applications, {roles}, {target-project}, allow'.
+The project group roles define permissions in the format: 'applications, {roles}'.
 - 'applications' specifies the scope (e.g., 'applications' or a specific app).
 - '{roles}' can be specific roles (e.g., 'admin', 'viewer') or '*' for all roles.
-- '{target-project}' specifies the target project (e.g., 'spartan-iaas-p0001') or '*' for all projects.
-- 'allow' indicates the permission type (currently only 'allow' is supported).
-
 Example:
-  "spartan-P00001-iaas" = ["applications, *, *, allow",]
+  "spartan-P00001-iaas" = ["applications, *",]
   "spartan-P00001-member"  = [
-      "applications, *, spartan-eks-dev/*, allow"
-      "applications, get, *, allow"
+      "applications, *"
+      "applications, get"
     ]
 EOT
   type        = map(list(string))
   default     = {}
+}
+
+variable "predefined_group_rules" {
+  description = "To add groups to predefined rule by admin, member, and viewer group respectively with full permission, write and read permission, and read-only permission"
+  type = object({
+    admin  = optional(list(string), [])
+    member = optional(list(string), [])
+    viewer = optional(list(string), [])
+  })
+  default = {}
 }
 
 variable "cluster_name" {

@@ -71,18 +71,21 @@ configs:
   clusterCredentials:
     %{for key, cluster in var.external_clusters}
     ${key}:
-      assumeRole: ${cluster.assumeRole}
       server: ${cluster.server}
       annotations: {}
       labels: {}
       clusterResources: ${cluster.clusterResources}
       config:
+        %{if length(cluster.config.awsAuthConfig) > 0}
         awsAuthConfig:
           clusterName: ${cluster.config.awsAuthConfig.clusterName}
           roleARN: ${cluster.config.awsAuthConfig.roleARN}
+        %{endif}
         tlsClientConfig:
           insecure: ${cluster.config.tlsClientConfig.insecure}
+          %{if cluster.config.tlsClientConfig.caData != ""}
           caData: ${cluster.config.tlsClientConfig.caData}
+          %{endif}
     %{endfor}
   %{endif}
 notifications:
