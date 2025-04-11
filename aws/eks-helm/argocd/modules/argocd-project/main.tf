@@ -75,8 +75,8 @@ resource "kubernetes_manifest" "app" {
     kind       = "Application"
 
     metadata = {
+      name      = var.project_name
       namespace = var.argocd_namespace
-      name      = var.cluster_name
     }
 
     spec = {
