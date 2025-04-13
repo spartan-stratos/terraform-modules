@@ -8,7 +8,7 @@ Terraform module which creates OpenSearch resources on AWS.
 
 ```hcl
 module "opensearch" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.3.8"
+  source = "github.com/spartan-stratos/terraform-modules//aws/opensearch?ref=v0.3.16"
 
   domain             = "opensearch"
   instance_size      = "t3.small.search"
@@ -57,6 +57,7 @@ No modules.
 
 | Name                                                                                                          | Description                                                                        | Type           | Default             | Required |
 |---------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------------|---------------------|:--------:|
+| <a name="input_availability_zone_count"></a> [availability\_zone\_count](#input\_availability\_zone\_count)   | Number of availability zones to enable from 2-3.                                   | `number`       | `3`                 |    no    |
 | <a name="input_create_linked_role"></a> [create\_linked\_role](#input\_create\_linked\_role)                  | Create a service linked role for Amazon OpenSearch Service to access VPC resources | `bool`         | `false`             |    no    |
 | <a name="input_domain"></a> [domain](#input\_domain)                                                          | The domain for creating open search                                                | `string`       | n/a                 |   yes    |
 | <a name="input_ebs_enabled"></a> [ebs\_enabled](#input\_ebs\_enabled)                                         | Enable EBS                                                                         | `bool`         | `false`             |    no    |
@@ -68,6 +69,7 @@ No modules.
 | <a name="input_principal_roles"></a> [principal\_roles](#input\_principal\_roles)                             | List of priciple roles                                                             | `list(string)` | `null`              |    no    |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids)                  | Security group IDs that will be used in additional to the default ones.            | `list(string)` | n/a                 |   yes    |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                            | The subnet ids of clusters                                                         | `list(string)` | n/a                 |   yes    |
+| <a name="input_zone_awareness_enabled"></a> [zone\_awareness\_enabled](#input\_zone\_awareness\_enabled)      | Whether zone awareness is enabled, set to true for multi-az deployment.            | `bool`         | `false`             |    no    |
 
 ## Outputs
 

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.16]() (2025-04-14)
+
+### Features
+
+* Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az.
+
 ## [0.3.8]() (2025-04-08)
 
 ### Features
