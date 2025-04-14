@@ -60,3 +60,16 @@ variable "encrypt_at_rest_enabled" {
   type        = bool
   default     = false
 }
+
+// multi-az config
+variable "zone_awareness_enabled" {
+  description = "Whether zone awareness is enabled, set to true for multi-az deployment."
+  type        = bool
+  default     = false
+}
+
+variable "availability_zone_count" {
+  description = "Number of availability zones to enable from 2-3."
+  type        = number
+  default     = 3
+}

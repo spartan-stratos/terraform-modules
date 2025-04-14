@@ -9,6 +9,14 @@ resource "aws_opensearch_domain" "this" {
   cluster_config {
     instance_type  = var.instance_size
     instance_count = var.instance_count
+
+    zone_awareness_enabled = var.zone_awareness_enabled
+    dynamic "zone_awareness_config" {
+      for_each = var.zone_awareness_enabled ? [1] : []
+      content {
+        availability_zone_count = var.availability_zone_count
+      }
+    }
   }
   vpc_options {
     subnet_ids         = var.subnet_ids
