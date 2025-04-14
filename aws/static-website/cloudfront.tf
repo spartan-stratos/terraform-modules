@@ -11,6 +11,7 @@ module "cloudfront" {
   minimum_protocol_version        = var.minimum_protocol_version
   price_class                     = var.price_class
   use_www_domain                  = var.use_www_domain
+  use_wildcard_domain             = var.use_wildcard_domain
   distribution_aliases            = var.cloudfront_distribution_aliases
   ordered_cache_behaviors         = var.ordered_cache_behaviors
   enabled_response_headers_policy = var.enabled_response_headers_policy

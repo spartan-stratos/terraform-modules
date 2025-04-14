@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.16]() (2025-04-14)
+
+### Features
+
+* Add `use_wildcard_domain` to add the wildcard route53 to cloudfront
+
 ## [0.3.8]() (2025-04-07)
 
 ### Features
