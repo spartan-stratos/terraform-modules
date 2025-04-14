@@ -6,16 +6,23 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* AWS KMS: [(./aws/static-website)](./aws/static-website)
+* AWS Static website: [(./aws/static-website)](./aws/static-website)
+    * Add `use_wildcard_domain` to support add route53 wildcard to our cloudfront
 
+
+* AWS OpenSearch: [(./aws/opensearch)](./aws/opensearch)
+   * Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az
+  
 ## [0.3.15]() (2025-04-11)
 
 ### Features
 * AWS KMS: [(./aws/kms)](./aws/kms)
-   * Add `use_wildcard_domain` to support add route53 wildcard to our cloudfront
+    * Add statements to KMS policy via `additional_statements`.
 
-* AWS OpenSearch: [(./aws/opensearch)](./aws/opensearch)
-   * Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az.
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Add predefined group rules for projects.
+    * Update destinations for projects and root applications
+    * Update the condition for adding in-cluster and rename it
 
  
 ### Bug Fixes
