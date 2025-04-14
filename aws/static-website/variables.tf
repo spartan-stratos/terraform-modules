@@ -77,6 +77,12 @@ variable "use_www_domain" {
   default     = false
 }
 
+variable "use_wildcard_domain" {
+  description = "Use wildcard domain"
+  type        = bool
+  default     = false
+}
+
 variable "cloudfront_distribution_aliases" {
   description = "List of domain names that is associated with the CloudFront distribution."
   type        = list(string)
