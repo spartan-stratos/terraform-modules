@@ -1,6 +1,18 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.3.16]() (2025-04-14)
+
+### Features
+
+* AWS Static website: [(./aws/static-website)](./aws/static-website)
+    * Add `use_wildcard_domain` to support add route53 wildcard to our cloudfront
+
+
+* AWS OpenSearch: [(./aws/opensearch)](./aws/opensearch)
+   * Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az
+  
 ## [0.3.15]() (2025-04-11)
 
 ### Features
@@ -10,7 +22,7 @@ All notable changes to this project will be documented in this file.
 * AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
     * Add predefined group rules for projects.
     * Update destinations for projects and root applications
-    * Update condition for adding in-cluster and rename it
+    * Update the condition for adding in-cluster and rename it
 
  
 ### Bug Fixes
