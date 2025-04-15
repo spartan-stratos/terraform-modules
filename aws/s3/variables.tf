@@ -206,7 +206,7 @@ variable "s3_lifecycle_rules" {
   description = "List of S3 bucket lifecycle configuration."
   type = list(object({
     id              = string
-    status          = string # "Enabled" or "Disabled"
+    status          = string               # "Enabled" or "Disabled"
     filter_prefix   = optional(string, "") # "" will apply to all
     transition_days = optional(number, 0)
     expiration_days = number
