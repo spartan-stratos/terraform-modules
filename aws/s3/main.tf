@@ -154,21 +154,33 @@ resource "aws_s3_bucket_acl" "this" {
   acl    = var.acl
 }
 
-resource "aws_s3_bucket_logging" "this" {
-  count = var.enabled_access_logging ? 1 : 0
+/*
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_lifecycle_configuration
+ */
+resource "aws_s3_bucket_lifecycle_configuration" "this" {
+  count = var.s3_lifecycle_rules != null ? 1 : 0
 
   bucket = local.bucket.id
 
-  target_bucket = var.access_log_target_bucket_id
-  target_prefix = var.access_log_target_prefix
-}
+  dynamic "rule" {
+    for_each = var.s3_lifecycle_rules != null ? var.s3_lifecycle_rules : []
 
-module "access_log_policy" {
-  count = length(var.write_access_logs_source_bucket_arns) > 0 ? 1 : 0
+    content {
+      id     = rule.value.id
+      status = rule.value.status
 
-  source = "./access-log-policy"
+      filter {
+        prefix = rule.value.filter_prefix
+      }
 
-  access_logs_bucket_id  = local.bucket.id
-  access_logs_bucket_arn = local.bucket.arn
-  source_bucket_arns     = var.write_access_logs_source_bucket_arns
+      transition {
+        days          = rule.value.transition_days
+        storage_class = rule.value.storage_class
+      }
+
+      expiration {
+        days = rule.value.expiration_days
+      }
+    }
+  }
 }
