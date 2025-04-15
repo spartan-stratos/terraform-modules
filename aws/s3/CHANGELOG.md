@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.17]() (2025-04-15)
+
+### Features
+
+* Add S3 lifecycle configuration `s3_lifecycle_rules`.
+
 ## [0.3.14]() (2025-04-11)
 
 ### Features

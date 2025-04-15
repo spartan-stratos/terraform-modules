@@ -46,20 +46,17 @@ variable "block_public_acls" {
   default     = true
 }
 
-
 variable "block_public_policy" {
   description = "Whether Amazon S3 should block public bucket policies for this bucket."
   type        = bool
   default     = true
 }
 
-
 variable "ignore_public_acls" {
   description = "Whether Amazon S3 should ignore public ACLs for this bucket."
   type        = bool
   default     = true
 }
-
 
 variable "restrict_public_buckets" {
   description = "Whether Amazon S3 should restrict public bucket policies for this bucket."
@@ -202,4 +199,18 @@ variable "disabled_s3_http_access" {
   description = "Whether to restrict HTTP access to S3 bucket."
   type        = bool
   default     = true
+}
+
+# lifecycle config
+variable "s3_lifecycle_rules" {
+  description = "List of S3 bucket lifecycle configuration."
+  type = list(object({
+    id              = string
+    status          = string # "Enabled" or "Disabled"
+    filter_prefix   = optional(string, "") # "" will apply to all
+    transition_days = optional(number, 0)
+    expiration_days = number
+    storage_class   = string # "STANDARD_IA", "DEEP_ARCHIVE", "GLACIER", ...
+  }))
+  default = null
 }
