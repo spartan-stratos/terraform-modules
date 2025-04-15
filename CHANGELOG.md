@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.17]() (2025-04-16)
+
+### Features
+
+* AWS S3: [(./aws/s3)](./aws/s3)
+    * Add S3 lifecycle configuration `s3_lifecycle_rules`.
+
 ## [0.3.16]() (2025-04-14)
 
 ### Features
@@ -9,13 +16,13 @@ All notable changes to this project will be documented in this file.
 * AWS Static website: [(./aws/static-website)](./aws/static-website)
     * Add `use_wildcard_domain` to support add route53 wildcard to our cloudfront
 
-
 * AWS OpenSearch: [(./aws/opensearch)](./aws/opensearch)
-   * Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az
-  
+    * Add `availability_zone_count` and `zone_awareness_enabled` to enable multi-az
+
 ## [0.3.15]() (2025-04-11)
 
 ### Features
+
 * AWS KMS: [(./aws/kms)](./aws/kms)
     * Add statements to KMS policy via `additional_statements`.
 
@@ -24,10 +31,11 @@ All notable changes to this project will be documented in this file.
     * Update destinations for projects and root applications
     * Update the condition for adding in-cluster and rename it
 
- 
 ### Bug Fixes
-* AWS Helm Nginx Ingress Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
-   * Update replicas variable name
+
+* AWS Helm Nginx Ingress
+  Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
+    * Update replicas variable name
 
 ## [0.3.14]() (2025-04-11)
 
@@ -40,9 +48,11 @@ All notable changes to this project will be documented in this file.
     * Restrict HTTP access to S3 bucket via `disabled_s3_http_access`.
 
 ### Bug Fixes
-* AWS Helm Nginx Ingress Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
-   * Update replicas variable name
-   
+
+* AWS Helm Nginx Ingress
+  Controller: [(./aws/eks-helm/nginx-ingress-controller)](./aws/eks-helm/nginx-ingress-controller)
+    * Update replicas variable name
+
 ## [0.3.13]() (2025-04-10)
 
 ### Features
