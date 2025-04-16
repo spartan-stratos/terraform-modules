@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1]() (2025-04-16)
+
+### Features
+
+* Add `custom_redis_parameters` to support custom redis parameters.
+
 ## [0.3.10]() (2025-04-09)
 
 ### Bug Fixes

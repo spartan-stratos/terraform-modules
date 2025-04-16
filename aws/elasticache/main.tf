@@ -19,6 +19,21 @@ resource "aws_elasticache_subnet_group" "this" {
   subnet_ids = var.subnet_ids
 }
 
+resource "aws_elasticache_parameter_group" "this" {
+  count       = var.custom_redis_parameters == null ? 0 : 1
+  name        = replace("${var.cluster_name}-redis${local.major_version}", "_", "-")
+  family      = local.redis_family
+  description = "Custom redis parameter group"
+
+  dynamic "parameter" {
+    for_each = var.custom_redis_parameters
+    content {
+      name  = parameter.value.name
+      value = parameter.value.value
+    }
+  }
+}
+
 /*
 aws_elasticache_replication_group provisions an Amazon ElastiCache replication group for a Redis cluster.
 It defines configuration settings like instance type, engine version, availability, and failover behavior.
@@ -34,7 +49,7 @@ resource "aws_elasticache_replication_group" "this" {
   num_node_groups         = var.cache_node_count
   replicas_per_node_group = var.replicas_per_node_group
 
-  parameter_group_name = var.parameter_group_name
+  parameter_group_name = local.parameter_group_name
   engine               = "redis"
   engine_version       = var.engine_version
   port                 = 6379

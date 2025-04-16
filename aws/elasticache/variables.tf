@@ -82,3 +82,12 @@ variable "replicas_per_node_group" {
   type        = number
   default     = 0
 }
+
+variable "custom_redis_parameters" {
+  description = "Custom redis parameters to apply to the parameter group"
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  default = null
+}
