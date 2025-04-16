@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.18]() (2025-04-16)
+## [0.4.0]() (2025-04-16)
 
-### Features
+### ⚠ BREAKING CHANGES
 
 * AWS S3: [(./aws/s3)](./aws/s3)
     * Update `aws_s3_bucket_policy` with creation flag `create_bucket_policy`.
