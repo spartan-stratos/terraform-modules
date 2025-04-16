@@ -77,7 +77,7 @@ variable "enabled_managed_in_cluster" {
 variable "in_cluster_name" {
   description = "To define in cluster name"
   type        = string
-  default     = null
+  default     = ""
 }
 
 
