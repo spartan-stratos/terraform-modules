@@ -86,6 +86,9 @@ configs:
     %{if var.enabled_managed_in_cluster}
     ${var.in_cluster_name}:
       server: https://kubernetes.default.svc
+      annotations: {}
+      labels: {}
+      clusterResources: false
       config:
         tlsClientConfig:
           insecure: false
