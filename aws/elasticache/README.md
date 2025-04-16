@@ -89,4 +89,4 @@ No modules.
 | <a name="output_elasticache_replication_group_reader_endpoint_address"></a> [elasticache\_replication\_group\_reader\_endpoint\_address](#output\_elasticache\_replication\_group\_reader\_endpoint\_address)                      | The reader endpoint address of the ElastiCache replication group.                                                                                                               |
 | <a name="output_transition_encryption_auth_token"></a> [transition\_encryption\_auth\_token](#output\_transition\_encryption\_auth\_token)                                                                                         | The authentication token for enabling encryption in transit for the ElastiCache replication group. This token is used to secure client-to-node and node-to-node communications. |
 
-<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
