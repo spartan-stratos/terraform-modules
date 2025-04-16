@@ -1,5 +1,5 @@
 locals {
-  assumeRoles = [for cluster in values(var.external_clusters) : cluster.assumeRole]
+  assume_roles = [for cluster in values(var.external_clusters) : cluster.assume_role]
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "allow_assume_remote_role" {
       "sts:AssumeRole",
     ]
 
-    resources = local.assumeRoles
+    resources = local.assume_roles
   }
 
 }

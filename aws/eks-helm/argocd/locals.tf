@@ -76,17 +76,20 @@ configs:
       labels: {}
       clusterResources: ${cluster.clusterResources}
       config:
-        %{if length(cluster.config.awsAuthConfig) > 0}
         awsAuthConfig:
-          clusterName: ${cluster.config.awsAuthConfig.clusterName}
-          roleARN: ${cluster.config.awsAuthConfig.roleARN}
-        %{endif}
+          clusterName: ${cluster.config.aws_auth_config.cluster_name}
+          roleARN: ${cluster.config.aws_auth_config.role_arn}
         tlsClientConfig:
-          insecure: ${cluster.config.tlsClientConfig.insecure}
-          %{if cluster.config.tlsClientConfig.caData != ""}
-          caData: ${cluster.config.tlsClientConfig.caData}
-          %{endif}
+          insecure: ${cluster.config.tls_client_config.insecure}
+          caData: ${cluster.config.tls_client_config.ca_data}
     %{endfor}
+    %{if var.enabled_managed_in_cluster}
+    ${var.in_cluster_name}:
+      server: https://kubernetes.default.svc
+      config:
+        tlsClientConfig:
+          insecure: false
+    %{endif}
   %{endif}
 notifications:
   enabled: true
