@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 ## [0.4.1]() (2025-04-16)
 
-### Breaking Changes
+### Features
 
 * Change variables that defined in `camelCase` to `snake_case`
   * `var.external_cluster`
