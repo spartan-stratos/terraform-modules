@@ -201,6 +201,12 @@ variable "disabled_s3_http_access" {
   default     = true
 }
 
+variable "create_bucket_policy" {
+  description = "Whether to create bucket policy."
+  type        = bool
+  default     = true
+}
+
 # lifecycle config
 variable "s3_lifecycle_rules" {
   description = "List of S3 bucket lifecycle configuration."
