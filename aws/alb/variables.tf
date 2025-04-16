@@ -40,3 +40,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "enabled_http_port" {
+  description = "Whether to allow HTTP (80) port through ALB security group."
+  type        = bool
+  default     = true
+}

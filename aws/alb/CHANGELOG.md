@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.3]() (2025-04-17)
+
+### Features
+
+* Add flag `enable_http_port` to add or ignore HTTP port 80.
+
 ## [0.1.63]() (2025-01-24)
 
 ### Features

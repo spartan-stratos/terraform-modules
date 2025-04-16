@@ -6,12 +6,15 @@ resource "aws_security_group" "alb" {
   name   = "${var.name}-sg-alb"
   vpc_id = var.vpc_id
 
-  ingress {
-    protocol         = "tcp"
-    from_port        = 80
-    to_port          = 80
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+  dynamic "ingress" {
+    for_each = var.enabled_http_port ? [1] : []
+    content {
+      protocol         = "tcp"
+      from_port        = 80
+      to_port          = 80
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
   }
 
   ingress {
