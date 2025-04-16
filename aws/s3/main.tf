@@ -72,17 +72,20 @@ aws_iam_policy_document generates an IAM policy document granting public access 
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document
 */
 data "aws_iam_policy_document" "this" {
-  count = var.enabled_public_policy ? 1 : 0
+  count = var.create_bucket_policy ? 1 : 0
 
-  statement {
-    sid       = "PublicReadGetObject"
-    effect    = "Allow"
-    actions   = ["s3:GetObject"]
-    resources = ["${local.bucket.arn}/*"]
+  dynamic "statement" {
+    for_each = var.enabled_public_policy ? [1] : []
+    content {
+      sid       = "PublicReadGetObject"
+      effect    = "Allow"
+      actions   = ["s3:GetObject"]
+      resources = ["${local.bucket.arn}/*"]
 
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
     }
   }
 
@@ -119,7 +122,7 @@ aws_s3_bucket_policy attaches a policy to the S3 bucket, enabling the public acc
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy
 */
 resource "aws_s3_bucket_policy" "this" {
-  count  = var.enabled_public_policy ? 1 : 0
+  count  = var.create_bucket_policy ? 1 : 0
   bucket = local.bucket.id
   policy = data.aws_iam_policy_document.this.0.json
 }
