@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.18]() (2025-04-16)
+
+### Features
+
+* Update `aws_s3_bucket_policy` with creation flag `create_bucket_policy`.
+
 ## [0.3.17]() (2025-04-15)
 
 ### Features
