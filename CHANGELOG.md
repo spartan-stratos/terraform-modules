@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.1]() (2025-04-16)
+
+### Features
+
+* AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
+  * Add `custom_redis_parameters` to add the custom redis configuration.
+
 ## [0.4.0]() (2025-04-16)
 
 ### ⚠ BREAKING CHANGES
