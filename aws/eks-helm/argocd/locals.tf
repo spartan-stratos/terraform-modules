@@ -74,7 +74,7 @@ configs:
       server: ${cluster.server}
       annotations: {}
       labels: {}
-      clusterResources: ${cluster.clusterResources}
+      clusterResources: ${cluster.cluster_resources}
       config:
         awsAuthConfig:
           clusterName: ${cluster.config.aws_auth_config.cluster_name}
