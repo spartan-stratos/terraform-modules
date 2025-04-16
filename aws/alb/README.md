@@ -38,13 +38,13 @@ module "alb" {
 | Name                                                                      | Version  |
 |---------------------------------------------------------------------------|----------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | \>= 5.75 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.75  |
 
 ## Providers
 
-| Name                                              | Version  |
-|---------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | \>= 5.75 |
+| Name                                              | Version |
+|---------------------------------------------------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
 
 ## Modules
 
@@ -52,19 +52,19 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                      | Type     |
-|---------------------------------------------------------------------------------------------------------------------------|----------|
-| [aws_alb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/alb_listener)         | resource |
-| [aws_alb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/alb_listener)        | resource |
-| [aws_alb_target_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/alb_target_group) | resource |
-| [aws_lb.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb)                             | resource |
-| [aws_security_group.alb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)      | resource |
+| Name                                                                                                                 | Type     |
+|----------------------------------------------------------------------------------------------------------------------|----------|
+| [aws_alb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/alb_listener)    | resource |
+| [aws_alb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/alb_listener)   | resource |
+| [aws_lb.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb)                        | resource |
+| [aws_security_group.alb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 
 ## Inputs
 
 | Name                                                                                      | Description                                                                                                                                                                                                | Type           | Default | Required |
 |-------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|---------|:--------:|
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn)         | The ARN of the certificate that the ALB uses for https                                                                                                                                                     | `string`       | n/a     |   yes    |
+| <a name="input_enabled_http_port"></a> [enabled\_http\_port](#input\_enabled\_http\_port) | Whether to allow HTTP (80) port through ALB security group.                                                                                                                                                | `bool`         | `true`  |    no    |
 | <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | Path to check if the service is healthy, e.g. "/status"                                                                                                                                                    | `string`       | n/a     |   yes    |
 | <a name="input_idle_timeout"></a> [idle\_timeout](#input\_idle\_timeout)                  | ALB idle timeout                                                                                                                                                                                           | `number`       | `60`    |    no    |
 | <a name="input_name"></a> [name](#input\_name)                                            | the name of the alb                                                                                                                                                                                        | `string`       | n/a     |   yes    |
