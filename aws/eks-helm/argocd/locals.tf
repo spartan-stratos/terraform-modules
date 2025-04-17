@@ -72,21 +72,40 @@ configs:
     %{for key, cluster in var.external_clusters}
     ${key}:
       server: ${cluster.server}
+      %{if length(cluster.annotations) > 0}
+      annotations:
+      %{for annotation_key, annotation_value in cluster.annotations}
+        ${annotation_key}: ${annotation_value}
+      %{endfor}
+      %{endif}
+      %{if length(cluster.labels) > 0}
+      labels:
+      %{for label_key, label_value in cluster.labels}
+        ${label_key}: ${label_value}
+      %{endfor}
+      %{endif}
+      %{if cluster.cluster_resources}
+      clusterResources: ${cluster.cluster_resources}
+      namespace: ${cluster.namespace}
+      %{endif}
+      config:
+        awsAuthConfig:
+          clusterName: ${cluster.config.aws_auth_config.cluster_name}
+          roleARN: ${cluster.config.aws_auth_config.role_arn}
+        tlsClientConfig:
+          insecure: ${cluster.config.tls_client_config.insecure}
+          caData: ${cluster.config.tls_client_config.ca_data}
+    %{endfor}
+    %{if var.enabled_managed_in_cluster}
+    ${var.in_cluster_name}:
+      server: https://kubernetes.default.svc
       annotations: {}
       labels: {}
-      clusterResources: ${cluster.clusterResources}
+      clusterResources: false
       config:
-        %{if length(cluster.config.awsAuthConfig) > 0}
-        awsAuthConfig:
-          clusterName: ${cluster.config.awsAuthConfig.clusterName}
-          roleARN: ${cluster.config.awsAuthConfig.roleARN}
-        %{endif}
         tlsClientConfig:
-          insecure: ${cluster.config.tlsClientConfig.insecure}
-          %{if cluster.config.tlsClientConfig.caData != ""}
-          caData: ${cluster.config.tlsClientConfig.caData}
-          %{endif}
-    %{endfor}
+          insecure: false
+    %{endif}
   %{endif}
 notifications:
   enabled: true

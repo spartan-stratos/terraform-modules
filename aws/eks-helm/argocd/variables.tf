@@ -67,6 +67,20 @@ variable "server_side_diff" {
   default     = true
 }
 
+# Enabled in-cluster
+variable "enabled_managed_in_cluster" {
+  description = "Enable in_cluster manage to rename in_cluster"
+  type        = bool
+  default     = false
+}
+
+variable "in_cluster_name" {
+  description = "To customize the in_cluster name for easier management (only `enabled_managed_in_cluster = true`)"
+  type        = string
+  default     = "in_cluster"
+}
+
+
 variable "enabled_aws_management_role" {
   description = "Enable the AWS management role for cross cluster management"
   type        = bool
@@ -122,13 +136,22 @@ variable "rbac_policies" {
 variable "external_clusters" {
   description = "Maps of external cluster that want to connect"
   type = map(object({
-    assumeRole       = optional(string, "")
-    server           = string
-    labels           = optional(map(any), {})
-    annotations      = optional(map(any), {})
-    namespace        = optional(string, "")
-    clusterResources = optional(bool, false)
-    config           = map(any)
+    assume_role       = optional(string, "")
+    server            = string
+    labels            = optional(map(any), {})
+    annotations       = optional(map(any), {})
+    namespace         = optional(string, "")
+    cluster_resources = optional(bool, false)
+    config = object({
+      aws_auth_config = object({
+        cluster_name = string
+        role_arn     = string
+      })
+      tls_client_config = object({
+        insecure = optional(bool, false)
+        ca_data  = string
+      })
+    })
   }))
   default = {}
 }
