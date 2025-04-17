@@ -72,9 +72,22 @@ configs:
     %{for key, cluster in var.external_clusters}
     ${key}:
       server: ${cluster.server}
-      annotations: {}
-      labels: {}
+      %{if length(cluster.annotations) > 0}
+      annotations:
+      %{for annotation_key, annotation_value in cluster.annotations}
+        ${annotation_key}: ${annotation_value}
+      %{endfor}
+      %{endif}
+      %{if length(cluster.labels) > 0}
+      labels:
+      %{for label_key, label_value in cluster.labels}
+        ${label_key}: ${label_value}
+      %{endfor}
+      %{endif}
+      %{if cluster.cluster_resources}
       clusterResources: ${cluster.cluster_resources}
+      namespace: ${cluster.namespace}
+      %{endif}
       config:
         awsAuthConfig:
           clusterName: ${cluster.config.aws_auth_config.cluster_name}
