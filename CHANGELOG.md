@@ -1,6 +1,21 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.4.2]() (2025-04-17)
+
+### Features
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Change variables that defined in `camelCase` to `snake_case`
+    * `var.external_cluster`
+        * assumeRoles -> assume_role
+        * clusterResources -> cluster_resources
+        * awsAuthConfig -> aws_auth_config
+        * clusterName -> cluster_name
+        * roleARN -> role_arn
+        * tlsClientConfig -> tls_client_config
+        * caData -> ca_data
+    * Add variable `enabled_managed_in_cluster` to enable in_cluster management, and `in_cluster_name` to change its name when `enabled_managed_in_cluster` is enable
 
 ## [0.4.1]() (2025-04-16)
 
