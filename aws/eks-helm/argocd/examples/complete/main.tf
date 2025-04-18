@@ -91,8 +91,8 @@ module "argocd" {
       server      = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
       config = {
         aws_auth_config = {
-          cluster_ame = "stratos-eks-dev"
-          role_arn    = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
+          cluster_name = "stratos-eks-dev"
+          role_arn     = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
         },
         tls_client_config = {
           insecure = false
