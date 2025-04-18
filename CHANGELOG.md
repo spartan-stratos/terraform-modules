@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.4]() (2025-04-18)
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Fix the in_cluster_name issue
+      
 ## [0.4.3]() (2025-04-18)
 
 ### Features
