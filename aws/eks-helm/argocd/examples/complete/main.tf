@@ -103,7 +103,6 @@ module "argocd" {
   }
 }
 
-
 module "argocd_projects" {
   source   = "../../modules/argocd-project"
   for_each = merge(local.atlas_dev, local.atlas_prod)
