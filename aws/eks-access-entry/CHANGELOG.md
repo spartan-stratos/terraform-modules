@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add assume roles
+* Add assume roles creation for manage trusted 
 
 ## [0.3.0]() (2025-03-30)
 
