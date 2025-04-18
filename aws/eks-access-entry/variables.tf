@@ -21,3 +21,12 @@ variable "cluster_name" {
   description = "The name of the EKS cluster."
   type        = string
 }
+
+variable "assume_role" {
+  description = "IAM that will gain"
+  type = list(object({
+    name = string
+    trusted_role_arn = list(string)
+  }))
+  default = []
+}
