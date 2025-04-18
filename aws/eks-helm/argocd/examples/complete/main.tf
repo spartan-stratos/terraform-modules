@@ -87,14 +87,14 @@ module "argocd" {
   # Connect External Cluster (eg: stratos-eks-dev)
   external_clusters = {
     "stratos-eks-dev" = {
-      assumeRole = "arn:aws:iam::2222222222:role/external-cluster-role" # This role will be in stratos-eks-dev for argocd_management assumed
+      assume_role = "arn:aws:iam::2222222222:role/external-cluster-role" # This role will be in stratos-eks-dev for argocd_management assumed
       server     = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
       config = {
-        awsAuthConfig = {
+        aws_auth_config = {
           clusterName = "stratos-eks-dev"
           roleARN     = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
         },
-        tlsClientConfig = {
+        tls_client_config = {
           insecure = false
           caData   = "<stratos-eks-dev caData>" # This get from eks cluster of dev
         }
