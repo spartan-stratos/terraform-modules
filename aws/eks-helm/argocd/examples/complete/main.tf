@@ -47,7 +47,7 @@ locals {
 }
 
 module "argocd" {
-  source = "../"
+  source = "../../"
 
   domain_name = "example.com"
 
