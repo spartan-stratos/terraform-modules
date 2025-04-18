@@ -1,5 +1,5 @@
 data "aws_iam_policy_document" "this" {
-  for_each = toset(var.assume_role)
+  for_each = { for i, entry in var.assume_role : entry.name => entry }
 
   statement {
     actions = [
