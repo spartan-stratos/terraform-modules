@@ -1,6 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.4.3]() (2025-04-18)
+
+### Features
+
+* Add Route53 record
+
+### Fix Bugs
+
+* Fix the namespace argocd is not found
+* Fix the no policy define in the role_policy
+* Fix the Ingress annotation to create the ALB listener rules
+
 ## [0.4.2]() (2025-04-17)
 
 ### Features

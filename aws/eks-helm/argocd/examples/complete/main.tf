@@ -47,7 +47,7 @@ locals {
 }
 
 module "argocd" {
-  source = "../"
+  source = "../../"
 
   domain_name = "example.com"
 
@@ -85,41 +85,26 @@ module "argocd" {
   oidc_github_client_secret = "secret"
 
   # Connect External Cluster (eg: stratos-eks-dev)
-  external_clusters = merge(
-    {
-      "stratos-eks-dev" = {
-        assumeRole = "arn:aws:iam::2222222222:role/external-cluster-role" # This role will be in stratos-eks-dev for argocd_management assumed
-        server     = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
-        config = {
-          awsAuthConfig = {
-            clusterName = "stratos-eks-dev"
-            roleARN     = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
-          },
-          tlsClientConfig = {
-            insecure = false
-            caData   = "<stratos-eks-dev caData>" # This get from eks cluster of dev
-          }
+  external_clusters = {
+    "stratos-eks-dev" = {
+      assume_role = "arn:aws:iam::2222222222:role/external-cluster-role" # This role will be in stratos-eks-dev for argocd_management assumed
+      server      = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
+      config = {
+        aws_auth_config = {
+          cluster_name = "stratos-eks-dev"
+          role_arn     = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
+        },
+        tls_client_config = {
+          insecure = false
+          ca_data  = "<stratos-eks-dev caData>" # This get from eks cluster of dev
         }
       }
-    },
-    { # This is must have connection for define name internal project, for example: argocd instance hosted on stratos-eks-prod, but its name is in-cluster, this one is for rename it into `stratos-eks-prod` for easier management
-      "stratos-eks-prod" = {
-        server = "https://kubernetes.default.svc" # This is for internal cluster
-        config = {
-          awsAuthConfig = {} # Leave this empty object just for internal connection
-          tlsClientConfig = {
-            insecure = false
-            caData   = "" # Leave this empty string just for internal connection
-          }
-        }
-      },
     }
-  )
+  }
 }
 
-
 module "argocd_projects" {
-  source   = "../modules/argocd-project"
+  source   = "../../modules/argocd-project"
   for_each = merge(local.atlas_dev, local.atlas_prod)
 
   github_organization = each.value.github_organization

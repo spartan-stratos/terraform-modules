@@ -58,8 +58,10 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy" "this" {
-  count = var.enabled_aws_management_role ? 1 : 0
+  count = var.enabled_aws_management_role && length(local.assume_roles) > 0 ? 1 : 0
 
   role   = aws_iam_role.this[0].name
   policy = data.aws_iam_policy_document.allow_assume_remote_role[0].json
+
+  depends_on = [helm_release.this]
 }

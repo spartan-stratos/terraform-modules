@@ -7,7 +7,7 @@ variable "argocd_namespace" {
 variable "chart_version" {
   description = "Version of the Argo CD Helm chart"
   type        = string
-  default     = "7.8.14"
+  default     = "7.8.26"
 }
 
 variable "chart_url" {
@@ -22,37 +22,16 @@ variable "repositories" {
   default     = []
 }
 
-variable "enabled_custom_ingress" {
-  description = "To enable alb ingress and use aws load balancer controller to manage"
-  type        = bool
-  default     = false
+variable "ingress_group_name" {
+  description = "Ingress group name for Argo CD"
+  type        = string
+  default     = "external"
 }
 
-variable "ingress" {
-  description = "Ingress configuration for Argo CD"
-  type = object({
-    enabled       = bool
-    ingress_class = optional(string, "alb")
-    controller    = optional(string, "aws")
-    annotations   = optional(map(string), {})
-    path          = optional(string, "/*")
-    pathType      = optional(string, "ImplementationSpecific")
-  })
-  default = {
-    enabled       = true
-    ingress_class = "alb"
-    controller    = "aws"
-    annotations = {
-      "alb.ingress.kubernetes.io/group.name"       = "external",
-      "kubernetes.io/ingress.class"                = "alb"
-      "alb.ingress.kubernetes.io/target-type"      = "ip"
-      "alb.ingress.kubernetes.io/healthcheck-path" = "/health/"
-      "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
-      "alb.ingress.kubernetes.io/listen-ports"     = "[{\"HTTPS\": 443}]"
-    }
-    path     = "/"
-    pathType = "Prefix"
-  }
+variable "ingress_class_name" {
+  description = "Ingress class name for Argo CD"
+  type        = string
+  default     = "alb"
 }
 
 variable "handle_tls" {
@@ -168,6 +147,12 @@ variable "domain_name" {
   type        = string
 }
 
+variable "sub_domain" {
+  description = "Sub domain for ArgoCD"
+  type        = string
+  default     = "argocd"
+}
+
 # Managed Node
 variable "node_selector" {
   description = "Node selector for the ingress controller"
@@ -191,4 +176,22 @@ variable "issuer_url" {
   description = "The issuer URL should be where Dex talks to the OIDC provider"
   type        = string
   default     = "http://argocd-dex-server:5556"
+}
+
+variable "create_route53_record" {
+  description = "Determines whether or not to create a route53 record for the ingress or not"
+  type        = bool
+  default     = false
+}
+
+variable "alb_zone_id" {
+  description = "The Route53 zone ID to create the record in"
+  type        = string
+  default     = null
+}
+
+variable "alb_cname" {
+  description = "Alias for the ALB (required when alb_zone_id is not null)"
+  type        = string
+  default     = null
 }
