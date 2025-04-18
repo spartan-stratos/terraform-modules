@@ -1,6 +1,21 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.4.3]() (2025-04-18)
+
+### Features
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Add Route53 record
+
+### Fix Bugs
+
+* AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
+    * Fix the namespace argocd is not found
+    * Fix the no policy define in the role_policy
+    * Fix the Ingress annotation to create the ALB listener rules
+
 ## [0.4.2]() (2025-04-17)
 
 ### Features
@@ -15,14 +30,15 @@ All notable changes to this project will be documented in this file.
         * roleARN -> role_arn
         * tlsClientConfig -> tls_client_config
         * caData -> ca_data
-    * Add variable `enabled_managed_in_cluster` to enable in_cluster management, and `in_cluster_name` to change its name when `enabled_managed_in_cluster` is enable
+    * Add variable `enabled_managed_in_cluster` to enable in_cluster management, and `in_cluster_name` to change its
+      name when `enabled_managed_in_cluster` is enable
 
 ## [0.4.1]() (2025-04-16)
 
 ### Features
 
 * AWS Elasticache: [(./aws/elasticache)](./aws/elasticache)
-  * Add `custom_redis_parameters` to add the custom redis configuration.
+    * Add `custom_redis_parameters` to add the custom redis configuration.
 
 ## [0.4.0]() (2025-04-16)
 
@@ -265,7 +281,8 @@ All notable changes to this project will be documented in this file.
           by `container_cpu`, `container_memory`.
         * `cloudwatch_log_group_name`, `cloudwatch_log_group_migration_name`: to define cloudwatch log group name.
           If `cloudwatch_log_group_migration_name` is not null, it will create a log group for service migration logs.
-        * `overwrite_task_role_name`, `overwrite_task_execution_role_name`, `task_policy_secrets_description`, `task_policy_ssm_description`:
+        * `overwrite_task_role_name`, `overwrite_task_execution_role_name`, `task_policy_secrets_description`,
+          `task_policy_ssm_description`:
           fallback on default value.
         * `enabled_datadog_sidecar`, `dd_site`, `dd_api_key_arn`, `dd_agent_image`, `dd_port`: supports datadog sidecar
           definitions.
