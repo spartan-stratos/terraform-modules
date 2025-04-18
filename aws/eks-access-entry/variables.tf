@@ -25,7 +25,7 @@ variable "cluster_name" {
 variable "assume_role" {
   description = "IAM that will gain"
   type = list(object({
-    name = string
+    name             = string
     trusted_role_arn = list(string)
   }))
   default = []
