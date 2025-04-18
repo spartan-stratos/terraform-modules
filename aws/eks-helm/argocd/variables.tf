@@ -50,15 +50,14 @@ variable "server_side_diff" {
 variable "enabled_managed_in_cluster" {
   description = "Enable in_cluster manage to rename in_cluster"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "in_cluster_name" {
   description = "To customize the in_cluster name for easier management (only `enabled_managed_in_cluster = true`)"
   type        = string
-  default     = "in_cluster"
+  default     = "in-cluster"
 }
-
 
 variable "enabled_aws_management_role" {
   description = "Enable the AWS management role for cross cluster management"

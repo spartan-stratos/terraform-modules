@@ -62,8 +62,17 @@ configs:
   rbac:
     policy.csv: |
       ${join("\n", var.rbac_policies)}
-  %{if length(var.external_clusters) > 0}
   clusterCredentials:
+    %{if var.enabled_managed_in_cluster}
+    ${var.in_cluster_name}:
+      server: https://kubernetes.default.svc
+      annotations: {}
+      labels: {}
+      clusterResources: false
+      config:
+        tlsClientConfig:
+          insecure: false
+    %{endif}
     %{for key, cluster in var.external_clusters}
     ${key}:
       server: ${cluster.server}
@@ -91,17 +100,6 @@ configs:
           insecure: ${cluster.config.tls_client_config.insecure}
           caData: ${cluster.config.tls_client_config.ca_data}
     %{endfor}
-    %{if var.enabled_managed_in_cluster}
-    ${var.in_cluster_name}:
-      server: https://kubernetes.default.svc
-      annotations: {}
-      labels: {}
-      clusterResources: false
-      config:
-        tlsClientConfig:
-          insecure: false
-    %{endif}
-  %{endif}
 notifications:
   enabled: true
   secret:
