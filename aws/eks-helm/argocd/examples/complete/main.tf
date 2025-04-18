@@ -88,7 +88,7 @@ module "argocd" {
   external_clusters = {
     "stratos-eks-dev" = {
       assume_role = "arn:aws:iam::2222222222:role/external-cluster-role" # This role will be in stratos-eks-dev for argocd_management assumed
-      server     = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
+      server      = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
       config = {
         aws_auth_config = {
           clusterName = "stratos-eks-dev"
