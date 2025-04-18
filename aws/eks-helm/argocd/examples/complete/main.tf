@@ -91,12 +91,12 @@ module "argocd" {
       server      = "<EXAMPLE>.us-west-2.eks.amazonaws.com"
       config = {
         aws_auth_config = {
-          clusterName = "stratos-eks-dev"
-          roleARN     = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
+          cluster_ame = "stratos-eks-dev"
+          role_arn    = "arn:aws:iam::2222222222:role/external-cluster-role" #same with assume role
         },
         tls_client_config = {
           insecure = false
-          caData   = "<stratos-eks-dev caData>" # This get from eks cluster of dev
+          ca_data  = "<stratos-eks-dev caData>" # This get from eks cluster of dev
         }
       }
     }
