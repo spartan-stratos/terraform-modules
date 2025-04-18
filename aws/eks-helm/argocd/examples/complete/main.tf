@@ -101,18 +101,6 @@ module "argocd" {
           }
         }
       }
-    },
-    { # This is must have connection for define name internal project, for example: argocd instance hosted on stratos-eks-prod, but its name is in-cluster, this one is for rename it into `stratos-eks-prod` for easier management
-      "stratos-eks-prod" = {
-        server = "https://kubernetes.default.svc" # This is for internal cluster
-        config = {
-          awsAuthConfig = {} # Leave this empty object just for internal connection
-          tlsClientConfig = {
-            insecure = false
-            caData   = "" # Leave this empty string just for internal connection
-          }
-        }
-      },
     }
   )
 }

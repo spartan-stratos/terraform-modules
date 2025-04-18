@@ -6,17 +6,10 @@ locals {
     }
   ])
 
-  ingress_annotations = flatten([
-    for key, value in var.ingress.annotations : {
-      key   = key
-      value = value
-    }
-  ])
-
   # ----- MANIFEST YAML FILE ------
   manifest = <<YAML
 global:
-  domain: "argocd.${var.domain_name}"
+  domain: "${var.sub_domain}.${var.domain_name}"
   %{if length(local.node_selectors) > 0}
   nodeSelector:
     %{for node in local.node_selectors}
@@ -34,16 +27,18 @@ global:
   %{endif}
 server:
   ingress:
-    enabled: ${var.ingress.enabled}
-    hostname: "argocd.${var.domain_name}"
-    ingressClassName: ${var.ingress.ingress_class}
-    controller: ${var.ingress.controller}
+    enabled: true
+    hostname: "${var.sub_domain}.${var.domain_name}"
+    ingressClassName: ${var.ingress_class_name}
+    controller: aws
     annotations:
-      %{for annotation in local.ingress_annotations}
-      ${annotation.key}: ${annotation.value}
-      %{endfor}
-    path: ${var.ingress.path}
-    pathType: ${var.ingress.pathType}
+      alb.ingress.kubernetes.io/group.name: ${var.ingress_group_name}
+      kubernetes.io/ingress.class: ${var.ingress_class_name}
+      alb.ingress.kubernetes.io/target-type: "ip"
+      alb.ingress.kubernetes.io/scheme: "internet-facing"
+      alb.ingress.kubernetes.io/listen-ports: "[{\"HTTPS\": 443}]"
+    path: /
+    pathType: Prefix
 
 dex:
   enabled: true

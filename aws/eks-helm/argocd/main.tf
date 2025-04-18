@@ -12,7 +12,7 @@ resource "helm_release" "this" {
 resource "kubernetes_secret" "github_app" {
   metadata {
     namespace = var.argocd_namespace
-    name      = var.github_app.secret_name
+    name      = lower(var.github_app.secret_name)
 
     labels = {
       "argocd.argoproj.io/secret-type" = "repo-creds"
@@ -26,13 +26,15 @@ resource "kubernetes_secret" "github_app" {
     githubAppInstallationID = var.github_app.installation_id
     githubAppPrivateKey     = var.github_app.private_key
   }
+
+  depends_on = [helm_release.this]
 }
 
 resource "kubernetes_secret" "repository" {
   for_each = toset(var.repositories)
   metadata {
     namespace = var.argocd_namespace
-    name      = "argocd-${replace(each.value, "/", "-")}"
+    name      = lower("argocd-${replace(each.value, "/", "-")}")
 
     labels = {
       "argocd.argoproj.io/secret-type" = "repository"
@@ -43,4 +45,6 @@ resource "kubernetes_secret" "repository" {
     type = "git"
     url  = "https://github.com/${each.value}"
   }
+
+  depends_on = [helm_release.this]
 }
