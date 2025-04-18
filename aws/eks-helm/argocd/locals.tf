@@ -8,7 +8,7 @@ locals {
 
   in_clusters = compact(distinct([
     "in-cluster",
-      var.enabled_managed_in_cluster == true ? var.in_cluster_name : null
+    var.enabled_managed_in_cluster == true ? var.in_cluster_name : null
   ]))
 
   # ----- MANIFEST YAML FILE ------
