@@ -175,3 +175,9 @@ variable "allow_remote_ssh_access" {
   type        = bool
   default     = false
 }
+
+variable "enabled_http_port" {
+  description = "Whether to enable HTTP port through security group."
+  type        = bool
+  default     = true
+}

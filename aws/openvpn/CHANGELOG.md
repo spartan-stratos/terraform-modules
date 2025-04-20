@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0]() (2025-04-21)
+
+### Feature
+
+* Add variable `enabled_http_port` to make HTTP optional from security group.
+
 ## [0.1.62]() (2025-01-24)
 
 ### Feature
