@@ -21,6 +21,8 @@ aws_alb_listener provides a Load Balancer Listener resource to redirect to https
 https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 */
 resource "aws_alb_listener" "http" {
+  count = var.enabled_http_port ? 1 : 0
+
   load_balancer_arn = aws_lb.main.id
   port              = 80
   protocol          = "HTTP"
