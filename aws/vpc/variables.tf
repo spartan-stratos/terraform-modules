@@ -65,3 +65,19 @@ variable "created_managed_node_group" {
   type        = bool
   default     = false
 }
+
+variable "custom_acls" {
+  description = "List of custom ACLs that overrides AWS default ACLs."
+  type = map(object({
+    rule_number = number
+    cidr_block  = string
+    protocol    = string
+    rule_action = string
+    egress      = optional(bool, false)
+    from_port   = optional(number, null)
+    to_port     = optional(number, null)
+    icmp_type   = optional(string, null)
+    icmp_code   = optional(string, null)
+  }))
+  default = null
+}

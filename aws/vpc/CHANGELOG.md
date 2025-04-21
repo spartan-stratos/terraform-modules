@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0]() (2025-04-21)
+
+### Features
+
+* Add VPC Network ACLs rules with variable `custom_acls`.
+
 ## [0.1.69]() (2025-02-21)
 
 ### Features
