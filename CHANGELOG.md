@@ -2,13 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0]() (2025-04-21)
+
+### ⚠ BREAKING CHANGES
+
+* AWS ALB : [(./aws/alb)](./aws/alb)
+    * Add flag `enable_http_port` to add or ignore HTTP port 80 on security group and ALB listener.
+* AWS Openvpn: [(./aws/openvpn)](./aws/openvpn)
+    * Add variable `enabled_http_port` to make HTTP optional from security group.
+
+### Features
+
+* AWS VPC: [(./aws/vpc)](./aws/vpc)
+    * Add VPC Network ACLs rules with variable `custom_acls`.
+
 ## [0.4.4]() (2025-04-18)
 
 ### Fix Bugs
 
 * AWS EKS Helm ArgoCD: [(./aws/eks-helm/argocd)](./aws/eks-helm/argocd)
     * Fix the in_cluster_name issue
-      
+
 ## [0.4.3]() (2025-04-18)
 
 ### Features
