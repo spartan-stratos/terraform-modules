@@ -39,6 +39,8 @@ https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secu
 Allow Certbot TLS renewal
  */
 resource "aws_security_group_rule" "http_vpn" {
+  count = var.enabled_http_port ? 1 : 0
+
   security_group_id = aws_security_group.this.id
   cidr_blocks       = ["0.0.0.0/0"]
 
