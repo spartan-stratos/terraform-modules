@@ -9,7 +9,8 @@ locals {
     title_tags     = "[Service Restarts]"
     title          = "Service ${var.service_name} restarted"
 
-    query_template = "avg($${timeframe}):sum:kubernetes.containers.restarts{kube_cluster_name:${var.cluster_name}, kube_service:${var.service_name}, kube_container_name:$${kube_container_name}} by {pod_name} >= $${threshold_critical}"
+    query_template = "avg($${timeframe}):diff(sum:kubernetes.containers.restarts{kube_cluster_name:${var.cluster_name}, kube_service:${var.service_name}, kube_container_name:$${kube_container_name}} by {pod_name}.rollup(max, 300)) >= $${threshold_critical}"
+    
     query_args = {
       timeframe           = "last_5m"
       kube_container_name = var.overwrite_container_name != null ? var.overwrite_container_name : var.service_name
