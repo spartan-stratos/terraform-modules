@@ -1,12 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.5.1]() (2024-01-05)
+## [0.5.1]() (2024-04-24)
 
 ### Features
 
-* Update restart datadog monitor being triggered by using diff function, which will check the increase restarting, for example if the pod restarted, the query template will count to 1, after that it will be 0 if there is no more increase in restart metrics.
-
+* Modify the Datadog restart monitor to use the diff function, which captures only new restart events. When a pod restarts, the query returns a value of 1, and it falls back to 0 if no further restarts occur.
 
 ## [0.1.36]() (2024-01-05)
 
