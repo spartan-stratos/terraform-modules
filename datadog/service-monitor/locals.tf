@@ -9,8 +9,7 @@ locals {
     title_tags     = "[Service Restarts]"
     title          = "Service ${var.service_name} restarted"
 
-    query_template = "avg($${timeframe}):monotonic_diff:kubernetes.containers.restarts{kube_cluster_name:${var.cluster_name}, kube_service:${var.service_name}, kube_container_name:$${kube_container_name}}.rollup(sum, 300) by {pod_name} > $${threshold_critical}"
-
+    query_template = "avg($${timeframe}):diff(sum:kubernetes.containers.restarts{kube_cluster_name:${var.cluster_name}, kube_service:${var.service_name}, kube_container_name:$${kube_container_name}} by {pod_name}.rollup(max, 300)) >= $${threshold_critical}"
     
     query_args = {
       timeframe           = "last_5m"
@@ -19,7 +18,6 @@ locals {
 
     threshold_critical          = 1
     threshold_critical_recovery = 0
-    renotify_interval           = 60
   }
 
   default_cpu_monitors = {
