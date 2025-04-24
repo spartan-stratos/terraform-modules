@@ -6,6 +6,11 @@ locals {
     }
   ])
 
+  in_clusters = compact(distinct([
+    "in-cluster",
+    var.enabled_managed_in_cluster == true ? var.in_cluster_name : null
+  ]))
+
   # ----- MANIFEST YAML FILE ------
   manifest = <<YAML
 global:
@@ -62,8 +67,17 @@ configs:
   rbac:
     policy.csv: |
       ${join("\n", var.rbac_policies)}
-  %{if length(var.external_clusters) > 0}
   clusterCredentials:
+    %{for cluster in local.in_clusters}
+    ${cluster}:
+      server: https://kubernetes.default.svc
+      annotations: {}
+      labels: {}
+      clusterResources: false
+      config:
+        tlsClientConfig:
+          insecure: false
+    %{endfor}
     %{for key, cluster in var.external_clusters}
     ${key}:
       server: ${cluster.server}
@@ -91,17 +105,6 @@ configs:
           insecure: ${cluster.config.tls_client_config.insecure}
           caData: ${cluster.config.tls_client_config.ca_data}
     %{endfor}
-    %{if var.enabled_managed_in_cluster}
-    ${var.in_cluster_name}:
-      server: https://kubernetes.default.svc
-      annotations: {}
-      labels: {}
-      clusterResources: false
-      config:
-        tlsClientConfig:
-          insecure: false
-    %{endif}
-  %{endif}
 notifications:
   enabled: true
   secret:
