@@ -18,6 +18,7 @@ locals {
 
     threshold_critical          = 1
     threshold_critical_recovery = 0
+    renotify_interval           = 60
   }
 
   default_cpu_monitors = {
