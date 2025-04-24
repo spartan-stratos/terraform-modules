@@ -1,6 +1,12 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.5.1]() (2025-04-24)
+
+### ⚠ BREAKING CHANGES
+
+* DataDog Service Monitor: [(./datadog/service-monitor)](./datadog/service-monitor)
+    * Modify the Datadog restart monitor to use the diff function, which captures only new restart events. When a pod restarts, the query returns a value of 1, and it falls back to 0 if no further restarts occur.
 
 ## [0.5.0]() (2025-04-21)
 
