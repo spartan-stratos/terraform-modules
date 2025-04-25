@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.5.2]() (2025-04-25)
+
+### Features
+
+* Add variable `multi-az` to indicate whether the database instance should be deployed across multiple availability zones
 
 ## [0.1.79]() (2025-03-12)
 

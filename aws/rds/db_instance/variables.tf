@@ -160,3 +160,10 @@ variable "replicate_source_db" {
   type        = string
   default     = null
 }
+
+# Multi AZ
+variable "multi_az" {
+  description = "Indicates whether the database instance should be deployed across multiple availability zones"
+  type        = bool
+  default     = false
+}
