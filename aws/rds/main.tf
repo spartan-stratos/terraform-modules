@@ -55,6 +55,7 @@ module "main_db_instance" {
   publicly_accessible          = var.publicly_accessible
   final_snapshot_identifier    = local.db_final_snapshot_identifier
   copy_tags_to_snapshot        = var.copy_tags_to_snapshot
+  multi_az                     = var.multi_az
 }
 
 module "replica_db_instance" {
