@@ -295,3 +295,15 @@ variable "kaniko_version" {
   type        = string
   default     = "v1.21.1"
 }
+
+variable "nodejs_configuration" {
+  description = "To custom and define NodeJS values"
+  type = object({
+    name = string
+    version = string
+  })
+  default = {
+    name = "Node 20"
+    version = "20.10.0"
+  }
+}
