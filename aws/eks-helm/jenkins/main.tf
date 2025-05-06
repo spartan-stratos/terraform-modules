@@ -145,12 +145,12 @@ controller:
         tool:
           nodejs:
             installations:
-            - name: "Node 20"
+            - name: "${var.nodejs_configuration.name}"
               properties:
               - installSource:
                   installers:
                   - nodeJSInstaller:
-                      id: "20.10.0"
+                      id: "${var.nodejs_configuration.version}"
                       npmPackages: "yarn"
                       npmPackagesRefreshHours: 72
       role-strategy: |-

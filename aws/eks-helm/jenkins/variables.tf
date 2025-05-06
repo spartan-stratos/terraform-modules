@@ -249,7 +249,7 @@ variable "additional_plugins" {
     "ansicolor:1.0.6",
     "blueocean:1.27.16",
     "config-file-provider:982.vb_a_e458a_37021",
-    "credentials:1408.va_622a_b_f5b_1b_1",
+    "credentials:1413.va_51c53703df1",
     "dark-theme:524.vd675b_22b_30cb_",
     "extended-read-permission:61.vf24570ff3b_e9",
     "github:1.41.0",
@@ -294,4 +294,16 @@ variable "kaniko_version" {
   description = "Version of Kaniko build tool"
   type        = string
   default     = "v1.21.1"
+}
+
+variable "nodejs_configuration" {
+  description = "To custom and define NodeJS values"
+  type = object({
+    name    = string
+    version = string
+  })
+  default = {
+    name    = "Node 20"
+    version = "20.10.0"
+  }
 }

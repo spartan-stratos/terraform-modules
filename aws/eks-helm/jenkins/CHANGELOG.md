@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.5.3]() (2025-05-05)
+
+### Features
+* Add `nodejs_configuration` to customize nodejs version in case projects need the latest version nodejs.
+
+### Changes
+* Update credential plugins version, which is the reason that cause crash for jenkins
 
 ## [0.1.67]() (2025-02-19)
 
