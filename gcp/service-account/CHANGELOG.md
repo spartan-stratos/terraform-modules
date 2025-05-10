@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.14]() (2025-04-10)
+
+### Bux fixes
+* Correct variable name `enabled_service_account` to `disabled_service_account` to represent the correct behavior.
+
 ## [0.1.22]() (2024-12-25)
 
 ### Features
