@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.4.4]() (2025-04-18)
+
+### Features
+
+* Add assume roles creation for manage trusted roles
 
 ## [0.3.0]() (2025-03-30)
 

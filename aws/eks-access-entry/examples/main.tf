@@ -35,6 +35,21 @@ module "eks-access-entry" {
     {
       principal_arn = "arn:aws:iam::<account-id>:role/github-actions/role-terraform-ops"
       policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSAdminPolicy"
+    },
+    /*
+      Role for ArgoCD
+    */
+    {
+      principal_arn = "arn:aws:iam::<account-id>:role/external-cluster-role"
+      policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
     }
   ]
+
+  assume_role = [
+    {
+      name = "external-cluster-role"
+      trusted_role_arn = ["arn:aws:iam::<account-id>:role/argocd"]
+    }
+  ]
+  
 }

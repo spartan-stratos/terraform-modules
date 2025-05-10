@@ -21,3 +21,12 @@ variable "cluster_name" {
   description = "The name of the EKS cluster."
   type        = string
 }
+
+variable "assume_role" {
+  description = "List of IAM roles to assume for managing EKS access entries. Each object should include a role name and a list of trusted role ARNs."
+  type = list(object({
+    name             = string
+    trusted_role_arn = list(string)
+  }))
+  default = []
+}
