@@ -317,7 +317,7 @@ variable "enable_fargate_scheduling" {
 variable "node_selector" {
   description = "Map of labels to force pods onto Fargate nodes"
   type        = map(string)
-  default = {}
+  default     = {}
 }
 
 variable "tolerations" {
