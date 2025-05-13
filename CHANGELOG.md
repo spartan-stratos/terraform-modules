@@ -1,6 +1,19 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [0.5.3]() (2025-05-13)
+
+### Features
+
+* AWS EKS: Helm Jenkins [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+    * Add `nodejs_configuration` to customize nodejs version in case projects need the latest version nodejs.
+    * Add `tolerations` and `node_selectors` for scheduling jenkins on managed node or fargate
+
+### Changes
+* AWS EKS: Helm Jenkins [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
+    * Update credential plugins version, which is the reason that cause crash for jenkins
+
+
 ## [0.5.2]() (2025-04-25)
 
 ### Features
