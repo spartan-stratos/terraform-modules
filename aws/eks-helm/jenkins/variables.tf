@@ -307,3 +307,26 @@ variable "nodejs_configuration" {
     version = "20.10.0"
   }
 }
+
+variable "enable_fargate_scheduling" {
+  description = "If true, Jenkins pods will be forced onto Fargate (via nodeSelector + tolerations)"
+  type        = bool
+  default     = false
+}
+
+variable "node_selector" {
+  description = "Map of labels to force pods onto Fargate nodes"
+  type        = map(string)
+  default     = {}
+}
+
+variable "tolerations" {
+  description = "List of tolerations required to schedule onto Fargate nodes"
+  type = list(object({
+    key      = string
+    operator = string
+    value    = string
+    effect   = string
+  }))
+  default = []
+}

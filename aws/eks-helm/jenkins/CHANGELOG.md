@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.5.3]() (2025-05-05)
+## [0.5.3]() (2025-05-13)
 
 ### Features
 * Add `nodejs_configuration` to customize nodejs version in case projects need the latest version nodejs.

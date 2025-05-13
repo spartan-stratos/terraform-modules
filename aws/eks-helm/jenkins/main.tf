@@ -21,6 +21,19 @@ resource "helm_release" "jenkins" {
 locals {
   manifest = <<YAML
 controller:
+  %{if var.enable_fargate_scheduling}
+  nodeSelector:
+    %{for key, value in var.node_selector}
+    ${key}: ${value}
+    %{endfor}
+  tolerations:
+    %{for tol in var.tolerations}
+    - key:      "${tol.key}"
+      operator: "${tol.operator}"
+      value:    "${tol.value}"
+      effect:   "${tol.effect}"
+    %{endfor}
+  %{endif}
   resources:
     requests:
       cpu: "${var.jenkins_cpu}"
@@ -342,6 +355,19 @@ persistence:
   enabled: true
   existingClaim: jenkins-home-pvc
 agent:
+  %{if var.enable_fargate_scheduling}
+  nodeSelector:
+    %{for key, value in var.node_selector}
+    ${key}: ${value}
+    %{endfor}
+  tolerations:
+    %{for tol in var.tolerations}
+    - key:      "${tol.key}"
+      operator: "${tol.operator}"
+      value:    "${tol.value}"
+      effect:   "${tol.effect}"
+    %{endfor}
+  %{endif}
   runAsUser: jenkins
   runAsGroup: jenkins
   showRawYaml: false
