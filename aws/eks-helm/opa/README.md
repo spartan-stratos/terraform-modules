@@ -8,7 +8,7 @@ This module helps install and configure OPA Engine for EKS cluster via Helm char
 
 ```hcl
 module "eks_helm_opa" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/opa?ref=v0.3.0"
+  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/opa?ref=v0.5.4"
 
   helm_release_name  = "opa"
   namespace          = "kube-system"
