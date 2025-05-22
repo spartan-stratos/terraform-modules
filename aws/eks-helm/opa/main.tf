@@ -1,24 +1,24 @@
 ##### Open Policy Agent  ###############################
 resource "helm_release" "opa" {
-  name              = var.helm_release_name
-  repository        = "https://spartan-stratos.github.io/helm-charts/"
-  chart             = "spartan"
-  version           = var.helm_chart_version
-  namespace         = var.namespace
-  create_namespace  = true
+  name             = var.helm_release_name
+  repository       = "https://spartan-stratos.github.io/helm-charts/"
+  chart            = "spartan"
+  version          = var.helm_chart_version
+  namespace        = var.namespace
+  create_namespace = true
 
   set {
-    name = "image.repository"
+    name  = "image.repository"
     value = "openpolicyagent/opa"
   }
 
   set {
-    name = "image.tag"
+    name  = "image.tag"
     value = var.opa_image_tag
   }
 
   set {
-    name = "containerPort"
+    name  = "containerPort"
     value = 8181
   }
 
