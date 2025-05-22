@@ -5,7 +5,6 @@ resource "helm_release" "opa" {
   chart      = "spartan"
   version    = var.helm_chart_version
   namespace  = var.namespace
-  keyring    = ""
 
   set {
     name = "image.repository"
@@ -14,7 +13,7 @@ resource "helm_release" "opa" {
 
   set {
     name = "image.tag"
-    value = "1.4.2"
+    value = var.opa_image_tag
   }
 
   set {
