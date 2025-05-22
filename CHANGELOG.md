@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.5.4]() (2025-05-22)
+
+### Features
+* AWS OPA module: [(./aws/eks-helm/opa)](./aws/eks-helm/opa)
+    * Add OPA helm deployment module
+
 ## [0.5.3]() (2025-05-13)
 
 ### Features
