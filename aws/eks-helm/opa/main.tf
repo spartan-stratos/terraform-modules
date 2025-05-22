@@ -1,10 +1,11 @@
-##### Metrics Server  ###############################
+##### Open Policy Agent  ###############################
 resource "helm_release" "opa" {
-  name       = var.helm_release_name
-  repository = "https://spartan-stratos.github.io/helm-charts/"
-  chart      = "spartan"
-  version    = var.helm_chart_version
-  namespace  = var.namespace
+  name              = var.helm_release_name
+  repository        = "https://spartan-stratos.github.io/helm-charts/"
+  chart             = "spartan"
+  version           = var.helm_chart_version
+  namespace         = var.namespace
+  create_namespace  = true
 
   set {
     name = "image.repository"
