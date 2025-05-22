@@ -10,7 +10,7 @@ variable "helm_release_name" {
 }
 
 variable "helm_chart_version" {
-  default     = "0.1.12"
+  default     = "0.1.13"
   type        = string
   description = "The chart version of OPA engine"
 }
