@@ -5,7 +5,7 @@ resource "helm_release" "opa" {
   chart            = "spartan"
   version          = var.helm_chart_version
   namespace        = var.namespace
-  create_namespace = true
+  create_namespace = var.create_namespace
 
   set {
     name  = "image.repository"

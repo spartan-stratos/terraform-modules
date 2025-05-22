@@ -20,3 +20,9 @@ variable "opa_image_tag" {
   type        = string
   description = "The tag of the OPA docker image"
 }
+
+variable "create_namespace" {
+  default     = true
+  type        = bool
+  description = "Create the namespace if it does not yet exist."
+}
