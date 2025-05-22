@@ -1,5 +1,5 @@
 module "eks_helm_opa" {
-  source = "github.com/spartan-stratos/terraform-modules//aws/eks-helm/opa?ref=v0.5.4"
+  source = "../"
 
   helm_release_name  = "opa"
   namespace          = "opa"
