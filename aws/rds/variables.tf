@@ -170,6 +170,18 @@ variable "publicly_accessible" {
   default     = false
 }
 
+variable "primary_deletion_protection" {
+  description = "If the DB primary instance should have deletion protection enabled. The instance can't be deleted when this value is set to true."
+  type        = bool
+  default     = true
+}
+
+variable "replica_deletion_protection" {
+  description = "If the DB replicas should have deletion protection enabled. The instances can't be deleted when this value is set to true."
+  type        = bool
+  default     = true
+}
+
 # Database password
 variable "use_secret_manager" {
   description = "Whether to use AWS Secret Manager storing Database password."
