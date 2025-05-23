@@ -24,6 +24,6 @@ resource "helm_release" "opa" {
 
   set_list {
     name  = "args"
-    value = ["run", "--ignore=.*", "--server"]
+    value = ["run", "--ignore=.*", "--server", "--addr=:8181"]
   }
 }
