@@ -73,3 +73,16 @@ variable "availability_zone_count" {
   type        = number
   default     = 3
 }
+
+// domain endpoint options
+variable "enforce_https" {
+  description = "Whether or not to require HTTPS."
+  type        = bool
+  default     = true
+}
+
+variable "tls_security_policy" {
+  description = "Name of the TLS security policy that needs to be applied to the HTTPS endpoint. For valid values, refer to the AWS documentation: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_DomainEndpointOptions.html#opensearchservice-Type-DomainEndpointOptions-TLSSecurityPolicy."
+  type        = string
+  default     = "Policy-Min-TLS-1-2-PFS-2023-10" // support TLS 1.2 and 1.3
+}

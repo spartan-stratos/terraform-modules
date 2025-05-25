@@ -29,6 +29,10 @@ resource "aws_opensearch_domain" "this" {
   encrypt_at_rest {
     enabled = var.encrypt_at_rest_enabled
   }
+  domain_endpoint_options {
+    enforce_https       = var.enforce_https
+    tls_security_policy = var.tls_security_policy
+  }
   access_policies = data.aws_iam_policy_document.this.json
 }
 
