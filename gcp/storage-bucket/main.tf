@@ -43,7 +43,7 @@ This block grants read access to all users for specified GCS bucket.
 https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket_access_control
  */
 resource "google_storage_bucket_access_control" "public_rule" {
-  count = var.is_public == true ? 1 : 0
+  count = var.is_listable == true ? 1 : 0
 
   bucket = google_storage_bucket.this.name
   role   = "READER"
