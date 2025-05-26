@@ -1,6 +1,13 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.6.0]() (2025-26-05)
+
+### Features
+
+* Add variable `primary_deletion_protection` and `replica_deletion_protection` to manage `deletion_protection` status on primary and replicas.
+
 ## [0.5.2]() (2025-04-25)
 
 ### Features

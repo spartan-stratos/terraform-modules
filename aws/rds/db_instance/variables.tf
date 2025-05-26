@@ -65,6 +65,12 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
+variable "deletion_protection" {
+  description = "If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true."
+  type        = bool
+  default     = true
+}
+
 # Storage and encryption
 variable "storage_type" {
   description = "The storage type of RDS instance. It can be standard, gp2 or gp3."
