@@ -50,6 +50,12 @@ variable "is_public" {
   default     = false
 }
 
+variable "is_listable" {
+  description = "Allow list object in a bucket"
+  type        = bool
+  default     = false
+}
+
 variable "is_static_web" {
   description = "Set the bucket as static web"
   type        = bool
