@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0]() (2025-05-27)
+
+### Changes
+
+* Add `engine` variable to support different Redis engines.
+
 ## [0.4.1]() (2025-04-16)
 
 ### Features
@@ -55,4 +61,3 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Initial commit with all the code
-
