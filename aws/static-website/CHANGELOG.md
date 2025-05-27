@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.5]() (2025-05-27)
+
+### Fix
+
+* Fix double policy in S3 bucket
+
 ## [0.3.16]() (2025-04-14)
 
 ### Features
