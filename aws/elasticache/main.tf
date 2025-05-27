@@ -50,7 +50,7 @@ resource "aws_elasticache_replication_group" "this" {
   replicas_per_node_group = var.replicas_per_node_group
 
   parameter_group_name = local.parameter_group_name
-  engine               = "redis"
+  engine               = var.engine
   engine_version       = var.engine_version
   port                 = 6379
   subnet_group_name    = aws_elasticache_subnet_group.this.name
