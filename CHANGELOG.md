@@ -2,9 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changes
+
+* AWS ElastiCache [(./aws/elasticache)](./aws/elasticache)
+  * Replaced hardcoded Redis engine with a variable to support different cache gines, such as Redis or Valkey.
+
+## [0.6.0]() (2025-05-27)
+
+### ⚠ BREAKING CHANGES
+
+* GCP Storage bucket: [(./gcp/storage-bucket)](./gcp/storage-bucket)
+    * Separate permissions of Google Cloud Storage bucket and objects: Add `is_listable` variable to manage bucket
+      permission, allow `allUsers` to list object. `is_public` variable allow `allUsers` to get object as usual.
+
+### Features
+
+* AWS RDS: [(./aws/rds)](./aws/rds)
+    * Add variable `primary_deletion_protection` and `replica_deletion_protection` to manage `deletion_protection`
+      status on primary and replicas.
+
 ## [0.5.4]() (2025-05-22)
 
 ### Features
+
 * AWS OPA module: [(./aws/eks-helm/opa)](./aws/eks-helm/opa)
     * Add OPA helm deployment module
 
@@ -17,23 +39,25 @@ All notable changes to this project will be documented in this file.
     * Add `tolerations` and `node_selectors` for scheduling jenkins on managed node or fargate
 
 ### Changes
+
 * AWS EKS: Helm Jenkins [(./aws/eks-helm/jenkins)](./aws/eks-helm/jenkins)
     * Update credential plugins version, which is the reason that cause crash for jenkins
-
 
 ## [0.5.2]() (2025-04-25)
 
 ### Features
 
 * AWS Postgres [(./aws/postgres)](./aws/rds)
-    * Add variable `multi-az` to indicate whether the database instance should be deployed across multiple availability zones
+    * Add variable `multi-az` to indicate whether the database instance should be deployed across multiple availability
+      zones
 
 ## [0.5.1]() (2025-04-24)
 
 ### ⚠ BREAKING CHANGES
 
 * DataDog Service Monitor: [(./datadog/service-monitor)](./datadog/service-monitor)
-    * Modify the Datadog restart monitor to use the diff function, which captures only new restart events. When a pod restarts, the query returns a value of 1, and it falls back to 0 if no further restarts occur.
+    * Modify the Datadog restart monitor to use the diff function, which captures only new restart events. When a pod
+      restarts, the query returns a value of 1, and it falls back to 0 if no further restarts occur.
 
 ## [0.5.0]() (2025-04-21)
 

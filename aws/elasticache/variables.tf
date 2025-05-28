@@ -3,6 +3,12 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "engine" {
+  description = "Name of the cache engine to be used for the clusters in the replication group. Valid values are redis or valkey"
+  type        = string
+  default     = "redis"
+}
+
 variable "engine_version" {
   description = "The version of Redis, default 7.1"
   type        = string
