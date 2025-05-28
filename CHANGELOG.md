@@ -4,10 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### ⚠ BREAKING CHANGES
+
+* AWS Opensearch [(./aws/opensearch)](./aws/opensearch)
+  * Add `enforce_https` and `tls_security_policy` to enforce HTTPS.
+
 ### Changes
 
 * AWS ElastiCache [(./aws/elasticache)](./aws/elasticache)
-  * Replaced hardcoded Redis engine with a variable to support different cache gines, such as Redis or Valkey.
+    * Replaced hardcoded Redis engine with a variable to support different cache gines, such as Redis or Valkey.
 
 ## [0.6.0]() (2025-05-27)
 

@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.0]() (2025-05-26)
+## [0.6.1]() (2025-05-28)
 
-### Features
+### ⚠ BREAKING CHANGES
 
 * Add `enforce_https` and `tls_security_policy` to enforce HTTPS.
 
