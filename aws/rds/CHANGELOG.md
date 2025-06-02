@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.0]() (2025-26-05)
+## [0.6.2]() (2025-06-02)
+
+### Changes
+
+* Add `db_port` output to RDS module.
+
+## [0.6.0]() (2025-05-26)
 
 ### Features
 
@@ -52,4 +58,3 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Initial commit with all the code
-
