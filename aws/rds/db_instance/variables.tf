@@ -71,6 +71,12 @@ variable "deletion_protection" {
   default     = true
 }
 
+variable "iam_database_authentication_enabled" {
+  description = "Specifies whether or not the mappings of AWS IAM accounts to database accounts are enabled."
+  type        = bool
+  default     = false
+}
+
 # Storage and encryption
 variable "storage_type" {
   description = "The storage type of RDS instance. It can be standard, gp2 or gp3."

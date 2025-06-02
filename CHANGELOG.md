@@ -15,6 +15,11 @@ All notable changes to this project will be documented in this file.
 * GCP monitoring notification
   channel [(./gcp/google-monitoring/monitoring-notification-channel)](./gcp/google-monitoring/monitoring-notification-channel)
 
+### Changes
+
+* AWS RDS [(./aws/rds)](./aws/rds)
+  * Add `db_port` output to RDS module.
+
 ## [0.6.1]() (2025-05-27)
 
 ### Changes

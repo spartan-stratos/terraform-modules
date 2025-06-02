@@ -28,6 +28,8 @@ resource "aws_db_instance" "this" {
   multi_az                     = var.multi_az
   deletion_protection          = var.deletion_protection
 
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
+
   lifecycle {
     ignore_changes = [
       storage_type,
