@@ -1,5 +1,5 @@
 module "storage_bucket_permission_change_alert" {
-  source = "../../"
+  source = "../../logging-metric"
 
   name          = "storage-bucket-permission-change-metric"
   description   = "Detects Storage Bucket permission changes"

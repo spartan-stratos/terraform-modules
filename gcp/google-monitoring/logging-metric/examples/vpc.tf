@@ -2,7 +2,7 @@
 Please navigate to README.md before apply this example
  */
 module "vpc_network_change_alert" {
-  source = "../../"
+  source = "../../logging-metric"
 
   name          = "vpc-network-change-metric"
   description   = "Detects VPC network changes"
@@ -39,7 +39,7 @@ EOT
 }
 
 module "vpc_network_route_change_alert" {
-  source = "../../"
+  source = "../../logging-metric"
 
   name        = "vpc-network-route-change-metric"
   description = "Detects VPC route changes"

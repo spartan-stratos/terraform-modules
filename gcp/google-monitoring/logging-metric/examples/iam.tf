@@ -2,7 +2,7 @@
 Please navigate to README.md before apply this example
  */
 module "custom_role_change_alert" {
-  source = "../../"
+  source = "../../logging-metric"
 
   name        = "custom-role-change-metric"
   description = "Detects custom role changes"

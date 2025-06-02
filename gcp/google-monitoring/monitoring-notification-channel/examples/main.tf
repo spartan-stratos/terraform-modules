@@ -1,5 +1,5 @@
 module "email_notification_channel" {
-  source = "../../"
+  source = "../../monitoring-notification-channel"
 
   display_name = "Admin Email Notification"
   type         = "email"
@@ -9,7 +9,7 @@ module "email_notification_channel" {
 }
 
 module "slack_notification_channel" {
-  source = "../../"
+  source = "../../monitoring-notification-channel"
 
   display_name = "Slack Notification"
   type         = "slack"

@@ -1,5 +1,5 @@
 module "audit_alert" {
-  source = "../../"
+  source = "../../logging-metric"
 
   name          = "audit-metric"
   description   = "Detects audit changes"
