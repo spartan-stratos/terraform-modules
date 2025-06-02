@@ -12,3 +12,7 @@ output "replica_address" {
 output "main_db_name" {
   value = module.postgresql.db_name
 }
+
+output "main_db_port" {
+  value = module.postgresql.db_port
+}
