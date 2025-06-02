@@ -66,6 +66,7 @@ Spartan Terraform Conventions and Standards:
 19. [Minimize the number of resources in each root module](#minimize-the-number-of-resources-in-each-root-module)
 20. [README.md template](#readmemd-template)
 21. [CHANGELOG.md template](#changelogmd-template)
+22. [Linting Tools](#linting-tools)
 
 ## Release process
 
@@ -433,6 +434,24 @@ All notable changes to this project will be documented in this file.
 
 * Fix abc ([#1](https://pr-link) ([2517eb9](https://commit-link))
 ```
+
+## Linting Tools
+
+1. **pre-commit**
+
+   Refer to the [Installation Guide](https://pre-commit.com/#install) for detailed instructions.
+
+2. **TFLint**
+
+   Refer to the [Installation Guide](https://github.com/terraform-linters/tflint?tab=readme-ov-file#installation) for
+   detailed instructions.
+
+3. **Set up Git hook**
+
+   Initialize the pre-commit hook by running the following command:
+   ```sh
+   pre-commit install
+   ```
 
 ## References
 

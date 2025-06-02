@@ -55,12 +55,6 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "db_port" {
-  description = "The port number on which the database accepts connections."
-  type        = number
-  default     = 5432
-}
-
 variable "multi_az" {
   description = "Indicates whether the database instance should be deployed across multiple availability zones."
   type        = bool
