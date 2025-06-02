@@ -52,7 +52,8 @@ resource "google_storage_bucket" "this" {
 
     content {
       condition {
-        age = lifecycle_rule.value.age
+        age                        = lifecycle_rule.value.age
+        days_since_noncurrent_time = lifecycle_rule.value.days_since_noncurrent_time
       }
       action {
         type = lifecycle_rule.value.type

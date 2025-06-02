@@ -131,8 +131,9 @@ variable "soft_delete_policy" {
 variable "lifecycle_rules" {
   description = "List of lifecycle rules for the bucket"
   type = list(object({
-    age  = number
-    type = string
+    age                        = number
+    type                       = string
+    days_since_noncurrent_time = number
   }))
   default = []
 }
