@@ -152,9 +152,3 @@ variable "enable_access_logs" {
   type        = bool
   default     = false
 }
-
-variable "destination_bucket" {
-  description = "GCS bucket name where logs will be stored"
-  type        = string
-  default     = null
-}
