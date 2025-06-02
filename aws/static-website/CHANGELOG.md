@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.4]() (2025-06-03)
+
+### Changes
+
+* Disable bucket policy creation for S3 bucket in `static-website` module.
+
 ## [0.6.3]() (2025-06-02)
 
 ### Changes
