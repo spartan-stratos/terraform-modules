@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [0.6.4]() (2025-06-03)
 
-### Changes
+### Removed
 
-* Disable bucket policy creation for S3 bucket in `static-website` module.
+* Removes duplicate S3 bucket policy creation in [./s3.tf](./s3.tf).
 
 ## [0.6.3]() (2025-06-02)
 
