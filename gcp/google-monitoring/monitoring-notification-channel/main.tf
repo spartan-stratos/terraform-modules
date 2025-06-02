@@ -8,6 +8,6 @@ resource "google_monitoring_notification_channel" "this" {
   sensitive_labels {
     auth_token  = var.auth_token
     password    = var.password
-    service_key = var.service
+    service_key = var.service_key
   }
 }
