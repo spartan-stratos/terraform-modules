@@ -137,6 +137,12 @@ variable "lifecycle_rules" {
   default = []
 }
 
+variable "enable_logging" {
+  description = "Whether to enable logging"
+  type        = bool
+  default     = false
+}
+
 /**
 access logs
  */

@@ -13,9 +13,3 @@ variable "log_sink_name" {
   description = "Name of the log sink"
   type        = string
 }
-
-variable "log_prefix" {
-  description = "Prefix inside the destination bucket"
-  type        = string
-  default     = "logs/"
-}
