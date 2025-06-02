@@ -17,6 +17,13 @@ resource "google_storage_bucket" "this" {
   uniform_bucket_level_access = var.uniform_bucket_level_access
   public_access_prevention    = var.public_access_prevention
 
+  dynamic "soft_delete_policy" {
+    for_each = var.soft_delete_policy != null ? [var.soft_delete_policy] : []
+    content {
+      retention_duration_seconds = soft_delete_policy.value.retention_duration_seconds
+    }
+  }
+
   versioning {
     enabled = var.enable_versioning
   }
@@ -37,6 +44,19 @@ resource "google_storage_bucket" "this" {
       method          = var.cors_methods
       response_header = var.cors_extra_headers
       max_age_seconds = var.cors_max_age_seconds
+    }
+  }
+
+  dynamic "lifecycle_rule" {
+    for_each = var.lifecycle_rules
+
+    content {
+      condition {
+        age = lifecycle_rule.value.age
+      }
+      action {
+        type = lifecycle_rule.value.type
+      }
     }
   }
 }

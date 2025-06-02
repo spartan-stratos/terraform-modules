@@ -124,3 +124,20 @@ variable "destination_bucket" {
   description = "GCS bucket name where logs will be stored"
   type        = string
 }
+
+variable "soft_delete_policy" {
+  description = "Optional soft delete policy"
+  type = object({
+    retention_duration_seconds = number
+  })
+  default = null
+}
+
+variable "lifecycle_rules" {
+  description = "List of lifecycle rules for the bucket"
+  type = list(object({
+    age  = number
+    type = string
+  }))
+  default = []
+}
