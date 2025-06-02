@@ -114,3 +114,45 @@ variable "enabled_disk_autoresize" {
   type        = bool
   default     = true
 }
+
+variable "master_maintenance_window" {
+  description = "Maintenance window configuration for the master instance"
+  type = object({
+    day          = number
+    hour         = number
+    update_track = string
+  })
+  default = {
+    day          = 1 # Monday
+    hour         = 9 # UTC
+    update_track = "stable"
+  }
+}
+
+variable "replica_maintenance_window" {
+  description = "Maintenance window configuration for replica instances"
+  type = object({
+    day          = number
+    hour         = number
+    update_track = string
+  })
+  default = {
+    day          = 1 # Monday
+    hour         = 8 # UTC
+    update_track = "stable"
+  }
+}
+
+variable "analytic_replica_maintenance_window" {
+  description = "Maintenance window configuration for analytic replica instances"
+  type = object({
+    day          = number
+    hour         = number
+    update_track = string
+  })
+  default = {
+    day          = 1 # Monday
+    hour         = 8 # UTC
+    update_track = "stable"
+  }
+}

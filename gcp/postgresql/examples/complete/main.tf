@@ -12,4 +12,19 @@ module "postgresql" {
 
   replica_count          = 1
   analytic_replica_count = 1
+  master_maintenance_window = {
+    day          = 1 # Monday
+    hour         = 9 # UTC
+    update_track = "stable"
+  }
+  replica_maintenance_window = {
+    day          = 1 # Monday
+    hour         = 8 # UTC
+    update_track = "stable"
+  }
+  analytic_replica_maintenance_window = {
+    day          = 1 # Monday
+    hour         = 8 # UTC
+    update_track = "stable"
+  }
 }

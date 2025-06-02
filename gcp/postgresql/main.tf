@@ -50,6 +50,12 @@ resource "google_sql_database_instance" "primary" {
         retained_backups = var.retained_backups_count
       }
     }
+
+    maintenance_window {
+      day          = var.master_maintenance_window.day
+      hour         = var.master_maintenance_window.hour
+      update_track = var.master_maintenance_window.update_track
+    }
   }
 
   lifecycle {
@@ -100,6 +106,12 @@ resource "google_sql_database_instance" "replica" {
         value = database_flags.value
       }
     }
+
+    maintenance_window {
+      day          = var.replica_maintenance_window.day
+      hour         = var.replica_maintenance_window.hour
+      update_track = var.replica_maintenance_window.update_track
+    }
   }
 
   lifecycle {
@@ -149,6 +161,12 @@ resource "google_sql_database_instance" "analytic_replica" {
         name  = database_flags.key
         value = database_flags.value
       }
+    }
+
+    maintenance_window {
+      day          = var.analytic_replica_maintenance_window.day
+      hour         = var.analytic_replica_maintenance_window.hour
+      update_track = var.analytic_replica_maintenance_window.update_track
     }
   }
 

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.3]() (2025-06-02)
+
+### Features
+
+* Add maintenance windows
+
 ## [0.1.4]() (2024-12-05)
 
 ### Features
@@ -13,4 +19,3 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Initial commit with all the code
-
