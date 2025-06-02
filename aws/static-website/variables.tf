@@ -53,12 +53,6 @@ variable "price_class" {
   default     = "PriceClass_100"
 }
 
-variable "enabled_public_policy" {
-  description = "Enabled create the Public Policy to allow public access to bucket objects."
-  type        = bool
-  default     = false
-}
-
 variable "enabled_read_write_policy" {
   description = "Enabled create the Read Write Policy to allow access to bucket objects."
   type        = bool

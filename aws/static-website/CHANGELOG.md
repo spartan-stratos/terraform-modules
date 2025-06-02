@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.2]() (2025-06-02)
+
+### Changes
+
+* Enable HTTP access for S3 bucket in CloudFront setup.
+
 ## [0.3.16]() (2025-04-14)
 
 ### Features

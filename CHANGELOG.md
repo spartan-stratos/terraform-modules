@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]()
+
+### Changes
+
+* AWS Static Website [(./aws/static-website)](./aws/static-website)
+  * Enable HTTP access for S3 bucket in CloudFront setup.
+
 ## [0.6.2]() (2025-06-01)
 
 ### ⚠ BREAKING CHANGES
