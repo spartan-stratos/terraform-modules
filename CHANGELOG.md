@@ -2,12 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]() (2025-05-28)
+## [0.6.2]() (2025-06-01)
 
 ### ⚠ BREAKING CHANGES
 
 * AWS Opensearch [(./aws/opensearch)](./aws/opensearch)
-  * Add `enforce_https` and `tls_security_policy` to enforce HTTPS.
+    * Add `enforce_https` and `tls_security_policy` to enforce HTTPS.
+
+### Features
+
+* GCP Logging metric [(./gcp/google-monitoring/logging-metric)](./gcp/google-monitoring/logging-metric)
+* GCP monitoring notification
+  channel [(./gcp/google-monitoring/monitoring-notification-channel)](./gcp/google-monitoring/monitoring-notification-channel)
 
 ### Changes
 
