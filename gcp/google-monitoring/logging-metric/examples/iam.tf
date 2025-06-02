@@ -4,9 +4,9 @@ Please navigate to README.md before apply this example
 module "custom_role_change_alert" {
   source = "../../"
 
-  name          = "custom-role-change-metric"
-  description   = "Detects custom role changes"
-  filter        = <<EOT
+  name        = "custom-role-change-metric"
+  description = "Detects custom role changes"
+  filter      = <<EOT
 resource.type="iam_role"
 AND (
   protoPayload.methodName="google.iam.admin.v1.CreateRole"

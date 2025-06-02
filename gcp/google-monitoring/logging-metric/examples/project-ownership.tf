@@ -1,9 +1,9 @@
 module "project_ownership_change_alert" {
   source = "../../"
 
-  name        = "project-ownership-change-metric"
-  description = "Detects Project ownership changes"
-  filter      = <<EOT
+  name          = "project-ownership-change-metric"
+  description   = "Detects Project ownership changes"
+  filter        = <<EOT
 protoPayload.serviceName="cloudresourcemanager.googleapis.com"
 AND (
   ProjectOwnership

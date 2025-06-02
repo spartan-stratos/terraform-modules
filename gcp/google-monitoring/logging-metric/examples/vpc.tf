@@ -41,9 +41,9 @@ EOT
 module "vpc_network_route_change_alert" {
   source = "../../"
 
-  name          = "vpc-network-route-change-metric"
-  description   = "Detects VPC route changes"
-  filter        = <<EOT
+  name        = "vpc-network-route-change-metric"
+  description = "Detects VPC route changes"
+  filter      = <<EOT
 resource.type="gce_route"
 AND (
   protoPayload.methodName="beta.compute.routes.patch"

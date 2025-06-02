@@ -20,7 +20,7 @@ variable "metric_kind" {
   description = "Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metricKind and valueType might not be supported. For counter metrics, set this to DELTA. Possible values are: DELTA, GAUGE, CUMULATIVE."
   type        = string
   validation {
-    condition = contains(["DELTA", "GAUGE", "CUMULATIVE"], var.metric_kind)
+    condition     = contains(["DELTA", "GAUGE", "CUMULATIVE"], var.metric_kind)
     error_message = "Possible values are: DELTA, GAUGE, CUMULATIVE"
   }
 }
@@ -29,7 +29,7 @@ variable "value_type" {
   description = "Whether the measurement is an integer, a floating-point number, etc. Some combinations of metricKind and valueType might not be supported. For counter metrics, set this to INT64. Possible values are: BOOL, INT64, DOUBLE, STRING, DISTRIBUTION, MONEY."
   type        = string
   validation {
-    condition = contains(["BOOL", "INT64", "DOUBLE", "STRING", "DISTRIBUTION", "MONEY"], var.value_type)
+    condition     = contains(["BOOL", "INT64", "DOUBLE", "STRING", "DISTRIBUTION", "MONEY"], var.value_type)
     error_message = "Possible values are: BOOL, INT64, DOUBLE, STRING, DISTRIBUTION, MONEY."
   }
 }
@@ -77,12 +77,12 @@ variable "auto_close" {
 
 variable "notification_channels" {
   description = "Identifiers of the notification channels to use for this alert. Each channel must already exist in the project."
-  type = list(string)
+  type        = list(string)
   default     = null
 }
 
 variable "user_labels" {
   description = "A set of custom labels for the alert policy. Label keys and values can be used to organize and identify alert policies."
-  type = map(string)
+  type        = map(string)
   default     = null
 }
