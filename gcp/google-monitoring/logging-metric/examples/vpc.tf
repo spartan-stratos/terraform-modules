@@ -4,9 +4,9 @@ Please navigate to README.md before apply this example
 module "vpc_network_change_alert" {
   source = "../../logging-metric"
 
-  name          = "vpc-network-change-metric"
-  description   = "Detects VPC network changes"
-  filter        = <<EOT
+  name        = "vpc-network-change-metric"
+  description = "Detects VPC network changes"
+  filter      = <<EOT
 resource.type="gce_network"
 AND (
   protoPayload.methodName="beta.compute.networks.insert"
