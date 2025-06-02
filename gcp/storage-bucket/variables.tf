@@ -147,8 +147,8 @@ variable "enable_logging" {
 /**
 access logs
  */
-variable "enable_access_logs" {
-  description = "Whether to enable access logging"
+variable "enable_creator_policy" {
+  description = "Whether to allow bucket create objects on itself. Should be enabled if you use this as log bucket."
   type        = bool
   default     = false
 }
