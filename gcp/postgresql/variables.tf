@@ -127,6 +127,19 @@ variable "master_maintenance_window" {
     hour         = 9 # UTC
     update_track = "stable"
   }
+
+  validation {
+    condition     = var.master_maintenance_window.day >= 1 && var.master_maintenance_window.day <= 7
+    error_message = "The 'day' attribute for maintenance_window must be between 1 (Monday) and 7 (Sunday)."
+  }
+  validation {
+    condition     = var.master_maintenance_window.hour >= 0 && var.master_maintenance_window.hour <= 23
+    error_message = "The 'hour' attribute for maintenance_window must be between 0 and 23 (UTC)."
+  }
+  validation {
+    condition     = contains(["week5", "stable", "canary"], var.master_maintenance_window.update_track)
+    error_message = "The 'update_track' attribute for maintenance_window must be either \"week5\", \"stable\" or \"canary\"."
+  }
 }
 
 variable "replica_maintenance_window" {
@@ -141,6 +154,19 @@ variable "replica_maintenance_window" {
     hour         = 8 # UTC
     update_track = "stable"
   }
+
+  validation {
+    condition     = var.replica_maintenance_window.day >= 1 && var.replica_maintenance_window.day <= 7
+    error_message = "The 'day' attribute for maintenance_window must be between 1 (Monday) and 7 (Sunday)."
+  }
+  validation {
+    condition     = var.replica_maintenance_window.hour >= 0 && var.replica_maintenance_window.hour <= 23
+    error_message = "The 'hour' attribute for maintenance_window must be between 0 and 23 (UTC)."
+  }
+  validation {
+    condition     = contains(["week5", "stable", "canary"], var.replica_maintenance_window.update_track)
+    error_message = "The 'update_track' attribute for maintenance_window must be either \"week5\", \"stable\" or \"canary\"."
+  }
 }
 
 variable "analytic_replica_maintenance_window" {
@@ -154,5 +180,18 @@ variable "analytic_replica_maintenance_window" {
     day          = 1 # Monday
     hour         = 8 # UTC
     update_track = "stable"
+  }
+
+  validation {
+    condition     = var.analytic_replica_maintenance_window.day >= 1 && var.analytic_replica_maintenance_window.day <= 7
+    error_message = "The 'day' attribute for maintenance_window must be between 1 (Monday) and 7 (Sunday)."
+  }
+  validation {
+    condition     = var.analytic_replica_maintenance_window.hour >= 0 && var.analytic_replica_maintenance_window.hour <= 23
+    error_message = "The 'hour' attribute for maintenance_window must be between 0 and 23 (UTC)."
+  }
+  validation {
+    condition     = contains(["week5", "stable", "canary"], var.analytic_replica_maintenance_window.update_track)
+    error_message = "The 'update_track' attribute for maintenance_window must be either \"week5\", \"stable\" or \"canary\"."
   }
 }
