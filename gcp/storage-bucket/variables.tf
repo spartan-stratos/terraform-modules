@@ -119,3 +119,8 @@ variable "bucket_viewers" {
   description = "A list of users who will have read-only access to the specified storage bucket."
   default     = []
 }
+
+variable "destination_bucket" {
+  description = "GCS bucket name where logs will be stored"
+  type        = string
+}

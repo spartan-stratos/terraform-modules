@@ -1,3 +1,7 @@
+locals {
+  bucket_name = var.bucket_name_overwrite == null ? "${var.bucket_name}-${var.environment}" : var.bucket_name_overwrite
+}
+
 /**
 `google_storage_bucket` creates a new bucket in Google cloud storage service (GCS).
 Once a bucket has been created, its location can't be changed.
@@ -5,7 +9,7 @@ With customizable options such as versioning, static website hosting, and CORS s
 https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/storage_bucket
  */
 resource "google_storage_bucket" "this" {
-  name          = var.bucket_name_overwrite == null ? "${var.bucket_name}-${var.environment}" : var.bucket_name_overwrite
+  name          = local.bucket_name
   location      = var.location
   force_destroy = var.force_destroy
   storage_class = var.storage_class
