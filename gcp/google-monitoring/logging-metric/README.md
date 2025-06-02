@@ -13,8 +13,6 @@ This Terraform module provisions GCP metric and monitoring rule.
 You may encounter this issue https://github.com/hashicorp/terraform-provider-google/issues/13349.
 
 The Terraform code / provider does not support direct filter without `resource.type`.
-Some examples will not work forwardly including: `module.custom_role_change_alert`
-and `module.vpc_network_route_change_alert`.
 You can first bypass it with any `resource_type` to apply; then modify the resource filter directly on GCP console, and
 in Terraform source (making sure no changes of Terraform plan).
 

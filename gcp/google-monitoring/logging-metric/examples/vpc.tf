@@ -16,6 +16,7 @@ AND (
   OR protoPayload.methodName="v1.compute.networks.addPeering"
 )
 EOT
+
   resource_type = "gce_network"
 
   metric_kind = "DELTA"
@@ -41,15 +42,16 @@ EOT
 module "vpc_network_route_change_alert" {
   source = "../../logging-metric"
 
-  name        = "vpc-network-route-change-metric"
-  description = "Detects VPC route changes"
-  filter      = <<EOT
+  name          = "vpc-network-route-change-metric"
+  description   = "Detects VPC route changes"
+  filter        = <<EOT
 resource.type="gce_route"
 AND (
   protoPayload.methodName="beta.compute.routes.patch"
   OR protoPayload.methodName="beta.compute.routes.insert"
 )
 EOT
+  resource_type = "global"
 
   metric_kind = "DELTA"
   value_type  = "INT64"
