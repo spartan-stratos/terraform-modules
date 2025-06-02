@@ -15,17 +15,41 @@ permissions:
   contents: write # to publish a GitHub release
 
 jobs:
+  verify-changelog:
+    name: Verify Changelog
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'spartan-stratos'
+    outputs:
+      is_releasable: ${{ steps.check_unreleased.outputs.is_releasable }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for [Unreleased] section
+        id: check_unreleased
+        run: |
+          if grep -q "\[Unreleased\]" CHANGELOG.md; then
+            echo "is_releasable=false" >> $GITHUB_OUTPUT
+            echo "CHANGELOG.md contains [Unreleased] section - skipping release"
+          else
+            echo "is_releasable=true" >> $GITHUB_OUTPUT
+            echo "CHANGELOG.md is ready for release"
+          fi
+
+
   release:
     name: Release
+    needs: verify-changelog
     runs-on: ubuntu-latest
     # Skip running release workflow on forks
-    if: github.repository_owner == 'spartan-stratos'
+    if: github.repository_owner == 'spartan-stratos' && needs.verify-changelog.outputs.is_releasable == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           # To fetch all refs
           fetch-depth: 0
+      
 
       # Extract the first (latest) version mentioned in the changelog
       - name: Extract Version from Changelog
