@@ -2,12 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]()
+## [0.6.4]() (2025-06-03)
 
-### Changes
+### Removed
 
 * AWS Static Website [(./aws/static-website)](./aws/static-website)
-  * Disable bucket policy creation for S3 bucket in `static-website` module.
+  * Removes duplicate S3 bucket policy creation in [./aws/static-website/s3.tf](./aws/static-website/s3.tf).
 
 ## [0.6.3]() (2025-06-02)
 
