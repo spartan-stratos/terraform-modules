@@ -123,6 +123,7 @@ variable "bucket_viewers" {
 variable "destination_bucket" {
   description = "GCS bucket name where logs will be stored"
   type        = string
+  default     = null
 }
 
 variable "soft_delete_policy" {
