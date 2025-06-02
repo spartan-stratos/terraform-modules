@@ -57,6 +57,8 @@ module "main_db_instance" {
   copy_tags_to_snapshot        = var.copy_tags_to_snapshot
   multi_az                     = var.multi_az
   deletion_protection          = var.primary_deletion_protection
+
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
 }
 
 module "replica_db_instance" {
