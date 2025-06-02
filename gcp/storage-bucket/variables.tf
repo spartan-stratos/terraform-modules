@@ -120,12 +120,6 @@ variable "bucket_viewers" {
   default     = []
 }
 
-variable "destination_bucket" {
-  description = "GCS bucket name where logs will be stored"
-  type        = string
-  default     = null
-}
-
 variable "soft_delete_policy" {
   description = "Optional soft delete policy"
   type = object({
@@ -141,4 +135,19 @@ variable "lifecycle_rules" {
     type = string
   }))
   default = []
+}
+
+/**
+access logs
+ */
+variable "enable_access_logs" {
+  description = "Whether to enable access logging"
+  type        = bool
+  default     = false
+}
+
+variable "destination_bucket" {
+  description = "GCS bucket name where logs will be stored"
+  type        = string
+  default     = null
 }
