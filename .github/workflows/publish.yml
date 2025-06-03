@@ -168,38 +168,34 @@ jobs:
           # Create a temporary directory for the module
           TEMP_DIR=$(mktemp -d)
           MODULE_NAME="terraform-$(echo "$MODULE_PATH" | tr '/' '-')"
+          PROVIDER="aws"  # or determine dynamically based on your structure
+          
+          # Create payload for registry
+          cat > payload.json << EOF
+          {
+            "data": {
+              "type": "registry-module-versions",
+              "attributes": {
+                "version": "${VERSION}"
+              }
+            }
+          }
+          EOF
           
           echo "Publishing module: ${MODULE_NAME} version ${VERSION}"
           
-          # Copy module files to temp directory
-          cp -r $MODULE_PATH/* $TEMP_DIR/
-          
-          # Create zip file
-          cd $TEMP_DIR
-          zip -r ../module.zip ./*
-          cd ..
-          
-          # Create module version in registry
-          REGISTRY_HOST="${TF_REGISTRY:-app.terraform.io}"
-          echo "Using registry host: ${REGISTRY_HOST}"
-          
+          # Step 1: Create version in registry
+          echo "Creating version in registry..."
           RESPONSE=$(curl \
             --fail \
             --header "Authorization: Bearer ${TF_TOKEN}" \
             --header "Content-Type: application/vnd.api+json" \
             --request POST \
-            "https://${REGISTRY_HOST}/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/${MODULE_NAME}/versions" \
-            --data-raw "{
-              \"data\": {
-                \"type\": \"registry-module-versions\",
-                \"attributes\": {
-                  \"version\": \"${VERSION}\"
-                }
-              }
-            }")
+            --data @payload.json \
+            "https://app.terraform.io/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/private/${TF_ORGANIZATION}/${MODULE_NAME}/${PROVIDER}/versions")
           
           # Extract upload URL from response
-          UPLOAD_URL=$(echo $RESPONSE | jq -r '.data.links.upload')
+          UPLOAD_URL=$(echo "$RESPONSE" | jq -r '.data.links.upload')
           
           if [ -z "$UPLOAD_URL" ] || [ "$UPLOAD_URL" = "null" ]; then
             echo "Failed to get upload URL from response:"
@@ -207,9 +203,24 @@ jobs:
             exit 1
           fi
           
-          echo "Uploading module content to: ${UPLOAD_URL}"
+          echo "Got upload URL: ${UPLOAD_URL}"
           
-          # Upload module content
+          # Step 2: Create module archive
+          echo "Creating module archive..."
+          cd "${MODULE_PATH}"
+          zip -r ../module.zip . \
+            -x "*.git*" \
+            -x "*.github*" \
+            -x "*.terraform*" \
+            -x "*.tfstate*" \
+            -x "terraform.tfvars" \
+            -x "*.tfvars" \
+            -x "*.tfplan" \
+            -x ".terraform.lock.hcl"
+          cd ..
+          
+          # Step 3: Upload the module content
+          echo "Uploading module content..."
           UPLOAD_RESPONSE=$(curl \
             --fail \
             --header "Authorization: Bearer ${TF_TOKEN}" \
@@ -218,11 +229,23 @@ jobs:
             --data-binary @module.zip \
             "${UPLOAD_URL}")
           
-          echo "Module published successfully"
+          echo "Module uploaded successfully"
+          
+          # Verify the upload
+          echo "Verifying module upload..."
+          sleep 5  # Give the registry some time to process
+          
+          VERIFY_RESPONSE=$(curl \
+            --fail \
+            --header "Authorization: Bearer ${TF_TOKEN}" \
+            --header "Content-Type: application/vnd.api+json" \
+            --request GET \
+            "https://app.terraform.io/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/private/${TF_ORGANIZATION}/${MODULE_NAME}/${PROVIDER}/versions/${VERSION}")
+          
+          echo "Module version status: $(echo "$VERIFY_RESPONSE" | jq -r '.data.attributes.status')"
           
           # Cleanup
-          rm -rf "$TEMP_DIR" module.zip
-
+          rm -f module.zip payload.json
 
   notify:
     needs: [publish]
