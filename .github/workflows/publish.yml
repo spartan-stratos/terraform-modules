@@ -152,15 +152,19 @@ jobs:
           # Make sure the value of GITHUB_TOKEN will not be persisted in repo's config
           persist-credentials: false
 
-      - name: Configure git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#      - name: Configure git
+#        run: |
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Publish module
         env:
           GITHUB_TOKEN: ${{ steps.github-app-token.outputs.token }}
         run: |
+          git config --global --add safe.directory /harness
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          
           VERSION="${{ matrix.version }}"
           MODULE_PATH="${{ matrix.path }}"
 
