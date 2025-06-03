@@ -159,7 +159,7 @@ jobs:
 
       - name: Publish module
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.github-app-token.outputs.token }}
         run: |
           VERSION="${{ matrix.version }}"
           MODULE_PATH="${{ matrix.path }}"
