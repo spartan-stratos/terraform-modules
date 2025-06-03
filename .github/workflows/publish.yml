@@ -13,10 +13,6 @@ on:
         description: 'Module path to publish (e.g., aws/acm)'
         required: true
         type: string
-      version:
-        description: 'Version to publish (e.g., 1.0.0)'
-        required: true
-        type: string
 
 jobs:
   detect-changes:
@@ -60,14 +56,29 @@ jobs:
           MODULES=()
 
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            # Manual trigger
+            # Manual trigger - read version from CHANGELOG.md
             MODULE_PATH="${{ github.event.inputs.module_path }}"
-            VERSION="${{ github.event.inputs.version }}"
-            if [[ -d "$MODULE_PATH" ]]; then
+            CHANGELOG_PATH="${MODULE_PATH}/CHANGELOG.md"
+          
+            if [[ ! -f "$CHANGELOG_PATH" ]]; then
+              echo "Error: CHANGELOG.md not found in ${MODULE_PATH}"
+              exit 1
+            fi
+          
+            VERSION=$(extract_version "$CHANGELOG_PATH")
+            if [[ -z "$VERSION" ]]; then
+              echo "Error: No version found in ${CHANGELOG_PATH}"
+              exit 1
+            fi
+          
+            if ! is_unreleased "$CHANGELOG_PATH" "$VERSION"; then
               MODULES+=("{\"path\":\"$MODULE_PATH\",\"version\":\"$VERSION\"}")
+            else
+              echo "Latest version is marked as Unreleased"
+              exit 1
             fi
           else
-            # Process changed files
+            # Process changed files from push event
             while IFS= read -r file; do
               [ -z "$file" ] && continue
           
