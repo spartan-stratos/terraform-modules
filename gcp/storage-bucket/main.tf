@@ -65,7 +65,7 @@ resource "google_storage_bucket" "this" {
     for_each = var.enable_logging ? [1] : []
     content {
       log_bucket        = var.destination_bucket
-      log_object_prefix = "${var.bucket_name}/"
+      log_object_prefix = "${local.bucket_name}/"
     }
   }
 }
