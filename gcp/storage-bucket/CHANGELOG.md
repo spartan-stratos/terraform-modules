@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Add `lifecycle_rules` and `soft_delete_policy`.
-* Add `enable_logging` to define destination bucket for storing access logs.
+* Add `logging` to define destination bucket for storing access logs.
 * Add `enable_creator_policy` to add permission for log bucket to create log objects.
 
 ## [0.6.0]() (2025-05-26)
