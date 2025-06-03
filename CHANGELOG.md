@@ -2,19 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.5]() (2025-06-03)
+
+### Features
+
+* AWS Static Website [(./gcp/storage-bucket)](./gcp/storage-bucket)
+
+    * Add `lifecycle_rules` and `soft_delete_policy`.
+    * Add `logging` to define destination bucket for storing access logs.
+    * Add `enable_creator_policy` to add permission for log bucket to create log objects.
+
 ## [0.6.4]() (2025-06-03)
 
 ### Removed
 
 * AWS Static Website [(./aws/static-website)](./aws/static-website)
-  * Removes duplicate S3 bucket policy creation in [./aws/static-website/s3.tf](./aws/static-website/s3.tf).
+    * Removes duplicate S3 bucket policy creation in [./aws/static-website/s3.tf](./aws/static-website/s3.tf).
 
 ## [0.6.3]() (2025-06-02)
 
 ### Changes
 
 * AWS Static Website [(./aws/static-website)](./aws/static-website)
-  * Enable HTTP access for S3 bucket in CloudFront setup.
+    * Enable HTTP access for S3 bucket in CloudFront setup.
 
 ## [0.6.2]() (2025-06-01)
 
@@ -32,7 +42,7 @@ All notable changes to this project will be documented in this file.
 ### Changes
 
 * AWS RDS [(./aws/rds)](./aws/rds)
-  * Add `db_port` output to RDS module.
+    * Add `db_port` output to RDS module.
 
 ## [0.6.1]() (2025-05-27)
 
