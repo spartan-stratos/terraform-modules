@@ -152,3 +152,12 @@ variable "enable_creator_policy" {
   type        = bool
   default     = false
 }
+
+variable "logging" {
+  description = "Define this block whether to enable logging"
+  type = object({
+    enabled            = bool
+    destination_bucket = string
+  })
+  default = null
+}

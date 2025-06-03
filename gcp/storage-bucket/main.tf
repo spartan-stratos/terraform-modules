@@ -62,9 +62,9 @@ resource "google_storage_bucket" "this" {
   }
 
   dynamic "logging" {
-    for_each = var.enable_logging ? [1] : []
+    for_each = var.logging != null ? [1] : []
     content {
-      log_bucket        = var.destination_bucket
+      log_bucket        = logging.value.destination_bucket
       log_object_prefix = "${local.bucket_name}/"
     }
   }

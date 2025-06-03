@@ -18,4 +18,9 @@ module "storage_bucket" {
       type = "SetStorageClass"
     }
   ]
+
+  logging = {
+    enabled            = true
+    destination_bucket = "log-bucket"
+  }
 }
