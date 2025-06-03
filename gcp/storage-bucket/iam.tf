@@ -23,3 +23,11 @@ resource "google_storage_bucket_iam_binding" "viewers" {
   role    = "roles/storage.objectViewer"
   members = var.bucket_viewers
 }
+
+resource "google_storage_bucket_iam_member" "creator" {
+  count = var.enable_creator_policy ? 1 : 0
+
+  bucket = google_storage_bucket.this.name
+  role   = "roles/storage.objectCreator"
+  member = "group:cloud-storage-analytics@google.com"
+}

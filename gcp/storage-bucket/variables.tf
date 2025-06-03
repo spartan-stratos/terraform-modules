@@ -119,3 +119,45 @@ variable "bucket_viewers" {
   description = "A list of users who will have read-only access to the specified storage bucket."
   default     = []
 }
+
+variable "soft_delete_policy" {
+  description = "Optional soft delete policy"
+  type = object({
+    retention_duration_seconds = number
+  })
+  default = null
+}
+
+variable "lifecycle_rules" {
+  description = "List of lifecycle rules for the bucket"
+  type = list(object({
+    age                        = number // days
+    type                       = string // action type
+    days_since_noncurrent_time = number // days
+  }))
+  default = []
+}
+
+variable "enable_logging" {
+  description = "Whether to enable logging"
+  type        = bool
+  default     = false
+}
+
+/**
+access logs
+ */
+variable "enable_creator_policy" {
+  description = "Whether to allow bucket create objects on itself. Should be enabled if you use this as log bucket."
+  type        = bool
+  default     = false
+}
+
+variable "logging" {
+  description = "Define this block whether to enable logging"
+  type = object({
+    enabled            = bool
+    destination_bucket = string
+  })
+  default = null
+}
