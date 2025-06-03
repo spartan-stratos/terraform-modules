@@ -156,40 +156,73 @@ jobs:
           # Make sure the value of GITHUB_TOKEN will not be persisted in repo's config
           persist-credentials: false
 
-#      - name: Configure git
-#        run: |
-#          git config --global user.name "github-actions[bot]"
-#          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Publish module
+      - name: Package and publish module
         env:
-          GITHUB_TOKEN: ${{ steps.github-app-token.outputs.token }}
+          TF_TOKEN: ${{ secrets.TF_TOKEN }}
+          TF_ORGANIZATION: ${{ secrets.TF_ORGANIZATION }}
+          TF_REGISTRY: ${{ secrets.TF_REGISTRY_HOST }}
         run: |
-          git config --global --add safe.directory /harness
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "github-actions"
-          
           VERSION="${{ matrix.version }}"
           MODULE_PATH="${{ matrix.path }}"
-
-          # Create module-specific tag
-          MODULE_NAME=$(echo "$MODULE_PATH" | tr '/' '-')
-          TAG_NAME="${MODULE_NAME}/v${VERSION}"
-
-          echo "Publishing $MODULE_PATH version ${VERSION}"
-          echo "Creating tag: ${TAG_NAME}"
-
-          # Set the remote URL with token authentication
-          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-
-          # Create and push tag
-          git tag -f "${TAG_NAME}"
-          git push origin "${TAG_NAME}" --force
           
-          # Wait for tag to be available
-          sleep 5
+          # Create a temporary directory for the module
+          TEMP_DIR=$(mktemp -d)
+          MODULE_NAME="terraform-$(echo "$MODULE_PATH" | tr '/' '-')"
+          
+          echo "Publishing module: ${MODULE_NAME} version ${VERSION}"
+          
+          # Copy module files to temp directory
+          cp -r $MODULE_PATH/* $TEMP_DIR/
+          
+          # Create zip file
+          cd $TEMP_DIR
+          zip -r ../module.zip ./*
+          cd ..
+          
+          # Create module version in registry
+          REGISTRY_HOST="${TF_REGISTRY:-app.terraform.io}"
+          echo "Using registry host: ${REGISTRY_HOST}"
+          
+          RESPONSE=$(curl \
+            --fail \
+            --header "Authorization: Bearer ${TF_TOKEN}" \
+            --header "Content-Type: application/vnd.api+json" \
+            --request POST \
+            "https://${REGISTRY_HOST}/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/${MODULE_NAME}/versions" \
+            --data-raw "{
+              \"data\": {
+                \"type\": \"registry-module-versions\",
+                \"attributes\": {
+                  \"version\": \"${VERSION}\"
+                }
+              }
+            }")
+          
+          # Extract upload URL from response
+          UPLOAD_URL=$(echo $RESPONSE | jq -r '.data.links.upload')
+          
+          if [ -z "$UPLOAD_URL" ] || [ "$UPLOAD_URL" = "null" ]; then
+            echo "Failed to get upload URL from response:"
+            echo "$RESPONSE"
+            exit 1
+          fi
+          
+          echo "Uploading module content to: ${UPLOAD_URL}"
+          
+          # Upload module content
+          UPLOAD_RESPONSE=$(curl \
+            --fail \
+            --header "Authorization: Bearer ${TF_TOKEN}" \
+            --header "Content-Type: application/octet-stream" \
+            --request PUT \
+            --data-binary @module.zip \
+            "${UPLOAD_URL}")
           
           echo "Module published successfully"
+          
+          # Cleanup
+          rm -rf "$TEMP_DIR" module.zip
+
 
   notify:
     needs: [publish]
