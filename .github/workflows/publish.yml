@@ -1,0 +1,182 @@
+
+name: Publish to Terraform Registry
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**/CHANGELOG.md'
+  workflow_dispatch:
+    inputs:
+      module_path:
+        description: 'Module path to publish (e.g., aws/acm)'
+        required: true
+        type: string
+      version:
+        description: 'Version to publish (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  detect-changes:
+    name: Detect Changed Modules
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        if: github.event_name == 'push'
+        run: |
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep "CHANGELOG.md$" || true)
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Process changes
+        id: set-matrix
+        run: |
+          # Function to extract latest version from CHANGELOG
+          extract_version() {
+            local changelog_file="$1"
+            grep -oE '^## \[v?[0-9]+\.[0-9]+\.[0-9]+\]' "$changelog_file" | head -1 | sed 's/^## \[//;s/\]//'
+          }
+
+          # Function to check if version is unreleased
+          is_unreleased() {
+            local changelog_file="$1"
+            local version="$2"
+            grep -A 1 "## \[$version\]" "$changelog_file" | grep -q "Unreleased"
+            return $?
+          }
+
+          # Initialize modules array
+          MODULES=()
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            # Manual trigger
+            MODULE_PATH="${{ github.event.inputs.module_path }}"
+            VERSION="${{ github.event.inputs.version }}"
+            if [[ -d "$MODULE_PATH" ]]; then
+              MODULES+=("{\"path\":\"$MODULE_PATH\",\"version\":\"$VERSION\"}")
+            fi
+          else
+            # Process changed files
+            while IFS= read -r file; do
+              [ -z "$file" ] && continue
+          
+              MODULE_PATH=$(dirname "$file")
+              VERSION=$(extract_version "$file")
+          
+              if [[ -n "$VERSION" ]] && ! is_unreleased "$file" "$VERSION"; then
+                MODULES+=("{\"path\":\"$MODULE_PATH\",\"version\":\"$VERSION\"}")
+              fi
+            done <<< "${{ steps.changed-files.outputs.changed_files }}"
+          fi
+
+          # Create JSON matrix
+          JSON_ARRAY=$(IFS=,; echo "{\"include\":[${MODULES[*]}]}")
+          echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
+          echo "Generated matrix: $JSON_ARRAY"
+
+  validate:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.matrix != '{\"include\":[]}'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.detect-changes.outputs.matrix)}}
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+
+      - name: Validate module files
+        working-directory: ${{ matrix.path }}
+        run: |
+          # Check required files
+          required_files=("main.tf" "variables.tf" "outputs.tf" "README.md" "versions.tf")
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "Error: Required file $file is missing"
+              exit 1
+            fi
+          done
+          
+          # Initialize and validate Terraform
+          terraform init
+          terraform validate
+
+  publish:
+    needs: [ detect-changes, validate ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.detect-changes.outputs.matrix)}}
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Publish module
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ matrix.version }}"
+          MODULE_PATH="${{ matrix.path }}"
+
+          # Create module-specific tag
+          MODULE_NAME=$(echo "$MODULE_PATH" | tr '/' '-')
+          TAG_NAME="${MODULE_NAME}/v${VERSION}"
+
+          echo "Publishing $MODULE_PATH version ${VERSION}"
+          echo "Creating tag: ${TAG_NAME}"
+
+          # Create and push tag
+          git tag -f "${TAG_NAME}"
+          git push origin "${TAG_NAME}" --force
+          
+          # Wait for tag to be available
+          sleep 5
+          
+          echo "Module published successfully"
+
+  notify:
+    needs: [publish]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const success = '${{ needs.publish.result }}' === 'success';
+            const message = success
+              ? '✅ Module publishing completed successfully'
+              : '❌ Module publishing failed';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });
