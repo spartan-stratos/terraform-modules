@@ -200,6 +200,17 @@ variable "s3_redirect_domain" {
   default     = null
 }
 
+variable "versioning_status" {
+  description = "Whether to enable versioning on S3 bucket."
+  type = string
+  default = "Disabled"
+
+  validation {
+    condition = var.versioning_status == "Disabled" || var.versioning_status == "Enabled"
+    error_message = "Only `Disabled` or `Enabled` are valid."
+  }
+}
+
 # logging
 variable "log_bucket_domain_name" {
   description = "Log bucket's domain name used to store access log from CloudFront."

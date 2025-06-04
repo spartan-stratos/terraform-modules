@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Add `enable_logging` to enable logging from cloudfront and create log bucket.
+* Add `versioning_status` to manage s3 versioning.
 
 ## [0.6.4]() (2025-06-03)
 
@@ -30,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain 
+* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain
 
 ## [0.1.72]() (2025-03-05)
 
@@ -49,7 +50,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Update cloudfront module to support root domain.
-
 
 ## [0.1.47]() (2025-01-09)
 
