@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.6]() (2025-06-05)
+
+### Features
+
+* Add `enable_logging` to enable logging from cloudfront and create log bucket.
+
 ## [0.6.4]() (2025-06-03)
 
 ### Removed

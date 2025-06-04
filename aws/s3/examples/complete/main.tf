@@ -4,7 +4,6 @@ module "s3_bucket" {
   bucket_name   = "example-bucket"
   bucket_prefix = null
 
-
   enabled_cors = true
   cors_configuration = {
     allowed_origins = ["example.com"]

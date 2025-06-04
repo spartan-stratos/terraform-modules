@@ -144,3 +144,9 @@ variable "s3_redirect_domain" {
   type        = string
   default     = null
 }
+
+variable "log_bucket_domain_name" {
+  description = "Log bucket's domain name that is used to store access log from CloudFront."
+  type        = string
+  default     = null
+}
