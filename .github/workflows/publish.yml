@@ -173,7 +173,7 @@ jobs:
           # Step 1: Check if module exists
           echo "Checking if module exists..."
           MODULE_CHECK=$(curl \
-            --fail --silent --show-error \
+            --silent --show-error \
             --header "Authorization: Bearer ${TF_TOKEN}" \
             --header "Content-Type: application/vnd.api+json" \
             --write-out "%{http_code}" \
