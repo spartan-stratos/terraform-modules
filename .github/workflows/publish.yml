@@ -170,7 +170,42 @@ jobs:
           MODULE_NAME="terraform-$(echo "$MODULE_PATH" | tr '/' '-')"
           PROVIDER="aws"  # or determine dynamically based on your structure
           
-          # Create payload for registry
+          # Step 1: Check if module exists
+          echo "Checking if module exists..."
+          MODULE_CHECK=$(curl \
+            --fail --silent --show-error \
+            --header "Authorization: Bearer ${TF_TOKEN}" \
+            --header "Content-Type: application/vnd.api+json" \
+            --write-out "%{http_code}" \
+            --output /dev/null \
+            "https://app.terraform.io/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/private/${TF_ORGANIZATION}/${MODULE_NAME}/${PROVIDER}")
+          
+          # Create module if it doesn't exist (404 response)
+          if [ "$MODULE_CHECK" -eq "404" ]; then
+            echo "Module doesn't exist. Creating new module..."
+            CREATE_RESPONSE=$(curl \
+              --fail \
+              --header "Authorization: Bearer ${TF_TOKEN}" \
+              --header "Content-Type: application/vnd.api+json" \
+              --request POST \
+              --data "{
+                \"data\": {
+                  \"type\": \"registry-modules\",
+                  \"attributes\": {
+                    \"name\": \"${MODULE_NAME}\",
+                    \"provider\": \"${PROVIDER}\",
+                    \"registry-name\": \"private\"
+                  }
+                }
+              }" \
+              "https://app.terraform.io/api/v2/organizations/${TF_ORGANIZATION}/registry-modules")
+          
+            echo "Module created successfully"
+          else
+            echo "Module already exists"
+          fi
+          
+          # Step 2: Create version payload
           cat > payload.json << EOF
           {
             "data": {
@@ -182,10 +217,8 @@ jobs:
           }
           EOF
           
-          echo "Publishing module: ${MODULE_NAME} version ${VERSION}"
-          
-          # Step 1: Create version in registry
-          echo "Creating version in registry..."
+          # Step 3: Create version in registry
+          echo "Creating version ${VERSION}..."
           RESPONSE=$(curl \
             --fail \
             --header "Authorization: Bearer ${TF_TOKEN}" \
@@ -194,7 +227,7 @@ jobs:
             --data @payload.json \
             "https://app.terraform.io/api/v2/organizations/${TF_ORGANIZATION}/registry-modules/private/${TF_ORGANIZATION}/${MODULE_NAME}/${PROVIDER}/versions")
           
-          # Extract upload URL from response
+          # Extract upload URL
           UPLOAD_URL=$(echo "$RESPONSE" | jq -r '.data.links.upload')
           
           if [ -z "$UPLOAD_URL" ] || [ "$UPLOAD_URL" = "null" ]; then
@@ -203,9 +236,7 @@ jobs:
             exit 1
           fi
           
-          echo "Got upload URL: ${UPLOAD_URL}"
-          
-          # Step 2: Create module archive
+          # Step 4: Create module archive
           echo "Creating module archive..."
           cd "${MODULE_PATH}"
           zip -r ../module.zip . \
@@ -219,7 +250,7 @@ jobs:
             -x ".terraform.lock.hcl"
           cd ..
           
-          # Step 3: Upload the module content
+          # Step 5: Upload the module content
           echo "Uploading module content..."
           UPLOAD_RESPONSE=$(curl \
             --fail \
@@ -231,7 +262,7 @@ jobs:
           
           echo "Module uploaded successfully"
           
-          # Verify the upload
+          # Step 6: Verify the upload
           echo "Verifying module upload..."
           sleep 5  # Give the registry some time to process
           
@@ -246,6 +277,7 @@ jobs:
           
           # Cleanup
           rm -f module.zip payload.json
+
 
   notify:
     needs: [publish]
