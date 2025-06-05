@@ -194,3 +194,10 @@ variable "password_length" {
   type        = number
   default     = 24
 }
+
+# Logging
+variable "enabled_cloudwatch_logs_exports" {
+  description = "(Optional) List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace."
+  type        = list(string)
+  default     = null
+}
