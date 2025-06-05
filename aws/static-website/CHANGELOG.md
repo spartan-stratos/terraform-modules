@@ -6,8 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add `enable_logging` to enable logging from cloudfront and create log bucket.
-* Add `versioning_status` to manage s3 versioning.
+* Add `enable_logging` to enable logging from CloudFront to CloudWatch.
+* Add `log_bucket_arn` and `log_bucket_prefix_path` to manage log bucket destination for storing CloudFront logs.
 
 ## [0.6.4]() (2025-06-03)
 

@@ -20,5 +20,9 @@ module "cloudfront" {
   strict_transport_security       = var.strict_transport_security
   content_type_options            = var.content_type_options
   wafv2_arn                       = var.wafv2_arn
-  log_bucket_domain_name          = var.log_bucket_domain_name
+
+  # logging
+  enable_logging         = var.enable_logging
+  log_bucket_arn         = var.log_bucket_arn
+  log_bucket_prefix_path = var.log_bucket_prefix_path != null ? var.log_bucket_prefix_path : "${var.name}-cloudfront"
 }

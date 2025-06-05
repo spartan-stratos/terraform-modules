@@ -158,16 +158,6 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   web_acl_id = var.wafv2_arn
-
-  dynamic "logging_config" {
-    for_each = var.log_bucket_domain_name != null ? [1] : []
-
-    content {
-      bucket          = var.log_bucket_domain_name
-      include_cookies = false
-      prefix          = "cloudfront-logs/${var.name}/"
-    }
-  }
 }
 
 /*
