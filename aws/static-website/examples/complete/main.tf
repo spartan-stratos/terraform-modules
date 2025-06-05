@@ -29,6 +29,9 @@ module "static_website" {
 module "cloudfront_logging" {
   source = "../../modules/cloudfront-logging"
 
+  # Use provider `us-east-1`
+  # Refer: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/standard-logging.html
+
   name                            = "web-platform"
   log_bucket_arn                  = module.cloudfront_log_bucket
   aws_cloudfront_distribution_arn = module.static_website.cloudfront_distribution_arn
