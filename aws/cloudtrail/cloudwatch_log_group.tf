@@ -21,6 +21,8 @@ resource "aws_iam_role" "cloudwatch" {
 }
 
 data "aws_iam_policy_document" "cloudwatch" {
+  count = var.create_cloudwatch_log_group ? 1 : 0
+
   statement {
     sid    = "AllowCreateLogGroup"
     effect = "Allow"
@@ -51,7 +53,7 @@ resource "aws_iam_policy" "cloudwatch" {
   count = var.create_cloudwatch_log_group ? 1 : 0
 
   name   = "CloudTrail-${var.name}-logs-policy"
-  policy = data.aws_iam_policy_document.cloudwatch.json
+  policy = data.aws_iam_policy_document.cloudwatch[0].json
 }
 
 resource "aws_iam_role_policy_attachment" "example" {
