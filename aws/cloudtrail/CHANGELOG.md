@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.6]() (2025-06-06)
+
+### Features
+
+* Add CloudTrail CloudWatch integrations to deliver CloudTrail logs to CloudWatch.
+
 ## [0.3.14]() (2025-04-11)
 
 ### Features
