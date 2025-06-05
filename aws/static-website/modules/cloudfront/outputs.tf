@@ -9,5 +9,5 @@ output "cloudfront_id" {
 
 output "distribution_arn" {
   description = "The CloudFront distribution's arn."
-  value = aws_cloudfront_distribution.this.arn
+  value       = aws_cloudfront_distribution.this.arn
 }

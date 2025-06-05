@@ -16,5 +16,5 @@ variable "log_bucket_arn" {
 variable "log_bucket_prefix_path" {
   description = "Log bucket's prefix path."
   type        = string
-  default = "cloudfront"
+  default     = "cloudfront"
 }

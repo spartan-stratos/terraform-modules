@@ -37,5 +37,5 @@ module "cloudfront_logging" {
 module "cloudfront_log_bucket" {
   source = "../../../s3"
 
-  bucket_name       = "cloudfront-log-bucket"
+  bucket_name = "cloudfront-log-bucket"
 }
