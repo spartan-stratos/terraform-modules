@@ -1,14 +1,10 @@
 resource "aws_cloudwatch_log_delivery_source" "this" {
-  provider = aws.us_east_1
-
   name         = "${var.name}-cloudfront-source"
   log_type     = "ACCESS_LOGS"
   resource_arn = var.aws_cloudfront_distribution_arn
 }
 
 resource "aws_cloudwatch_log_delivery_destination" "this" {
-  provider = aws.us_east_1
-
   name = "${var.name}-cloudfront-destination"
   delivery_destination_configuration {
     destination_resource_arn = "${var.log_bucket_arn}/${var.log_bucket_prefix_path}"
@@ -16,8 +12,6 @@ resource "aws_cloudwatch_log_delivery_destination" "this" {
 }
 
 resource "aws_cloudwatch_log_delivery" "this" {
-  provider = aws.us_east_1
-
   delivery_source_name     = aws_cloudwatch_log_delivery_source.this.name
   delivery_destination_arn = aws_cloudwatch_log_delivery_destination.this.arn
 
