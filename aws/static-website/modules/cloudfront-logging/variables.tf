@@ -1,3 +1,8 @@
+variable "name" {
+  description = "For creating or retrieving the bucket and cloudfront name"
+  type        = string
+}
+
 variable "aws_cloudfront_distribution_arn" {
   description = "CloudFront distribution's arn as source to deliver logs."
   type        = string
@@ -11,4 +16,5 @@ variable "log_bucket_arn" {
 variable "log_bucket_prefix_path" {
   description = "Log bucket's prefix path."
   type        = string
+  default = "cloudfront"
 }

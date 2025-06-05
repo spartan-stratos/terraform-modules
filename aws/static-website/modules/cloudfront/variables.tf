@@ -144,23 +144,3 @@ variable "s3_redirect_domain" {
   type        = string
   default     = null
 }
-
-# logging
-
-variable "enable_logging" {
-  description = "Whether to enable logging (V2)."
-  type        = bool
-  default     = false
-}
-
-variable "log_bucket_arn" {
-  description = "Log bucket's arn that used to store CloudFront logs."
-  type        = string
-  default     = null
-}
-
-variable "log_bucket_prefix_path" {
-  description = "Log bucket's prefix path to store CloudFront logs."
-  type        = string
-  default     = null
-}

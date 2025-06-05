@@ -1,5 +1,5 @@
 module "static_website" {
-  source = "../.."
+  source = "../../../static-website"
 
   name              = "example"
   bucket_prefix     = "example"
@@ -26,3 +26,16 @@ module "static_website" {
   }]
 }
 
+module "cloudfront_logging" {
+  source = "../../modules/cloudfront-logging"
+
+  name                            = "web-platform"
+  log_bucket_arn                  = module.cloudfront_log_bucket
+  aws_cloudfront_distribution_arn = module.static_website.cloudfront_distribution_arn
+}
+
+module "cloudfront_log_bucket" {
+  source = "../../../s3"
+
+  bucket_name       = "cloudfront-log-bucket"
+}
