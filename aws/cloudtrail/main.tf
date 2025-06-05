@@ -97,8 +97,14 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 locals {
-  cloud_watch_logs_group_arn = var.cloud_watch_logs_group_arn != null ? var.cloud_watch_logs_group_arn : aws_cloudwatch_log_group.this[0].arn
-  cloud_watch_logs_role_arn  = var.cloud_watch_logs_role_arn != null ? var.cloud_watch_logs_role_arn : aws_iam_role.cloudwatch[0].arn
+locals {
+  cloud_watch_logs_group_arn = var.cloud_watch_logs_group_arn != null ? var.cloud_watch_logs_group_arn : (
+    var.create_cloudwatch_log_group ? aws_cloudwatch_log_group.this[0].arn : null
+  )
+  cloud_watch_logs_role_arn  = var.cloud_watch_logs_role_arn != null ? var.cloud_watch_logs_role_arn : (
+    var.create_cloudwatch_log_group ? aws_iam_role.cloudwatch[0].arn : null
+  )
+}
 }
 
 resource "aws_cloudtrail" "this" {
