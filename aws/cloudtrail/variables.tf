@@ -27,18 +27,6 @@ variable "enable_logging" {
   default     = false
 }
 
-variable "cloud_watch_logs_role_arn" {
-  type        = string
-  description = "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group"
-  default     = null
-}
-
-variable "cloud_watch_logs_group_arn" {
-  type        = string
-  description = "Specifies a log group name using an Amazon Resource Name (ARN), that represents the log group to which CloudTrail logs will be delivered"
-  default     = null
-}
-
 variable "insight_selector" {
   type = list(object({
     insight_type = string
@@ -123,4 +111,24 @@ variable "disabled_s3_http_access" {
   description = "Whether to restrict HTTP access to S3 bucket."
   type        = bool
   default     = true
+}
+
+# cloudwatch integration
+
+variable "cloud_watch_logs_role_arn" {
+  type        = string
+  description = "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user’s log group"
+  default     = null
+}
+
+variable "cloud_watch_logs_group_arn" {
+  type        = string
+  description = "Specifies a log group name using an Amazon Resource Name (ARN), that represents the log group to which CloudTrail logs will be delivered"
+  default     = null
+}
+
+variable "create_cloudwatch_log_group" {
+  description = "Whether to create CloudWatch log group to deliver CloudTrail logs to."
+  type        = bool
+  default     = false
 }
