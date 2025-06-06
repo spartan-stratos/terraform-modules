@@ -10,4 +10,5 @@ module "postgresql" {
   vpc_id                              = "vpc-123456789"
   subnet_ids                          = []
   storage_type                        = "gp2"
+  cloudwatch_exported_log_types       = ["postgresql", "upgrade"]
 }
