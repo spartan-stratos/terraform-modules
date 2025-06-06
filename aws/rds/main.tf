@@ -60,7 +60,7 @@ module "main_db_instance" {
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
+  cloudwatch_exported_log_types = var.cloudwatch_exported_log_types
 }
 
 module "replica_db_instance" {
