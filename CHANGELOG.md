@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.6]() (2025-06-06)
+
+### Features
+
+* AWS RDS [(./aws/rds)](./aws/rds)
+    * Add `enabled_cloudwatch_logs_exports` to enable logging on RDS instance and replicas.Add commentMore actions
+      Add comment
+
+* AWS CloudTrail [(./aws/cloudtrail)](./aws/cloudtrail)
+    * Add CloudTrail CloudWatch integrations to deliver CloudTrail logs to CloudWatch.
+
 ## [0.6.5]() (2025-06-03)
 
 ### Features
