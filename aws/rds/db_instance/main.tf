@@ -30,7 +30,7 @@ resource "aws_db_instance" "this" {
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
+  enabled_cloudwatch_logs_exports = var.cloudwatch_exported_log_types
 
   lifecycle {
     ignore_changes = [
