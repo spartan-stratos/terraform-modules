@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.6]() (2025-06-05)
+
+### Features
+
+* Add `cloudfront_distribution_arn` to module `static-website` output.
+* Add module `cloudfront-logging` to deliver CloudFront logs to S3 log bucket.
+
 ## [0.6.4]() (2025-06-03)
 
 ### Removed
@@ -24,7 +31,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain 
+* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain
 
 ## [0.1.72]() (2025-03-05)
 
@@ -43,7 +50,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Update cloudfront module to support root domain.
-
 
 ## [0.1.47]() (2025-01-09)
 

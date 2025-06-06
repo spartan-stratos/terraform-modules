@@ -21,4 +21,6 @@ module "s3" {
 
   custom_read_write_policy_name = var.s3_custom_read_write_policy_name
   read_write_policy_description = var.s3_read_write_policy_description
+
+  versioning_status = var.versioning_status
 }
