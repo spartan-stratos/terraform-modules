@@ -17,3 +17,8 @@ output "cloudfront_id" {
   description = "The Cloudfront ID that hosting the web"
   value       = module.cloudfront.cloudfront_id
 }
+
+output "cloudfront_distribution_arn" {
+  description = "Cloudfront distribution arn."
+  value       = module.cloudfront.cloudfront_distribution_arn
+}

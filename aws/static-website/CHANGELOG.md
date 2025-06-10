@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.7]() (2025-06-10)
+
+### Features
+
+* Add output `cloudfront_distribution_arn`.
+
 ## [0.6.4]() (2025-06-03)
 
 ### Removed
@@ -24,7 +30,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain 
+* Add `s3_redirect_domain` to configure addressed S3 bucket to redirect to another domain
 
 ## [0.1.72]() (2025-03-05)
 
@@ -43,7 +49,6 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Update cloudfront module to support root domain.
-
 
 ## [0.1.47]() (2025-01-09)
 
