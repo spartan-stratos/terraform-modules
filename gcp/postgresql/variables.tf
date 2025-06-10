@@ -124,7 +124,7 @@ variable "master_maintenance_window" {
   })
   default = {
     day          = 1 # Monday
-    hour         = 9 # UTC
+    hour         = 8 # UTC
     update_track = "stable"
   }
 
