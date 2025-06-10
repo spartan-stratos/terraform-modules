@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.7]() (2025-06-10)
+
+### Features
+
+* AWS Static-website [(./aws/static-website)](./aws/static-website)
+    * Add output `cloudfront_distribution_arn`.
+
 ## [0.6.6]() (2025-06-06)
 
 ### Features
