@@ -41,8 +41,6 @@ def delete_repos_in_org(token, org_name, file_path=None, confirmation=False):
                 print(
                     f"The following repositories don't exist in the organization '{org_name}': {', '.join(invalid_repos)}")
                 repo_names = [repo for repo in repo_names if repo not in invalid_repos]
-        else:
-            repo_names = all_repo_names  # Delete all repositories if no file is specified
 
         if not repo_names:
             print("No matching repositories found to delete.")
