@@ -4,6 +4,12 @@ datadog:
   logs:
     enabled: ${var.enabled_logs}
     containerCollectAll: ${var.enabled_container_collect_all_logs}
+  %{if var.container_exclude != null}
+  containerExclude: ${var.container_exclude}
+  %{endif}
+  %{if var.container_include != null}
+  containerInclude: ${var.container_include}
+  %{endif}
 agents:
   enabled: ${var.enabled_agent}
 clusterAgent:

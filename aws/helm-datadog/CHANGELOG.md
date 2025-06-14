@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 ## [0.6.8]() (2025-06-14)
 
+### BREAKING CHANGES
+
+* Change module named to `helm-datadog`, and be flattened and moved to root `aws`, which could be recognized by tools to export and deploy to Terraform Registry.
+
 ### Fix bugs
 
 * Fix the typo in assigning node_selector and tolerations for agents, which should be `agents.node_selector` and `agents.tolerations` instead of missing `s`.
