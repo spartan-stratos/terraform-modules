@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.6.8]() (2025-06-14)
+## [0.7.0]() (2025-06-14)
 
 ### BREAKING CHANGES
 
