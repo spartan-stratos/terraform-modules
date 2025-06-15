@@ -68,6 +68,10 @@ resource "kubernetes_manifest" "this" {
     }
   }
 
+  field_manager {
+    force_conflicts = true
+  }
+
   lifecycle {
     ignore_changes = [
       manifest.spec.destinations
