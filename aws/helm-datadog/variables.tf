@@ -108,3 +108,15 @@ variable "tolerations" {
   description = "Tolerations for the ingress controller"
   default     = []
 }
+
+variable "container_exclude" {
+  type        = string
+  description = "value"
+  default     = null
+}
+
+variable "container_include" {
+  type        = string
+  description = "value"
+  default     = null
+}
