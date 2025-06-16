@@ -14,18 +14,6 @@ All notable changes to this project will be documented in this file.
 
 * Add RDS namespace `identifier`.
 
-## [0.3.13]() (2025-04-10)
-
-### Features
-
-* Add RDS namespace `identifier`.
-
-## [0.3.13]() (2025-04-10)
-
-### Features
-
-* Add RDS namespace `identifier`.
-
 ## [0.1.62]() (2025-01-24)
 
 ### Features
