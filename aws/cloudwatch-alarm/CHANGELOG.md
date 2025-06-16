@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0]() (2025-06-16)
+
+### BREAKING CHANGES
+
+* Changed module name to `cloudwatch-alarm` for Terraform Registry discovery compatibility.
+
 ## [0.3.13]() (2025-04-10)
 
 ### Features
