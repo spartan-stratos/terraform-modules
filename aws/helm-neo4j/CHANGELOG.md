@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [1.0.0]() (2025-06-17)
+
+### BREAKING CHANGES
+
+* Changed module name to `helm-neo4j` and flatten it to aws root folder for Terraform Registry discovery compatibility.
 
 ## [0.1.75]() (2025-03-06)
 
