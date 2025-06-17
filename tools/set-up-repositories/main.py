@@ -3,6 +3,7 @@ import json
 import logging
 import os
 import shutil
+import subprocess
 import tempfile
 from pathlib import Path
 from typing import List
@@ -32,12 +33,14 @@ if not GITHUB_TOKEN:
     raise EnvironmentError("The 'GITHUB_TOKEN' environment variable is not set.")
 
 CONFIG = {
+    "update_repo_content": False,
     "enable_branch_protection": False,
     "enable_tag_protection": False,
-    "setup_actions_secrets": True,
-    "trigger_release_workflow": True,
+    "setup_actions_secrets": False,
+    "trigger_release_workflow": False,
     "enabled_publishing": False,
     "skip_published_modules": False,
+    "add_module_to_meta_repo": True,
 }
 
 
@@ -323,6 +326,186 @@ class TerraformModulePublisher:
         except Exception as e:
             logger.error(f"An error occurred while publishing to Terraform Cloud: {e}", exc_info=True)
 
+    def add_repos_as_submodules_and_create_pr(self, repos):
+        """
+        Adds the given repositories as submodules to the meta-repo defined in the `META_REPO_URL` environment
+        and creates a pull request for the changes.
+
+        :param repos: A list of repository URLs (e.g., ["https://github.com/org/repo1.git", "https://github.com/org/repo2.git"]).
+        """
+        # Retrieve the meta-repo GitHub URL from the environment variable
+        meta_repo_url = os.getenv("META_REPO_URL")
+        if not meta_repo_url:
+            logger.error(
+                "Environment variable 'META_REPO_URL' is not set. Please set it to the GitHub URL of the meta-repo.")
+            return
+
+        # Extract meta-repo name and org name from the URL
+        org_name, meta_repo_name = self._parse_meta_repo_url(meta_repo_url)
+
+        # Clone the meta-repo into a temporary directory
+        tmp_dir = tempfile.mkdtemp()
+        local_meta_repo_path = os.path.join(tmp_dir, meta_repo_name)
+
+        logger.info(f"Cloning the meta-repo '{meta_repo_url}' into temporary directory '{local_meta_repo_path}'...")
+        try:
+            subprocess.run(["git", "clone", meta_repo_url, local_meta_repo_path], check=True)
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed to clone meta-repo: {e}")
+            return
+
+        # Navigate to the meta-repo directory
+        original_cwd = os.getcwd()
+        os.chdir(local_meta_repo_path)
+
+        for repo in repos:
+            try:
+                repo_name = repo.name
+
+                # Check if the submodule already exists
+                if os.path.exists(os.path.join(local_meta_repo_path, repo_name)):
+                    logger.info(f"Repository '{repo_name}' already exists as a submodule. Skipping.")
+                    continue
+
+                # Create a feature branch for adding the current submodule
+                feature_branch = f"add-terraform-submodule-{repo_name}"
+                logger.info(f"Creating feature branch '{feature_branch}' for module '{repo_name}'...")
+                subprocess.run(["git", "checkout", "-b", feature_branch], check=True)
+
+                # Add the repository as a submodule
+                logger.info(f"Adding '{repo_name}' as a submodule...")
+                subprocess.run(
+                    ["git", "submodule", "add", "-b", "master", repo.ssh_url],
+                    check=True
+                )
+
+                # Check if there are changes in the working tree
+                logger.info("Checking for changes before committing...")
+                status_output = subprocess.run(
+                    ["git", "status", "--porcelain"],
+                    stdout=subprocess.PIPE,
+                    text=True
+                ).stdout.strip()
+
+                if not status_output:
+                    logger.info("No changes detected in the repository. Skipping commit and PR creation.")
+                    continue
+
+                # Stage, commit, and push the changes
+                logger.info("Staging changes for submodules...")
+                subprocess.run(["git", "add", "."], check=True)  # Add all changes
+                commit_message = f"Add Terraform module `{repo_name}` as submodule"
+                logger.info(f"Committing changes: '{commit_message}'...")
+                subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+                logger.info("Debugging...")
+                subprocess.run(["git", "remote", "-v"], check=True)
+
+                logger.info("Pushing feature branch...")
+                subprocess.run(["git", "push", "-u", "origin", feature_branch, "-f"], check=True)
+
+                # Create a pull request using the GitHub API
+                pr_title = f"Add Terraform module `{repo_name}` as submodule"
+                pr_body = f"This pull request adds Terraform module `{repo_name}` submodule to the repository."
+                logger.info(f"Creating a pull request titled '{pr_title}'...")
+                pr_id = self.create_pull_request(org_name, meta_repo_name, feature_branch, pr_title, pr_body)
+
+                # Attempt to auto-merge the pull request
+                try:
+                    logger.info(f"Attempting to auto-merge the pull request for branch '{feature_branch}'...")
+                    self.auto_merge_pull_request(
+                        org_name=org_name,
+                        repo_name=meta_repo_name,
+                        pr_id=pr_id
+                    )
+                except Exception as e:
+                    logger.error(f"Auto-merge failed: {e}")
+
+            except subprocess.CalledProcessError as e:
+                logger.error(f"Error occurred during submodule addition or PR creation: {e}")
+            finally:
+                # Navigate back to the original directory and clean up
+                os.chdir(original_cwd)
+
+    def auto_merge_pull_request(self, org_name, repo_name, pr_id):
+        """
+        Automatically merges a pull request on GitHub if the checks have passed.
+
+        :param org_name: The GitHub organization name.
+        :param repo_name: The name of the repository containing the pull request.
+        :param pr_id: The ID of the pull request to be merged.
+        """
+        pr_url = f"https://api.github.com/repos/{org_name}/{repo_name}/pulls"
+        headers = {
+            "Authorization": f"token {self.github_token}",
+            "Accept": "application/vnd.github+json",
+        }
+
+        # Attempt to merge the pull request
+        merge_url = f"{pr_url}/{pr_id}/merge"
+        payload = {"merge_method": "squash"}
+        logger.info(f"Attempting to merge pull request #{merge_url}, payload=[{payload}]...")
+        merge_response = requests.put(merge_url, json=payload, headers=headers)
+
+        if merge_response.status_code == 200:
+            logger.info(f"Pull request #{pr_id} merged successfully.")
+        else:
+            logger.error(f"Failed to merge pull request #{pr_id}. "
+                         f"Status Code: {merge_response.status_code}, Response: {merge_response.text}")
+            raise Exception(f"Failed to merge pull request #{pr_id}.")
+
+    def _parse_meta_repo_url(self, meta_repo_url):
+        """
+        Parses the organization name and repository name from the META_REPO_URL.
+
+        :param meta_repo_url: The GitHub URL of the meta-repo (e.g., "git@github.com:org-name/repo-name.git").
+        :return: (org_name, repo_name) as a tuple.
+        """
+        try:
+            # Extract organization and repo from the URL (assuming "git@github.com:org-name/repo-name.git")
+            repo_parts = meta_repo_url.split(":")[-1].split("/")
+            org_name = repo_parts[0]
+            repo_name = repo_parts[1].replace(".git", "")
+            return org_name, repo_name
+        except Exception:
+            logger.error(f"Failed to parse organization and repo name from META_REPO_URL: {meta_repo_url}")
+            raise
+
+    def create_pull_request(self, org_name, repo_name, branch, title, body):
+        """
+        Creates a pull request on GitHub using the GitHub API.
+
+        :param org_name: The GitHub organization name.
+        :param repo_name: The name of the repository where the PR will be created.
+        :param branch: The feature branch to merge into the default branch (e.g., 'main').
+        :param title: The title of the pull request.
+        :param body: The body/description of the pull request.
+        """
+        pr_url = f"https://api.github.com/repos/{org_name}/{repo_name}/pulls"
+        headers = {
+            "Authorization": f"token {self.github_token}",
+            "Accept": "application/vnd.github+json",
+        }
+        payload = {
+            "title": title,
+            "body": body,
+            "head": branch,
+            "base": "master"
+        }
+
+        response = requests.post(pr_url, json=payload, headers=headers)
+        if response.status_code == 201:
+            response_content = response.json()
+            pull_request_url = response_content.get('html_url')
+            pull_request_id = response_content.get('number')
+            logger.info(f"Pull request created successfully: {pull_request_url}")
+            return pull_request_id
+        else:
+            logger.error(
+                f"Failed to create pull request. "
+                f"Status Code: {response.status_code}, Response: {response.text}"
+            )
+
     def process_module(self, provider: str, module_name: str, module_path: str) -> dict:
         """Process a single Terraform module"""
         repo_name = f"terraform-{provider}-{module_name}"
@@ -363,20 +546,21 @@ class TerraformModulePublisher:
                 if os.path.exists(repo_path):
                     shutil.rmtree(repo_path)
 
-                repo_clone = Repo.clone_from(repo.ssh_url, repo_path)
-                logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
+                if CONFIG["update_repo_content"]:
+                    repo_clone = Repo.clone_from(repo.ssh_url, repo_path)
+                    logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
 
-                # Copy module files
-                self.copy_module_files(module_path, repo_path)
+                    # Copy module files
+                    self.copy_module_files(module_path, repo_path)
 
-                # Copy template files if they exist
-                if os.path.exists(self.template_dir):
-                    self.copy_template_files(repo_path)
+                    # Copy template files if they exist
+                    if os.path.exists(self.template_dir):
+                        self.copy_template_files(repo_path)
 
-                # Git operations
-                repo_clone.git.add(A=True)
-                repo_clone.index.commit("Initial commit")
-                repo_clone.git.push('origin', 'master')
+                    # Git operations
+                    repo_clone.git.add(A=True)
+                    repo_clone.index.commit("Initial commit")
+                    repo_clone.git.push('origin', 'master')
 
                 # Setup protection rules
                 if CONFIG["enable_branch_protection"]:
@@ -393,6 +577,8 @@ class TerraformModulePublisher:
 
                 if CONFIG["enabled_publishing"]:
                     self.publish_to_terraform_public_registry(repo)
+
+                self.add_repos_as_submodules_and_create_pr(repos=[repo])
 
             logger.info(f"Successfully processed module: {repo_name}")
             result.update({
@@ -495,6 +681,17 @@ def parse_arguments():
         default=os.getcwd(),
         help='Base directory containing the provider folders and template directory (default: current working directory)'
     )
+
+    # Adding the new `module-path` argument
+    parser.add_argument(
+        "--module-path",
+        required=False,
+        default=None,
+        help=(
+            "Specify the path to a specific module to process. "
+            "If omitted, all modules in the base directory will be scanned and processed."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -520,6 +717,7 @@ def validate_base_dir(base_dir: str) -> None:
 def main():
     args = parse_arguments()
     base_dir = os.path.abspath(args.base_dir)
+    module_path = args.module_path
 
     try:
         validate_base_dir(base_dir)
@@ -528,7 +726,15 @@ def main():
         publisher = TerraformModulePublisher(
             github_token=GITHUB_TOKEN, org_name=GITHUB_ORG, base_dir=base_dir
         )
-        results = publisher.scan_and_process_modules()
+
+        if module_path:
+            logger.info(f"Processing only the specified module at: {module_path}")
+            provider = module_path.split("/")[0]
+            module_name = module_path.split("/")[1]
+            results = [publisher.process_module(provider=provider, module_name=module_name,
+                                                module_path=os.path.join(base_dir, module_path))]
+        else:
+            results = publisher.scan_and_process_modules()
 
         # Print results
         print("\nProcessing Results:")
