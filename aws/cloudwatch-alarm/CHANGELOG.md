@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 * Changed module name to `cloudwatch-alarm` for Terraform Registry discovery compatibility.
 
+### Features
+
+* Add outputs.tf file
+
 ## [0.3.13]() (2025-04-10)
 
 ### Features
