@@ -96,6 +96,14 @@ resource "aws_s3_bucket_policy" "this" {
   policy = data.aws_iam_policy_document.this.json
 }
 
+locals {
+  cloud_watch_logs_group_arn = var.cloud_watch_logs_group_arn != null ? var.cloud_watch_logs_group_arn : (
+    var.create_cloudwatch_log_group ? aws_cloudwatch_log_group.this[0].arn : null
+  )
+  cloud_watch_logs_role_arn = var.cloud_watch_logs_role_arn != null ? var.cloud_watch_logs_role_arn : (
+    var.create_cloudwatch_log_group ? aws_iam_role.cloudwatch[0].arn : null
+  )
+}
 
 resource "aws_cloudtrail" "this" {
   name                          = var.name
@@ -105,8 +113,8 @@ resource "aws_cloudtrail" "this" {
   sns_topic_name                = var.sns_topic_name
   is_multi_region_trail         = var.is_multi_region_trail
   include_global_service_events = var.include_global_service_events
-  cloud_watch_logs_role_arn     = var.cloud_watch_logs_role_arn
-  cloud_watch_logs_group_arn    = var.cloud_watch_logs_group_arn
+  cloud_watch_logs_role_arn     = local.cloud_watch_logs_role_arn
+  cloud_watch_logs_group_arn    = "${local.cloud_watch_logs_group_arn}:*" # CloudTrail requires the Log Stream wildcard
   kms_key_id                    = var.kms_key_arn
   is_organization_trail         = var.is_organization_trail
   s3_key_prefix                 = var.s3_key_prefix

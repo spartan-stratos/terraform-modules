@@ -19,6 +19,6 @@ output "cloudfront_id" {
 }
 
 output "cloudfront_distribution_arn" {
-  description = "The CloudFront distribution' arn."
-  value       = module.cloudfront.distribution_arn
+  description = "Cloudfront distribution arn."
+  value       = module.cloudfront.cloudfront_distribution_arn
 }

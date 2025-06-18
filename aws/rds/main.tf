@@ -59,6 +59,8 @@ module "main_db_instance" {
   deletion_protection          = var.primary_deletion_protection
 
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
+
+  cloudwatch_exported_log_types = var.cloudwatch_exported_log_types
 }
 
 module "replica_db_instance" {
@@ -85,4 +87,6 @@ module "replica_db_instance" {
   publicly_accessible          = var.publicly_accessible
   replicate_source_db          = module.main_db_instance.db_identifier
   deletion_protection          = var.replica_deletion_protection
+
+  cloudwatch_exported_log_types = var.cloudwatch_exported_log_types
 }

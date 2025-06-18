@@ -15,6 +15,8 @@ AND (
 )
 EOT
 
+  resource_type = "global"
+
   metric_kind = "DELTA"
   value_type  = "INT64"
   unit        = "1"
