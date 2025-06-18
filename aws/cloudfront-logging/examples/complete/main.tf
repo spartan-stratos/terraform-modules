@@ -25,3 +25,20 @@ module "static_website" {
     compress               = true
   }]
 }
+
+module "cloudfront_logging" {
+  source = "../../"
+
+  # Use provider in global region `us-east-1`
+  # Refer: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/standard-logging.html
+
+  name                            = "web-platform"
+  log_bucket_arn                  = module.cloudfront_log_bucket.s3_bucket_arn
+  aws_cloudfront_distribution_arn = module.static_website.cloudfront_distribution_arn
+}
+
+module "cloudfront_log_bucket" {
+  source = "../../../s3"
+
+  bucket_name = "cloudfront-log-bucket"
+}
