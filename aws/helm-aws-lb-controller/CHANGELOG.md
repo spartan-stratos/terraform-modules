@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+## [1.0.0]() (2025-06-17)
+
+### BREAKING CHANGES
+
+* Changed module name to `helm-aws-lb-controller` and flatten it to aws root folder for Terraform Registry discovery compatibility.
 
 ## [0.3.11]() (2025-04-09)
 
