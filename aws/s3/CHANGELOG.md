@@ -2,12 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.6]() (2025-06-05)
-
-### Features
-
-* Add bucket domain name as output.
-
 ## [0.4.0]() (2025-04-16)
 
 ### ⚠ BREAKING CHANGES

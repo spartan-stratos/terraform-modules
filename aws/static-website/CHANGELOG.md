@@ -2,12 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.8]() (2025-06-18)
-
-### Features
-
-* Add `cloudfront_distribution_arn` to module `static-website` output.
-
 ## [0.6.7]() (2025-06-10)
 
 ### Features

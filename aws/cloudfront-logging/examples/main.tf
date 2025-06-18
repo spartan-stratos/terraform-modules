@@ -1,5 +1,6 @@
 module "static_website" {
-  source = "github.com/c0x12c/terraform-aws-static-website?ref=v0.7.0"
+  source  = "c0x12c/static-website/aws"
+  version = "0.7.1"
 
   name              = "example"
   bucket_prefix     = "example"
@@ -38,7 +39,8 @@ module "cloudfront_logging" {
 }
 
 module "cloudfront_log_bucket" {
-  source = "github.com/c0x12c/terraform-aws-s3?ref=v0.4.0"
+  source  = "c0x12c/s3/aws"
+  version = "0.4.0"
 
   bucket_name = "cloudfront-log-bucket"
 }

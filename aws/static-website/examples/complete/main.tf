@@ -1,5 +1,5 @@
 module "static_website" {
-  source = "../../../static-website"
+  source = "../.."
 
   name              = "example"
   bucket_prefix     = "example"
@@ -25,3 +25,4 @@ module "static_website" {
     compress               = true
   }]
 }
+

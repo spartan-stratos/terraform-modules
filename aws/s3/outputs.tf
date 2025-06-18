@@ -18,11 +18,6 @@ output "s3_bucket_regional_domain_name" {
   value       = local.bucket.bucket_regional_domain_name
 }
 
-output "s3_bucket_domain_name" {
-  description = "The domain name of the S3 bucket. Will be of format `bucketname.s3.amazonaws.com`."
-  value       = local.bucket.bucket_domain_name
-}
-
 output "iam_policy_s3_bucket_public_assets_write_arn" {
   description = "The ARN of the IAM policy granting write access only to S3 bucket assets."
   value       = try(aws_iam_policy.this.0.arn, null)
