@@ -7,7 +7,7 @@ resource "aws_cloudwatch_log_delivery_source" "this" {
 resource "aws_cloudwatch_log_delivery_destination" "this" {
   name = "${var.name}-cloudfront-destination"
   delivery_destination_configuration {
-    destination_resource_arn = "${var.log_bucket_arn}/${var.log_bucket_prefix_path}"
+    destination_resource_arn = var.log_bucket_arn
   }
 }
 
@@ -16,6 +16,6 @@ resource "aws_cloudwatch_log_delivery" "this" {
   delivery_destination_arn = aws_cloudwatch_log_delivery_destination.this.arn
 
   s3_delivery_configuration {
-    suffix_path = "/{DistributionId}/{yyyy}/{MM}/{dd}/{HH}"
+    suffix_path = "${var.name}/{DistributionId}/{yyyy}/{MM}/{dd}/{HH}"
   }
 }
