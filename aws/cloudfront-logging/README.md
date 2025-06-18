@@ -6,7 +6,7 @@
 
 ```hcl
 module "cloudfront_logging" {
-  source = "../../"
+  source = "../"
 
   # Use provider `us-east-1`
   # Refer: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/standard-logging.html

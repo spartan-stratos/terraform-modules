@@ -1,5 +1,5 @@
 module "static_website" {
-  source = "../../../static-website"
+  source = "github.com/c0x12c/terraform-aws-static-website?ref=v0.7.0"
 
   name              = "example"
   bucket_prefix     = "example"
@@ -27,7 +27,7 @@ module "static_website" {
 }
 
 module "cloudfront_logging" {
-  source = "../../"
+  source = "../"
 
   # Use provider in global region `us-east-1`
   # Refer: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/standard-logging.html
@@ -38,7 +38,7 @@ module "cloudfront_logging" {
 }
 
 module "cloudfront_log_bucket" {
-  source = "../../../s3"
+  source = "github.com/c0x12c/terraform-aws-s3?ref=v0.4.0"
 
   bucket_name = "cloudfront-log-bucket"
 }
