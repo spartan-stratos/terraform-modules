@@ -13,6 +13,7 @@ import requests
 from dotenv import load_dotenv
 from git import Repo
 from github import Github, GithubException
+from openai import OpenAI
 
 load_dotenv()
 
@@ -25,22 +26,29 @@ GITHUB_ORG = os.getenv("GITHUB_ORG")
 GITHUB_APP_INSTALLATION_ID = os.getenv("GITHUB_APP_INSTALLATION_ID")
 # GH_APP_ID = '1393968'
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 X_CSRF_TOKEN = os.getenv("X_CSRF_TOKEN")
 AUTH_COOKIE_KEY = os.getenv("AUTH_COOKIE_KEY")
 AUTH_COOKIE_VALUE = os.getenv("AUTH_COOKIE_VALUE")
+
+client = OpenAI(
+    api_key=OPENAI_API_KEY
+)
 
 if not GITHUB_TOKEN:
     raise EnvironmentError("The 'GITHUB_TOKEN' environment variable is not set.")
 
 CONFIG = {
-    "update_repo_content": False,
+    "update_repo_content": True,
     "enable_branch_protection": False,
     "enable_tag_protection": False,
     "setup_actions_secrets": False,
     "trigger_release_workflow": False,
     "enabled_publishing": False,
     "skip_published_modules": False,
-    "add_module_to_meta_repo": True,
+    "add_module_to_meta_repo": False,
 }
 
 
@@ -557,10 +565,29 @@ class TerraformModulePublisher:
                     if os.path.exists(self.template_dir):
                         self.copy_template_files(repo_path)
 
-                    # Git operations
-                    repo_clone.git.add(A=True)
-                    repo_clone.index.commit("Initial commit")
-                    repo_clone.git.push('origin', 'master')
+                    # Check for changes before committing
+                    if repo_clone.is_dirty(untracked_files=True):
+                        print(f"Changes detected in repository {repo_name}. Pushing changes to GitHub.")
+                        repo_clone.git.add(A=True)
+
+                        # Check if the repository has any commits
+                        if len(list(repo_clone.iter_commits())) == 0:
+                            commit_subject = "Initial commit"
+                        else:
+                            repo_diff = repo_clone.git.diff('HEAD')
+                            commit_subject = self.generate_commit_subject(diff=repo_diff)
+                            print(f"commit_subject: {commit_subject}")
+
+                        # Use the generated or fallback commit subject
+                        repo_clone.index.commit(commit_subject)
+
+                        return {}
+
+                        # Use the generated or fallback commit subject
+                        # repo_clone.index.commit(commit_subject)
+                        # repo_clone.git.push('origin', 'master')
+                    else:
+                        logger.info("No changes detected. Skipping commit and push.")
 
                 # Setup protection rules
                 if CONFIG["enable_branch_protection"]:
@@ -610,6 +637,28 @@ class TerraformModulePublisher:
             })
 
         return result
+
+    def generate_commit_subject(self, diff: str):
+        try:
+            # Generate the prompt to pass to OpenAI
+            prompt = (
+                "Based on the following git diff, provide a concise GitHub commit subject "
+                "following GitHub's commit message convention:\n\n"
+                f"{diff}"
+            )
+
+            # Call OpenAI API to get the commit subject
+            response = client.responses.create(
+                model="gpt-4",
+                instructions="You are an expert at crafting concise GitHub commit messages. Respond with a single, well-written commit message only.",
+                input=prompt
+            )
+
+            return response.output_text
+        except Exception as e:
+            logger.error(f"Error generating commit subject using OpenAI: {str(e)}")
+            raise e
+            # return "Update repository contents"  # Fallback subject
 
     def scan_and_process_modules(self) -> List[dict]:
         """Scan through provider folders and process modules"""
@@ -731,8 +780,11 @@ def main():
             logger.info(f"Processing only the specified module at: {module_path}")
             provider = module_path.split("/")[0]
             module_name = module_path.split("/")[1]
-            results = [publisher.process_module(provider=provider, module_name=module_name,
-                                                module_path=os.path.join(base_dir, module_path))]
+            results = [publisher.process_module(
+                provider=provider,
+                module_name=module_name,
+                module_path=os.path.join(base_dir, module_path)
+            )]
         else:
             results = publisher.scan_and_process_modules()
 
