@@ -10,7 +10,7 @@ on:
 
 env:
   # Secrets
-  GH_APP_PRIVATE_KEY: ${{ SPARTAN_GH_APP_PRIVATE_KEY }}
+  GH_APP_PRIVATE_KEY: ${{ secrets.SPARTAN_GH_APP_PRIVATE_KEY }}
   GITHUB_TOKEN: ${{ secrets.SPARTAN_PAT_TOKEN }}
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
   TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
