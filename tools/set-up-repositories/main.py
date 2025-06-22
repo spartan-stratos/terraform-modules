@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import json
 import logging
 import os
@@ -9,6 +10,7 @@ from pathlib import Path
 from typing import List
 
 import git
+import jwt
 import requests
 from dotenv import load_dotenv
 from git import Repo
@@ -24,6 +26,7 @@ logger = logging.getLogger(__name__)
 GH_APP_ID = os.getenv("GH_APP_ID")
 GITHUB_ORG = os.getenv("GITHUB_ORG")
 GH_APP_INSTALLATION_ID = os.getenv("GH_APP_INSTALLATION_ID")
+TF_GH_APP_INSTALLATION_ID = os.getenv("TF_GH_APP_INSTALLATION_ID")
 PAT_TOKEN = os.getenv("PAT_TOKEN")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -317,7 +320,7 @@ class TerraformModulePublisher:
                 "attributes": {
                     "vcs_repo": {
                         "identifier": f"{self.org_name}/{repo.name}",
-                        "github_app_installation_id": GH_APP_INSTALLATION_ID,
+                        "github_app_installation_id": TF_GH_APP_INSTALLATION_ID,
                     }
                 },
                 "organization_name": self.org_name
@@ -782,10 +785,70 @@ def _get_meta_repo(meta_repo_url: str) -> Repo:
             meta_repo_path = tempfile.mkdtemp()
         logger.info(f"Meta-repo not found at '{meta_repo_path}'. Cloning into the directory...")
         try:
-            meta_repo = Repo.clone_from(url=meta_repo_url, to_path=meta_repo_path)
+            secret_file_path = os.path.join(os.getcwd(), "credentials", "github_app_private_key.pem")
+            try:
+                with open(secret_file_path, "r") as file:
+                    gh_app_private_key = file.read()
+            except FileNotFoundError:
+                raise Exception(f"Secret file not found at {secret_file_path}")
+
+            meta_repo = clone_with_github_app(
+                meta_repo_url=meta_repo_url,
+                meta_repo_path=meta_repo_path,
+                private_key=gh_app_private_key,
+                app_id=GH_APP_ID,
+                installation_id=GH_APP_INSTALLATION_ID
+            )
             return meta_repo
         except Exception as e:
             raise Exception(f"Failed to clone meta-repo: {e}") from e
+
+
+def create_jwt(app_id: str, private_key: str) -> str:
+    """
+    Generates a JWT for authenticating GitHub App requests.
+    """
+    now = int(datetime.datetime.now().timestamp())
+    payload = {
+        "iat": now - 60,  # Issued 60 seconds in the past to handle clock skew
+        "exp": now + (10 * 60),  # Token valid for 10 minutes
+        "iss": app_id,  # App ID
+    }
+    return jwt.encode(payload, private_key, algorithm='RS256')
+
+
+def get_installation_access_token(app_id: str, private_key: str, installation_id: str) -> str:
+    """
+    Exchanges a GitHub App JWT for an installation access token.
+    """
+    jwt_token = create_jwt(app_id, private_key)
+    print(f"jwt_token: {jwt_token}")
+    headers = {"Authorization": f"Bearer {jwt_token}", "Accept": "application/vnd.github+json"}
+    url = f"https://api.github.com/app/installations/{installation_id}/access_tokens"
+
+    response = requests.post(url, headers=headers)
+    if response.status_code == 201:
+        return response.json().get("token")
+    else:
+        raise Exception(f"Failed to obtain installation token: {response.json()}")
+
+
+def clone_with_github_app(meta_repo_url: str, meta_repo_path: str, app_id: str, private_key: str, installation_id: str) -> Repo:
+    """
+    Clones a repository using GitHub App credentials.
+    """
+    # Get the installation access token
+    installation_token = get_installation_access_token(app_id=app_id, private_key=private_key, installation_id=installation_id)
+
+    # Construct an authenticated repository URL
+    auth_repo_url = meta_repo_url.replace(
+        "https://github.com", f"https://x-access-token:{installation_token}@github.com"
+    )
+
+    try:
+        return Repo.clone_from(url=auth_repo_url, to_path=meta_repo_path)
+    except Exception as e:
+        raise Exception(f"Failed to clone meta-repo: {e}") from e
 
 
 def main():
