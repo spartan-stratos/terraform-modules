@@ -10,14 +10,15 @@ on:
 
 env:
   # Secrets
-  GH_APP_PRIVATE_KEY: ${{ SPARTAN_GH_APP_PRIVATE_KEY }}
-  GITHUB_TOKEN: ${{ secrets.SPARTAN_PAT_TOKEN }}
+  GH_APP_PRIVATE_KEY: ${{ secrets.SPARTAN_GH_APP_PRIVATE_KEY }}
+  PAT_TOKEN: ${{ secrets.SPARTAN_PAT_TOKEN }}
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
   TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+  TF_GH_APP_INSTALLATION_ID: ${{ secrets.TF_GH_APP_INSTALLATION_ID }}
   # Variables
   GH_APP_ID: ${{ vars.SPARTAN_GH_APP_ID }}
   GH_APP_INSTALLATION_ID: ${{ vars.SPARTAN_GH_APP_INSTALLATION_ID }}
-  GITHUB_ORG: ${{ github.repository_owner }}
+  GITHUB_ORG: ${{ vars.SPARTAN_GITHUB_ORG }}
   META_REPO_URL: ${{ vars.META_REPO_URL }}
 
 jobs:
@@ -42,12 +43,3 @@ jobs:
 
       - name: Run Python script
         run: python main.py --base-dir ${{ github.workspace }} --module-path ${{ inputs.module-path }}
-#        env:
-#          GH_APP_ID: ${{ env.GH_APP_ID }}
-#          GITHUB_ORG: ${{ github.repository_owner }}
-#          GITHUB_APP_INSTALLATION_ID: ${{ vars.GITHUB_APP_INSTALLATION_ID }}
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-#          X_CSRF_TOKEN: ${{ secrets.X_CSRF_TOKEN }}
-#          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-#          META_REPO_URL: ${{ vars.META_REPO_URL }}
