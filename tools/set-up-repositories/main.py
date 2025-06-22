@@ -833,13 +833,8 @@ def get_installation_access_token(app_id: str, private_key: str, installation_id
 
 
 def clone_with_github_app(meta_repo_url: str, meta_repo_path: str, app_id: str, private_key: str, installation_id: str) -> Repo:
-    """
-    Clones a repository using GitHub App credentials.
-    """
-    # Get the installation access token
     installation_token = get_installation_access_token(app_id=app_id, private_key=private_key, installation_id=installation_id)
 
-    # Construct an authenticated repository URL
     auth_repo_url = meta_repo_url.replace(
         "https://github.com", f"https://x-access-token:{installation_token}@github.com"
     )
@@ -847,7 +842,7 @@ def clone_with_github_app(meta_repo_url: str, meta_repo_path: str, app_id: str, 
     try:
         return Repo.clone_from(url=auth_repo_url, to_path=meta_repo_path)
     except Exception as e:
-        raise Exception(f"Failed to clone meta-repo: {e}") from e
+        raise Exception(f"Failed to clone meta-repo with GitHub App: {e}") from e
 
 
 def main():
