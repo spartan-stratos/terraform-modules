@@ -23,32 +23,31 @@ logger = logging.getLogger(__name__)
 
 GH_APP_ID = os.getenv("GH_APP_ID")
 GITHUB_ORG = os.getenv("GITHUB_ORG")
-GITHUB_APP_INSTALLATION_ID = os.getenv("GITHUB_APP_INSTALLATION_ID")
-# GH_APP_ID = '1393968'
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GH_APP_INSTALLATION_ID = os.getenv("GH_APP_INSTALLATION_ID")
+PAT_TOKEN = os.getenv("PAT_TOKEN")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 X_CSRF_TOKEN = os.getenv("X_CSRF_TOKEN")
-AUTH_COOKIE_KEY = os.getenv("AUTH_COOKIE_KEY")
-AUTH_COOKIE_VALUE = os.getenv("AUTH_COOKIE_VALUE")
+TF_API_TOKEN = os.getenv("TF_API_TOKEN")
 
 client = OpenAI(
     api_key=OPENAI_API_KEY
 )
 
-if not GITHUB_TOKEN:
-    raise EnvironmentError("The 'GITHUB_TOKEN' environment variable is not set.")
+if not PAT_TOKEN:
+    raise EnvironmentError("The 'PAT_TOKEN' environment variable is not set.")
 
 CONFIG = {
-    "update_repo_content": True,
+    "update_repo_content": False,
+    "update_repo_template_file": False,
     "enable_branch_protection": False,
     "enable_tag_protection": False,
     "setup_actions_secrets": False,
     "trigger_release_workflow": False,
     "enabled_publishing": False,
     "skip_published_modules": False,
-    "add_module_to_meta_repo": False,
+    "add_module_to_meta_repo": True,
 }
 
 
@@ -91,7 +90,9 @@ class TerraformModulePublisher:
 
             repo = self.org.create_repo(
                 name=repo_name,
-                private=False
+                private=False,
+                auto_init=True,
+                license_template="apache-2.0"
             )
 
             # Update repository settings
@@ -294,12 +295,19 @@ class TerraformModulePublisher:
     def publish_to_terraform_public_registry(self, repo):
         headers = {
             "Content-Type": "application/vnd.api+json",
-            "x-csrf-token": X_CSRF_TOKEN
+            "x-csrf-token": X_CSRF_TOKEN,
+            "Authorization": f"Bearer {TF_API_TOKEN}"
         }
 
-        cookies = {
-            AUTH_COOKIE_KEY: AUTH_COOKIE_VALUE
-        }
+        parts = repo.name.split("-")
+        provider = parts[1]
+        module_name = "-".join(parts[2:])
+
+        # Check if the module is already published to the Terraform public registry
+        if self.is_module_published(module_name=module_name, namespace=self.org_name, provider=provider):
+            logger.info(
+                f"Module '{module_name}' is already published to the Terraform public registry. Skipping publish.")
+            return
 
         registry_url = f"https://app.terraform.io/api/v2/organizations/{self.org_name}/registry/modules"
 
@@ -309,7 +317,7 @@ class TerraformModulePublisher:
                 "attributes": {
                     "vcs_repo": {
                         "identifier": f"{self.org_name}/{repo.name}",
-                        "github_app_installation_id": GITHUB_APP_INSTALLATION_ID,
+                        "github_app_installation_id": GH_APP_INSTALLATION_ID,
                     }
                 },
                 "organization_name": self.org_name
@@ -319,11 +327,11 @@ class TerraformModulePublisher:
         try:
             logger.info(
                 f"Publishing module to Terraform Cloud Public Registry using repo: {repo.name} with url: {registry_url}")
-            response = requests.post(registry_url, headers=headers, cookies=cookies, json=payload)
+            response = requests.post(registry_url, headers=headers, json=payload)
 
             if response.status_code == 201:  # HTTP 201 Created
                 logger.info("Module successfully published to the Terraform Cloud registry.")
-                return response.json()
+                return True
             elif response.status_code == 422:  # HTTP 422 Unprocessable Entity
                 logger.error("Module is already published or validation failed.")
                 logger.error(f"Details: {response.text}")
@@ -333,6 +341,8 @@ class TerraformModulePublisher:
                 logger.error(f"Failed to publish module. Response: {response.text}")
         except Exception as e:
             logger.error(f"An error occurred while publishing to Terraform Cloud: {e}", exc_info=True)
+
+        return False
 
     def add_repos_as_submodules_and_create_pr(self, repos):
         """
@@ -348,52 +358,45 @@ class TerraformModulePublisher:
                 "Environment variable 'META_REPO_URL' is not set. Please set it to the GitHub URL of the meta-repo.")
             return
 
+        # Check if the meta-repo already exists locally
+        meta_repo = _get_meta_repo(meta_repo_url=meta_repo_url)
+        meta_repo_path = meta_repo.working_dir
+        logger.info(f"Meta-repo path: {meta_repo_path}")
+
         # Extract meta-repo name and org name from the URL
         org_name, meta_repo_name = self._parse_meta_repo_url(meta_repo_url)
 
-        # Clone the meta-repo into a temporary directory
-        tmp_dir = tempfile.mkdtemp()
-        local_meta_repo_path = os.path.join(tmp_dir, meta_repo_name)
-
-        logger.info(f"Cloning the meta-repo '{meta_repo_url}' into temporary directory '{local_meta_repo_path}'...")
-        try:
-            subprocess.run(["git", "clone", meta_repo_url, local_meta_repo_path], check=True)
-        except subprocess.CalledProcessError as e:
-            logger.error(f"Failed to clone meta-repo: {e}")
-            return
-
         # Navigate to the meta-repo directory
         original_cwd = os.getcwd()
-        os.chdir(local_meta_repo_path)
+        os.chdir(meta_repo_path)
 
         for repo in repos:
             try:
                 repo_name = repo.name
 
                 # Check if the submodule already exists
-                if os.path.exists(os.path.join(local_meta_repo_path, repo_name)):
+                if os.path.exists(os.path.join(meta_repo_path, repo_name)):
                     logger.info(f"Repository '{repo_name}' already exists as a submodule. Skipping.")
                     continue
 
                 # Create a feature branch for adding the current submodule
                 feature_branch = f"add-terraform-submodule-{repo_name}"
                 logger.info(f"Creating feature branch '{feature_branch}' for module '{repo_name}'...")
-                subprocess.run(["git", "checkout", "-b", feature_branch], check=True)
+                meta_repo.git.checkout('-b', feature_branch)
 
                 # Add the repository as a submodule
                 logger.info(f"Adding '{repo_name}' as a submodule...")
-                subprocess.run(
-                    ["git", "submodule", "add", "-b", "master", repo.ssh_url],
-                    check=True
-                )
+                meta_repo.git.submodule("add", "-b", "master", repo.ssh_url)
 
                 # Check if there are changes in the working tree
                 logger.info("Checking for changes before committing...")
-                status_output = subprocess.run(
-                    ["git", "status", "--porcelain"],
-                    stdout=subprocess.PIPE,
-                    text=True
-                ).stdout.strip()
+                # status_output = subprocess.run(
+                #     ["git", "status", "--porcelain"],
+                #     stdout=subprocess.PIPE,
+                #     text=True
+                # ).stdout.strip()
+
+                status_output = meta_repo.git.status("--porcelain").strip()
 
                 if not status_output:
                     logger.info("No changes detected in the repository. Skipping commit and PR creation.")
@@ -401,16 +404,19 @@ class TerraformModulePublisher:
 
                 # Stage, commit, and push the changes
                 logger.info("Staging changes for submodules...")
-                subprocess.run(["git", "add", "."], check=True)  # Add all changes
+                meta_repo.git.add(A=True)
+                # subprocess.run(["git", "add", "."], check=True)  # Add all changes
                 commit_message = f"Add Terraform module `{repo_name}` as submodule"
                 logger.info(f"Committing changes: '{commit_message}'...")
-                subprocess.run(["git", "commit", "-m", commit_message], check=True)
+                meta_repo.git.commit("-m", commit_message)
+                # subprocess.run(["git", "commit", "-m", commit_message], check=True)
 
-                logger.info("Debugging...")
-                subprocess.run(["git", "remote", "-v"], check=True)
+                # logger.info("Debugging...")
+                # subprocess.run(["git", "remote", "-v"], check=True)
 
                 logger.info("Pushing feature branch...")
-                subprocess.run(["git", "push", "-u", "origin", feature_branch, "-f"], check=True)
+                # subprocess.run(["git", "push", "-u", "origin", feature_branch, "-f"], check=True)
+                meta_repo.git.push("--force", "origin", feature_branch)
 
                 # Create a pull request using the GitHub API
                 pr_title = f"Add Terraform module `{repo_name}` as submodule"
@@ -547,23 +553,26 @@ class TerraformModulePublisher:
             else:
                 repo = self.create_github_repo(repo_name)
 
-            with tempfile.TemporaryDirectory() as temp_dir:
-                # Clone the new repository
-                repo_path = os.path.join(temp_dir, repo_name)
+            if CONFIG["update_repo_content"] or CONFIG["update_repo_template_file"]:
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    # Clone the new repository
+                    repo_path = os.path.join(temp_dir, repo_name)
 
-                if os.path.exists(repo_path):
-                    shutil.rmtree(repo_path)
+                    if os.path.exists(repo_path):
+                        shutil.rmtree(repo_path)
 
-                if CONFIG["update_repo_content"]:
                     repo_clone = Repo.clone_from(repo.ssh_url, repo_path)
-                    logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
 
-                    # Copy module files
-                    self.copy_module_files(module_path, repo_path)
+                    if CONFIG["update_repo_content"]:
+                        logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
 
-                    # Copy template files if they exist
-                    if os.path.exists(self.template_dir):
-                        self.copy_template_files(repo_path)
+                        # Copy module files
+                        self.copy_module_files(module_path, repo_path)
+
+                    if CONFIG["update_repo_template_file"]:
+                        # Copy template files if they exist
+                        if os.path.exists(self.template_dir):
+                            self.copy_template_files(repo_path)
 
                     # Check for changes before committing
                     if repo_clone.is_dirty(untracked_files=True):
@@ -575,36 +584,35 @@ class TerraformModulePublisher:
                             commit_subject = "Initial commit"
                         else:
                             repo_diff = repo_clone.git.diff('HEAD')
-                            commit_subject = self.generate_commit_subject(diff=repo_diff)
-                            print(f"commit_subject: {commit_subject}")
 
-                        # Use the generated or fallback commit subject
+                            if len(repo_diff) > 1000:
+                                commit_subject = "Initialize project with core functionalities"
+                                logger.info("Diff length is large. Using default commit subject.")
+                            else:
+                                commit_subject = self.generate_commit_subject(diff=repo_diff)
+
                         repo_clone.index.commit(commit_subject)
-
-                        return {}
-
-                        # Use the generated or fallback commit subject
-                        # repo_clone.index.commit(commit_subject)
-                        # repo_clone.git.push('origin', 'master')
+                        repo_clone.git.push('origin', 'master')
                     else:
                         logger.info("No changes detected. Skipping commit and push.")
 
-                # Setup protection rules
-                if CONFIG["enable_branch_protection"]:
-                    self.setup_branch_protection(repo)
+            # Setup protection rules
+            if CONFIG["enable_branch_protection"]:
+                self.setup_branch_protection(repo)
 
-                if CONFIG["enable_tag_protection"]:
-                    self.setup_tag_protection(repo)
+            if CONFIG["enable_tag_protection"]:
+                self.setup_tag_protection(repo)
 
-                if CONFIG["setup_actions_secrets"]:
-                    self.setup_github_actions_credentials(repo)
+            if CONFIG["setup_actions_secrets"]:
+                self.setup_github_actions_credentials(repo)
 
-                if CONFIG["trigger_release_workflow"]:
-                    self.trigger_release_workflow(repo)
+            if CONFIG["trigger_release_workflow"]:
+                self.trigger_release_workflow(repo)
 
-                if CONFIG["enabled_publishing"]:
-                    self.publish_to_terraform_public_registry(repo)
+            if CONFIG["enabled_publishing"]:
+                self.publish_to_terraform_public_registry(repo=repo)
 
+            if CONFIG["add_module_to_meta_repo"]:
                 self.add_repos_as_submodules_and_create_pr(repos=[repo])
 
             logger.info(f"Successfully processed module: {repo_name}")
@@ -709,6 +717,7 @@ class TerraformModulePublisher:
                 if os.path.isfile(source_item):
                     if os.path.isfile(dest_item):
                         os.remove(dest_item)
+                    print(f"Copying template file: {source_item} to {dest_item}")
                     shutil.copy2(source_item, dest_item)
                 elif os.path.isdir(source_item):
                     if os.path.isdir(dest_item):
@@ -763,6 +772,22 @@ def validate_base_dir(base_dir: str) -> None:
             f"No provider directories found in {base_dir}. Expected at least one of: aws, datadog, gcp, github")
 
 
+def _get_meta_repo(meta_repo_url: str) -> Repo:
+    meta_repo_path = os.getenv('META_REPO_PATH')
+
+    if meta_repo_path is not None and os.path.exists(meta_repo_path):
+        return Repo(path=meta_repo_path)
+    else:
+        if meta_repo_path is None:
+            meta_repo_path = tempfile.mkdtemp()
+        logger.info(f"Meta-repo not found at '{meta_repo_path}'. Cloning into the directory...")
+        try:
+            meta_repo = Repo.clone_from(url=meta_repo_url, to_path=meta_repo_path)
+            return meta_repo
+        except Exception as e:
+            raise Exception(f"Failed to clone meta-repo: {e}") from e
+
+
 def main():
     args = parse_arguments()
     base_dir = os.path.abspath(args.base_dir)
@@ -773,7 +798,7 @@ def main():
 
         logger.info(f"Using base directory: {base_dir}")
         publisher = TerraformModulePublisher(
-            github_token=GITHUB_TOKEN, org_name=GITHUB_ORG, base_dir=base_dir
+            github_token=PAT_TOKEN, org_name=GITHUB_ORG, base_dir=base_dir
         )
 
         if module_path:

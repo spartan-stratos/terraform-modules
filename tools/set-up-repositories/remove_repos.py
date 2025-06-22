@@ -5,10 +5,10 @@ from github import Github
 
 load_dotenv()
 
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+PAT_TOKEN = os.getenv('PAT_TOKEN')
 
-if not GITHUB_TOKEN:
-    raise EnvironmentError("The 'GITHUB_TOKEN' environment variable is not set.")
+if not PAT_TOKEN:
+    raise EnvironmentError("The 'PAT_TOKEN' environment variable is not set.")
 
 
 def delete_repos_in_org(token, org_name, file_path=None, confirmation=False):
@@ -70,4 +70,4 @@ def delete_repos_in_org(token, org_name, file_path=None, confirmation=False):
 
 
 if __name__ == "__main__":
-    delete_repos_in_org(token=GITHUB_TOKEN, org_name='c0x12c', file_path='repos_to_delete.txt', confirmation=True)
+    delete_repos_in_org(token=PAT_TOKEN, org_name='c0x12c', file_path='repos_to_delete.txt', confirmation=True)
