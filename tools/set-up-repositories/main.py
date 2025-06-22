@@ -24,8 +24,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 GH_APP_ID = os.getenv("GH_APP_ID")
-GITHUB_ORG = os.getenv("GITHUB_ORG")
 GH_APP_INSTALLATION_ID = os.getenv("GH_APP_INSTALLATION_ID")
+GH_APP_PRIVATE_KEY = os.getenv("GH_APP_PRIVATE_KEY")
+GITHUB_ORG = os.getenv("GITHUB_ORG")
 TF_GH_APP_INSTALLATION_ID = os.getenv("TF_GH_APP_INSTALLATION_ID")
 PAT_TOKEN = os.getenv("PAT_TOKEN")
 
@@ -185,14 +186,7 @@ class TerraformModulePublisher:
     def setup_github_actions_credentials(self, repo):
         logger.info(f"Setting up GitHub Actions credentials for repository: {repo.name}")
 
-        # Read the value for the secret `GH_APP_PRIVATE_KEY` from the credentials folder
-        secret_file_path = os.path.join(os.getcwd(), "credentials", "github_app_private_key.pem")
-        try:
-            with open(secret_file_path, "r") as file:
-                gh_app_private_key = file.read()
-        except FileNotFoundError:
-            logger.error(f"Secret file not found at {secret_file_path}")
-            return
+        gh_app_private_key = _get_github_app_private_key()
 
         repo.create_secret(secret_name="GH_APP_PRIVATE_KEY", unencrypted_value=gh_app_private_key)
         logger.info("Secret 'GH_APP_PRIVATE_KEY' successfully created.")
@@ -785,12 +779,7 @@ def _get_meta_repo(meta_repo_url: str) -> Repo:
             meta_repo_path = tempfile.mkdtemp()
         logger.info(f"Meta-repo not found at '{meta_repo_path}'. Cloning into the directory...")
         try:
-            secret_file_path = os.path.join(os.getcwd(), "credentials", "github_app_private_key.pem")
-            try:
-                with open(secret_file_path, "r") as file:
-                    gh_app_private_key = file.read()
-            except FileNotFoundError:
-                raise Exception(f"Secret file not found at {secret_file_path}")
+            gh_app_private_key = _get_github_app_private_key()
 
             meta_repo = clone_with_github_app(
                 meta_repo_url=meta_repo_url,
@@ -802,6 +791,17 @@ def _get_meta_repo(meta_repo_url: str) -> Repo:
             return meta_repo
         except Exception as e:
             raise Exception(f"Failed to clone meta-repo: {e}") from e
+
+def _get_github_app_private_key() -> str:
+    if GH_APP_PRIVATE_KEY is not None:
+        return GH_APP_PRIVATE_KEY
+
+    secret_file_path = os.path.join(os.getcwd(), "credentials", "github_app_private_key.pem")
+    try:
+        with open(secret_file_path, "r") as file:
+            return file.read()
+    except FileNotFoundError:
+        raise Exception(f"Secret file not found at {secret_file_path}")
 
 
 def create_jwt(app_id: str, private_key: str) -> str:
@@ -822,7 +822,6 @@ def get_installation_access_token(app_id: str, private_key: str, installation_id
     Exchanges a GitHub App JWT for an installation access token.
     """
     jwt_token = create_jwt(app_id, private_key)
-    print(f"jwt_token: {jwt_token}")
     headers = {"Authorization": f"Bearer {jwt_token}", "Accept": "application/vnd.github+json"}
     url = f"https://api.github.com/app/installations/{installation_id}/access_tokens"
 
