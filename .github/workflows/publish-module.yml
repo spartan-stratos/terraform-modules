@@ -17,7 +17,7 @@ env:
   # Variables
   GH_APP_ID: ${{ vars.SPARTAN_GH_APP_ID }}
   GH_APP_INSTALLATION_ID: ${{ vars.SPARTAN_GH_APP_INSTALLATION_ID }}
-  GITHUB_ORG: ${{ github.repository_owner }}
+  GITHUB_ORG: ${{ vars.SPARTAN_GITHUB_ORG }}
   META_REPO_URL: ${{ vars.META_REPO_URL }}
 
 jobs:
