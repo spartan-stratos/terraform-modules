@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0]() (2025-06-24)
+
+### BREAKING CHANGES
+
+* Rename module to `oidc-provider`.
+
+
 ## [0.1.70]() (2024-02-27)
 
 ### Bug fixes
