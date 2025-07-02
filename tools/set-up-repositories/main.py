@@ -43,13 +43,13 @@ if not PAT_TOKEN:
     raise EnvironmentError("The 'PAT_TOKEN' environment variable is not set.")
 
 CONFIG = {
-    "update_repo_content": False,
-    "update_repo_template_file": False,
-    "enable_branch_protection": False,
-    "enable_tag_protection": False,
-    "setup_actions_secrets": False,
-    "trigger_release_workflow": False,
-    "enabled_publishing": False,
+    "update_repo_content": True,
+    "update_repo_template_file": True,
+    "enable_branch_protection": True,
+    "enable_tag_protection": True,
+    "setup_actions_secrets": True,
+    "trigger_release_workflow": True,
+    "enabled_publishing": True,
     "skip_published_modules": False,
     "add_module_to_meta_repo": True,
 }
