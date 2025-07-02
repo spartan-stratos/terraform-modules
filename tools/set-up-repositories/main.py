@@ -558,11 +558,11 @@ class TerraformModulePublisher:
                     if os.path.exists(repo_path):
                         shutil.rmtree(repo_path)
 
-                    repo_clone = Repo.clone_from(repo.ssh_url, repo_path)
+                    ssh_url_with_token = repo.ssh_url.replace("git@", f"https://{self.github_token}@")
+                    repo_clone = Repo.clone_from(ssh_url_with_token, repo_path)
+                    logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
 
                     if CONFIG["update_repo_content"]:
-                        logger.info(f"Cloned repository {repo_name} to {repo_path} using url: {repo.ssh_url}")
-
                         # Copy module files
                         self.copy_module_files(module_path, repo_path)
 
