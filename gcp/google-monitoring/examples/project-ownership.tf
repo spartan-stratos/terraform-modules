@@ -1,5 +1,5 @@
 module "project_ownership_change_alert" {
-  source = "../../logging-metric"
+  source = "../../google-monitoring"
 
   name          = "project-ownership-change-metric"
   description   = "Detects Project ownership changes"

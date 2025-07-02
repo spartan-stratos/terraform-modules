@@ -1,8 +1,8 @@
 /**
-Please navigate to README.md before apply this example
+Please navigate to README.md if you failed SOC2 on this resource
  */
 module "vpc_network_change_alert" {
-  source = "../../logging-metric"
+  source = "../../google-monitoring"
 
   name        = "vpc-network-change-metric"
   description = "Detects VPC network changes"
@@ -40,7 +40,7 @@ EOT
 }
 
 module "vpc_network_route_change_alert" {
-  source = "../../logging-metric"
+  source = "../../google-monitoring"
 
   name          = "vpc-network-route-change-metric"
   description   = "Detects VPC route changes"
