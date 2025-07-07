@@ -4,7 +4,7 @@ locals {
 }
 
 module "eks" {
-  source = "../.."
+  source = "c0x12c/eks-cluster/aws"
 
   region          = "us-west-2"
   environment     = "test"
