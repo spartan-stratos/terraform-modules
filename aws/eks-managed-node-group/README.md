@@ -13,6 +13,7 @@ This module will create the components below
 
 ```hcl
 module "mng" {
+  source  = "c0x12c/eks-managed-node-group/aws"
 
   name         = "mng"
   cluster_name = aws_eks_cluster.master.name

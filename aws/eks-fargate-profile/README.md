@@ -8,7 +8,7 @@ Configuration in this directory creates a Fargate EKS Profile
 
 ```hcl
 module "fargate_profile" {
-  source  = "./modules/fargate-profile"
+  source  = "c0x12c/eks-fargate-profile/aws"
 
   cluster_name      = aws_eks_cluster.master.name
   cluster_ip_family = "ipv4"
