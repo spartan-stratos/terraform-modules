@@ -1,5 +1,6 @@
 module "eks_managed_node_group" {
-  source = "./modules/managed-node-group"
+  source  = "c0x12c/eks-managed-node-group/aws"
+  version = "1.0.0"
 
   for_each = var.node_groups
 
