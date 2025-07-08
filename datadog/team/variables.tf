@@ -1,15 +1,19 @@
 variable "team_name" {
-  type = string
+  description = "The name of the Datadog team."
+  type        = string
 }
 
 variable "team_description" {
-  type = string
+  description = "A description for the Datadog team."
+  type        = string
 }
 
 variable "team_handle" {
-  type = string
+  description = "The handle for the Datadog team, which must be unique."
+  type        = string
 }
 
 variable "team_members" {
-  type = list(string)
+  description = "A list of email addresses for the users to be added to the team."
+  type        = list(string)
 }
