@@ -33,3 +33,8 @@ variable "escalation_policy" {
     retries                    = number
   })
 }
+variable "escalation_policy_escalate_after_seconds" {
+  description = "The number of seconds after which to escalate the on-call notification."
+  type        = number
+  default     = 60
+}

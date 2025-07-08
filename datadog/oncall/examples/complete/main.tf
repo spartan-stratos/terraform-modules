@@ -1,5 +1,5 @@
 module "oncall_be" {
-  source = "c0x12c/oncall/datadog"
+  source = "../../"
 
   team_id = module.datadog_team.team_id
 
