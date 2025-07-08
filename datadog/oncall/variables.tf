@@ -1,16 +1,18 @@
 variable "team_id" {
-  type = string
+  description = "The ID of the Datadog team to associate with the on-call resources."
+  type        = string
 }
-
 variable "urgency" {
-  type    = string
-  default = "high"
+  description = "The urgency level for the routing rule."
+  type        = string
+  default     = "high"
   validation {
     condition     = contains(["low", "dynamic", "high"], var.urgency)
     error_message = "Urgency must be one of 'low', 'dynamic', or 'high'."
   }
 }
 variable "schedule" {
+  description = "Configuration for the on-call schedule, including name, time zone, and layer details."
   type = object({
     name      = string
     time_zone = string
@@ -23,8 +25,8 @@ variable "schedule" {
     })
   })
 }
-
 variable "escalation_policy" {
+  description = "Configuration for the on-call escalation policy."
   type = object({
     name                       = string
     resolve_page_on_policy_end = bool
