@@ -11,7 +11,7 @@ locals {
 }
 
 module "datadog_notification_rules" {
-  source = "c0x12c/notification-rules/datadog"
+  source = "../../"
 
   notification_rules = local.notification_rules
 }
