@@ -1,6 +1,7 @@
 module "fargate_profile" {
-  source = "./modules/fargate-profile"
-  create = var.create_fargate_profile
+  source  = "c0x12c/eks-fargate-profile/aws"
+  version = "1.0.0"
+  create  = var.create_fargate_profile
 
   # Fargate Profile
   cluster_name      = aws_eks_cluster.master.name
