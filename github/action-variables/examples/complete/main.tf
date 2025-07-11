@@ -1,5 +1,5 @@
 module "github_actions_variables" {
-  source = "../../modules/action-variables"
+  source = "../../"
 
   repository = "service-platform"
   variables = {

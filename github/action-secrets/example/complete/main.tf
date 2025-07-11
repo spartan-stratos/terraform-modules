@@ -1,5 +1,5 @@
 module "github_actions_secrets" {
-  source = "../../modules/action-secrets"
+  source = "../../"
 
   repository = "service-platform"
   secrets = {

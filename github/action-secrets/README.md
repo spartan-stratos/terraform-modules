@@ -8,7 +8,8 @@ This module creates list of GitHub Actions secrets from input.
 
 ```hcl
 module "github_actions_secrets" {
-  source  = "github.com/spartan-stratos/terraform-modules//github/actions/modules/action-secrets?ref=v0.1.10"
+  source  = "c0x12c/action-secrets/github"
+  version = "~> 1.0.0"
 
   repository = "service-platform"
   secrets = {
