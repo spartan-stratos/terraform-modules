@@ -5,5 +5,6 @@ variable "repository" {
 
 variable "secrets" {
   description = "secrets to be set in the repository"
+  sensitive   = true
   type        = map(string)
 }

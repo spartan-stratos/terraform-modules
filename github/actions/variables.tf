@@ -1,6 +1,7 @@
 variable "repository_secrets" {
   description = "A map of maps of repository and GitHub Actions secrets."
   type        = map(map(string))
+  sensitive   = true
   default     = {}
 }
 
