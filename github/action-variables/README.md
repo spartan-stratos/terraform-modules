@@ -8,7 +8,8 @@ This module creates list of GitHub Actions variables from input.
 
 ```hcl
 module "github_actions_variables" {
-  source  = "github.com/spartan-stratos/terraform-modules//github/actions/modules/action-variables?ref=v0.1.10"
+  source  = "c0x12c/action-variables/github"
+  version = "~> 1.0.0"
 
   repository = "service-platform"
   variables = {
