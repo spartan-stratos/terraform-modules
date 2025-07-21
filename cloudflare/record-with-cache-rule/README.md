@@ -48,16 +48,16 @@ module "cloudflare_cdn_for_static_site" {
 
 ## Requirements
 
-| Name                                                                      | Version  |
-|---------------------------------------------------------------------------|----------|
+| Name | Version |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.75  |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.6.0 |
 
 ## Providers
 
-| Name                                              | Version |
-|---------------------------------------------------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.75 |
+| Name | Version |
+|------|---------|
+| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 5.6.0 |
 
 ## Modules
 
@@ -65,25 +65,32 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                                    | Type     |
-|-----------------------------------------------------------------------------------------------------------------------------------------|----------|
-| [aws_cloudwatch_metric_alarm.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
-| [aws_sns_topic.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic)                             | resource |
-| [aws_sns_topic_subscription.target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription) | resource |
+| Name | Type |
+|------|------|
+| [cloudflare_dns_record.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
+| [cloudflare_page_rule.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/page_rule) | resource |
 
 ## Inputs
 
-| Name                                                                                            | Description                                                                                                                               | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default | Required |
-|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|:--------:|
-| <a name="input_alarms"></a> [alarms](#input\_alarms)                                            | A map of alarms to create                                                                                                                 | <pre>map(object({<br/>    name                = string<br/>    description         = string<br/>    comparison_operator = string<br/>    evaluation_periods  = string<br/>    metric_name         = string<br/>    namespace           = string<br/>    period              = string<br/>    statistic           = string<br/>    threshold           = number<br/>    queue_name          = optional(string)<br/>    alb_name            = optional(string)<br/>    target_group_name   = optional(string)<br/>    instance_id         = optional(string)<br/>    auto_scaling_group  = optional(string)<br/>    currency            = optional(string)<br/>    linked_account      = optional(string)<br/>    identifier          = optional(string)<br/>  }))</pre> | n/a     |   yes    |
-| <a name="input_create_sns_topic"></a> [create\_sns\_topic](#input\_create\_sns\_topic)          | Creates a SNS Topic if `true`.                                                                                                            | `bool`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `true`  |    no    |
-| <a name="input_datapoints_to_alarm"></a> [datapoints\_to\_alarm](#input\_datapoints\_to\_alarm) | The number of datapoints that must be breaching to trigger the alarm.                                                                     | `number`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `null`  |    no    |
-| <a name="input_email"></a> [email](#input\_email)                                               | n/a                                                                                                                                       | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | n/a     |   yes    |
-| <a name="input_environment"></a> [environment](#input\_environment)                             | AWS environment you are deploying to. Will be appended to SNS topic and alarm name. (e.g. dev, prod)                                      | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | n/a     |   yes    |
-| <a name="input_queue_name"></a> [queue\_name](#input\_queue\_name)                              | The queue name of the SQS queue.                                                                                                          | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `null`  |    no    |
-| <a name="input_sns_topic_arns"></a> [sns\_topic\_arns](#input\_sns\_topic\_arns)                | List of SNS topic ARNs to be used. If `create_sns_topic` is `true`, it merges the created SNS Topic by this module with this list of ARNs | `list(string)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `[]`    |    no    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_cache_status"></a> [cache\_status](#input\_cache\_status) | The status of the page rule for caching. | `string` | `"active"` | no |
+| <a name="input_comment"></a> [comment](#input\_comment) | Optional comment for the DNS record. | `string` | `null` | no |
+| <a name="input_enabled_proxy"></a> [enabled\_proxy](#input\_enabled\_proxy) | Whether the record is proxied through Cloudflare. | `bool` | `true` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the DNS record, such as 'example.com'. | `string` | n/a | yes |
+| <a name="input_page_rule_actions"></a> [page\_rule\_actions](#input\_page\_rule\_actions) | Actions for the page rule associated with the DNS record. | `map(any)` | <pre>{<br/>  "browser_cache_ttl": 86400,<br/>  "cache_level": "cache_everything",<br/>  "edge_cache_ttl": 86400<br/>}</pre> | no |
+| <a name="input_record_content"></a> [record\_content](#input\_record\_content) | The content of the DNS record, such as an IP address or CNAME target. | `string` | n/a | yes |
+| <a name="input_settings"></a> [settings](#input\_settings) | Optional settings for the DNS record. | `map(any)` | <pre>{<br/>  "ipv4_only": false,<br/>  "ipv6_only": false<br/>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags for the DNS record. | `list(string)` | `[]` | no |
+| <a name="input_ttl"></a> [ttl](#input\_ttl) | Time to live for the DNS record. | `number` | `1` | no |
+| <a name="input_type"></a> [type](#input\_type) | The type of DNS record (e.g., A, CNAME). | `string` | `"A"` | no |
+| <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | The ID of the Cloudflare zone where the DNS record will be created. | `string` | n/a | yes |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_dns_record_id"></a> [dns\_record\_id](#output\_dns\_record\_id) | n/a |
+| <a name="output_page_rule_id"></a> [page\_rule\_id](#output\_page\_rule\_id) | n/a |
+
 <!-- END_TF_DOCS -->
