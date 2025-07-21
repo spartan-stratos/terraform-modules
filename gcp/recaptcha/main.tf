@@ -1,4 +1,14 @@
+/**
+This `google_client_config` data source retrieves the current authenticated user's Google Cloud configuration.
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/client_config
+ */
+
 data "google_client_config" "this" {}
+
+/**
+This resource creates Google reCAPTCHA Enterprise keys for Android and iOS applications.
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/recaptcha_enterprise_key
+*/
 
 resource "google_recaptcha_enterprise_key" "android" {
   display_name = "${data.google_client_config.this.project}-${var.environment}-android-recaptcha"
