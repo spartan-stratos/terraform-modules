@@ -2,6 +2,7 @@ module "recaptcha" {
   source = "../.."
 
   environment = "dev"
+  project_id  = "your-gcp-project-id"
 
   # Android settings
   allow_all_package_names = false
