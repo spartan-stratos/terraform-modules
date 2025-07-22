@@ -3,5 +3,5 @@ output "dns_record_id" {
 }
 
 output "page_rule_id" {
-  value = cloudflare_page_rule.cdn_cache.id
+  value = cloudflare_page_rule.this.id
 }
