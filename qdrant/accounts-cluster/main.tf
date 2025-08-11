@@ -11,6 +11,6 @@ resource "qdrant-cloud_accounts_cluster" "this" {
 }
 
 resource "qdrant-cloud_accounts_database_api_key_v2" "this" {
-  name        = "${var.name}-auth-key"
+  name       = "${var.name}-auth-key"
   cluster_id = qdrant-cloud_accounts_cluster.this.id
 }
