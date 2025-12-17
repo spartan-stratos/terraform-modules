@@ -301,10 +301,10 @@ class TerraformModulePublisher:
         module_name = "-".join(parts[2:])
 
         # Check if the module is already published to the Terraform public registry
-        # if self.is_module_published(module_name=module_name, namespace=self.org_name, provider=provider):
-        #     logger.info(
-        #         f"Module '{module_name}' is already published to the Terraform public registry. Skipping publish.")
-        #     return
+        if self.is_module_published(module_name=module_name, namespace=self.org_name, provider=provider):
+            logger.info(
+                f"Module '{module_name}' is already published to the Terraform public registry. Skipping publish.")
+            return
 
         registry_url = f"https://app.terraform.io/api/v2/organizations/{self.org_name}/registry/modules"
 
@@ -565,7 +565,8 @@ class TerraformModulePublisher:
 
                     if CONFIG["update_repo_content"]:
                         # Copy module files
-                        self.copy_module_files(module_path, repo_path)
+                        if os.path.exists(module_path):
+                            self.copy_module_files(module_path, repo_path)
 
                     if CONFIG["update_repo_template_file"]:
                         # Copy template files if they exist
