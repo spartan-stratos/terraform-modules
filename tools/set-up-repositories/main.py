@@ -565,7 +565,8 @@ class TerraformModulePublisher:
 
                     if CONFIG["update_repo_content"]:
                         # Copy module files
-                        self.copy_module_files(module_path, repo_path)
+                        if os.path.exists(module_path):
+                            self.copy_module_files(module_path, repo_path)
 
                     if CONFIG["update_repo_template_file"]:
                         # Copy template files if they exist
