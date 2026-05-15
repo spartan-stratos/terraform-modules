@@ -87,10 +87,31 @@ variable "node_pools" {
         }
       }
 
-    Available presets: builder, general-purpose, compute-optimized, memory-optimized
+    Available presets: builder, builder-spot, general-purpose, compute-optimized, memory-optimized
   EOT
-  type        = map(any)
-  default     = {}
+  type = map(object({
+    preset               = optional(string)
+    instance_families    = optional(list(string))
+    instance_sizes       = optional(list(string))
+    architectures        = optional(list(string))
+    capacity_types       = optional(list(string))
+    cpu_limit            = optional(string)
+    memory_limit         = optional(string)
+    consolidation_policy = optional(string)
+    consolidate_after    = optional(string)
+    expire_after         = optional(string)
+    volume_size          = optional(string)
+    volume_type          = optional(string)
+    volume_iops          = optional(number)
+    volume_throughput    = optional(number)
+    labels               = optional(map(string), {})
+    taints = optional(list(object({
+      key    = string
+      value  = string
+      effect = string
+    })), [])
+  }))
+  default = {}
 }
 
 # IAM Configuration

@@ -31,8 +31,10 @@ locals {
       local.base_node_pool_structure,
       # Merge preset if specified (or base structure if not)
       try(config.preset, null) != null ? local.nodepool_presets[config.preset] : local.base_node_pool_structure,
-      # Merge user overrides (excluding preset key)
-      { for k, v in config : k => v if k != "preset" }
+      # Merge user overrides (excluding preset key and null values).
+      # Null values come from optional() fields the caller didn't set —
+      # they must NOT clobber the preset's defaults.
+      { for k, v in config : k => v if k != "preset" && v != null }
     )
   }
 
