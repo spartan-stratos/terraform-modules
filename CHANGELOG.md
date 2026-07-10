@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.8]() (2026-07-10)
+
+### Fix Bugs
+
+* AWS Helm-ArgoCD [(./aws/helm-argocd)](./aws/helm-argocd)
+    * Default notifications subscription now references trigger names (`on-deployed`, `on-sync-failed`, `on-sync-running`, `on-sync-succeeded`) instead of template names, so the global `slack:social` subscription actually fires on deploy/sync events.
+    * Correct the `route53` submodule source path (`../route53`) broken by the module flatten.
+
 ## [0.6.7]() (2025-06-10)
 
 ### Features
