@@ -1,5 +1,5 @@
 module "route53" {
-  source   = "../../route53"
+  source   = "../route53"
   dns_zone = var.domain_name
 }
 
