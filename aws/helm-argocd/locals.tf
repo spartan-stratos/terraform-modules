@@ -115,10 +115,10 @@ notifications:
         - slack:social
       triggers:
         - on-sync-status-unknown
-        - app-deployed
-        - app-sync-failed
-        - app-sync-running
-        - app-sync-succeeded
+        - on-deployed
+        - on-sync-failed
+        - on-sync-running
+        - on-sync-succeeded
   notifiers:
     service.slack: |
       token: $slack-token
