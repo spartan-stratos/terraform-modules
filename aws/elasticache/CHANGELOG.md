@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.9]() (2026-07-28)
+
+### Bug Fixes
+
+* Gate `auth_token_update_strategy` on `transit_encryption_enabled` so plans no longer fail on AWS provider v6 when transit encryption (and the auth token) is disabled.
+
 ## [0.6.0]() (2025-05-27)
 
 ### Changes
